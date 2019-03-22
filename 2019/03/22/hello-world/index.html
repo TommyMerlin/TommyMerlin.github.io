@@ -72,7 +72,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.0.1',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -126,6 +126,30 @@
   <title>Hello World | HuYe的博客</title>
   
 
+
+  <div id="vk_api_transport"></div>
+  <script>
+    window.vkAsyncInit = function() {
+      VK.init({
+        apiId: k8YSNHUCFeaUjjRu9lJO
+      });
+
+      
+        VK.Widgets.Like("vk_like", {type: "mini", height: 20});
+      
+
+      
+        VK.Widgets.Comments("vk_comments", {limit: 10, attach: "*"});
+      
+    };
+    setTimeout(function() {
+      var el = document.createElement("script");
+      el.type = "text/javascript";
+      el.src = "//vk.com/js/api/openapi.js";
+      el.async = true;
+      document.getElementById("vk_api_transport").appendChild(el);
+    }, 0);
+  </script>
 
 
 
@@ -475,6 +499,25 @@
 
       
       
+        <div class="post-widgets">
+        
+
+        
+          
+          <div class="social-like">
+            
+              <div class="vk_like">
+                <span id="vk_like"></span>
+              </div>
+            
+
+            
+          </div>
+        
+
+        
+        </div>
+      
       
 
       
@@ -496,7 +539,8 @@
           
 
   
-    <div class="comments" id="gitalk-container">
+    <div class="comments" id="comments">
+      <div id="vk_comments"></div>
     </div>
 
   
