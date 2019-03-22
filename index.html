@@ -328,6 +328,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/Hexo-GitHub-搭建个人博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1biwvzjnpj20ku0ks41r.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/22/Hexo-GitHub-搭建个人博客/" class="post-title-link" itemprop="url">Hexo + GitHub 搭建个人博客</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 18:15:39 / 修改时间：19:19:00" itemprop="dateCreated datePublished" datetime="2019-03-22T18:15:39+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/03/22/Hexo-GitHub-搭建个人博客/" class="leancloud_visitors" data-flag-title="Hexo + GitHub 搭建个人博客">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div align="center"><br>    <img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1bqw0tlhnj20mv05zt97.jpg" width="75%"><br></div>
+
+<p>对于程序员来说，$搭建和维护一个个人博客十分必要$，写博客既是对所学知识的整理和总结，同时也能向他人展现自己的学习成果。这篇教程就是基于 Hexo 和 GitHub 来搭建属于自己的个人博客，简单快捷，对小白也十分友好。</p>
+<hr>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>本次Hexo博客搭建环境</p>
+<blockquote>
+<p>Windows 10  1803<br>node-v10.14.1<br>git version 2.21.0.windows.1<br>hexo-v3.8.0</p>
+</blockquote>
+<h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><p>安装各种依赖环境还是比较简单的，基本上就是从各自的官网下载进行安装，十分方便。</p>
+<h4 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h4><p>Hexo 的运行需要 Node.js 的支持，所以我们需要首先安装好 Node.js 。打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>就能很明显地看到下载提示，点击左边的按钮进行下载即可。</p>
+<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1brw3bv28j20pa0dsq3z.jpg" width="75%"></p>
+<p><strong>下载完点击安装程序进行安装，无需修改安装路径的话无脑点击下一步即可。</strong><br>当安装完成后打开命令行工具（cmd/powershell)，输入<code>node -v</code>，如果输出如下信息，安装即为成功。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v10.<span class="number">14.1</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>我们需要从 GitHub 上下载主题文件，最重要的是我们需要将本地的博客部署到可供外部访问的网页上去，我们借助的是 GitHub ，这些都离不开 Git 的支持。同样的我们到 <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git官网下载页</a>下载即可。这里我们选择 Windows 64 位最新版本的 Git for Windows 进行安装。</p>
+<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1bsbsbanhj20xd0lpdlw.jpg" width="90%/"></p>
+<p><strong>安装和 Node.js 差不多，不做修改的话一直点下一步即可。</strong><br>安装完成后同样打开命令行工具（cmd/powershell)，输入<code>git --version</code>，如果输出如下信息，安装即为成功。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version <span class="number">2.21</span>.<span class="number">0</span>.windows.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>未完待续…….</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/My-First-Blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -686,7 +875,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -705,7 +894,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -724,7 +915,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
