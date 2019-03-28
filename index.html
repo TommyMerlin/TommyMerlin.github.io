@@ -561,7 +561,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-28 21:48:03" itemprop="dateModified" datetime="2019-03-28T21:48:03+08:00">2019-03-28</time>
+                <time title="修改时间：2019-03-28 21:56:57" itemprop="dateModified" datetime="2019-03-28T21:56:57+08:00">2019-03-28</time>
               
             
           </span>
@@ -669,12 +669,12 @@
 <p>接下来我们需要开启开启本地服务器，输入 <code>hexo s</code> 命令（是 <code>hexo server</code> 的简写），输出</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
 <p>我们就知道了网页运行在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 上，我们在浏览器中输入该地址便能进入我们创建的博客网页啦。</p>
-<p><div align="center"><br>    <img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1f0gx2bbcj217918v15o.jpg" width="85%"><br></div></p>
+<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1f0gx2bbcj217918v15o.jpg" width="85%"></p>
 <hr>
-<h1 id="美化博客页面"><a href="#美化博客页面" class="headerlink" title="美化博客页面"></a>美化博客页面</h1><h3 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h3><p>可以看到打开的博客页面就是 Hexo 默认的页面，所以并不是非常得好看，我们可以自行选择更换，在 GitHub 上搜索 Hexo 主题还是有非常多的项目的。我在这里选择了目前使用人数比较多的 Next 主题进行演示。Next 主题的 Github 地址是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next/hexotheme-next</a>。回到我们存放博客文件的根目录，输入如下指令，将该仓库克隆到本地。</p>
+<h1 id="美化博客页面"><a href="#美化博客页面" class="headerlink" title="美化博客页面"></a>美化博客页面</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p>可以看到打开的博客页面就是 Hexo 默认的页面，所以并不是非常得好看，我们可以自行选择更换，在 GitHub 上搜索 Hexo 主题还是有非常多的项目的。我在这里选择了目前使用人数比较多的 Next 主题进行演示。Next 主题的 Github 地址是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next/hexotheme-next</a>。回到我们存放博客文件的根目录，输入如下指令，将该仓库克隆到本地。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> Blog</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 <p>这样我们就将 Next 主题克隆到 themes/next 文件夹下啦。</p>
-<h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>使用编辑器打开根目录下的 <code>_config.yml</code> 文件，这个文件保存的就是 Hexo 的诸多配置项，我们可以对其进行个性化修改。在文件中找到 <code>theme</code> 配置选项，如下所示：</p>
+<h2 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h2><p>使用编辑器打开根目录下的 <code>_config.yml</code> 文件，这个文件保存的就是 Hexo 的诸多配置项，我们可以对其进行个性化修改。在文件中找到 <code>theme</code> 配置选项，如下所示：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">landscape</span></span><br></pre></td></tr></table></figure>
 <p>可以看到现在的主题是默认的 <code>landscape</code> ，我们将其改为 <code>next</code> 即可。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
@@ -685,7 +685,7 @@
 <p>这就是我们新生成的页面了，是不是看上去精致多了呢。</p>
 <hr>
 <h1 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h1><p>在完成了上述步骤之后，我们就可以在自己的电脑上打开博客网页了，但是怎么才能让别人也能访问到我们的网页呢？这就需要我们部署我们的博客网站了。幸运的是，GitHub 能为我们免费提供这一服务，那就是 GitHub Page ，我们需要做的就是在 GitHub 上新建一个名为 <code>&lt;username&gt;.github.io</code> (在<code>&lt;username&gt;</code>处填入你的用户名） 的仓库即可。</p>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>打开根目录下的 <code>_config.yml</code> 文件，找到 <code>deploy</code> 选项，如下所示：</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>打开根目录下的 <code>_config.yml</code> 文件，找到 <code>deploy</code> 选项，如下所示：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>:</span><br></pre></td></tr></table></figure>
 <p>将其修改为</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
