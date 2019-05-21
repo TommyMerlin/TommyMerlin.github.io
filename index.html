@@ -574,7 +574,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-30 13:33:48" itemprop="dateModified" datetime="2019-03-30T13:33:48+08:00">2019-03-30</time>
+                <time title="修改时间：2019-05-21 13:22:29" itemprop="dateModified" datetime="2019-05-21T13:22:29+08:00">2019-05-21</time>
               
             
           </span>
@@ -639,7 +639,8 @@
       
         
           
-            <div align="center"><br>    <img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1bqw0tlhnj20mv05zt97.jpg" width="85%"><br></div>
+            <div align="center"><br>    <img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-1.jpg" width="85%"><br></div>
+
 
 <p>对于程序员来说，搭建和维护一个个人博客十分必要​，写博客既是对所学知识的整理和总结，同时也能向他人展现自己的学习成果。这篇教程就是基于 Hexo 和 GitHub 来搭建属于自己的个人博客，简单快捷，对小白也十分友好。</p>
 <hr>
@@ -649,17 +650,17 @@
 </blockquote>
 <p>安装各种依赖环境还是比较简单的，基本上就是从各自的官网下载进行安装，十分方便。</p>
 <h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2><p>Hexo 的运行需要 Node.js 的支持，所以我们需要首先安装好 Node.js 。打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>就能很明显地看到下载提示，点击左边的按钮进行下载即可。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1brw3bv28j20pa0dsq3z.jpg" width="75%"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-2.jpg" width="75%"></p>
 <p><strong>下载完点击安装程序进行安装，无需修改安装路径的话无脑点击下一步即可。</strong><br>当安装完成后打开命令行工具（cmd/powershell)，输入<code>node -v</code>，如果输出如下信息，安装即为成功。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v10.14.1</span><br></pre></td></tr></table></figure>
 <h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><p>我们需要从 GitHub 上下载主题文件，最重要的是我们需要将本地的博客部署到可供外部访问的网页上去，我们借助的是 GitHub ，这些都离不开 Git 的支持。同样的我们到 <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git官网下载页</a>下载即可。这里我们选择 Windows 64 位最新版本的 Git for Windows 进行安装。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1bsbsbanhj20xd0lpdlw.jpg" width="90%/"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-3.jpg" width="90%/"></p>
 <p><strong>安装和 Node.js 差不多，不做修改的话一直点下一步即可。</strong><br>安装完成后同样打开命令行工具（cmd/powershell)，输入<code>git --version</code>，如果输出如下信息，安装即为成功。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.21.0.windows.1</span><br></pre></td></tr></table></figure>
 <h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>安装完 Git 后，我们的操作就可以在 Git Bash 中进行<strong>(当然在其他命令行工具中也行)</strong>，在资源管理的任意目录下右键鼠标可以看到 Git Bash Here 选项。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1eyu8xf96j207i0cst98.jpg" width="30%/"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-4.jpg" width="30%/"></p>
 <p>单击该选项，我们便进入了 Git 的命令行工具界面如下(同样打开Windows自带的cmd或是其他命令行工具都可以)，之后 Hexo 的安装、博客的部署等操作都在这个界面进行。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1eyxmwsicj20km0ceglq.jpg" width="75%/"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-5.jpg" width="75%/"></p>
 <p>由于国内的 npm 访问外网下载速度较慢，我们可以将 npm 源更换为淘宝的镜像（当然如果你觉得你的下载速度较快的话，也可以选择不进行更换），在 Git Bash 中输入以下指令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
 <p><strong>请注意如果进行了上述操作，那么之后的下载等操作需要使用到 npm 的地方你都应该更换为 cnpm 指令，这样才能起到加速作用，如果未进行更换，则使用 npm 即可。</strong></p>
@@ -674,7 +675,7 @@
 <p>进入 Blog 文件夹后，输入 <code>hexo init</code> 命令，即可完成该文件夹的初始化，在此期间，Hexo 会自动克隆和创建一系列相关文件，在结束后为得到如下反馈：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">INFO  Cloning hexo-starter to F:\desktop\Blog</span><br><span class="line">Cloning into <span class="string">'F:\desktop\Blog'</span>...</span><br><span class="line">...</span><br><span class="line">Unpacking objects: 100% (71/71), <span class="keyword">done</span>.</span><br><span class="line">Submodule <span class="string">'themes/landscape'</span> (https://github.com/hexojs/hexo-theme-landscape.git) registered <span class="keyword">for</span> path <span class="string">'themes/landscape'</span></span><br><span class="line">Cloning into <span class="string">'F:/desktop/Blog/themes/landscape'</span>...</span><br><span class="line">...</span><br><span class="line">Receiving objects: 100% (890/890), 2.56 MiB | 362.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (465/465), <span class="keyword">done</span>.</span><br><span class="line">Submodule path <span class="string">'themes/landscape'</span>: checked out <span class="string">'73a23c51f8487cfcd7c6deec96ccc7543960d350'</span></span><br><span class="line">INFO  Install dependencies</span><br><span class="line">...</span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
 <p>当看到 <code>Start blogging with Hexo</code> 就知道我们已经初始化成功了，Blog 文件夹中会创建如下文件：</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1f00cx5bbj20kn0730tg.jpg" width="80%/"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-6.jpg" width="80%/"></p>
 <hr>
 <h1 id="生成博客页面"><a href="#生成博客页面" class="headerlink" title="生成博客页面"></a>生成博客页面</h1><p>在 \source\_posts\ 文件夹中就保存着我们写的所有博客，当前我们并没有写任何博客，但是 Hexo 为自动生成一个 hello-world.md 文件，我们可以以此为例，看看我们的博客网页是啥样啦。</p>
 <p>在 Git Bash 中输入 <code>hexo g</code> 命令（是 <code>hexo generate</code> 的简写），等待 Hexo 自动生成网页，得到如下反馈则生成成功：</p>
@@ -682,7 +683,7 @@
 <p>接下来我们需要开启开启本地服务器，输入 <code>hexo s</code> 命令（是 <code>hexo server</code> 的简写），输出</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
 <p>我们就知道了网页运行在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 上，我们在浏览器中输入该地址便能进入我们创建的博客网页啦。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1f0gx2bbcj217918v15o.jpg" width="85%"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-7.jpg" width="85%"></p>
 <hr>
 <h1 id="美化博客页面"><a href="#美化博客页面" class="headerlink" title="美化博客页面"></a>美化博客页面</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p>可以看到打开的博客页面就是 Hexo 默认的页面，所以并不是非常得好看，我们可以自行选择更换，在 GitHub 上搜索 Hexo 主题还是有非常多的项目的。我在这里选择了目前使用人数比较多的 Next 主题进行演示。Next 主题的 Github 地址是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next/hexotheme-next</a>。回到我们存放博客文件的根目录，输入如下指令，将该仓库克隆到本地。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> Blog</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
@@ -694,7 +695,7 @@
 <p>再在 Git Bash 中依次输入下面三条指令（发布三连），<strong>请注意所有的 hexo 指令都是在根目录下进行的，如果当前目录不是根目录，必须先切换到根目录再执行命令</strong>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean   <span class="comment">#清除之前生成的网站文件</span></span><br><span class="line">$ hexo g       <span class="comment">#生成当前网站文件</span></span><br><span class="line">$ hexo s       <span class="comment">#开启服务器</span></span><br></pre></td></tr></table></figure>
 <p>再次打开 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> ，我们就能看到更换主题后的网站了，非常便捷。</p>
-<p><img src="https://ws1.sinaimg.cn/large/8ad8ba54ly1g1gae18qhbj20uo18jacn.jpg" width="85%/"></p>
+<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-8.jpg" width="85%/"></p>
 <p>这就是我们新生成的页面了，是不是看上去精致多了呢。</p>
 <hr>
 <h1 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h1><p>在完成了上述步骤之后，我们就可以在自己的电脑上打开博客网页了，但是怎么才能让别人也能访问到我们的网页呢？这就需要我们部署我们的博客网站了。幸运的是，GitHub 能为我们免费提供这一服务，那就是 GitHub Page ，我们需要做的就是在 GitHub 上新建一个名为 <code>&lt;username&gt;.github.io</code> (在<code>&lt;username&gt;</code>处填入你的用户名） 的仓库即可。</p>
