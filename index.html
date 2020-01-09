@@ -364,7 +364,7 @@
                 
               
 
-              <time title="创建时间：2020-01-09 18:16:00 / 修改时间：18:17:08" itemprop="dateCreated datePublished" datetime="2020-01-09T18:16:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-01-09 18:16:00 / 修改时间：18:35:36" itemprop="dateCreated datePublished" datetime="2020-01-09T18:16:00+08:00">2020-01-09</time>
             
 
             
@@ -468,17 +468,17 @@
 <h3 id="3-统计学习三要素"><a href="#3-统计学习三要素" class="headerlink" title="3 统计学习三要素"></a>3 统计学习三要素</h3><p>方法=模型+策略+算法</p>
 <h4 id="3-1模型"><a href="#3-1模型" class="headerlink" title="3.1模型"></a>3.1模型</h4><p><strong>假设空间$\mathcal{F}$</strong></p>
 <p>1）假设空间定义为<strong>决策函数</strong>的集合（非概率模型）</p>
-<p>$\mathcal{F}={f|Y=f(X)}$</p>
+<p>$\mathcal{F}=\{f|Y=f(X)\}$</p>
 <p>X/Y：定义在输入空间$\mathcal{X}$和输出空间$\mathcal{Y}$上的随机变量，<br>此时$\mathcal{F}$通常是由一个参数向量决定的函数族：</p>
-<p>$\mathcal{F}={f|Y=f_\theta(X),\theta \in R^n}$</p>
+<p>$\mathcal{F}=\{f|Y=f_\theta(X),\theta \in R^n\}$</p>
 <p>2）假设空间定义为<strong>条件概率</strong>的集合（概率模型）</p>
-<p>$\mathcal{F}={P|P(X,Y)}$</p>
+<p>$\mathcal{F}=\{P|P(X,Y)\}$</p>
 <p>X/Y：定义在输入空间$\mathcal{X}$和输出空间$\mathcal{Y}$上的随机变量，<br>此时$\mathcal{F}$通常是由一个参数向量决定的条件概率分布族：</p>
-<p>$\mathcal{F}={P|P_\theta(X,Y),\theta \in R^n}$</p>
+<p>$\mathcal{F}=\{P|P_\theta(X,Y),\theta \in R^n\}$</p>
 <h4 id="3-2策略"><a href="#3-2策略" class="headerlink" title="3.2策略"></a>3.2策略</h4><p>1）损失函数、风险函数<br>损失函数（代价函数）L(Y,f(X))：度量预测错误的程度，为f(X)和Y的非负实值函数</p>
 <p>常用损失函数：</p>
 <ul>
-<li>0-1损失函数<br>$L(Y, f(X))=\left{\begin{array}{ll}{1,} &amp; {Y \neq f(X)} \ {0,} &amp; {Y=f(X)}\end{array}\right.$</li>
+<li>0-1损失函数<br>$L(Y, f(X))=\left\{\begin{array}{ll}{1,} &amp; {Y \neq f(X)} \\ {0,} &amp; {Y=f(X)}\end{array}\right.$</li>
 <li>平方损失函数<br>$L(Y, f(X))=(Y-f(X))^{2}$</li>
 <li>绝对损失函数<br>$L(Y, f(X))=|Y-f(X)|$</li>
 <li>对数损失函数/对数似然损失函数<br>$L(Y, P(Y | X))=-\log P(Y | X)$</li>
@@ -2097,6 +2097,74 @@
   
 
   
+  
+
+  
+  
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
 
   
 
