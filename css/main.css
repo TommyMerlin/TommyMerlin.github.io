@@ -2006,7 +2006,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #01658a;
+  background: #ffa1a7;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3118,8 +3118,5 @@ ul.breadcrumb li+li:last-child {
   }
 }
 body {
-  background: url("https://gitee.com/TommyMerlin/image-host-gitee/raw/master/bgimage-1.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50% 50%;
+  background-color: #d8e3e7;
 }
