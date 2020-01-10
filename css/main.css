@@ -2006,7 +2006,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffa1a7;
+  background: #1b17ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3116,7 +3116,4 @@ ul.breadcrumb li+li:last-child {
   .post-body {
     text-align: justify;
   }
-}
-body {
-  background-color: #d8e3e7;
 }
