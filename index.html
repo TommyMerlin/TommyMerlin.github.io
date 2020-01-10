@@ -430,7 +430,9 @@
 要解决这个问题，您可以执行以下操作：
 
 1.右击“我的电脑”，然后选择“属性”。（有可能需要在控制面板中双击“系统”）。
-2.选择
+2.选择“高级”标签，点击“环境变量”。
+3.在窗口下方的系统变量中，查找变量 LM_LICENSE_FILE。
+4.如果有 LM_LICENSE_FILE 变量存在，请看第5步。如果没有，请创建一个 LM_
               ...
             </p>
           <!--noindex-->
@@ -603,7 +605,13 @@
             <p>
               感知机——二类分类的线性分类模型
 1.感知机模型输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置
-感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S
+感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。
+    
+
+感知机模型
+
+
+2.感知机学习策略2.1 数据集的线性可分性存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两
               ...
             </p>
           <!--noindex-->
@@ -791,7 +799,19 @@
 监督学习（supervised learning）
 非监督学习（unsupervised learning）
 半监督学习（semi-supervised learning）
-强化学习（reinforcement learning
+强化学习（reinforcement learning）
+
+三要素：
+
+模型（model）
+策略（strategy）
+算法（algorithm）
+
+主要步骤：
+
+得到一个有限训练数据集
+确定包含所有可能模型的假设空间（学习模型的集合）
+确定模型选择的准则
               ...
             </p>
           <!--noindex-->
@@ -995,6 +1015,10 @@ AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - 
 
 
 datawhalechina / pumpkin-book
+《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
+
+
+scutan90 / DeepLearning-50
               ...
             </p>
           <!--noindex-->
@@ -1373,7 +1397,9 @@ datawhalechina / pumpkin-book
 Windows 10  1803node-v10.14.1git version 2.21.0.windows.1hexo-v3.8.0
 
 安装各种依赖环境还是比较简单的，基本上就是从各自的官网下载进行安装，十分方便。
-安装 Node.jsHexo 的运行需要 Node.js 的支持，所以我们需要首先安装好 Node.js
+安装 Node.jsHexo 的运行需要 Node.js 的支持，所以我们需要首先安装好 Node.js 。打开Node.js官网就能很明显地看到下载提示，点击左边的按钮进行下载即可。
+
+下载完点击安装程序进行安装，无需修改安装路径的话无脑点击下一步即可。当安装完成后打开命令行工具（cmd/powers
               ...
             </p>
           <!--noindex-->
@@ -1526,7 +1552,10 @@ Windows 10  1803node-v10.14.1git version 2.21.0.windows.1hexo-v3.8.0
 Quick StartCreate a new post$ hexo new "My New Post"
 More info: Writing
 Run server$ hexo server
-More info
+More info: Server
+Generate static files$ hexo generate
+More info: Generating
+Deploy to remote sites$ hexo dep
               ...
             </p>
           <!--noindex-->
