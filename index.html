@@ -423,25 +423,20 @@
       
         
           
-            <p>感知机——二类分类的线性分类模型</p>
-<h3 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h3><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/2020/01/09/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h3 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h3><h4 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h4><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h4 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h4><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h3 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h3><h4 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h4><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h4 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h4><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-
+            <p>
+              感知机——二类分类的线性分类模型
+1.感知机模型输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/09/统计学习方法第二章学习笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -600,128 +595,29 @@
       
         
           
-            <h2 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1.统计学习"></a>1.统计学习</h2><h3 id="1-1特点"><a href="#1-1特点" class="headerlink" title="1.1特点"></a>1.1特点</h3><ul>
-<li>建立于计算机及网络之上</li>
-<li>数据驱动</li>
-<li>目的：对数据进行预测及分析</li>
-<li>以方法为中心</li>
-<li>综合概率论、统计学、信息论、计算理论、最优化理论及计算机科学</li>
-</ul>
-<blockquote>
-<p>统计学习就是计算机系统通过运用数据及统计方法提高系统性能的机器学习。</p>
-</blockquote>
-<h3 id="1-2对象"><a href="#1-2对象" class="headerlink" title="1.2对象"></a>1.2对象</h3><p> 统计学习对象：数据<br> <strong>基本假设：</strong> 同类数据具有一定的统计规律性</p>
-<h3 id="1-3目的"><a href="#1-3目的" class="headerlink" title="1.3目的"></a>1.3目的</h3><p> 对<strong>新数据</strong>进行预测和分析</p>
-<h3 id="1-4方法"><a href="#1-4方法" class="headerlink" title="1.4方法"></a>1.4方法</h3><p>常用方法：</p>
-<ul>
-<li>监督学习（supervised learning）</li>
-<li>非监督学习（unsupervised learning）</li>
-<li>半监督学习（semi-supervised learning）</li>
-<li>强化学习（reinforcement learning）</li>
-</ul>
-<p>三要素：</p>
-<ul>
-<li>模型（model）</li>
-<li>策略（strategy）</li>
-<li>算法（algorithm）</li>
-</ul>
-<p>主要步骤：</p>
-<ol>
-<li>得到一个有限训练数据集</li>
-<li>确定包含所有可能模型的假设空间（学习模型的集合）</li>
-<li>确定模型选择的准则（学习策略）</li>
-<li>实现求解最优模型的算法（学习算法）</li>
-<li>通过学习算法选择最优模型</li>
-<li>对新数据进行预测和分析</li>
-</ol>
-<h2 id="2监督学习基本概念"><a href="#2监督学习基本概念" class="headerlink" title="2监督学习基本概念"></a>2监督学习基本概念</h2><h3 id="2-1输入空间、特征空间、输出空间"><a href="#2-1输入空间、特征空间、输出空间" class="headerlink" title="2.1输入空间、特征空间、输出空间"></a>2.1输入空间、特征空间、输出空间</h3><ul>
-<li>输入空间：输入的所有可能取值</li>
-<li>输出空间：输出的所有可能取值</li>
-<li>特征空间：所有特征向量存在空间</li>
-<li>特征向量：表示具体的实例</li>
-</ul>
-<h3 id="2-2联合概率分布"><a href="#2-2联合概率分布" class="headerlink" title="2.2联合概率分布"></a>2.2联合概率分布</h3><p>监督学习假设输入与输出的随机变量X和Y遵循联合概率分布P(X,Y)  （基本假设）</p>
-<h3 id="2-3假设空间"><a href="#2-3假设空间" class="headerlink" title="2.3假设空间"></a>2.3假设空间</h3><p>假设空间：输入空间到输出空间的映射的集合</p>
-<h2 id="3-统计学习三要素"><a href="#3-统计学习三要素" class="headerlink" title="3 统计学习三要素"></a>3 统计学习三要素</h2><p>方法=模型+策略+算法</p>
-<h3 id="3-1模型"><a href="#3-1模型" class="headerlink" title="3.1模型"></a>3.1模型</h3><p><strong>假设空间$\mathcal{F}$</strong></p>
-<p>1）假设空间定义为<strong>决策函数</strong>的集合（非概率模型）</p>
-<p>$\mathcal{F}=\{f|Y=f(X)\}$</p>
-<p>X/Y：定义在输入空间$\mathcal{X}$和输出空间$\mathcal{Y}$上的随机变量，<br>此时$\mathcal{F}$通常是由一个参数向量决定的函数族：</p>
-<p>$\mathcal{F}=\{f|Y=f_\theta(X),\theta \in R^n\}$</p>
-<p>2）假设空间定义为<strong>条件概率</strong>的集合（概率模型）</p>
-<p>$\mathcal{F}=\{P|P(X,Y)\}$</p>
-<p>X/Y：定义在输入空间$\mathcal{X}$和输出空间$\mathcal{Y}$上的随机变量，<br>此时$\mathcal{F}$通常是由一个参数向量决定的条件概率分布族：</p>
-<p>$\mathcal{F}=\{P|P_\theta(X,Y),\theta \in R^n\}$</p>
-<h3 id="3-2策略"><a href="#3-2策略" class="headerlink" title="3.2策略"></a>3.2策略</h3><p>1）损失函数、风险函数<br>损失函数（代价函数）L(Y,f(X))：度量预测错误的程度，为f(X)和Y的非负实值函数</p>
-<p>常用损失函数：</p>
-<ul>
-<li>0-1损失函数<br>$L(Y, f(X))=\left\{\begin{array}{ll}{1,} &amp; {Y \neq f(X)} \\ {0,} &amp; {Y=f(X)}\end{array}\right.$</li>
-<li>平方损失函数<br>$L(Y, f(X))=(Y-f(X))^{2}$</li>
-<li>绝对损失函数<br>$L(Y, f(X))=|Y-f(X)|$</li>
-<li>对数损失函数/对数似然损失函数<br>$L(Y, P(Y | X))=-\log P(Y | X)$</li>
-</ul>
-<p>风险函数/期望损失$R_{\mathrm{exp}}(f)$：损失函数的期望<br>$R_{\mathrm{exp}}(f)=E_{P}[L(Y, f(X))]=\int_{\mathcal{X}\times\mathcal{Y}} L(y, f(x)) P(x, y) \mathrm{d} x \mathrm{d} y$</p>
-<p>经验风险/经验损失$R_{\mathrm{emp}}(f)$：f(X)关于训练数据集的平均损失<br>$R_{\mathrm{emp}}(f)=\frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)$</p>
-<p>当N趋于无穷，经验风险$R_{\mathrm{emp}}(f)$趋于期望风险$R_{\mathrm{exp}}(f)$。</p>
-<p>2）经验风险最小化与结构风险最小化</p>
-<p><strong>经验风险最小化</strong>：经验风险最小的模型即为最优模型，求解如下最优化问题：</p>
-<p>$\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)$</p>
-<p>注意点：</p>
-<ul>
-<li>样本容量大效果好，如极大似然估计</li>
-<li>样本容量小有可能产生“过拟合”现象</li>
-</ul>
-<p><strong>结构风险最小化</strong>：等价于正则化，防止过拟合。在经验风险上加上正则化项或罚项。</p>
-<p>结构风险：$R_{sm}(f)=\frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)$</p>
-<p>注意点：</p>
-<ul>
-<li>结构风险小需要经验风险与模型复杂度同时小</li>
-<li>结构风险小对训练数据和测试数据都有较好的预测，如最大后验概率估计</li>
-</ul>
-<h3 id="3-3算法"><a href="#3-3算法" class="headerlink" title="3.3算法"></a>3.3算法</h3><p>学习模型的具体计算方法，也即求解最优化问题的算法</p>
-<h2 id="4-模型评估与模型选择"><a href="#4-模型评估与模型选择" class="headerlink" title="4.模型评估与模型选择"></a>4.模型评估与模型选择</h2><h3 id="4-1-训练误差、测试误差"><a href="#4-1-训练误差、测试误差" class="headerlink" title="4.1 训练误差、测试误差"></a>4.1 训练误差、测试误差</h3><p>学习到的模型：$Y=\hat{f}(X)$</p>
-<p>训练误差$R_{\mathrm{emp}}(\hat{f})$：模型$Y=\hat{f}(X)$关于训练集的平均损失：<br>$R_{\mathrm{emp}}(\hat{f})=\frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, \hat{f}\left(x_{i}\right)\right)$</p>
-<p>测试误差$e_{\mathrm{test}}$：模型$Y=\hat{f}(X)$关于测试集的平均损失：<br>$e_{\mathrm{test}}=\frac{1}{N^{\prime}} \sum_{i=1}^{N^{\prime}} L\left(y_{i}, \hat{f}\left(x_{i}\right)\right)$</p>
-<h3 id="4-2-模型选择"><a href="#4-2-模型选择" class="headerlink" title="4.2 模型选择"></a>4.2 模型选择</h3><p>避免出现过拟合并提高模型的预测能力</p>
-<div align="center">    
-<img src="/2020/01/09/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
-<p>M次多项式函数拟合问题</p>
-</div>
+            <p>
+              1.统计学习1.1特点
+建立于计算机及网络之上
+数据驱动
+目的：对数据进行预测及分析
+以方法为中心
+综合概率论、统计学、信息论、计算理论、最优化理论及计算机科学
 
-<div align="center">    
-<img src="/2020/01/09/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
-<p>训练误差和测试误差与模型复杂度的关系</p>
-</div>
 
-<h2 id="5-正则化与交叉验证"><a href="#5-正则化与交叉验证" class="headerlink" title="5.正则化与交叉验证"></a>5.正则化与交叉验证</h2><h3 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 正则化</h3><p>正则化项一般为模型复杂度的单调递增函数，模型越复杂，正则化值越大。</p>
-<p>一般形式：$\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)$</p>
-<p>正则化项不同形式：<br>$L_2范数$：$L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}|w|^{2}_2$<br>$L_1范数$：$L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\lambda|w|_{1}$</p>
-<ul>
-<li>函数的p范数：$|w|_p=(\sum_{i=1}^{N}|x_i|^p)^{\frac{1}{p}}$ </li>
-</ul>
-<h3 id="5-2-交叉验证"><a href="#5-2-交叉验证" class="headerlink" title="5.2 交叉验证"></a>5.2 交叉验证</h3><p>1）简单交叉验证<br>随机将数据集分为两部分：训练集—测试集。</p>
-<p>2）S折交叉验证<br>随机将数据切分成S个互不相交的同大小子集，训练集（S-1）—测试集（剩余子集）。</p>
-<p>3）留一交叉验证<br>S折交叉验证特殊情形：S=N（N：数据集容量），缺乏数据情况下使用。</p>
-<h2 id="6-泛化能力"><a href="#6-泛化能力" class="headerlink" title="6.泛化能力"></a>6.泛化能力</h2><p>学习到的模型：$Y=\hat{f}(X)$<br>泛化误差：$R_{\mathrm{exp}}(\hat{f})=E_{P}[L(Y, \hat{f}(X))]=\int_{\mathcal{X}\times\mathcal{Y}} L(y, \hat{f}(x)) P(x, y) \mathrm{d} x \mathrm{d} y$</p>
-<h2 id="7-生成模型"><a href="#7-生成模型" class="headerlink" title="7.生成模型"></a>7.生成模型</h2><p>监督学习方法可分为生成方法和判别方法。</p>
-<p>生成模型：朴素贝叶斯方法、隐马尔可夫模型<br>特点：</p>
-<ul>
-<li>可还原出联合概率分布P(X,Y)</li>
-<li>学习收敛速度更快</li>
-<li>存在隐变量，只能使用生成方法</li>
-</ul>
-<p>判别模型：k近邻法、感知机、决策树、逻辑斯蒂回归模型、最大熵模型、支持向量机、提升方法、条件随机场<br>特点：</p>
-<ul>
-<li>不可还原出联合概率分布P(X,Y)</li>
-<li>学习准确率更高</li>
-<li>可以简化学习问题</li>
-</ul>
-<h2 id="8-分类问题"><a href="#8-分类问题" class="headerlink" title="8.分类问题"></a>8.分类问题</h2><p>评价指标：分类准确率</p>
-<p>二类问题常用评价指标：精确率、召回率<br>TP——将正类预测为正类数（正类：关注的类）<br>FN——将正类预测为负类数<br>FP——将负类预测为正类数<br>TN——将负类预测为负类数<br>精确率：$P=\frac{TP}{TP+FP}$<br>召回率：$R=\frac{TP}{TP+FN}$<br>$F_1$值：$\frac{2}{F_1}=\frac{1}{P}+\frac{1}{R}\quad\quad$$F_1=\frac{2TP}{2TP+FP+FN}$ （精确率、召回率的调和均值）</p>
-<h2 id="9-标注问题"><a href="#9-标注问题" class="headerlink" title="9.标注问题"></a>9.标注问题</h2><p>输入：观测序列<br>输出：标记序列/状态序列<br>常用方法：隐马尔可夫模型、条件随机场</p>
-<h2 id="10-回归问题"><a href="#10-回归问题" class="headerlink" title="10.回归问题"></a>10.回归问题</h2><p>回归模型：从输入变量到输出变量之间映射的函数，等价于函数拟合。<br>常用损失函数：平方损失函数，此时可由最小二乘法求解。</p>
+统计学习就是计算机系统通过运用数据及统计方法提高系统性能的机器学习。
 
+1.2对象 统计学习对象：数据 基本假设： 同类数据具有一定的
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/09/统计学习方法第一章学习笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -892,464 +788,35 @@
       
         
           
-            <h1 id="Repository-Collection"><a href="#Repository-Collection" class="headerlink" title="Repository-Collection"></a>Repository-Collection</h1><p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/pilot.jpg" alt><br><em>A collection of useful repositories.</em></p>
-<p><a href="https://github.com/TommyMerlin/Repository-Collection" target="_blank" rel="noopener">GitHub</a> </p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li><a href="#机器学习">机器学习</a></li>
-<li><a href="#Python">Python</a></li>
-<li><a href="#中国大学课程资源">中国大学课程资源</a></li>
-<li><a href="#c-dotnet">C# DOTNET</a></li>
-<li><a href="#WPF">WPF</a></li>
-<li><a href="#前端博客">前端/博客</a></li>
-<li><a href="#资源汇总">资源汇总</a></li>
-<li><a href="#cs相关">CS相关</a></li>
-<li><a href="#AGV">AGV</a></li>
-<li><a href="#有趣项目">有趣项目</a></li>
-</ul>
-<hr>
-<h3 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h3><ol>
-<li><a href="https://github.com/apachecn/AiLearning" target="_blank" rel="noopener">apachecn / AiLearning</a><blockquote>
-<p>AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP。<br>网站: <a href="http://ailearning.apachecn.org" target="_blank" rel="noopener">http://ailearning.apachecn.org</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/datawhalechina/pumpkin-book" target="_blank" rel="noopener">datawhalechina / pumpkin-book</a><blockquote>
-<p>《机器学习》（西瓜书）公式推导解析，在线阅读地址：<a href="https://datawhalechina.github.io/pumpkin-book" target="_blank" rel="noopener">https://datawhalechina.github.io/pumpkin-book</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/scutan90/DeepLearning-500-questions" target="_blank" rel="noopener">scutan90 / DeepLearning-500-questions</a><blockquote>
-<p>深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/zergtant/pytorch-handbook" target="_blank" rel="noopener">zergtant / pytorch-handbook</a><blockquote>
-<p>pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门，其中包含的Pytorch教程全部通过测试保证可以成功运行。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fengdu78/lihang-code" target="_blank" rel="noopener">fengdu78 / lihang-code</a><blockquote>
-<p>《统计学习方法》的代码实现。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/MLEveryday/100-Days-Of-ML-Code" target="_blank" rel="noopener">MLEveryday / 100-Days-Of-ML-Code</a><blockquote>
-<p>100-Days-Of-ML-Code中文版。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/GokuMohandas/practicalAI" target="_blank" rel="noopener">GokuMohandas / practicalAI</a><blockquote>
-<p>A practical approach to machine learning.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/roboticcam/machine-learning-notes" target="_blank" rel="noopener">roboticcam/machine-learning-notes</a><blockquote>
-<p>不间断更新机器学习，概率模型和深度学习的讲义(1000+页)和视频链接。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/afshinea/stanford-cs-229-machine-learning" target="_blank" rel="noopener">afshinea / stanford-cs-229-machine-learning</a><blockquote>
-<p>VIP cheatsheets for Stanford’s CS 229 Machine Learning.<br>网站: <a href="https://stanford.edu/~shervine/teaching/cs-229" target="_blank" rel="noopener">https://stanford.edu/~shervine/teaching/cs-229</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fengdu78/deeplearning_ai_books" target="_blank" rel="noopener">fengdu78 / deeplearning_ai_books</a><blockquote>
-<p>deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank" rel="noopener">fengdu78 / Coursera-ML-AndrewNg-Notes</a><blockquote>
-<p>吴恩达老师的机器学习课程个人笔记。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">tensorflow / tensorflow</a><blockquote>
-<p>An Open Source Machine Learning Framework for Everyone.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/d2l-ai/d2l-zh" target="_blank" rel="noopener">d2l-ai / d2l-zh</a><blockquote>
-<p>《动手学深度学习》：面向中文读者、能运行、可讨论。英文版即伯克利“深度学习导论（STAT 157）”教材。<br>视频：<a href="https://space.bilibili.com/209599371/channel/detail?cid=23541" target="_blank" rel="noopener">https://space.bilibili.com/209599371/channel/detail?cid=23541</a><br>PDF: <a href="https://github.com/TommyMerlin/Repository-Collection/tree/master/files" target="_blank" rel="noopener">https://github.com/TommyMerlin/Repository-Collection/tree/master/files</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/afshinea/stanford-cs-229-machine-learning" target="_blank" rel="noopener">afshinea / stanford-cs-229-machine-learning</a><blockquote>
-<p>Cheatsheets for Stanford’s CS 229 Machine Learning.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/microsoft/ai-edu" target="_blank" rel="noopener">microsoft / ai-edu</a><blockquote>
-<p>AI education materials for Chinese students, teachers and IT professionals.</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><ol>
-<li><a href="https://github.com/jackfrued/Python-100-Days" target="_blank" rel="noopener">jackfrued / Python-100-Days</a><blockquote>
-<p>Python - 100天从新手到大师。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/TheAlgorithms/Python" target="_blank" rel="noopener">TheAlgorithms / Python</a><blockquote>
-<p>算法的Python实现。All Algorithms implemented in Python.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/vinta/awesome-python" target="_blank" rel="noopener">vinta / awesome-python</a><blockquote>
-<p>A curated list of awesome Python frameworks, libraries, software and resources.<br>网站: <a href="https://awesome-python.com/" target="_blank" rel="noopener">https://awesome-python.com/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">fxsjy / jieba</a><blockquote>
-<p>结巴中文分词。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/lancopku/pkuseg-python" target="_blank" rel="noopener">lancopku / pkuseg-python</a><blockquote>
-<p>pkuseg多领域中文分词工具。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fighting41love/funNLP" target="_blank" rel="noopener">fighting41love / funNLP</a><blockquote>
-<p>中英文敏感词、语言检测、中外手机/电话归属地/运营商查询、名字推断性别、手机号抽取、身份证抽取、邮箱抽取、中日文人名库、中文缩写库、拆字词典、词汇情感值、停用词、反动词表、暴恐词表、繁简体转换、英文模拟中文发音、汪峰歌词生成器、职业名称词库、同义词库、反义词库、否定词库、汽车品牌词库、汽车零件词库、连续英文切割、各种中文词向量、公司名字大全、古诗词库、IT词库、财经词库、成语词库、地名词库、历史名人词库、诗词词库、医学词库、饮食词库、法律词库、汽车词库、动物词库、中文聊天语料、中文谣言数据、百度中文问答数据集、句子相似度匹配算法集合、bert资源、文本生成&amp;摘要相关工具、cocoNLP信息抽取工具、国内电话号码正则匹配</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/amueller/word_cloud" target="_blank" rel="noopener">amueller / word_cloud</a><blockquote>
-<p>词云生成。A little word cloud generator in Python.<br>网站: <a href="https://amueller.github.io/word_cloud" target="_blank" rel="noopener">https://amueller.github.io/word_cloud</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank" rel="noopener">jakevdp / PythonDataScienceHandbook</a><blockquote>
-<p>Python数据处理。Python Data Science Handbook: full text in Jupyter Notebooks.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/xchaoinfo/fuck-login" target="_blank" rel="noopener">xchaoinfo / fuck-login</a><blockquote>
-<p>模拟登录一些知名的网站，为了方便爬取需要登录的网站。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/fluentpython/example-code" target="_blank" rel="noopener">fluentpython / example-code</a><blockquote>
-<p>《流畅的Python》书中代码。Example code for the book Fluent Python.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">leisurelicht / wtfpython-cn</a><blockquote>
-<p>wtfpython的中文翻译。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/qxf2/wtfiswronghere" target="_blank" rel="noopener">qxf2 / wtfiswronghere</a><blockquote>
-<p>新手常犯的Python错误。<br>A collection of simple errors that beginners are likely to hit when they start writing Python.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/rougier/matplotlib-cheatsheet" target="_blank" rel="noopener">rougier / matplotlib-cheatsheet</a><blockquote>
-<p>Matplotlib 3.1 cheat sheet. From an upcoming book on matplotlib.</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="中国大学课程资源"><a href="#中国大学课程资源" class="headerlink" title="中国大学课程资源"></a>中国大学课程资源</h3><ol>
-<li><a href="https://github.com/USTC-Resource/USTC-Course" target="_blank" rel="noopener">USTC-Resource / USTC-Course</a><blockquote>
-<p>中国科学技术大学课程资源。<br>网站: <a href="https://ustc-resource.github.io/USTC-Course" target="_blank" rel="noopener">https://ustc-resource.github.io/USTC-Course</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/PKUanonym/REKCARC-TSC-UHT" target="_blank" rel="noopener">PKUanonym / REKCARC-TSC-UHT</a><blockquote>
-<p>清华大学计算机系课程攻略。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/lib-pku/libpku" target="_blank" rel="noopener">lib-pku / libpku</a><blockquote>
-<p>北京大学课程资料。<br>网站: <a href="https://lib-pku.github.io/" target="_blank" rel="noopener">https://lib-pku.github.io/</a> </p>
-</blockquote>
-</li>
-<li><a href="https://github.com/QSCTech/zju-icicles" target="_blank" rel="noopener">QSCTech / zju-icicles</a><blockquote>
-<p>浙江大学课程攻略共享计划。<br>网站: <a href="https://qsctech.github.io/zju-icicles/" target="_blank" rel="noopener">https://qsctech.github.io/zju-icicles/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/TheNetAdmin/zjuthesis" target="_blank" rel="noopener">TheNetAdmin / zjuthesis</a><blockquote>
-<p>浙江大学毕业论文 Latex 模板。</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="C-DOTNET"><a href="#C-DOTNET" class="headerlink" title="C# DOTNET"></a>C# DOTNET</h3><ol>
-<li><a href="https://github.com/TheAlgorithms/C-Sharp" target="_blank" rel="noopener">TheAlgorithms / C-Sharp</a><blockquote>
-<p>算法的C#实现。All algorithms implemented in C#.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Live-Charts/Live-Charts" target="_blank" rel="noopener">Live-Charts / Live-Charts</a><blockquote>
-<p>.NET下简单、灵活、可交互的图表。<br>Simple, flexible, interactive &amp; powerful charts, maps and gauges for .Net.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/0xd4d/dnSpy" target="_blank" rel="noopener">0xd4d / dnSpy</a><blockquote>
-<p>.NET调试和编译器。.NET debugger and assembly editor.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/shimat/opencvsharp" target="_blank" rel="noopener">shimat / opencvsharp</a><blockquote>
-<p>.NET框架下的OpenCV。.NET Framework wrapper for OpenCV.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/dathlin/HslCommunication" target="_blank" rel="noopener">dathlin / HslCommunication</a><blockquote>
-<p>工业物联网基础架构框架，专注于基础技术通信和跨平台、跨语言通信功能，实现多种主流PLC数据读写。<br>网站: <a href="http://www.hslcommunication.cn" target="_blank" rel="noopener">http://www.hslcommunication.cn</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/quozd/awesome-dotnet" target="_blank" rel="noopener">quozd / awesome-dotnet</a><blockquote>
-<p>A collection of awesome .NET libraries, tools, frameworks and software.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/microsoft/dotnet" target="_blank" rel="noopener">microsoft / dotnet</a><blockquote>
-<p>This repo is the official home of .NET on GitHub. It’s a great starting point to find many .NET OSS projects from Microsoft and the community, including many that are part of the .NET Foundation.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/yuzhengyang/Fork" target="_blank" rel="noopener">yuzhengyang / Fork</a><blockquote>
-<p>C#工具包，C#工具类，常用方法，系统API，文件处理、加密解密、Winform美化（C# Tools）。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Jimmey-Jiang/Common.Utility" target="_blank" rel="noopener">Jimmey-Jiang / Common.Utility</a><blockquote>
-<p>比较全面的c#帮助类，各种功能性代码。</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="WPF"><a href="#WPF" class="headerlink" title="WPF"></a>WPF</h3><ol>
-<li><a href="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit" target="_blank" rel="noopener">MaterialDesignInXAML / MaterialDesignInXamlToolkit</a><blockquote>
-<p>Google’s Material Design in XAML &amp; WPF, for C# &amp; VB.Net.<br>网站: <a href="http://materialdesigninxaml.net/" target="_blank" rel="noopener">http://materialdesigninxaml.net/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/MahApps/MahApps.Metro" target="_blank" rel="noopener">MahApps / MahApps.Metro</a><blockquote>
-<p>A framework that allows developers to cobble together a Metro or Modern UI for their own WPF applications with minimal effort.<br>网站: <a href="https://mahapps.com" target="_blank" rel="noopener">https://mahapps.com</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/firstfloorsoftware/mui" target="_blank" rel="noopener">firstfloorsoftware / mui</a><blockquote>
-<p>Modern UI for WPF.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/xceedsoftware/wpftoolkit" target="_blank" rel="noopener">xceedsoftware / wpftoolkit</a><blockquote>
-<p>All the controls missing in WPF. Over 1 million downloads.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/microsoft/WPF-Samples" target="_blank" rel="noopener">microsoft / WPF-Samples</a><blockquote>
-<p>Repository for WPF related samples.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Panuon/PanuonUI" target="_blank" rel="noopener">Panuon / PanuonUI</a><blockquote>
-<p>一个好看精致、开源无限制使用的WPF控件库。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Panuon/PanuonUI.Silver" target="_blank" rel="noopener">Panuon / PanuonUI.Silver</a><blockquote>
-<p>Panuon.UI optimized version. A beautiful wpf ui library using templates &amp; attached properties.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/kwonganding/wpf.controls" target="_blank" rel="noopener">kwonganding / wpf.controls</a><blockquote>
-<p>在学习中和使用WPF中，学习、借鉴了很多网友的文章和开源的项目的知识。发现提供实际项目开发需要的基础控件、样式的文章大都比较散，不成系列。因此基于现在项目中使用开发了一个wpf基础UI库。</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="前端-博客"><a href="#前端-博客" class="headerlink" title="前端/博客"></a>前端/博客</h3><ol>
-<li><a href="https://github.com/qiu-deqing/FE-learning" target="_blank" rel="noopener">qiu-deqing / FE-learning</a><blockquote>
-<p>前端入门方法。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next / hexo-theme-next</a><blockquote>
-<p>Hexo主题。Elegant and powerful theme for Hexo.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener">gitalk / gitalk</a><blockquote>
-<p>Gitalk is a modern comment component based on Github Issue and Preact.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/helloqingfeng/Awsome-Front-End-learning-resource" target="_blank" rel="noopener">helloqingfeng / Awsome-Front-End-learning-resource</a><blockquote>
-<p>GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等）。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/kamranahmedse/developer-roadmap" target="_blank" rel="noopener">kamranahmedse / developer-roadmap</a><blockquote>
-<p>Roadmap to becoming a web developer in 2019.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/ProfessionalCSharp/ProfessionalCSharp6" target="_blank" rel="noopener">ProfessionalCSharp / ProfessionalCSharp6</a><blockquote>
-<p>Code samples for the book Professional C# 6 and .NET Core 1.0, Wrox Press.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/b3log/pipe" target="_blank" rel="noopener">b3log / pipe</a><blockquote>
-<p>🎷 一款小而美的博客平台，专为程序员设计。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/pandao/editor.md" target="_blank" rel="noopener">pandao / editor.md</a><blockquote>
-<p>开源可嵌入的在线Markdown编辑器（模块）。The open source embeddable online markdown editor (component).<br>网站: <a href="http://editor.md.ipandao.com/" target="_blank" rel="noopener">http://editor.md.ipandao.com/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/qianguyihao/Web" target="_blank" rel="noopener">qianguyihao / Web</a><blockquote>
-<p>前端入门和进阶学习笔记，超详细的Web前端学习图文教程。</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="资源汇总"><a href="#资源汇总" class="headerlink" title="资源汇总"></a>资源汇总</h3><ol>
-<li><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener">sindresorhus / awesome</a><blockquote>
-<p>Awesome lists about all kinds of interesting topics.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/dipakkr/A-to-Z-Resources-for-Students" target="_blank" rel="noopener">dipakkr / A-to-Z-Resources-for-Students</a><blockquote>
-<p>Curated list of resources for college students.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/LisaDziuba/Awesome-Design-Tools" target="_blank" rel="noopener">LisaDziuba / Awesome-Design-Tools</a><blockquote>
-<p>The best design tools for everything.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Solido/awesome-flutter" target="_blank" rel="noopener">Solido / awesome-flutter</a><blockquote>
-<p>An awesome list that curates the best Flutter libraries, tools, tutorials, articles and more.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/TonnyL/Awesome_APIs" target="_blank" rel="noopener">TonnyL / Awesome_APIs</a><blockquote>
-<p>:octocat: A collection of APIs.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis / public-apis</a><blockquote>
-<p>A collective list of free APIs for use in software and web development.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/matiassingers/awesome-readme" target="_blank" rel="noopener">matiassingers / awesome-readme</a><blockquote>
-<p>A curated list of awesome READMEs.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/ryanoasis/nerd-fonts" target="_blank" rel="noopener">ryanoasis / nerd-fonts</a><blockquote>
-<p>图标、字体集合。🔡 Iconic font aggregator, collection, and patcher. 40+ patched fonts, over 3,600 glyph/icons, includes popular collections such as Font Awesome &amp; fonts such as Hack.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/justjavac/awesome-wechat-weapp" target="_blank" rel="noopener">justjavac / awesome-wechat-weapp</a><blockquote>
-<p>微信小程序开发资源汇总 💯</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="CS相关"><a href="#CS相关" class="headerlink" title="CS相关"></a>CS相关</h3><ol>
-<li><a href="https://github.com/CyC2018/CS-Notes" target="_blank" rel="noopener">CyC2018 / CS-Notes</a><blockquote>
-<p>📚 技术面试必备基础知识、Leetcode 题解、Java、C++、Python、后端面试、操作系统、计算机网络、系统设计。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/prakhar1989/awesome-courses" target="_blank" rel="noopener">prakhar1989 / awesome-courses</a><blockquote>
-<p>📚 大学CS课程。List of awesome university courses for learning Computer Science!</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/EbookFoundation/free-programming-books" target="_blank" rel="noopener">EbookFoundation / free-programming-books</a><blockquote>
-<p>📚 编程相关书籍。Freely available programming books.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/justjavac/free-programming-books-zh_CN" target="_blank" rel="noopener">justjavac / free-programming-books-zh_CN</a><blockquote>
-<p>📚 免费的计算机编程类中文书籍</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/ruanyf/free-books" target="_blank" rel="noopener">ruanyf / free-books</a><blockquote>
-<p>互联网上的免费书籍。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Snailclimb / JavaGuide</a><blockquote>
-<p>【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/protocolbuffers/protobuf" target="_blank" rel="noopener">protocolbuffers / protobuf</a><blockquote>
-<p>Protocol Buffers - Google’s data interchange format.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/geeeeeeeeek/git-recipes" target="_blank" rel="noopener">geeeeeeeeek / git-recipes</a><blockquote>
-<p>🥡 高质量的Git中文教程。Git recipes in Chinese by Zhongyi Tong.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/github/gitignore" target="_blank" rel="noopener">github / gitignore</a><blockquote>
-<p>A collection of useful .gitignore templates.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/ziishaned/learn-regex" target="_blank" rel="noopener">ziishaned / learn-regex</a><blockquote>
-<p>学习正则表达式。Learn regex the easy way.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Lellansin/Cipher-examples" target="_blank" rel="noopener">Lellansin / Cipher-examples</a><blockquote>
-<p>常见加密算法。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/badges/shields" target="_blank" rel="noopener">badges / shields</a><blockquote>
-<p>Concise, consistent, and legible badges in SVG and raster format.<br>网站: <a href="https://shields.io/" target="_blank" rel="noopener">https://shields.io/</a></p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="AGV"><a href="#AGV" class="headerlink" title="AGV"></a>AGV</h3><ol>
-<li><a href="https://github.com/AtsushiSakai/PythonRobotics" target="_blank" rel="noopener">AtsushiSakai / PythonRobotics</a><blockquote>
-<p>Python sample codes for robotics algorithms.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/anvaka/ngraph.path" target="_blank" rel="noopener">anvaka / ngraph.path</a><blockquote>
-<p>Path finding in a graph.</p>
-</blockquote>
-</li>
-</ol>
-<hr>
-<h3 id="有趣项目"><a href="#有趣项目" class="headerlink" title="有趣项目"></a>有趣项目</h3><ol>
-<li><a href="https://github.com/chrislgarry/Apollo-11" target="_blank" rel="noopener">chrislgarry / Apollo-11</a><blockquote>
-<p>阿波罗11号。Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/hakimel/reveal.js" target="_blank" rel="noopener">hakimel / reveal.js</a><blockquote>
-<p>The HTML Presentation Framework.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/VincentSit/ChinaMobilePhoneNumberRegex" target="_blank" rel="noopener">VincentSit / ChinaMobilePhoneNumberRegex</a><blockquote>
-<p> 一组匹配中国大陆手机号码的正则表达式。<br>Regular expressions that match the mobile phone number in mainland China.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Jannchie/Historical-ranking-data-visualization-based-on-d3.js" target="_blank" rel="noopener">Jannchie / Historical-ranking-data-visualization-based-on-d3.js</a><blockquote>
-<p>这是一个数据可视化项目，能够将历史数据排名转化为动态柱状图图表。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/pomber/git-history" target="_blank" rel="noopener">pomber / git-history</a><blockquote>
-<p>可视化浏览commit历史。Quickly browse the history of a file from any git repository.<br>网站: <a href="https://githistory.xyz/" target="_blank" rel="noopener">https://githistory.xyz/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/leon-ai/leon" target="_blank" rel="noopener">leon-ai / leon</a><blockquote>
-<p>Leon is your open-source personal assistant.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/lennylxx/ipv6-hosts" target="_blank" rel="noopener">lennylxx / ipv6-hosts</a><blockquote>
-<p>Fork of <a href="https://code.google.com/archive/p/ipv6-hosts/" target="_blank" rel="noopener">https://code.google.com/archive/p/ipv6-hosts/</a>, focusing on automation.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/chinese-poetry/chinese-poetry" target="_blank" rel="noopener">chinese-poetry / chinese-poetry</a><blockquote>
-<p>最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/JustArchiNET/ArchiSteamFarm" target="_blank" rel="noopener">JustArchiNET / ArchiSteamFarm</a><blockquote>
-<p>Steam挂卡。C# application with primary purpose of idling Steam cards from multiple accounts simultaneously.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/soimort/you-get" target="_blank" rel="noopener">soimort / you-get</a><blockquote>
-<p>Dumb downloader that scrapes the web.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/houshanren/hangzhou_house_knowledge" target="_blank" rel="noopener">houshanren / hangzhou_house_knowledge</a><blockquote>
-<p>2017年买房经历总结出来的买房购房知识分享给大家，希望对大家有所帮助。买房不易，且买且珍惜。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/komeiji-satori/Dress" target="_blank" rel="noopener">komeiji-satori / Dress</a><blockquote>
-<p>好耶 是女装。</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net / XX-Net</a><blockquote>
-<p>A web proxy tool.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/Aniket965/Hello-world" target="_blank" rel="noopener">Aniket965 / Hello-world</a><blockquote>
-<p>Add any Program in any language you like or add a hello world Program ❣️ if you like give us ⭐️.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/rwv/chinese-dos-games" target="_blank" rel="noopener">rwv / chinese-dos-games</a><blockquote>
-<p>🎮 Chinese DOS games in browser.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/gelstudios/gitfiti" target="_blank" rel="noopener">gelstudios / gitfiti</a><blockquote>
-<p>随意更改commit历史。Abusing github commit history for the lulz.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/ornicar/lila" target="_blank" rel="noopener">ornicar / lila</a><blockquote>
-<p>国际象棋。♞ lichess.org: the forever free, adless and open source chess server. ♞</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/cmiscm/leonsans" target="_blank" rel="noopener">cmiscm / leonsans</a><blockquote>
-<p>代码生成的字体。Leon Sans is a geometric sans-serif typeface made with code in 2019 by Jongmin Kim.<br>网站: <a href="https://leon-kim.com/" target="_blank" rel="noopener">https://leon-kim.com/</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/menzi11/BullshitGenerator" target="_blank" rel="noopener">menzi11 / BullshitGenerator</a><blockquote>
-<p>狗屁不通文章生成器。Needs to generate some texts to test if my GUI rendering codes good or not. so I made this.<br>网站: <a href="https://suulnnka.github.io/BullshitGenerator/index.html" target="_blank" rel="noopener">https://suulnnka.github.io/BullshitGenerator/index.html</a></p>
-</blockquote>
-</li>
-<li><a href="https://github.com/3b1b/manim" target="_blank" rel="noopener">3b1b / manim</a><blockquote>
-<p>数学动画引擎。Animation engine for explanatory math videos.</p>
-</blockquote>
-</li>
-<li><a href="https://github.com/carloscuesta/gitmoji" target="_blank" rel="noopener">carloscuesta / gitmoji</a><blockquote>
-<p>在commit信息中添加emoji。An emoji guide for your commit messages. 😜<br>网站: <a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">https://gitmoji.carloscuesta.me/</a></p>
-</blockquote>
-</li>
-</ol>
+            <p>
+              Repository-CollectionA collection of useful repositories.
+GitHub 
+目录
+机器学习
+Python
+中国大学课程资源
+C# DOTNET
+WPF
+前端/博客
+资源汇总
+CS相关
+AGV
+有趣项目
 
+
+机器学习
+apachecn / AiL
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/13/GitHub项目精选/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1520,9 +987,19 @@
       
         
           
-            <p>上一篇我们讲了个人博客网站的搭建和部署问题，这一篇我们来讲讲博客网站的美化。还是以 Next 主题为例，打开 <code>themes\next</code> 文件夹下的 <code>_config.yml</code> <strong>(注意不是根目录下的 <code>_config.yml</code> 文件)</strong>，这个文件就是 Next 主题的配置文件，在其中可以修改和主题相关的配置选项，模拟人生4 2019.05.22 Origin正版备份</p>
-
+            <p>
+              上一篇我们讲了个人博客网站的搭建和部署问题，这一篇我们来讲讲博客网站的美化。还是以 Next 主题为例，打开 themes\next 文件夹下的 _config.yml (注意不是根目录下的 _config.yml 文件)，这个文件就是 Next 主题的配置文件，在其中可以修改和主题相关的配置选项，
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/28/Hexo-个人博客网站美化/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1693,78 +1170,28 @@
       
         
           
-            <div align="center">
-    <img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-1.jpg" width="85%">
-</div>
+            <p>
+              
+    
 
 
-<p>对于程序员来说，搭建和维护一个个人博客十分必要​，写博客既是对所学知识的整理和总结，同时也能向他人展现自己的学习成果。这篇教程就是基于 Hexo 和 GitHub 来搭建属于自己的个人博客，简单快捷，对小白也十分友好。</p>
-<hr>
-<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>本次Hexo博客搭建环境</p>
-<blockquote>
-<p>Windows 10  1803<br>node-v10.14.1<br>git version 2.21.0.windows.1<br>hexo-v3.8.0</p>
-</blockquote>
-<p>安装各种依赖环境还是比较简单的，基本上就是从各自的官网下载进行安装，十分方便。</p>
-<h2 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h2><p>Hexo 的运行需要 Node.js 的支持，所以我们需要首先安装好 Node.js 。打开<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>就能很明显地看到下载提示，点击左边的按钮进行下载即可。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-2.jpg" width="75%"></p>
-<p><strong>下载完点击安装程序进行安装，无需修改安装路径的话无脑点击下一步即可。</strong><br>当安装完成后打开命令行工具（cmd/powershell)，输入<code>node -v</code>，如果输出如下信息，安装即为成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v10.14.1</span><br></pre></td></tr></table></figure>
-<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><p>我们需要从 GitHub 上下载主题文件，最重要的是我们需要将本地的博客部署到可供外部访问的网页上去，我们借助的是 GitHub ，这些都离不开 Git 的支持。同样的我们到 <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git官网下载页</a>下载即可。这里我们选择 Windows 64 位最新版本的 Git for Windows 进行安装。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-3.jpg" width="90%/"></p>
-<p><strong>安装和 Node.js 差不多，不做修改的话一直点下一步即可。</strong><br>安装完成后同样打开命令行工具（cmd/powershell)，输入<code>git --version</code>，如果输出如下信息，安装即为成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.21.0.windows.1</span><br></pre></td></tr></table></figure>
-<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>安装完 Git 后，我们的操作就可以在 Git Bash 中进行<strong>(当然在其他命令行工具中也行)</strong>，在资源管理的任意目录下右键鼠标可以看到 Git Bash Here 选项。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-4.jpg" width="30%/"></p>
-<p>单击该选项，我们便进入了 Git 的命令行工具界面如下(同样打开Windows自带的cmd或是其他命令行工具都可以)，之后 Hexo 的安装、博客的部署等操作都在这个界面进行。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-5.jpg" width="75%/"></p>
-<p>由于国内的 npm 访问外网下载速度较慢，我们可以将 npm 源更换为淘宝的镜像（当然如果你觉得你的下载速度较快的话，也可以选择不进行更换），在 Git Bash 中输入以下指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p><strong>请注意如果进行了上述操作，那么之后的下载等操作需要使用到 npm 的地方你都应该更换为 cnpm 指令，这样才能起到加速作用，如果未进行更换，则使用 npm 即可。</strong></p>
-<p>接下来就是重头戏<strong>安装 Hexo </strong>了。输入如下指令即可安装完成 Hexo 的安装，十分方便。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-<p>在安装过程中可能会出现<code>WARN</code>提示，这是因为 Hexo 的某些内容不支持 Windows 系统，我们无需理会 <del>(程序员只关心 Error，不关心 Warning🙃)</del>。</p>
-<p>安装完成后，我们输入 <code>hexo -v</code> 命令，如果显示如下信息，则安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo-cli: 1.1.0</span><br><span class="line">os: Windows_NT 10.0.17134 win32 x64</span><br><span class="line">http_parser: 2.8.0</span><br><span class="line">node: 10.14.1</span><br><span class="line">v8: 6.8.275.32-node.36</span><br><span class="line">uv: 1.23.2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>底下还有许多包的版本信息，可以看到 Hexo 的依赖项还是比较多的。</p>
-<hr>
-<h1 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h1><p>在我们想要存放博客文件的盘下进入 Git Bash ，首先我们要新建一个文件夹用来存放我们写的博客和其它相关文件，在命令行中输入<code>mkdir Blog</code> 命令，便可新建一个名称为 Blog 的文件夹（文件夹名可自取）。接下来进入刚创建的文件夹，可使用 <code>cd Blog</code> 命令，或是进入该文件夹后在空白处单击右键，再点击 Git Bash Here （还是多练习以下命令行的简单命令为好）。</p>
-<p>进入 Blog 文件夹后，输入 <code>hexo init</code> 命令，即可完成该文件夹的初始化，在此期间，Hexo 会自动克隆和创建一系列相关文件，在结束后为得到如下反馈：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">INFO  Cloning hexo-starter to F:\desktop\Blog</span><br><span class="line">Cloning into <span class="string">'F:\desktop\Blog'</span>...</span><br><span class="line">...</span><br><span class="line">Unpacking objects: 100% (71/71), <span class="keyword">done</span>.</span><br><span class="line">Submodule <span class="string">'themes/landscape'</span> (https://github.com/hexojs/hexo-theme-landscape.git) registered <span class="keyword">for</span> path <span class="string">'themes/landscape'</span></span><br><span class="line">Cloning into <span class="string">'F:/desktop/Blog/themes/landscape'</span>...</span><br><span class="line">...</span><br><span class="line">Receiving objects: 100% (890/890), 2.56 MiB | 362.00 KiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (465/465), <span class="keyword">done</span>.</span><br><span class="line">Submodule path <span class="string">'themes/landscape'</span>: checked out <span class="string">'73a23c51f8487cfcd7c6deec96ccc7543960d350'</span></span><br><span class="line">INFO  Install dependencies</span><br><span class="line">...</span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
-<p>当看到 <code>Start blogging with Hexo</code> 就知道我们已经初始化成功了，Blog 文件夹中会创建如下文件：</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-6.jpg" width="80%/"></p>
-<hr>
-<h1 id="生成博客页面"><a href="#生成博客页面" class="headerlink" title="生成博客页面"></a>生成博客页面</h1><p>在 \source\_posts\ 文件夹中就保存着我们写的所有博客，当前我们并没有写任何博客，但是 Hexo 为自动生成一个 hello-world.md 文件，我们可以以此为例，看看我们的博客网页是啥样啦。</p>
-<p>在 Git Bash 中输入 <code>hexo g</code> 命令（是 <code>hexo generate</code> 的简写），等待 Hexo 自动生成网页，得到如下反馈则生成成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded <span class="keyword">in</span> 192 ms</span><br><span class="line">INFO  Generated: index.html</span><br><span class="line">...</span><br><span class="line">INFO  28 files generated <span class="keyword">in</span> 459 ms</span><br></pre></td></tr></table></figure>
-<p>接下来我们需要开启开启本地服务器，输入 <code>hexo s</code> 命令（是 <code>hexo server</code> 的简写），输出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
-<p>我们就知道了网页运行在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 上，我们在浏览器中输入该地址便能进入我们创建的博客网页啦。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-7.jpg" width="85%"></p>
-<hr>
-<h1 id="美化博客页面"><a href="#美化博客页面" class="headerlink" title="美化博客页面"></a>美化博客页面</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p>可以看到打开的博客页面就是 Hexo 默认的页面，所以并不是非常得好看，我们可以自行选择更换，在 GitHub 上搜索 Hexo 主题还是有非常多的项目的。我在这里选择了目前使用人数比较多的 Next 主题进行演示。Next 主题的 Github 地址是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next/hexotheme-next</a>。回到我们存放博客文件的根目录，输入如下指令，将该仓库克隆到本地。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> Blog</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-<p>这样我们就将 Next 主题克隆到 themes/next 文件夹下啦。</p>
-<h2 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h2><p>使用编辑器打开根目录下的 <code>_config.yml</code> 文件，这个文件保存的就是 Hexo 的诸多配置项，我们可以对其进行个性化修改。在文件中找到 <code>theme</code> 配置选项，如下所示：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">landscape</span></span><br></pre></td></tr></table></figure>
-<p>可以看到现在的主题是默认的 <code>landscape</code> ，我们将其改为 <code>next</code> 即可。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
-<p>再在 Git Bash 中依次输入下面三条指令（发布三连），<strong>请注意所有的 hexo 指令都是在根目录下进行的，如果当前目录不是根目录，必须先切换到根目录再执行命令</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean   <span class="comment">#清除之前生成的网站文件</span></span><br><span class="line">$ hexo g       <span class="comment">#生成当前网站文件</span></span><br><span class="line">$ hexo s       <span class="comment">#开启服务器</span></span><br></pre></td></tr></table></figure>
-<p>再次打开 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> ，我们就能看到更换主题后的网站了，非常便捷。</p>
-<p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-8.jpg" width="85%/"></p>
-<p>这就是我们新生成的页面了，是不是看上去精致多了呢。</p>
-<hr>
-<h1 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h1><p>在完成了上述步骤之后，我们就可以在自己的电脑上打开博客网页了，但是怎么才能让别人也能访问到我们的网页呢？这就需要我们部署我们的博客网站了。幸运的是，GitHub 能为我们免费提供这一服务，那就是 GitHub Page ，我们需要做的就是在 GitHub 上新建一个名为 <code>&lt;username&gt;.github.io</code> (在<code>&lt;username&gt;</code>处填入你的用户名） 的仓库即可。</p>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>打开根目录下的 <code>_config.yml</code> 文件，找到 <code>deploy</code> 选项，如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>:</span><br></pre></td></tr></table></figure>
-<p>将其修改为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>在其中的 <code>&lt;username&gt;</code> 处填入你的 GitHub 用户名即可。保存配置文件并退出。</p>
-<p>接下来在 Git Bash 中输入下面三条指令（部署三连）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>至此，我们就已经完成了个人博客网站的部署，在浏览器中输入你的地址 ：<code>&lt;username&gt;.github.io</code> ，就能看到我们的个人网站啦！</p>
 
+对于程序员来说，搭建和维护一个个人博客十分必要​，写博客既是对所学知识的整理和总结，同时也能向他人展现自己的学习成果。这篇教程就是基于 Hexo 和 GitHub 来搭建属于自己的个人博客，简单快捷，对小白也十分友好。
+
+前期准备本次Hexo博客搭建环境
+
+Windows 10  
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/22/Hexo-GitHub-搭建个人博客/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1901,17 +1328,19 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <p>
+              Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/22/hello-world/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
