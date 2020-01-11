@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>微服务架构与实践 第2章-微服务架构综述</title>
-    <url>/2020/01/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC2%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%BC%E8%BF%B0/</url>
+    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC2%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%BC%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="1微服务架构概述"><a href="#1微服务架构概述" class="headerlink" title="1微服务架构概述"></a>1微服务架构概述</h2><p><strong>微服务定义</strong>(Martin Fowler)：微服务架构为一种架构模式，提倡将单一应用划分成<strong>一组小的服务</strong>，服务之间互相协调、互相配合。每个服务运行在<strong>独立进程</strong>中，服务间沟通采用<strong>轻量级通信机制</strong>。每个服务围绕具体业务构建，可<strong>独立部署</strong>。</p>
 <h3 id="1-1-“微”的定义"><a href="#1-1-“微”的定义" class="headerlink" title="1.1 “微”的定义"></a>1.1 “微”的定义</h3><ul>
 <li>代码行数：×</li>
@@ -21,10 +21,10 @@
 </ul>
 <h3 id="1-3-轻量级通信"><a href="#1-3-轻量级通信" class="headerlink" title="1.3 轻量级通信"></a>1.3 轻量级通信</h3><p><strong>轻量级通信</strong>：语言无关、平台无关的交互方式。</p>
 <h3 id="1-4-独立性"><a href="#1-4-独立性" class="headerlink" title="1.4 独立性"></a>1.4 独立性</h3><p>在应用交付过程中，开发、测试以及部署的独立。</p>
-<p><img src="/2020/01/10/微服务架构与实践第2章-微服务架构综述/独立性.png" alt="独立性" style="zoom:80%;"></p>
+<p><img src="/学习笔记/微服务架构与实践第2章-微服务架构综述/独立性.png" alt="独立性" style="zoom:80%;"></p>
 <h3 id="1-4-进程隔离"><a href="#1-4-进程隔离" class="headerlink" title="1.4 进程隔离"></a>1.4 进程隔离</h3><p><strong>单块架构</strong>：对应用进行部署时，需先停掉当前运行应用，部署完成后在重新启动，无法做到独立部署。</p>
 <p><strong>微服务架构</strong>：每个服务均为高度自治的独立业务实体，能很容易地部署到不同的主机上。</p>
-<p><img src="/2020/01/10/微服务架构与实践第2章-微服务架构综述/进程隔离.png" alt="进程隔离" style="zoom:80%;"></p>
+<p><img src="/学习笔记/微服务架构与实践第2章-微服务架构综述/进程隔离.png" alt="进程隔离" style="zoom:80%;"></p>
 <h2 id="2-微服务架构与SOA"><a href="#2-微服务架构与SOA" class="headerlink" title="2.微服务架构与SOA"></a>2.微服务架构与SOA</h2><h3 id="2-1-SOA概述"><a href="#2-1-SOA概述" class="headerlink" title="2.1 SOA概述"></a>2.1 SOA概述</h3><p><strong>SOA</strong>：对于复杂系统，按照不同的、可重用的粒度划分，将功能相关的一组功能提供者组织在一起为用户提供服务。</p>
 <h3 id="2-2-微服务和SOA"><a href="#2-2-微服务和SOA" class="headerlink" title="2.2 微服务和SOA"></a>2.2 微服务和SOA</h3><div class="table-container">
 <table>
@@ -129,13 +129,13 @@
   </entry>
   <entry>
     <title>微服务架构与实践 第1章-单块架构及其面临的挑战</title>
-    <url>/2020/01/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC1%E7%AB%A0-%E5%8D%95%E5%9D%97%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%85%B6%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98/</url>
+    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC1%E7%AB%A0-%E5%8D%95%E5%9D%97%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%85%B6%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98/</url>
     <content><![CDATA[<h2 id="1-三层应用架构"><a href="#1-三层应用架构" class="headerlink" title="1.三层应用架构"></a>1.三层应用架构</h2><h3 id="1-1-三层架构"><a href="#1-1-三层架构" class="headerlink" title="1.1 三层架构"></a>1.1 三层架构</h3><ul>
 <li><strong>表示层</strong>：用户交互部分。</li>
 <li><strong>业务逻辑层</strong>：根据用户输入信息，进行逻辑运算或业务处理。</li>
 <li><strong>数据访问层</strong>：有效地将数据存储到数据库、文件系统等。</li>
 </ul>
-<p><img src="/2020/01/10/微服务架构与实践第1章-单块架构及其面临的挑战/三层架构.png" alt="三层架构" style="zoom:80%;"></p>
+<p><img src="/学习笔记/微服务架构与实践第1章-单块架构及其面临的挑战/三层架构.png" alt="三层架构" style="zoom:80%;"></p>
 <h3 id="1-2-三层架构优势"><a href="#1-2-三层架构优势" class="headerlink" title="1.2 三层架构优势"></a>1.2 三层架构优势</h3><ul>
 <li>解决应用程序中代码间调用复杂、代码职责不清问题。</li>
 <li>接口与实现分离，易于用不同实现替代现有实现。</li>
@@ -171,7 +171,7 @@
   </entry>
   <entry>
     <title>Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法</title>
-    <url>/2020/01/10/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <url>/%E6%95%99%E7%A8%8B/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
     <content><![CDATA[<h2 id="1-许可证问题"><a href="#1-许可证问题" class="headerlink" title="1.许可证问题"></a>1.许可证问题</h2><h3 id="1-1-解决方法1"><a href="#1-1-解决方法1" class="headerlink" title="1.1 解决方法1"></a>1.1 解决方法1</h3><p>MATLAB 在启动时，一直停留在“正在初始化”的状态，有可能是因为 MATLAB 一直在找着本机的许可证。</p>
 <p>有可能是设置了 <code>LM_LICENSE_FILE</code> 的环境变量。这个变量告诉 MATLAB 或者其他应用程序去哪里查找许可证文件。如果您有一个网络许可证，但是当前又没有联网，那么 MATLAB 就会一直停留在这个状态。</p>
 <p><strong>注意</strong>：还有一个环境变量 <code>MLM_LICENSE_FILE</code> 也会导致这一问题。这个环境变量只用于 MATLAB。</p>
@@ -226,12 +226,12 @@
   </entry>
   <entry>
     <title>统计学习方法第二章学习笔记</title>
-    <url>/2020/01/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
 <h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
 <p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
 <div align="center">    
-<img src="/2020/01/09/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<img src="/学习笔记/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
 <p>感知机模型</p>
 </div>
 
@@ -255,7 +255,7 @@
   </entry>
   <entry>
     <title>统计学习方法第一章学习笔记</title>
-    <url>/2020/01/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1.统计学习"></a>1.统计学习</h2><h3 id="1-1特点"><a href="#1-1特点" class="headerlink" title="1.1特点"></a>1.1特点</h3><ul>
 <li>建立于计算机及网络之上</li>
 <li>数据驱动</li>
@@ -340,12 +340,12 @@
 <p>测试误差$e_{\mathrm{test}}$：模型$Y=\hat{f}(X)$关于测试集的平均损失：<br>$e_{\mathrm{test}}=\frac{1}{N^{\prime}} \sum_{i=1}^{N^{\prime}} L\left(y_{i}, \hat{f}\left(x_{i}\right)\right)$</p>
 <h3 id="4-2-模型选择"><a href="#4-2-模型选择" class="headerlink" title="4.2 模型选择"></a>4.2 模型选择</h3><p>避免出现过拟合并提高模型的预测能力</p>
 <div align="center">    
-<img src="/2020/01/09/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/学习笔记/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
 <p>M次多项式函数拟合问题</p>
 </div>
 
 <div align="center">    
-<img src="/2020/01/09/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/学习笔记/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
 <p>训练误差和测试误差与模型复杂度的关系</p>
 </div>
 
@@ -387,7 +387,7 @@
   </entry>
   <entry>
     <title>GitHub 项目精选</title>
-    <url>/2019/08/13/GitHub%E9%A1%B9%E7%9B%AE%E7%B2%BE%E9%80%89/</url>
+    <url>/%E6%B1%87%E6%80%BB/GitHub%E9%A1%B9%E7%9B%AE%E7%B2%BE%E9%80%89/</url>
     <content><![CDATA[<h1 id="Repository-Collection"><a href="#Repository-Collection" class="headerlink" title="Repository-Collection"></a>Repository-Collection</h1><p><img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/pilot.jpg" alt><br><em>A collection of useful repositories.</em></p>
 <p><a href="https://github.com/TommyMerlin/Repository-Collection" target="_blank" rel="noopener">GitHub</a> </p>
 <hr>
@@ -842,7 +842,7 @@
   </entry>
   <entry>
     <title>Hexo 搭建个人博客网站美化</title>
-    <url>/2019/03/28/Hexo-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%BE%8E%E5%8C%96/</url>
+    <url>/%E6%95%99%E7%A8%8B/Hexo-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%BE%8E%E5%8C%96/</url>
     <content><![CDATA[<p>上一篇我们讲了个人博客网站的搭建和部署问题，这一篇我们来讲讲博客网站的美化。还是以 Next 主题为例，打开 <code>themes\next</code> 文件夹下的 <code>_config.yml</code> <strong>(注意不是根目录下的 <code>_config.yml</code> 文件)</strong>，这个文件就是 Next 主题的配置文件，在其中可以修改和主题相关的配置选项，模拟人生4 2019.05.22 Origin正版备份</p>
 ]]></content>
       <categories>
@@ -857,7 +857,7 @@
   </entry>
   <entry>
     <title>Hexo + GitHub 搭建个人博客</title>
-    <url>/2019/03/22/Hexo-GitHub-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/%E6%95%99%E7%A8%8B/Hexo-GitHub-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<div align="center">
     <img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/blog1-1.jpg" width="85%">
 </div>
@@ -942,7 +942,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2019/03/22/hello-world/</url>
+    <url>/uncategorized/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
