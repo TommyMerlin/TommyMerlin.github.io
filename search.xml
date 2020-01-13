@@ -49,7 +49,7 @@
 </tr>
 <tr>
 <td style="text-align:left">集成方式复杂（ESB/WS/SOAP）</td>
-<td style="text-align:left">集成方式简单（HTTP/REST/JSON</td>
+<td style="text-align:left">集成方式简单（HTTP/REST/JSON）</td>
 </tr>
 <tr>
 <td style="text-align:left">单块架构系统，相互依赖，部署复杂</td>
