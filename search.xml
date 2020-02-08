@@ -161,6 +161,9 @@
 </li>
 <li>构建全功能团队难</li>
 </ul>
+<blockquote>
+<p><strong>垂直伸缩</strong>: 升级到更强大的服务器（多CPU 昂贵大中型机）。<br><strong>水平伸缩</strong>: 增加更便宜的机器。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>学习笔记</category>
