@@ -6,14 +6,15 @@
     <content><![CDATA[<h2 id="1-安装-jdk-并配置路径"><a href="#1-安装-jdk-并配置路径" class="headerlink" title="1.安装 jdk 并配置路径"></a>1.安装 jdk 并配置路径</h2><p>将 jdk 解压放到 <code>/usr/local/</code> 目录下。</p>
 <p>修改 <code>/etc/profile</code> 文档，在末尾添加如下语句：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_191</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+<p>刷新配置文件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
 <h2 id="2-安装-Tomcat"><a href="#2-安装-Tomcat" class="headerlink" title="2.安装 Tomcat"></a>2.安装 Tomcat</h2><p>解压Tomcat压缩包。</p>
 <p>修改 <code>/conf/server.xml</code>文件，将端口8080改为80。</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/Blog\source\_posts\在Linux服务器端手动部署Tomcat\修改Server配置.png" alt="修改Server配置"></p>
+<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/修改Server配置.png" alt="修改Server配置" style="zoom:100%;"></p>
 <h2 id="3-在阿里云服务器上添加安全组规则"><a href="#3-在阿里云服务器上添加安全组规则" class="headerlink" title="3.在阿里云服务器上添加安全组规则"></a>3.在阿里云服务器上添加安全组规则</h2><p>添加80端口的监听。</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/Blog\source\_posts\在Linux服务器端手动部署Tomcat\添加安全组规则.png" alt="添加安全组规则" style="zoom:60%;"></p>
+<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/添加安全组规则.png" alt="添加安全组规则" style="zoom:60%;"></p>
 <h2 id="4-启动-Tomcat-服务器"><a href="#4-启动-Tomcat-服务器" class="headerlink" title="4.启动 Tomcat 服务器"></a>4.启动 Tomcat 服务器</h2><p>执行 <code>/bin/startup.sh</code>脚本，启动服务器，访问服务器地址就能看到部署成功！</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/Blog\source\_posts\在Linux服务器端手动部署Tomcat\Tomcat.png" alt="Tomcat" style="zoom:50%;"></p>
+<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/Tomcat.png" alt="Tomcat" style="zoom:50%;"></p>
 ]]></content>
       <categories>
         <category>教程笔记</category>
