@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>HTTP学习笔记</title>
-    <url>/JavaWeb/HTTP/HTTP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/Java/JavaWeb/HTTP/HTTP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><strong>概念</strong>：Hyper Text Transfer Protocol 超文本传输协议。</p>
 <p><strong>传输协议</strong>：定义了客户端和服务器端通信时，发送数据的格式。</p>
 <p><strong>特点</strong>：</p>
@@ -60,7 +60,7 @@
 <h2 id="3-Request"><a href="#3-Request" class="headerlink" title="3.Request"></a>3.Request</h2><h3 id="3-1-request-继承体系结构"><a href="#3-1-request-继承体系结构" class="headerlink" title="3.1 request 继承体系结构"></a>3.1 request 继承体系结构</h3><ul>
 <li>ServletRequest(接口) &lt;— HttpServletRequest(接口) —org.apache.catalina.connector.RequestFacade 类(tomcat)</li>
 </ul>
-<h3 id="3-2-request-功能"><a href="#3-2-request-功能" class="headerlink" title="3.2 request 功能"></a>3.2 request 功能</h3><h4 id="3-2-1-获取请求消息数据"><a href="#3-2-1-获取请求消息数据" class="headerlink" title="3.2.1.获取请求消息数据"></a>3.2.1.获取请求消息数据</h4><h5 id="3-2-1-1获取请求行数据"><a href="#3-2-1-1获取请求行数据" class="headerlink" title="3.2.1.1获取请求行数据"></a>3.2.1.1获取<strong>请求行</strong>数据</h5><ul>
+<h3 id="3-2-request-功能"><a href="#3-2-request-功能" class="headerlink" title="3.2 request 功能"></a>3.2 request 功能</h3><h4 id="3-2-1-获取请求消息数据"><a href="#3-2-1-获取请求消息数据" class="headerlink" title="3.2.1.获取请求消息数据"></a>3.2.1.获取请求消息数据</h4><h5 id="获取请求行数据"><a href="#获取请求行数据" class="headerlink" title="获取请求行数据"></a>获取<strong>请求行</strong>数据</h5><ul>
 <li>GET /demo/show？name=zhangsan HTTP/1.1</li>
 <li>方法：<ul>
 <li>获取请求方式：GET<ul>
@@ -97,12 +97,12 @@
 </ul>
 </li>
 </ul>
-<h5 id="3-2-1-2获取请求头数据"><a href="#3-2-1-2获取请求头数据" class="headerlink" title="3.2.1.2获取请求头数据"></a>3.2.1.2获取<strong>请求头</strong>数据</h5><ul>
+<h5 id="获取请求头数据"><a href="#获取请求头数据" class="headerlink" title="获取请求头数据"></a>获取<strong>请求头</strong>数据</h5><ul>
 <li><strong>String getHeader(String name)</strong>：通过请求头的名称获取请求头的值。</li>
 <li>Enumeration<string> getHeaderNames()：获取所有的请求头名称。</string></li>
 </ul>
-<p><img src="/JavaWeb/HTTP/HTTP学习笔记/获取请求头.png" alt="获取请求头" style="zoom:70%;"></p>
-<h5 id="3-2-1-3获取请求体数据"><a href="#3-2-1-3获取请求体数据" class="headerlink" title="3.2.1.3获取请求体数据"></a>3.2.1.3获取<strong>请求体</strong>数据</h5><ul>
+<p><img src="/Java/JavaWeb/HTTP/HTTP学习笔记/获取请求头.png" alt="获取请求头" style="zoom:70%;"></p>
+<h5 id="获取请求体数据"><a href="#获取请求体数据" class="headerlink" title="获取请求体数据"></a>获取<strong>请求体</strong>数据</h5><ul>
 <li>1.获取流对象。<ul>
 <li>BufferedReader getReader()：获取字符输入流，只能操作字符数据。</li>
 <li>ServletInputStream getInputStream()：获取字节输入流，可操作所有类型数据。</li>
@@ -110,7 +110,7 @@
 </li>
 <li>2.从流对象中获取数据。</li>
 </ul>
-<h4 id="3-2-2-其他功能"><a href="#3-2-2-其他功能" class="headerlink" title="3.2.2.其他功能"></a>3.2.2.<strong>其他功能</strong></h4><h5 id="3-2-2-1获取请求参数"><a href="#3-2-2-1获取请求参数" class="headerlink" title="3.2.2.1获取请求参数"></a>3.2.2.1获取请求参数</h5><ul>
+<h4 id="3-2-2-其他功能"><a href="#3-2-2-其他功能" class="headerlink" title="3.2.2 其他功能**"></a>3.2.2 其他功能**</h4><h5 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h5><ul>
 <li><p>通用方式：get 和 post 请求都可以用。</p>
 </li>
 <li><p>String getParameter(String name)：根据参数名称获取参数值    username=zs&amp;password=123</p>
@@ -119,7 +119,7 @@
 <li>Enumeration<string> getParameterNames()：获取所有请求的参数名称</string></li>
 <li>Map<string,string[]> getParameterMap():获取所有参数的map集合</string,string[]></li>
 </ul>
-<h5 id="3-2-2-2请求转发"><a href="#3-2-2-2请求转发" class="headerlink" title="3.2.2.2请求转发"></a>3.2.2.2请求转发</h5><ul>
+<h5 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h5><ul>
 <li><p>一种在服务器内部的资源跳转方式。</p>
 </li>
 <li><p>步骤：</p>
@@ -139,7 +139,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="3-2-2-3共享数据"><a href="#3-2-2-3共享数据" class="headerlink" title="3.2.2.3共享数据"></a>3.2.2.3共享数据</h5><ul>
+<h5 id="共享数据"><a href="#共享数据" class="headerlink" title="共享数据"></a>共享数据</h5><ul>
 <li>域对象：一个有作用范围的对象，可以在范围内共享数据。</li>
 <li>request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据。</li>
 <li>方法：<ul>
@@ -149,11 +149,12 @@
 </ul>
 </li>
 </ul>
-<h5 id="3-2-2-4获取-ServletContext"><a href="#3-2-2-4获取-ServletContext" class="headerlink" title="3.2.2.4获取 ServletContext"></a>3.2.2.4获取 ServletContext</h5><ul>
+<h5 id="获取-ServletContext"><a href="#获取-ServletContext" class="headerlink" title="获取 ServletContext"></a>获取 ServletContext</h5><ul>
 <li>ServletContext getServletContext()</li>
 </ul>
 ]]></content>
       <categories>
+        <category>Java</category>
         <category>JavaWeb</category>
         <category>HTTP</category>
       </categories>
@@ -164,7 +165,7 @@
   </entry>
   <entry>
     <title>Servlet学习笔记</title>
-    <url>/JavaWeb/Servlet/Servlet%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/Java/JavaWeb/Servlet/Servlet%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-Servlet-概述"><a href="#1-Servlet-概述" class="headerlink" title="1.Servlet 概述"></a>1.Servlet 概述</h2><ul>
 <li><p><strong>概念</strong>：运行在服务器端的小程序。</p>
 <ul>
@@ -198,7 +199,7 @@
 <li>1.<strong>创建</strong>：执行 init 方法，仅执行一次。<ul>
 <li>Servlet 什么时候被创建？<ul>
 <li>默认情况下，第一次访问时被创建。</li>
-<li>可以在<servelet>标签下配置指定 Servlet 被创建的时机。<br><img src="/JavaWeb/Servlet/Servlet学习笔记/配置Servlet创建时机.png" alt="配置Servlet创建时机" style="zoom:70%;"></servelet></li>
+<li>可以在<servelet>标签下配置指定 Servlet 被创建的时机。<br><img src="/Java/JavaWeb/Servlet/Servlet学习笔记/配置Servlet创建时机.png" alt="配置Servlet创建时机" style="zoom:70%;"></servelet></li>
 </ul>
 </li>
 </ul>
@@ -234,7 +235,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-Servlet-体系结构"><a href="#4-Servlet-体系结构" class="headerlink" title="4.Servlet 体系结构"></a>4.Servlet 体系结构</h2><p><img src="/JavaWeb/Servlet/Servlet学习笔记/Servlet继承关系.png" alt="Servlet继承关系" style="zoom:60%;"></p>
+<h2 id="4-Servlet-体系结构"><a href="#4-Servlet-体系结构" class="headerlink" title="4.Servlet 体系结构"></a>4.Servlet 体系结构</h2><p><img src="/Java/JavaWeb/Servlet/Servlet学习笔记/Servlet继承关系.png" alt="Servlet继承关系" style="zoom:60%;"></p>
 <ul>
 <li>GenericServlet：将Servlet接口中其他的方法做了默认空实现，只将service()方法作为抽象方法。</li>
 <li>HttpServlet：对http协议的一种封装，简化操作。<ul>
@@ -261,6 +262,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>Java</category>
         <category>JavaWeb</category>
         <category>Servlet</category>
       </categories>
@@ -295,7 +297,7 @@
   </entry>
   <entry>
     <title>Tomcat部署项目的三种方式</title>
-    <url>/JavaWeb/Tomcat/Tomcat%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <url>/Java/JavaWeb/Tomcat/Tomcat%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="1-直接将项目放到webapps目录下"><a href="#1-直接将项目放到webapps目录下" class="headerlink" title="1.直接将项目放到webapps目录下"></a>1.直接将项目放到webapps目录下</h2><ul>
 <li>项目的访问路径—&gt;虚拟路径</li>
 <li>简化部署：将项目打包成一个war包，再将war包放置到webapps目录下<ul>
@@ -316,6 +318,7 @@
 </ul>
 </context>]]></content>
       <categories>
+        <category>Java</category>
         <category>JavaWeb</category>
         <category>Tomcat</category>
       </categories>
