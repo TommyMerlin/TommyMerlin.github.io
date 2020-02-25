@@ -96,25 +96,21 @@
 
 
 
-  <meta name="description" content="1.直接将项目放到webapps目录下 项目的访问路径—&amp;gt;虚拟路径 简化部署：将项目打包成一个war包，再将war包放置到webapps目录下 war包会自动解压缩（热部署）    2.配置conf/server.xml文件在标签体中配置    docBase：项目存放的路径 path：虚拟路径  3.在conf\Catalina\localhost创建任意名称的xml文件在xml文件中编写">
-<meta name="keywords" content="JavaWeb,Tomcat">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat部署项目的三种方式">
-<meta property="og:url" content="http://yoursite.com/教程笔记/Tomcat部署项目的三种方式/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Servlet学习笔记">
+<meta property="og:url" content="http://yoursite.com/uncategorized/Servlet学习笔记/index.html">
 <meta property="og:site_name" content="HuYe的博客">
-<meta property="og:description" content="1.直接将项目放到webapps目录下 项目的访问路径—&amp;gt;虚拟路径 简化部署：将项目打包成一个war包，再将war包放置到webapps目录下 war包会自动解压缩（热部署）    2.配置conf/server.xml文件在标签体中配置    docBase：项目存放的路径 path：虚拟路径  3.在conf\Catalina\localhost创建任意名称的xml文件在xml文件中编写">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-24T13:07:23.251Z">
+<meta property="og:updated_time" content="2020-02-25T00:51:04.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomcat部署项目的三种方式">
-<meta name="twitter:description" content="1.直接将项目放到webapps目录下 项目的访问路径—&amp;gt;虚拟路径 简化部署：将项目打包成一个war包，再将war包放置到webapps目录下 war包会自动解压缩（热部署）    2.配置conf/server.xml文件在标签体中配置    docBase：项目存放的路径 path：虚拟路径  3.在conf\Catalina\localhost创建任意名称的xml文件在xml文件中编写">
+<meta name="twitter:title" content="Servlet学习笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/教程笔记/Tomcat部署项目的三种方式/">
+  <link rel="canonical" href="http://yoursite.com/uncategorized/Servlet学习笔记/">
 
 
 
@@ -124,7 +120,7 @@
   };
 </script>
 
-  <title>Tomcat部署项目的三种方式 | HuYe的博客</title>
+  <title>Servlet学习笔记 | HuYe的博客</title>
   
 
 
@@ -361,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/教程笔记/Tomcat部署项目的三种方式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/Servlet学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -378,7 +374,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tomcat部署项目的三种方式
+          <h1 class="post-title" itemprop="name headline">Servlet学习笔记
 
               
             
@@ -404,34 +400,12 @@
                 
               
 
-              <time title="创建时间：2020-02-24 19:55:04 / 修改时间：21:07:23" itemprop="dateCreated datePublished" datetime="2020-02-24T19:55:04+08:00">2020-02-24</time>
+              <time title="创建时间：2020-02-25 08:51:04" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
             
 
-            
-              
-
-              
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/教程笔记/" itemprop="url" rel="index"><span itemprop="name">教程笔记</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -462,7 +436,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">835</span>
+                <span title="本文字数">0</span>
               
 
               
@@ -486,25 +460,7 @@
       
 
       
-        <h2 id="1-直接将项目放到webapps目录下"><a href="#1-直接将项目放到webapps目录下" class="headerlink" title="1.直接将项目放到webapps目录下"></a>1.直接将项目放到webapps目录下</h2><ul>
-<li>项目的访问路径—&gt;虚拟路径</li>
-<li>简化部署：将项目打包成一个war包，再将war包放置到webapps目录下<ul>
-<li>war包会自动解压缩（热部署）</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-配置conf-server-xml文件"><a href="#2-配置conf-server-xml文件" class="headerlink" title="2.配置conf/server.xml文件"></a>2.配置conf/server.xml文件</h2><p>在<host>标签体中配置</host></p>
-<context daobase="D:\hello" path="/hello">
-
-<ul>
-<li>docBase：项目存放的路径</li>
-<li>path：虚拟路径</li>
-</ul>
-<h2 id="3-在conf-Catalina-localhost创建任意名称的xml文件"><a href="#3-在conf-Catalina-localhost创建任意名称的xml文件" class="headerlink" title="3.在conf\Catalina\localhost创建任意名称的xml文件"></a>3.在conf\Catalina\localhost创建任意名称的xml文件</h2><p>在xml文件中编写<context daobase="D:\hello"></context></p>
-<ul>
-<li>虚拟目录：xml文件的名称</li>
-</ul>
-</context>
+        
       
     </div>
 
@@ -554,14 +510,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
-          
-            <a href="/tags/Tomcat/" rel="tag"><i class="fa fa-tag"></i> Tomcat</a>
-          
-        </div>
-      
 
       
       
@@ -571,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/学习笔记/微服务架构与实践第2章-微服务架构综述/" rel="next" title="微服务架构与实践 第2章-微服务架构综述">
-                <i class="fa fa-chevron-left"></i> 微服务架构与实践 第2章-微服务架构综述
+              <a href="/教程笔记/在Linux服务器端手动部署Tomcat/" rel="next" title="在Linux服务器端手动部署Tomcat">
+                <i class="fa fa-chevron-left"></i> 在Linux服务器端手动部署Tomcat
               </a>
             
           </div>
@@ -580,10 +528,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/教程笔记/在Linux服务器端手动部署Tomcat/" rel="prev" title="在Linux服务器端手动部署Tomcat">
-                在Linux服务器端手动部署Tomcat <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -627,17 +571,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -654,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -675,7 +610,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -791,23 +730,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-直接将项目放到webapps目录下"><span class="nav-text">1.直接将项目放到webapps目录下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-配置conf-server-xml文件"><span class="nav-text">2.配置conf/server.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在conf-Catalina-localhost创建任意名称的xml文件"><span class="nav-text">3.在conf\Catalina\localhost创建任意名称的xml文件</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

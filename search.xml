@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Servlet学习笔记</title>
+    <url>/uncategorized/Servlet%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>在Linux服务器端手动部署Tomcat</title>
     <url>/%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2Tomcat/</url>
     <content><![CDATA[<h2 id="1-安装-jdk-并配置路径"><a href="#1-安装-jdk-并配置路径" class="headerlink" title="1.安装 jdk 并配置路径"></a>1.安装 jdk 并配置路径</h2><p>将 jdk 解压放到 <code>/usr/local/</code> 目录下。</p>
@@ -20,14 +25,13 @@
         <category>教程笔记</category>
       </categories>
       <tags>
-        <tag>JavaWeb</tag>
         <tag>Tomcat</tag>
         <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
     <title>Tomcat部署项目的三种方式</title>
-    <url>/%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/Tomcat%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <url>/JavaWeb/Tomcat/Tomcat%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="1-直接将项目放到webapps目录下"><a href="#1-直接将项目放到webapps目录下" class="headerlink" title="1.直接将项目放到webapps目录下"></a>1.直接将项目放到webapps目录下</h2><ul>
 <li>项目的访问路径—&gt;虚拟路径</li>
 <li>简化部署：将项目打包成一个war包，再将war包放置到webapps目录下<ul>
@@ -48,7 +52,8 @@
 </ul>
 </context>]]></content>
       <categories>
-        <category>教程笔记</category>
+        <category>JavaWeb</category>
+        <category>Tomcat</category>
       </categories>
       <tags>
         <tag>JavaWeb</tag>
