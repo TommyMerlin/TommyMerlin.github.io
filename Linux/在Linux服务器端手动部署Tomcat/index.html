@@ -96,21 +96,29 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Servlet学习笔记">
-<meta property="og:url" content="http://yoursite.com/uncategorized/Servlet学习笔记/index.html">
+  <meta name="description" content="1.安装 jdk 并配置路径将 jdk 解压放到 /usr/local/ 目录下。 修改 /etc/profile 文档，在末尾添加如下语句： 123export JAVA_HOME=/usr/local/jdk1.8.0_191export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/l">
+<meta name="keywords" content="Tomcat,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux服务器端手动部署Tomcat">
+<meta property="og:url" content="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.安装 jdk 并配置路径将 jdk 解压放到 /usr/local/ 目录下。 修改 /etc/profile 文档，在末尾添加如下语句： 123export JAVA_HOME=/usr/local/jdk1.8.0_191export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/l">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-25T00:51:04.509Z">
+<meta property="og:image" content="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/修改Server配置.png">
+<meta property="og:image" content="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/添加安全组规则.png">
+<meta property="og:image" content="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/Tomcat.png">
+<meta property="og:updated_time" content="2020-02-25T01:41:21.110Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Servlet学习笔记">
+<meta name="twitter:title" content="在Linux服务器端手动部署Tomcat">
+<meta name="twitter:description" content="1.安装 jdk 并配置路径将 jdk 解压放到 /usr/local/ 目录下。 修改 /etc/profile 文档，在末尾添加如下语句： 123export JAVA_HOME=/usr/local/jdk1.8.0_191export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/l">
+<meta name="twitter:image" content="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/修改Server配置.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/uncategorized/Servlet学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/">
 
 
 
@@ -120,7 +128,7 @@
   };
 </script>
 
-  <title>Servlet学习笔记 | HuYe的博客</title>
+  <title>在Linux服务器端手动部署Tomcat | HuYe的博客</title>
   
 
 
@@ -357,7 +365,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/Servlet学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -374,7 +382,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Servlet学习笔记
+          <h1 class="post-title" itemprop="name headline">在Linux服务器端手动部署Tomcat
 
               
             
@@ -400,12 +408,46 @@
                 
               
 
-              <time title="创建时间：2020-02-25 08:51:04" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
+              <time title="创建时间：2020-02-24 21:05:18" itemprop="dateCreated datePublished" datetime="2020-02-24T21:05:18+08:00">2020-02-24</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-25 09:41:21" itemprop="dateModified" datetime="2020-02-25T09:41:21+08:00">2020-02-25</time>
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -436,7 +478,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">1.7k</span>
               
 
               
@@ -460,7 +502,19 @@
       
 
       
-        
+        <h2 id="1-安装-jdk-并配置路径"><a href="#1-安装-jdk-并配置路径" class="headerlink" title="1.安装 jdk 并配置路径"></a>1.安装 jdk 并配置路径</h2><p>将 jdk 解压放到 <code>/usr/local/</code> 目录下。</p>
+<p>修改 <code>/etc/profile</code> 文档，在末尾添加如下语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_191</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+<p>刷新配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<h2 id="2-安装-Tomcat"><a href="#2-安装-Tomcat" class="headerlink" title="2.安装 Tomcat"></a>2.安装 Tomcat</h2><p>解压Tomcat压缩包。</p>
+<p>修改 <code>/conf/server.xml</code>文件，将端口8080改为80。</p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/修改Server配置.png" alt="修改Server配置" style="zoom:100%;"></p>
+<h2 id="3-在阿里云服务器上添加安全组规则"><a href="#3-在阿里云服务器上添加安全组规则" class="headerlink" title="3.在阿里云服务器上添加安全组规则"></a>3.在阿里云服务器上添加安全组规则</h2><p>添加80端口的监听。</p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/添加安全组规则.png" alt="添加安全组规则" style="zoom:60%;"></p>
+<h2 id="4-启动-Tomcat-服务器"><a href="#4-启动-Tomcat-服务器" class="headerlink" title="4.启动 Tomcat 服务器"></a>4.启动 Tomcat 服务器</h2><p>执行 <code>/bin/startup.sh</code>脚本，启动服务器，访问服务器地址就能看到部署成功！</p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/Tomcat.png" alt="Tomcat" style="zoom:50%;"></p>
+
       
     </div>
 
@@ -510,6 +564,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Tomcat/" rel="tag"><i class="fa fa-tag"></i> Tomcat</a>
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
 
       
       
@@ -519,8 +581,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/教程笔记/在Linux服务器端手动部署Tomcat/" rel="next" title="在Linux服务器端手动部署Tomcat">
-                <i class="fa fa-chevron-left"></i> 在Linux服务器端手动部署Tomcat
+              <a href="/JavaWeb/Tomcat/Tomcat部署项目的三种方式/" rel="next" title="Tomcat部署项目的三种方式">
+                <i class="fa fa-chevron-left"></i> Tomcat部署项目的三种方式
               </a>
             
           </div>
@@ -528,6 +590,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/JavaWeb/Servlet/Servlet学习笔记/" rel="prev" title="Servlet学习笔记">
+                Servlet学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -571,8 +637,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -614,7 +689,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -653,7 +736,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -731,6 +816,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装-jdk-并配置路径"><span class="nav-text">1.安装 jdk 并配置路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装-Tomcat"><span class="nav-text">2.安装 Tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在阿里云服务器上添加安全组规则"><span class="nav-text">3.在阿里云服务器上添加安全组规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-启动-Tomcat-服务器"><span class="nav-text">4.启动 Tomcat 服务器</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -757,7 +859,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">22k</span>
   
 
   

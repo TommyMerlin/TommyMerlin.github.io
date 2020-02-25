@@ -2,12 +2,88 @@
 <search>
   <entry>
     <title>Servlet学习笔记</title>
-    <url>/uncategorized/Servlet%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
+    <url>/JavaWeb/Servlet/Servlet%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-Servlet-概述"><a href="#1-Servlet-概述" class="headerlink" title="1.Servlet 概述"></a>1.Servlet 概述</h2><ul>
+<li><p><strong>概念</strong>：运行在服务器端的小程序。</p>
+<ul>
+<li>Servlet 就是一个<strong>接口</strong>，定义了 Java 类被浏览器访问（Tomcat识别）的规则。</li>
+</ul>
+</li>
+<li><p><strong>快速入门</strong>：</p>
+<ul>
+<li>1.创建 JavaEE 项目。</li>
+<li>2.定义一个类，实现 Servlet 接口。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerletDemo1</span> <span class="keyword">implements</span> <span class="title">Servlet</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.实现接口中的抽象方法。</li>
+<li>4.配置 Servlet：<code>web\WEB-INF\web.xml</code>。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.coderhuye.web.servlet.ServerletDemo1<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>执行原理</strong>：</p>
+<ul>
+<li>1.当服务器接受到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径。</li>
+<li>2.查找web.xml文件，是否有对应的<url-pattern>标签体内容。</url-pattern></li>
+<li>3.如果有，则在找到对应的<servlet-class>全类名。</servlet-class></li>
+<li>4.tomcat会将字节码文件加载进内存，并且创建其对象。</li>
+<li>5.调用其方法。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-Servlet-生命周期"><a href="#2-Servlet-生命周期" class="headerlink" title="2.Servlet 生命周期"></a>2.Servlet 生命周期</h2><ul>
+<li>1.<strong>创建</strong>：执行 init 方法，仅执行一次。<ul>
+<li>Servlet 什么时候被创建？<ul>
+<li>默认情况下，第一次访问时被创建。</li>
+<li>可以在<servelet>标签下配置指定 Servlet 被创建的时机。<br><img src="/JavaWeb/Servlet/Servlet学习笔记/配置Servlet创建时机.png" alt="配置Servlet创建时机" style="zoom:70%;"></servelet></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Servlet 在内存中只有一个对象，是单例的。<ul>
+<li>多个用户同时访问时，存在线程安全问题。</li>
+<li>解决：尽量不在 Servlet 中定义成员变量。即使定义了成员变量，也不要对其修改值。</li>
+</ul>
+</li>
+<li>2.<strong>提供服务</strong>：执行 sevice 方法，每访问一次 Servlet ，就会执行一次。</li>
+<li>3.<strong>销毁</strong>：服务器正常关闭时执行一次。</li>
+</ul>
+<hr>
+<h2 id="3-Servlet3-0"><a href="#3-Servlet3-0" class="headerlink" title="3.Servlet3.0"></a>3.Servlet3.0</h2><ul>
+<li><p>支持注解配置</p>
+</li>
+<li><p>步骤：</p>
+<ul>
+<li><p>创建 JavaEE 项目，选择 Servlet 版本 &gt;3.0，可不创建 web.xml。</p>
+</li>
+<li><p>定义一个 Servlet 实现类。</p>
+</li>
+<li><p>复写方法</p>
+<ul>
+<li><p>在类上使用 @WebServlet 注解</p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(urlPatterns = <span class="string">"/demo1"</span>)</span><br><span class="line">or</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/demo1"</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>JavaWeb</tag>
+        <tag>Servlet</tag>
+      </tags>
   </entry>
   <entry>
     <title>在Linux服务器端手动部署Tomcat</title>
-    <url>/%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2Tomcat/</url>
+    <url>/Linux/%E5%9C%A8Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2Tomcat/</url>
     <content><![CDATA[<h2 id="1-安装-jdk-并配置路径"><a href="#1-安装-jdk-并配置路径" class="headerlink" title="1.安装 jdk 并配置路径"></a>1.安装 jdk 并配置路径</h2><p>将 jdk 解压放到 <code>/usr/local/</code> 目录下。</p>
 <p>修改 <code>/etc/profile</code> 文档，在末尾添加如下语句：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_191</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
@@ -15,14 +91,14 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
 <h2 id="2-安装-Tomcat"><a href="#2-安装-Tomcat" class="headerlink" title="2.安装 Tomcat"></a>2.安装 Tomcat</h2><p>解压Tomcat压缩包。</p>
 <p>修改 <code>/conf/server.xml</code>文件，将端口8080改为80。</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/修改Server配置.png" alt="修改Server配置" style="zoom:100%;"></p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/修改Server配置.png" alt="修改Server配置" style="zoom:100%;"></p>
 <h2 id="3-在阿里云服务器上添加安全组规则"><a href="#3-在阿里云服务器上添加安全组规则" class="headerlink" title="3.在阿里云服务器上添加安全组规则"></a>3.在阿里云服务器上添加安全组规则</h2><p>添加80端口的监听。</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/添加安全组规则.png" alt="添加安全组规则" style="zoom:60%;"></p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/添加安全组规则.png" alt="添加安全组规则" style="zoom:60%;"></p>
 <h2 id="4-启动-Tomcat-服务器"><a href="#4-启动-Tomcat-服务器" class="headerlink" title="4.启动 Tomcat 服务器"></a>4.启动 Tomcat 服务器</h2><p>执行 <code>/bin/startup.sh</code>脚本，启动服务器，访问服务器地址就能看到部署成功！</p>
-<p><img src="/教程笔记/在Linux服务器端手动部署Tomcat/Tomcat.png" alt="Tomcat" style="zoom:50%;"></p>
+<p><img src="/Linux/在Linux服务器端手动部署Tomcat/Tomcat.png" alt="Tomcat" style="zoom:50%;"></p>
 ]]></content>
       <categories>
-        <category>教程笔记</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>Tomcat</tag>
@@ -62,7 +138,7 @@
   </entry>
   <entry>
     <title>微服务架构与实践 第2章-微服务架构综述</title>
-    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC2%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%BC%E8%BF%B0/</url>
+    <url>/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC2%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BB%BC%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="1微服务架构概述"><a href="#1微服务架构概述" class="headerlink" title="1微服务架构概述"></a>1微服务架构概述</h2><p><strong>微服务定义</strong>(Martin Fowler)：微服务架构为一种架构模式，提倡将单一应用划分成<strong>一组小的服务</strong>，服务之间互相协调、互相配合。每个服务运行在<strong>独立进程</strong>中，服务间沟通采用<strong>轻量级通信机制</strong>。每个服务围绕具体业务构建，可<strong>独立部署</strong>。</p>
 <h3 id="1-1-“微”的定义"><a href="#1-1-“微”的定义" class="headerlink" title="1.1 “微”的定义"></a>1.1 “微”的定义</h3><ul>
 <li>代码行数：×</li>
@@ -81,10 +157,10 @@
 </ul>
 <h3 id="1-3-轻量级通信"><a href="#1-3-轻量级通信" class="headerlink" title="1.3 轻量级通信"></a>1.3 轻量级通信</h3><p><strong>轻量级通信</strong>：语言无关、平台无关的交互方式。</p>
 <h3 id="1-4-独立性"><a href="#1-4-独立性" class="headerlink" title="1.4 独立性"></a>1.4 独立性</h3><p>在应用交付过程中，开发、测试以及部署的独立。</p>
-<p><img src="/学习笔记/微服务架构与实践第2章-微服务架构综述/独立性.png" alt="独立性" style="zoom:80%;"></p>
+<p><img src="/微服务/微服务读书笔记/微服务架构与实践第2章-微服务架构综述/独立性.png" alt="独立性" style="zoom:80%;"></p>
 <h3 id="1-4-进程隔离"><a href="#1-4-进程隔离" class="headerlink" title="1.4 进程隔离"></a>1.4 进程隔离</h3><p><strong>单块架构</strong>：对应用进行部署时，需先停掉当前运行应用，部署完成后在重新启动，无法做到独立部署。</p>
 <p><strong>微服务架构</strong>：每个服务均为高度自治的独立业务实体，能很容易地部署到不同的主机上。</p>
-<p><img src="/学习笔记/微服务架构与实践第2章-微服务架构综述/进程隔离.png" alt="进程隔离" style="zoom:80%;"></p>
+<p><img src="/微服务/微服务读书笔记/微服务架构与实践第2章-微服务架构综述/进程隔离.png" alt="进程隔离" style="zoom:80%;"></p>
 <h2 id="2-微服务架构与SOA"><a href="#2-微服务架构与SOA" class="headerlink" title="2.微服务架构与SOA"></a>2.微服务架构与SOA</h2><h3 id="2-1-SOA概述"><a href="#2-1-SOA概述" class="headerlink" title="2.1 SOA概述"></a>2.1 SOA概述</h3><p><strong>SOA</strong>：对于复杂系统，按照不同的、可重用的粒度划分，将功能相关的一组功能提供者组织在一起为用户提供服务。</p>
 <h3 id="2-2-微服务和SOA"><a href="#2-2-微服务和SOA" class="headerlink" title="2.2 微服务和SOA"></a>2.2 微服务和SOA</h3><div class="table-container">
 <table>
@@ -181,7 +257,8 @@
 </ul>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>微服务</category>
+        <category>微服务读书笔记</category>
       </categories>
       <tags>
         <tag>微服务</tag>
@@ -189,13 +266,13 @@
   </entry>
   <entry>
     <title>微服务架构与实践 第1章-单块架构及其面临的挑战</title>
-    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC1%E7%AB%A0-%E5%8D%95%E5%9D%97%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%85%B6%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98/</url>
+    <url>/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC1%E7%AB%A0-%E5%8D%95%E5%9D%97%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%85%B6%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98/</url>
     <content><![CDATA[<h2 id="1-三层应用架构"><a href="#1-三层应用架构" class="headerlink" title="1.三层应用架构"></a>1.三层应用架构</h2><h3 id="1-1-三层架构"><a href="#1-1-三层架构" class="headerlink" title="1.1 三层架构"></a>1.1 三层架构</h3><ul>
 <li><strong>表示层</strong>：用户交互部分。</li>
 <li><strong>业务逻辑层</strong>：根据用户输入信息，进行逻辑运算或业务处理。</li>
 <li><strong>数据访问层</strong>：有效地将数据存储到数据库、文件系统等。</li>
 </ul>
-<p><img src="/学习笔记/微服务架构与实践第1章-单块架构及其面临的挑战/三层架构.png" alt="三层架构" style="zoom:80%;"></p>
+<p><img src="/微服务/微服务读书笔记/微服务架构与实践第1章-单块架构及其面临的挑战/三层架构.png" alt="三层架构" style="zoom:80%;"></p>
 <h3 id="1-2-三层架构优势"><a href="#1-2-三层架构优势" class="headerlink" title="1.2 三层架构优势"></a>1.2 三层架构优势</h3><ul>
 <li>解决应用程序中代码间调用复杂、代码职责不清问题。</li>
 <li>接口与实现分离，易于用不同实现替代现有实现。</li>
@@ -226,7 +303,8 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>微服务</category>
+        <category>微服务读书笔记</category>
       </categories>
       <tags>
         <tag>微服务</tag>
@@ -289,12 +367,12 @@
   </entry>
   <entry>
     <title>统计学习方法第二章学习笔记</title>
-    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
 <h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
 <p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
 <div align="center">    
-<img src="/学习笔记/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法学习笔记/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
 <p>感知机模型</p>
 </div>
 
@@ -309,7 +387,8 @@
 <p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>机器学习</category>
+        <category>统计学习方法学习笔记</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
@@ -318,7 +397,7 @@
   </entry>
   <entry>
     <title>统计学习方法第一章学习笔记</title>
-    <url>/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1.统计学习"></a>1.统计学习</h2><h3 id="1-1特点"><a href="#1-1特点" class="headerlink" title="1.1特点"></a>1.1特点</h3><ul>
 <li>建立于计算机及网络之上</li>
 <li>数据驱动</li>
@@ -403,12 +482,12 @@
 <p>测试误差$e_{\mathrm{test}}$：模型$Y=\hat{f}(X)$关于测试集的平均损失：<br>$e_{\mathrm{test}}=\frac{1}{N^{\prime}} \sum_{i=1}^{N^{\prime}} L\left(y_{i}, \hat{f}\left(x_{i}\right)\right)$</p>
 <h3 id="4-2-模型选择"><a href="#4-2-模型选择" class="headerlink" title="4.2 模型选择"></a>4.2 模型选择</h3><p>避免出现过拟合并提高模型的预测能力</p>
 <div align="center">    
-<img src="/学习笔记/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法学习笔记/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
 <p>M次多项式函数拟合问题</p>
 </div>
 
 <div align="center">    
-<img src="/学习笔记/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法学习笔记/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
 <p>训练误差和测试误差与模型复杂度的关系</p>
 </div>
 
@@ -441,7 +520,8 @@
 <h2 id="10-回归问题"><a href="#10-回归问题" class="headerlink" title="10.回归问题"></a>10.回归问题</h2><p>回归模型：从输入变量到输出变量之间映射的函数，等价于函数拟合。<br>常用损失函数：平方损失函数，此时可由最小二乘法求解。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>机器学习</category>
+        <category>统计学习方法学习笔记</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
