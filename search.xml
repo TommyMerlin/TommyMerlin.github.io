@@ -17,8 +17,7 @@
 <li>1.0：每一次请求响应都会建立新的连接。</li>
 <li>1.1：复用连接。</li>
 </ul>
-<h2 id="2-请求消息数据格式"><a href="#2-请求消息数据格式" class="headerlink" title="2.请求消息数据格式"></a>2.请求消息数据格式</h2><ul>
-<li>1.<strong>请求行</strong><ul>
+<h2 id="2-请求消息数据格式"><a href="#2-请求消息数据格式" class="headerlink" title="2.请求消息数据格式"></a>2.请求消息数据格式</h2><h3 id="2-1-请求行"><a href="#2-1-请求行" class="headerlink" title="2.1 请求行"></a>2.1 <strong>请求行</strong></h3><ul>
 <li>格式：请求方式 请求url 请求协议/版本</li>
 <li>请求方式：7中，常用2种：<ul>
 <li>GET：<ul>
@@ -36,8 +35,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>2.<strong>请求头</strong><ul>
+<h3 id="2-2-请求头"><a href="#2-2-请求头" class="headerlink" title="2.2 请求头"></a>2.2 <strong>请求头</strong></h3><ul>
 <li>格式：请求头名称：请求头值</li>
 <li>常见请求头：<ul>
 <li>User-Agent：告诉服务器访问所使用的浏览器版本信息，解决浏览器兼容性问题。</li>
@@ -49,32 +47,20 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>3.<strong>请求空行</strong><ul>
+<h3 id="2-3-请求空行"><a href="#2-3-请求空行" class="headerlink" title="2.3 请求空行"></a>2.3 <strong>请求空行</strong></h3><ul>
 <li>空行，用于分割POST请求的请求头和请求体。</li>
 </ul>
-</li>
-<li>4.<strong>请求体（正文）</strong><ul>
+<h3 id="2-4-请求体（正文）"><a href="#2-4-请求体（正文）" class="headerlink" title="2.4 请求体（正文）"></a>2.4 <strong>请求体（正文）</strong></h3><ul>
 <li>封装POST请求消息的请求参数。</li>
-</ul>
-</li>
 </ul>
 <p>字符串格式：</p>
 <blockquote>
 <p>GET /login.html HTTP/1.1<br>Host: localhost:8080<br>Connection: keep-alive<br>Upgrade-Insecure-Requests: 1<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36 Sec-Fetch-Dest: document<br>Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3;q=0.9<br>Accept-Encoding: gzip, deflate, br<br>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8<br>Referer: <a href="http://localhost/login.html" target="_blank" rel="noopener">http://localhost/login.html</a></p>
 </blockquote>
-<h2 id="3-Request"><a href="#3-Request" class="headerlink" title="3.Request"></a>3.Request</h2><ul>
-<li><p>request 继承体系结构</p>
-<ul>
+<h2 id="3-Request"><a href="#3-Request" class="headerlink" title="3.Request"></a>3.Request</h2><h3 id="3-1-request-继承体系结构"><a href="#3-1-request-继承体系结构" class="headerlink" title="3.1 request 继承体系结构"></a>3.1 request 继承体系结构</h3><ul>
 <li>ServletRequest(接口) &lt;— HttpServletRequest(接口) —org.apache.catalina.connector.RequestFacade 类(tomcat)</li>
 </ul>
-</li>
-</ul>
-<h3 id="request-功能"><a href="#request-功能" class="headerlink" title="request 功能"></a>request 功能</h3><ul>
-<li><p>1.获取请求消息数据</p>
-<ul>
-<li><p>获取<strong>请求行</strong>数据</p>
-<ul>
+<h3 id="3-2-request-功能"><a href="#3-2-request-功能" class="headerlink" title="3.2 request 功能"></a>3.2 request 功能</h3><h4 id="3-2-1-获取请求消息数据"><a href="#3-2-1-获取请求消息数据" class="headerlink" title="3.2.1.获取请求消息数据"></a>3.2.1.获取请求消息数据</h4><h5 id="3-2-1-1获取请求行数据"><a href="#3-2-1-1获取请求行数据" class="headerlink" title="3.2.1.1获取请求行数据"></a>3.2.1.1获取<strong>请求行</strong>数据</h5><ul>
 <li>GET /demo/show？name=zhangsan HTTP/1.1</li>
 <li>方法：<ul>
 <li>获取请求方式：GET<ul>
@@ -111,17 +97,12 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>获取<strong>请求头</strong>数据</p>
-<ul>
+<h5 id="3-2-1-2获取请求头数据"><a href="#3-2-1-2获取请求头数据" class="headerlink" title="3.2.1.2获取请求头数据"></a>3.2.1.2获取<strong>请求头</strong>数据</h5><ul>
 <li><strong>String getHeader(String name)</strong>：通过请求头的名称获取请求头的值。</li>
-<li><p>Enumeration<string> getHeaderNames()：获取所有的请求头名称。</string></p>
-<p><img src="/JavaWeb/HTTP/HTTP学习笔记/Blog\source\_posts\HTTP学习笔记\获取请求头.png" alt="获取请求头" style="zoom:70%;"></p>
-</li>
+<li>Enumeration<string> getHeaderNames()：获取所有的请求头名称。</string></li>
 </ul>
-</li>
-<li><p>获取<strong>请求体</strong>数据</p>
-<ul>
+<p><img src="/JavaWeb/HTTP/HTTP学习笔记/获取请求头.png" alt="获取请求头" style="zoom:70%;"></p>
+<h5 id="3-2-1-3获取请求体数据"><a href="#3-2-1-3获取请求体数据" class="headerlink" title="3.2.1.3获取请求体数据"></a>3.2.1.3获取<strong>请求体</strong>数据</h5><ul>
 <li>1.获取流对象。<ul>
 <li>BufferedReader getReader()：获取字符输入流，只能操作字符数据。</li>
 <li>ServletInputStream getInputStream()：获取字节输入流，可操作所有类型数据。</li>
@@ -129,23 +110,47 @@
 </li>
 <li>2.从流对象中获取数据。</li>
 </ul>
+<h4 id="3-2-2-其他功能"><a href="#3-2-2-其他功能" class="headerlink" title="3.2.2.其他功能"></a>3.2.2.<strong>其他功能</strong></h4><h5 id="3-2-2-1获取请求参数"><a href="#3-2-2-1获取请求参数" class="headerlink" title="3.2.2.1获取请求参数"></a>3.2.2.1获取请求参数</h5><ul>
+<li><p>通用方式：get 和 post 请求都可以用。</p>
 </li>
-<li><p><strong>其他功能</strong></p>
-<ul>
-<li>获取请求参数，通用方式：get 和 post 请求都可以用。<ul>
-<li>String getParameter(String name)：根据参数名称获取参数值    username=zs&amp;password=123</li>
+<li><p>String getParameter(String name)：根据参数名称获取参数值    username=zs&amp;password=123</p>
+</li>
 <li>String[] getParameterValues(String name)：根据参数名称获取参数值的数组  hobby=xx&amp;hobby=game</li>
 <li>Enumeration<string> getParameterNames()：获取所有请求的参数名称</string></li>
 <li>Map<string,string[]> getParameterMap():获取所有参数的map集合</string,string[]></li>
 </ul>
+<h5 id="3-2-2-2请求转发"><a href="#3-2-2-2请求转发" class="headerlink" title="3.2.2.2请求转发"></a>3.2.2.2请求转发</h5><ul>
+<li><p>一种在服务器内部的资源跳转方式。</p>
 </li>
-<li>请求转发：一种在服务器内部的资源跳转方式。</li>
-<li>共享数据</li>
-<li>获取 ServletContext</li>
+<li><p>步骤：</p>
+<ul>
+<li><p>1.通过request对象获取请求转发器对象：</p>
+<p>  RequestDispatcher getRequestDispatcher(String path)</p>
+</li>
+<li><p>2.使用RequestDispatcher对象来进行转发：forward(ServletRequest request, ServletResponse response) </p>
+</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>浏览器地址栏路径不发生变化。</li>
+<li>只能转发到当前服务器内部资源中。</li>
+<li>请求转发只是一次请求。</li>
 </ul>
 </li>
 </ul>
+<h5 id="3-2-2-3共享数据"><a href="#3-2-2-3共享数据" class="headerlink" title="3.2.2.3共享数据"></a>3.2.2.3共享数据</h5><ul>
+<li>域对象：一个有作用范围的对象，可以在范围内共享数据。</li>
+<li>request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据。</li>
+<li>方法：<ul>
+<li>void setAttribute(String name,Object obj)：存储数据。</li>
+<li>Object getAttitude(String name)：通过键获取值。</li>
+<li>void removeAttribute(String name)：通过键移除键值对。</li>
+</ul>
 </li>
+</ul>
+<h5 id="3-2-2-4获取-ServletContext"><a href="#3-2-2-4获取-ServletContext" class="headerlink" title="3.2.2.4获取 ServletContext"></a>3.2.2.4获取 ServletContext</h5><ul>
+<li>ServletContext getServletContext()</li>
 </ul>
 ]]></content>
       <categories>
