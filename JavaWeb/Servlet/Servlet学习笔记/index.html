@@ -105,7 +105,8 @@
 <meta property="og:description" content="1.Servlet 概述 概念：运行在服务器端的小程序。  Servlet 就是一个接口，定义了 Java 类被浏览器访问（Tomcat识别）的规则。   快速入门：  1.创建 JavaEE 项目。 2.定义一个类，实现 Servlet 接口。  1public class ServerletDemo1 implements Servlet  3.实现接口中的抽象方法。 4.配置 Servlet">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/JavaWeb/Servlet/Servlet学习笔记/配置Servlet创建时机.png">
-<meta property="og:updated_time" content="2020-02-25T01:41:49.988Z">
+<meta property="og:image" content="http://yoursite.com/JavaWeb/Servlet/Servlet学习笔记/Servlet继承关系.png">
+<meta property="og:updated_time" content="2020-02-25T03:12:15.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet学习笔记">
 <meta name="twitter:description" content="1.Servlet 概述 概念：运行在服务器端的小程序。  Servlet 就是一个接口，定义了 Java 类被浏览器访问（Tomcat识别）的规则。   快速入门：  1.创建 JavaEE 项目。 2.定义一个类，实现 Servlet 接口。  1public class ServerletDemo1 implements Servlet  3.实现接口中的抽象方法。 4.配置 Servlet">
@@ -406,7 +407,7 @@
                 
               
 
-              <time title="创建时间：2020-02-25 08:51:04 / 修改时间：09:41:49" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
+              <time title="创建时间：2020-02-25 08:51:04 / 修改时间：11:12:15" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
             
 
             
@@ -471,7 +472,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.3k</span>
+                <span title="本文字数">5.3k</span>
               
 
               
@@ -553,13 +554,39 @@
 </li>
 <li><p>复写方法</p>
 <ul>
-<li><p>在类上使用 @WebServlet 注解</p>
+<li><p>在类上使用 @WebServlet 注解。</p>
 <ul>
-<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(urlPatterns = <span class="string">"/demo1"</span>)</span><br><span class="line">or</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/demo1"</span>)</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(urlPatterns = <span class="string">"/demo1"</span>)</span><br><span class="line">or</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/demo1"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<h2 id="4-Servlet-体系结构"><a href="#4-Servlet-体系结构" class="headerlink" title="4.Servlet 体系结构"></a>4.Servlet 体系结构</h2><p><img src="/JavaWeb/Servlet/Servlet学习笔记/Servlet继承关系.png" alt="Servlet继承关系" style="zoom:60%;"></p>
+<ul>
+<li>GenericServlet：将Servlet接口中其他的方法做了默认空实现，只将service()方法作为抽象方法。</li>
+<li>HttpServlet：对http协议的一种封装，简化操作。<ul>
+<li>定义类继承HttpServlet。</li>
+<li>复写doGet/doPost方法。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-Servlet-相关配置"><a href="#5-Servlet-相关配置" class="headerlink" title="5.Servlet 相关配置"></a>5.Servlet 相关配置</h2><ul>
+<li><p>urlPatterns：一个Servlet可以定义多个访问路径 ：</p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(&#123;<span class="string">"/d4"</span>,<span class="string">"/demo4"</span>,<span class="string">"/dd4"</span>&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>路径定义规则：</p>
+<ul>
+<li>/xxx：路径匹配</li>
+<li>/xxx/xxx：多层路径，目录结构</li>
+<li>*.do：扩展名匹配</li>
 </ul>
 </li>
 </ul>
@@ -640,6 +667,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/JavaWeb/HTTP/HTTP学习笔记/" rel="prev" title="HTTP学习笔记">
+                HTTP学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -709,7 +740,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -742,7 +773,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -783,7 +816,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -871,7 +906,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Servlet-概述"><span class="nav-text">1.Servlet 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Servlet-生命周期"><span class="nav-text">2.Servlet 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Servlet3-0"><span class="nav-text">3.Servlet3.0</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Servlet-概述"><span class="nav-text">1.Servlet 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Servlet-生命周期"><span class="nav-text">2.Servlet 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Servlet3-0"><span class="nav-text">3.Servlet3.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Servlet-体系结构"><span class="nav-text">4.Servlet 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Servlet-相关配置"><span class="nav-text">5.Servlet 相关配置</span></a></li></ol></div>
             
 
           </div>
@@ -904,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">24k</span>
   
 
   
