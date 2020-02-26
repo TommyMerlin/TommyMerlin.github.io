@@ -211,25 +211,18 @@
 <p>HTTP/1.1 200 OK<br>Content-Type: text/html;charset=UTF-8<br>Content-Length: 101<br>Date: Wed, 06 Jun 2018 07:08:42 GMT</p>
 </blockquote>
 <h2 id="5-Response对象"><a href="#5-Response对象" class="headerlink" title="5.Response对象"></a>5.Response对象</h2><h3 id="5-1-功能"><a href="#5-1-功能" class="headerlink" title="5.1 功能"></a>5.1 功能</h3><h4 id="设置响应消息"><a href="#设置响应消息" class="headerlink" title="设置响应消息"></a>设置响应消息</h4><ul>
-<li><p>设置响应行</p>
-<ul>
+<li>设置响应行<ul>
 <li>格式：HTTP/1.1 200 ok</li>
 <li>设置状态码：setStatus(int sc) </li>
 </ul>
 </li>
-<li><p>设置响应头</p>
-<ul>
+<li>设置响应头<ul>
 <li>setHeader(String name, String value) </li>
 </ul>
 </li>
-<li><p>设置响应体</p>
-<ul>
-<li><p>1.获取输出流</p>
-<p>字符输出流：PrintWriter getWriter()</p>
-<p>字节输出流：ServletOutputStream getOutputStream()</p>
-</li>
-<li><p>2.使用输出流，将数据输出到客户端浏览器</p>
-</li>
+<li>设置响应体<ul>
+<li>1.获取输出流<br>字符输出流：PrintWriter getWriter()<br>字节输出流：ServletOutputStream getOutputStream()</li>
+<li>2.使用输出流，将数据输出到客户端浏览器</li>
 </ul>
 </li>
 </ul>
@@ -248,9 +241,7 @@
 <h5 id="路径写法："><a href="#路径写法：" class="headerlink" title="路径写法："></a>路径写法：</h5><ul>
 <li><p>路径分类：</p>
 <ul>
-<li><p><strong>相对路径</strong>：通过相对路径不可以确定唯一资源。</p>
-<p>如：./index.html  不以/开头，以 . 开头</p>
-<ul>
+<li><strong>相对路径</strong>：通过相对路径不可以确定唯一资源。<br>如：./index.html  不以/开头，以 . 开头<ul>
 <li>规则：找到当前资源和目标资源之间的相对位置关系。<ul>
 <li>./：当前目录</li>
 <li>../：后退一级目录</li>
@@ -258,17 +249,20 @@
 </li>
 </ul>
 </li>
-<li><p><strong>绝对路径</strong>：通过绝对路径可以确定唯一资源。</p>
-<p>如：<a href="http://localhost/day15/responseDemo2" target="_blank" rel="noopener">http://localhost/day15/responseDemo2</a></p>
-<p>​        /day15/responseDemo2</p>
+<li><p><strong>绝对路径</strong>：通过绝对路径可以确定唯一资源。<br>如：<a href="http://localhost/day15/responseDemo2" target="_blank" rel="noopener">http://localhost/day15/responseDemo2</a><br>​        /day15/responseDemo2</p>
 <ul>
-<li>规则：判断定义的路径是给谁用的？判断请求将来从哪发出。<ul>
-<li>给客户端浏览器使用：需要加虚拟目录(项目的访问路径)。<ul>
-<li>建议虚拟目录动态获取：request.getContextPath()</li>
-<li><a> , <form>， 重定向…</form></a></li>
+<li><p>规则：判断定义的路径是给谁用的？判断请求将来从哪发出。</p>
+<ul>
+<li><p>给客户端浏览器使用：需要加虚拟目录(项目的访问路径)。</p>
+<ul>
+<li><p>建议虚拟目录动态获取：request.getContextPath()</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;a&gt; , &lt;form&gt;， 重定向...</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li>给服务器使用：不需要加虚拟目录。<ul>
+<li><p>给服务器使用：不需要加虚拟目录。</p>
+<ul>
 <li>转发路径</li>
 </ul>
 </li>
@@ -289,10 +283,16 @@
 <li><p>PrintWriter pw = response.getWriter();获取的流的默认编码是ISO-8859-1。</p>
 </li>
 <li><p>设置编码（在获取流之前设置）。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">PrintWriter writer = response.getWriter();</span><br><span class="line">writer.write(<span class="string">"&lt;h1&gt;Hello Java&lt;/h1&gt;&lt;br&gt;&lt;a href='http://www.baidu.com'&gt;百度&lt;/a&gt;"</span>);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="服务器输出字节数据到浏览器"><a href="#服务器输出字节数据到浏览器" class="headerlink" title="服务器输出字节数据到浏览器"></a>服务器输出字节数据到浏览器</h4><h4 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h4>]]></content>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">PrintWriter writer = response.getWriter();</span><br><span class="line">writer.write(<span class="string">"&lt;h1&gt;Hello Java&lt;/h1&gt;&lt;br&gt;&lt;a href='http://www.baidu.com'&gt;百度&lt;/a&gt;"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="服务器输出字节数据到浏览器"><a href="#服务器输出字节数据到浏览器" class="headerlink" title="服务器输出字节数据到浏览器"></a>服务器输出字节数据到浏览器</h4><p>步骤</p>
+<ul>
+<li>获取字节输出流</li>
+<li>输出数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"><span class="comment">//1.获取字节输出流</span></span><br><span class="line">ServletOutputStream sos = response.getOutputStream();</span><br><span class="line"><span class="comment">//2.输出数据</span></span><br><span class="line">sos.write(<span class="string">"你好"</span>.getBytes(<span class="string">"utf-8"</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h4>]]></content>
       <categories>
         <category>Java</category>
         <category>JavaWeb</category>
