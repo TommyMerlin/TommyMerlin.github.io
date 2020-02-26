@@ -152,6 +152,14 @@
 <h5 id="获取-ServletContext"><a href="#获取-ServletContext" class="headerlink" title="获取 ServletContext"></a>获取 ServletContext</h5><ul>
 <li>ServletContext getServletContext()</li>
 </ul>
+<h3 id="3-3-案例：用户登录"><a href="#3-3-案例：用户登录" class="headerlink" title="3.3 案例：用户登录"></a>3.3 案例：用户登录</h3><p><strong>需求</strong>：</p>
+<ul>
+<li>1.编写 <code>login.html</code> 登录页面。<br>username &amp; password 两个输入框</li>
+<li>2.使用 Druid 数据库连接池技术,操作 mysql ，test01数据库中 stuinfo 表。</li>
+<li>3.使用 JdbcTemplate 技术封装 JDBC。</li>
+<li>4.登录成功跳转到 SuccessServlet 展示：登录成功！用户名,欢迎您。</li>
+<li>5.登录失败跳转到 FailServlet 展示：登录失败，用户名或密码错误。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
