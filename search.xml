@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>会话技术Cookie&amp;Session</title>
+    <url>/Java/JavaWeb/HTTP/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AFCookie-Session/</url>
+    <content><![CDATA[<h2 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h2><p><strong>会话</strong>：一次会话中包含多次请求和响应。</p>
+<ul>
+<li>一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止。</li>
+</ul>
+<p><strong>功能</strong>：在一次会话的范围内的多次请求间，共享数据。</p>
+<p><strong>方式</strong>：</p>
+<ul>
+<li>客户端会话技术：Cookie</li>
+<li>服务器端会话技术：Session</li>
+</ul>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>客户端会话技术，将数据保存到客户端。</p>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ul>
+<li><p>创建Cookie对象，绑定数据。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Cookie(String name, String value)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发送Cookie对象。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.addCookie(Cookie cookie)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取Cookie，拿到数据。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cookie[]  request.getCookies()</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JavaWeb</category>
+        <category>HTTP</category>
+      </categories>
+      <tags>
+        <tag>JavaWeb</tag>
+        <tag>HTTP</tag>
+        <tag>Cookie</tag>
+        <tag>Session</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTP学习笔记</title>
     <url>/Java/JavaWeb/HTTP/HTTP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><strong>概念</strong>：Hyper Text Transfer Protocol 超文本传输协议。</p>
