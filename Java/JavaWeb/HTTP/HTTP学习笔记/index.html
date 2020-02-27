@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/Java/JavaWeb/HTTP/HTTP学习笔记/登录案例分析.bmp">
 <meta property="og:image" content="http://yoursite.com/Java/JavaWeb/HTTP/HTTP学习笔记/状态码.png">
 <meta property="og:image" content="http://yoursite.com/Java/JavaWeb/HTTP/HTTP学习笔记/重定向.bmp">
-<meta property="og:updated_time" content="2020-02-27T03:11:26.935Z">
+<meta property="og:updated_time" content="2020-02-27T03:14:35.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP学习笔记">
 <meta name="twitter:description" content="1.概述概念：Hyper Text Transfer Protocol 超文本传输协议。 传输协议：定义了客户端和服务器端通信时，发送数据的格式。 特点：  基于 TCP/IP 的高级协议。 默认端口号：80。 基于请求/响应模型：一次请求对应一次响应。 无状态：每次请求之间相互独立，不能交互数据。  历史版本：  1.0：每一次请求响应都会建立新的连接。 1.1：复用连接。  2.请求消息数据格">
@@ -426,7 +426,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-27 11:11:26" itemprop="dateModified" datetime="2020-02-27T11:11:26+08:00">2020-02-27</time>
+                <time title="修改时间：2020-02-27 11:14:35" itemprop="dateModified" datetime="2020-02-27T11:14:35+08:00">2020-02-27</time>
               
             
           </span>
@@ -493,7 +493,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">28k</span>
+                <span title="本文字数">27k</span>
               
 
               
@@ -756,8 +756,7 @@
 <li>转发是<strong>一次请求</strong>，可以使用request对象来共享数据。</li>
 </ul>
 <h5 id="路径写法："><a href="#路径写法：" class="headerlink" title="路径写法："></a>路径写法：</h5><ul>
-<li><p>路径分类：</p>
-<ul>
+<li>路径分类：<ul>
 <li><strong>相对路径</strong>：通过相对路径不可以确定唯一资源。<br>如：./index.html  不以/开头，以 . 开头<ul>
 <li>规则：找到当前资源和目标资源之间的相对位置关系。<ul>
 <li>./：当前目录</li>
@@ -766,23 +765,32 @@
 </li>
 </ul>
 </li>
-<li><p><strong>绝对路径</strong>：通过绝对路径可以确定唯一资源。<br>如：<a href="http://localhost/day15/responseDemo2" target="_blank" rel="noopener">http://localhost/day15/responseDemo2</a><br>​        /day15/responseDemo2</p>
+<li><strong>绝对路径</strong>：通过绝对路径可以确定唯一资源。<br>如：<a href="http://localhost/day15/responseDemo2" target="_blank" rel="noopener">http://localhost/day15/responseDemo2</a><br>​        /day15/responseDemo2<ul>
+<li>规则：判断定义的路径是给谁用的？判断请求将来从哪发出。<ul>
+<li>给客户端浏览器使用：需要加虚拟目录(项目的访问路径)。<ul>
+<li>建议虚拟目录动态获取：request.getContextPath()</li>
+</ul>
+</li>
+<li>给服务器使用：不需要加虚拟目录。<ul>
+<li>转发路径</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="服务器输出字符数据到浏览器"><a href="#服务器输出字符数据到浏览器" class="headerlink" title="服务器输出字符数据到浏览器"></a>服务器输出字符数据到浏览器</h4><p>步骤</p>
 <ul>
-<li><p>规则：判断定义的路径是给谁用的？判断请求将来从哪发出。</p>
+<li>获取字符输出流</li>
+<li>输出数据</li>
+</ul>
+<p>乱码问题</p>
 <ul>
-<li><p>给客户端浏览器使用：需要加虚拟目录(项目的访问路径)。</p>
-<ul>
-<li><p>建议虚拟目录动态获取：request.getContextPath()</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">          &lt;a&gt; , &lt;form&gt;， 重定向...</span><br><span class="line">      - 给服务器使用：不需要加虚拟目录。</span><br><span class="line">        - 转发路径</span><br><span class="line"></span><br><span class="line">#### 服务器输出字符数据到浏览器</span><br><span class="line">步骤</span><br><span class="line">- 获取字符输出流</span><br><span class="line">- 输出数据</span><br><span class="line"></span><br><span class="line">乱码问题</span><br><span class="line">- PrintWriter pw = response.getWriter();获取的流的默认编码是ISO-8859-1。</span><br><span class="line">- 设置编码（在获取流之前设置）。</span><br><span class="line">```java</span><br><span class="line">  response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">  PrintWriter writer = response.getWriter();</span><br><span class="line">  writer.write(&quot;&lt;h1&gt;Hello Java&lt;/h1&gt;&lt;br&gt;&lt;a href=&apos;http://www.baidu.com&apos;&gt;百度&lt;/a&gt;&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li>PrintWriter pw = response.getWriter();获取的流的默认编码是ISO-8859-1。</li>
+<li>设置编码（在获取流之前设置）。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">PrintWriter writer = response.getWriter();</span><br><span class="line">writer.write(<span class="string">"&lt;h1&gt;Hello Java&lt;/h1&gt;&lt;br&gt;&lt;a href='http://www.baidu.com'&gt;百度&lt;/a&gt;"</span>);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="服务器输出字节数据到浏览器"><a href="#服务器输出字节数据到浏览器" class="headerlink" title="服务器输出字节数据到浏览器"></a>服务器输出字节数据到浏览器</h4><p>步骤</p>
@@ -1176,7 +1184,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-请求消息数据格式"><span class="nav-text">2.请求消息数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-请求行"><span class="nav-text">2.1 请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-请求头"><span class="nav-text">2.2 请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-请求空行"><span class="nav-text">2.3 请求空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-请求体（正文）"><span class="nav-text">2.4 请求体（正文）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Request对象"><span class="nav-text">3.Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-request-继承体系结构"><span class="nav-text">3.1 request 继承体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-request-功能"><span class="nav-text">3.2 request 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-获取请求消息数据"><span class="nav-text">3.2.1.获取请求消息数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求行数据"><span class="nav-text">获取请求行数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求头数据"><span class="nav-text">获取请求头数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求体数据"><span class="nav-text">获取请求体数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-其他功能"><span class="nav-text">3.2.2 其他功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求参数"><span class="nav-text">获取请求参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求转发"><span class="nav-text">请求转发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#共享数据"><span class="nav-text">共享数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取-ServletContext"><span class="nav-text">获取 ServletContext</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-案例：用户登录"><span class="nav-text">3.3 案例：用户登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#需求"><span class="nav-text">需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例分析"><span class="nav-text">案例分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-响应消息数据格式"><span class="nav-text">4.响应消息数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-响应行"><span class="nav-text">4.1 响应行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-响应头"><span class="nav-text">4.2 响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-响应空行"><span class="nav-text">4.3 响应空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-响应体"><span class="nav-text">4.4 响应体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应字符串格式"><span class="nav-text">响应字符串格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Response对象"><span class="nav-text">5.Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-功能"><span class="nav-text">5.1 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置响应消息"><span class="nav-text">设置响应消息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-案例"><span class="nav-text">5.2 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完成重定向"><span class="nav-text">完成重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向的特点：redirect"><span class="nav-text">重定向的特点：redirect</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转发的特点：forward"><span class="nav-text">转发的特点：forward</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#路径写法："><span class="nav-text">路径写法：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器输出字节数据到浏览器"><span class="nav-text">服务器输出字节数据到浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证码"><span class="nav-text">验证码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-ServletContext对象"><span class="nav-text">6.ServletContext对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-概念"><span class="nav-text">6.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-获取"><span class="nav-text">6.2 获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-功能"><span class="nav-text">6.3 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-案例"><span class="nav-text">6.4 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件下载需求"><span class="nav-text">文件下载需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中文文件名问题"><span class="nav-text">中文文件名问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-请求消息数据格式"><span class="nav-text">2.请求消息数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-请求行"><span class="nav-text">2.1 请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-请求头"><span class="nav-text">2.2 请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-请求空行"><span class="nav-text">2.3 请求空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-请求体（正文）"><span class="nav-text">2.4 请求体（正文）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Request对象"><span class="nav-text">3.Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-request-继承体系结构"><span class="nav-text">3.1 request 继承体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-request-功能"><span class="nav-text">3.2 request 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-获取请求消息数据"><span class="nav-text">3.2.1.获取请求消息数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求行数据"><span class="nav-text">获取请求行数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求头数据"><span class="nav-text">获取请求头数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求体数据"><span class="nav-text">获取请求体数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-其他功能"><span class="nav-text">3.2.2 其他功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取请求参数"><span class="nav-text">获取请求参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求转发"><span class="nav-text">请求转发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#共享数据"><span class="nav-text">共享数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取-ServletContext"><span class="nav-text">获取 ServletContext</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-案例：用户登录"><span class="nav-text">3.3 案例：用户登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#需求"><span class="nav-text">需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例分析"><span class="nav-text">案例分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-响应消息数据格式"><span class="nav-text">4.响应消息数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-响应行"><span class="nav-text">4.1 响应行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-响应头"><span class="nav-text">4.2 响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-响应空行"><span class="nav-text">4.3 响应空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-响应体"><span class="nav-text">4.4 响应体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应字符串格式"><span class="nav-text">响应字符串格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Response对象"><span class="nav-text">5.Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-功能"><span class="nav-text">5.1 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置响应消息"><span class="nav-text">设置响应消息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-案例"><span class="nav-text">5.2 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完成重定向"><span class="nav-text">完成重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定向的特点：redirect"><span class="nav-text">重定向的特点：redirect</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转发的特点：forward"><span class="nav-text">转发的特点：forward</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#路径写法："><span class="nav-text">路径写法：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器输出字符数据到浏览器"><span class="nav-text">服务器输出字符数据到浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器输出字节数据到浏览器"><span class="nav-text">服务器输出字节数据到浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证码"><span class="nav-text">验证码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-ServletContext对象"><span class="nav-text">6.ServletContext对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-概念"><span class="nav-text">6.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-获取"><span class="nav-text">6.2 获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-功能"><span class="nav-text">6.3 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-案例"><span class="nav-text">6.4 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件下载需求"><span class="nav-text">文件下载需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中文文件名问题"><span class="nav-text">中文文件名问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
