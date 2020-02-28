@@ -1,6 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>卷积神经网络</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h2 id="1-卷积神经网络结构"><a href="#1-卷积神经网络结构" class="headerlink" title="1.卷积神经网络结构"></a>1.卷积神经网络结构</h2><p><img style="float: center;" src="/机器学习/卷积神经网络/卷积神经网络结构.png" width="70%"></p>
+<ul>
+<li><strong>输入层</strong>：将每个像素代表一个特征节点输入到网络中。</li>
+<li><strong>卷积层</strong>：卷积运算的主要目的是使原信号特征增强，并降低噪音。</li>
+<li><strong>降采样层</strong>：降低网络训练参数及模型的过拟合程度。</li>
+<li><strong>全连接层</strong>：对生成的特征进行加权。</li>
+</ul>
+<h2 id="2-卷积运算"><a href="#2-卷积运算" class="headerlink" title="2.卷积运算"></a>2.卷积运算</h2><ul>
+<li>1.<strong>求点积</strong>：将5×5输入矩阵中3×3深蓝色区域中每个元素分别与其对应位置的权值（红色数字）相乘，然后再相加，所得到的值作为3×3输出矩阵（绿色）的第一个元素。  </li>
+<li>2.<strong>滑动窗口</strong>：将3×3权值矩阵向右移动一个格（即，步长为1）。  </li>
+<li>3.<strong>重复操作</strong>：同样地，将此时深色区域内每个元素分别与对应的权值相乘然后再相加，所得到的值作为输出矩阵的第二个元素；重复上述“求点积-滑动窗口”操作，直至输出矩阵所有值被填满。</li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/卷积操作.png" width="60%"></p>
+<p><strong>注意点</strong>：</p>
+<ul>
+<li>卷积核在2 维输入数据上“滑动”，对当前输入部分的元素进行矩阵乘法，然后将结果汇为单个输出像素值，重复这个过程直到遍历整张图像，这个过程就叫做卷积  </li>
+<li>这个权值矩阵就是<strong>卷积核</strong>  </li>
+<li>卷积操作后的图像称为<strong>特征图</strong>（feature map）</li>
+</ul>
+<h2 id="3-全连接层和卷积层对比"><a href="#3-全连接层和卷积层对比" class="headerlink" title="3.全连接层和卷积层对比"></a>3.全连接层和卷积层对比</h2><p><img style="float: center;" src="/机器学习/卷积神经网络/全连接层和卷积层对比.png" width="60%"></p>
+<h2 id="4-卷积的作用"><a href="#4-卷积的作用" class="headerlink" title="4.卷积的作用"></a>4.卷积的作用</h2><ul>
+<li>卷积运算的主要目的是<strong>使原信号特征增强，并降低噪音</strong>。  </li>
+<li>对图像用一个卷积核进行卷积运算，实际上是一个滤波的过程。每个卷积核都是一种特征提取方式，就像是一个筛子，将图像中符合条件的部分筛选出来。  </li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/卷积示意图.png" width="50%"></p>
+<h2 id="5-填充（Padding）"><a href="#5-填充（Padding）" class="headerlink" title="5.填充（Padding）"></a>5.填充（Padding）</h2><p>在卷积核滑动过程中图像边缘会被裁剪掉，将5×5的特征矩阵转换为3×3的特征矩阵。<br><strong>填充</strong>：用额外的“假”像素（通常值为0）填充边缘。这样，在滑动时的卷积核可以允许原始边缘像素位于卷积核的中心，同时延伸到边缘之外的假像素，从而产生与输入（5×5蓝色）相同大小的输出（5×5绿色）。  </p>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/填充.png" width="20%"></p>
+<h2 id="6-多通道卷积"><a href="#6-多通道卷积" class="headerlink" title="6.多通道卷积"></a>6.多通道卷积</h2><ul>
+<li>每个卷积核都会将图像生成为另一幅特征映射图，即：<strong>一个卷积核提取一种特征</strong>。  </li>
+<li>为了使特征提取更充分，可以添加多个卷积核以提取不同的特征，也就是，<strong>多通道卷积</strong>。  </li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/特征筛选.png" width="20%"></p>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/desktop/研究周报/机器学习/卷积神经网络/img/多通道卷积.png" width="40%"></p>
+<h2 id="7-池化（pooling）"><a href="#7-池化（pooling）" class="headerlink" title="7.池化（pooling）"></a>7.池化（pooling）</h2><p><strong>池化</strong>：计算图像一个区域上的某个特定特征的平均值或最大值的聚合操作。<br>卷积层的作用是探测上一层特征的局部连接，而池化的作用是<strong>在语义上将相似的特征合并起来</strong>，从而达到降维的目的。  </p>
+<p><strong>常用池化方法</strong></p>
+<ul>
+<li>1.<strong>均值池化</strong>：对池化区域内的像素点取均值，这种方法得到的特征数据对背景信息更敏感。  </li>
+<li>2.<strong>最大池化</strong>：对池化区域内所有像素点取最大值，这种方法得到的特征对纹理特征信息更加敏感。</li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/最大池化.png" width="40%"></p>
+<h2 id="8-步长（stride）"><a href="#8-步长（stride）" class="headerlink" title="8.步长（stride）"></a>8.步长（stride）</h2><p><strong>步长</strong>：卷积核在图片上移动的格数。  </p>
+<ul>
+<li>stride=1：</li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/stride1.png" width="50%"></p>
+<ul>
+<li>stride=2:</li>
+</ul>
+<p><img style="float: center;" src="/机器学习/卷积神经网络/stride2.png" width="50%"></p>
+<p>步长大于1的卷积操作也是<strong>降维的一种方式</strong>。<br>卷积后图片尺寸：假如步长为S，原始图片尺寸为$[N_1,N_1]$，卷积核大小为$[N_2,N_2]$，那么<strong>卷积之后图像大小</strong>：<br>$[\frac{N_1-N_2}{S}+1,\frac{N_1-N_2}{S}+1]$</p>
+<h2 id="9-卷积神经网络组成小结"><a href="#9-卷积神经网络组成小结" class="headerlink" title="9.卷积神经网络组成小结"></a>9.卷积神经网络组成小结</h2><p><img style="float: center;" src="/机器学习/卷积神经网络/卷积神经网络组成.png" width="50%"></p>
+<p>正则表达式：<br>输入层→(卷积层+→池化层?)+→全连接层+<br>含义：<strong>输入层</strong>→(<strong>卷积层</strong>[一层或多层]+<strong>池化层</strong>[0或1层])[一个或多个]→<strong>全连接层</strong>[一个或多个]</p>
+<h2 id="10-Tensorflow实践"><a href="#10-Tensorflow实践" class="headerlink" title="10.Tensorflow实践"></a>10.Tensorflow实践</h2><p>CIFAR10 数据集</p>
+<p><img src="/机器学习/卷积神经网络/desktop\9.卷积神经网络\img\CIFAR10.png" alt="CIFAR10" style="zoom:60%;"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> pickle <span class="keyword">as</span> p</span><br><span class="line">%load_ext tensorboard</span><br></pre></td></tr></table></figure>
+<h3 id="9-1-导入CIFAR数据集"><a href="#9-1-导入CIFAR数据集" class="headerlink" title="9.1 导入CIFAR数据集"></a>9.1 导入CIFAR数据集</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(Xtrain,Ytrain),(Xtest,Ytest) = tf.keras.datasets.cifar10.load_data()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看训练和测试数据集大小</span></span><br><span class="line">print(<span class="string">"Xtrain's shape:"</span>,Xtrain.shape)</span><br><span class="line">print(<span class="string">"Ytrain's shape:"</span>,Ytrain.shape)</span><br><span class="line">print(<span class="string">"Xtest's shape:"</span>,Xtest.shape)</span><br><span class="line">print(<span class="string">"Ytest's shape:"</span>,Ytest.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>Xtrain&#39;s shape: (50000, 32, 32, 3)
+Ytrain&#39;s shape: (50000, 1)
+Xtest&#39;s shape: (10000, 32, 32, 3)
+Ytest&#39;s shape: (10000, 1)
+</code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看图像数据和标签</span></span><br><span class="line">label_dict = &#123;<span class="number">0</span>:<span class="string">'T-shirt/top'</span>,<span class="number">1</span>:<span class="string">'Trouser'</span>,<span class="number">2</span>:<span class="string">'Pullover'</span>,<span class="number">3</span>:<span class="string">'Dress'</span>,<span class="number">4</span>:<span class="string">'Coat'</span>,</span><br><span class="line">             <span class="number">5</span>:<span class="string">'Sandal'</span>,<span class="number">6</span>:<span class="string">'Shirt'</span>,<span class="number">7</span>:<span class="string">'Sneaker'</span>,<span class="number">8</span>:<span class="string">'Bag'</span>,<span class="number">9</span>:<span class="string">'Ankle boot'</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_images_labels</span><span class="params">(images,labels,prediction,idx,num=<span class="number">10</span>)</span>:</span></span><br><span class="line">    fig = plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line">    labels = np.array(labels)</span><br><span class="line">    <span class="keyword">if</span> num&gt;<span class="number">10</span>:</span><br><span class="line">        num=<span class="number">10</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        plt.subplot(<span class="number">2</span>,<span class="number">5</span>,<span class="number">1</span>+i)</span><br><span class="line">        plt.imshow(images[idx],cmap=<span class="string">'binary'</span>)</span><br><span class="line">        title=str(i+<span class="number">1</span>)+<span class="string">'.'</span>+label_dict[labels[idx,<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">if</span> len(prediction)&gt;<span class="number">0</span>:</span><br><span class="line">            title+=<span class="string">'=&gt;'</span>+label_dict[prediction[idx]]</span><br><span class="line">        plt.title(title,fontsize=<span class="number">10</span>)</span><br><span class="line">        idx+=<span class="number">1</span></span><br><span class="line">plot_images_labels(Xtest,Ytest,[],<span class="number">10</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/机器学习/卷积神经网络/output_16_0.png" alt="png"></p>
+<h3 id="9-2-数据预处理"><a href="#9-2-数据预处理" class="headerlink" title="9.2 数据预处理"></a>9.2 数据预处理</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 图像数据数字标准化</span></span><br><span class="line">Xtrain_norm = Xtrain.astype(<span class="string">'float32'</span>)/<span class="number">255.0</span></span><br><span class="line">Xtest_norm = Xtest.astype(<span class="string">'float32'</span>)/<span class="number">255.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 独热编码</span></span><br><span class="line"><span class="comment"># Ytrain_onehot = tf.one_hot(Ytrain,depth=10)</span></span><br><span class="line"><span class="comment"># Ytest_onehot = tf.one_hot(Ytest,depth=10)</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-3-建立模型"><a href="#9-3-建立模型" class="headerlink" title="9.3 建立模型"></a>9.3 建立模型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model = tf.keras.Sequential()</span><br><span class="line">model.add(tf.keras.layers.Conv2D(<span class="number">32</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, input_shape=(<span class="number">32</span>, <span class="number">32</span>, <span class="number">3</span>)))</span><br><span class="line">model.add(tf.keras.layers.MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>)))</span><br><span class="line">model.add(tf.keras.layers.Conv2D(<span class="number">64</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(tf.keras.layers.MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>)))</span><br><span class="line">model.add(tf.keras.layers.Conv2D(<span class="number">64</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(tf.keras.layers.Flatten())</span><br><span class="line">model.add(tf.keras.layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(tf.keras.layers.Dense(<span class="number">10</span>, activation=<span class="string">'softmax'</span>))</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<pre><code>Model: &quot;sequential_18&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_35 (Conv2D)           (None, 30, 30, 32)        896       
+_________________________________________________________________
+max_pooling2d_12 (MaxPooling (None, 15, 15, 32)        0         
+_________________________________________________________________
+conv2d_36 (Conv2D)           (None, 13, 13, 64)        18496     
+_________________________________________________________________
+max_pooling2d_13 (MaxPooling (None, 6, 6, 64)          0         
+_________________________________________________________________
+conv2d_37 (Conv2D)           (None, 4, 4, 64)          36928     
+_________________________________________________________________
+flatten_12 (Flatten)         (None, 1024)              0         
+_________________________________________________________________
+dense_22 (Dense)             (None, 64)                65600     
+_________________________________________________________________
+dense_23 (Dense)             (None, 10)                650       
+=================================================================
+Total params: 122,570
+Trainable params: 122,570
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre><h3 id="9-4-编译模型"><a href="#9-4-编译模型" class="headerlink" title="9.4 编译模型"></a>9.4 编译模型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 模型编译</span></span><br><span class="line">model.compile(optimizer=<span class="string">'adam'</span>,</span><br><span class="line">             loss=<span class="string">'sparse_categorical_crossentropy'</span>,</span><br><span class="line">             metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">log_dir = <span class="string">"F:\\JupyterNotebook\\TensorFlowLearn\\logs\\"</span> + datetime.datetime.now().strftime(<span class="string">"%Y%m%d-%H%M%S"</span>)</span><br><span class="line">tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="9-5-训练模型"><a href="#9-5-训练模型" class="headerlink" title="9.5 训练模型"></a>9.5 训练模型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">his = model.fit(Xtrain_norm,Ytrain,epochs=<span class="number">5</span>,validation_data=(Xtest_norm,Ytest),callbacks=[tensorboard_callback])</span><br></pre></td></tr></table></figure>
+<pre><code>Train on 50000 samples, validate on 10000 samples
+Epoch 1/5
+   32/50000 [..............................] - ETA: 8:18 - loss: 2.3121 - accuracy: 0.0312WARNING:tensorflow:Method (on_train_batch_end) is slow compared to the batch update (0.103193). Check your callbacks.
+50000/50000 [==============================] - 23s 452us/sample - loss: 1.5411 - accuracy: 0.4347 - val_loss: 1.2904 - val_accuracy: 0.5303
+Epoch 2/5
+50000/50000 [==============================] - 22s 440us/sample - loss: 1.1496 - accuracy: 0.5928 - val_loss: 1.1249 - val_accuracy: 0.6020
+Epoch 3/5
+50000/50000 [==============================] - 22s 449us/sample - loss: 0.9963 - accuracy: 0.6501 - val_loss: 0.9654 - val_accuracy: 0.6617
+Epoch 4/5
+50000/50000 [==============================] - 23s 455us/sample - loss: 0.8942 - accuracy: 0.6858 - val_loss: 0.9129 - val_accuracy: 0.6794
+Epoch 5/5
+50000/50000 [==============================] - 23s 455us/sample - loss: 0.8187 - accuracy: 0.7118 - val_loss: 0.9052 - val_accuracy: 0.6840
+</code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">his.history.keys()</span><br></pre></td></tr></table></figure>
+<pre><code>dict_keys([&#39;loss&#39;, &#39;accuracy&#39;, &#39;val_loss&#39;, &#39;val_accuracy&#39;])
+</code></pre><h3 id="9-6-训练结果"><a href="#9-6-训练结果" class="headerlink" title="9.6 训练结果"></a>9.6 训练结果</h3><p>模型训练后的准确率为<strong>68.4%</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot(his.epoch,his.history.get(<span class="string">'loss'</span>),label=<span class="string">'trainset_loss'</span>)</span><br><span class="line">plt.plot(his.epoch,his.history.get(<span class="string">'val_loss'</span>),label=<span class="string">'testset_loss'</span>)</span><br><span class="line">plt.legend(fontsize=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/机器学习/卷积神经网络/output_26_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot(his.epoch,his.history.get(<span class="string">'accuracy'</span>),label=<span class="string">'trainset_accuracy'</span>)</span><br><span class="line">plt.plot(his.epoch,his.history.get(<span class="string">'val_accuracy'</span>),label=<span class="string">'testset_accuracy'</span>)</span><br><span class="line">plt.legend(fontsize=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/机器学习/卷积神经网络/output_27_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">prediction = model.predict(Xtest_norm)</span><br><span class="line">prediction = np.argmax(prediction,axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plot_images_labels(Xtest,Ytest,prediction,<span class="number">10</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/机器学习/卷积神经网络/output_29_0.png" alt="png"></p>
+<p>可见第1和第6幅图预测错误，本次训练只进行了5轮，仍有比较大的改进空间。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>卷积神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bootstrap学习笔记</title>
     <url>/%E5%89%8D%E7%AB%AF/Bootstrap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><a href="https://www.bootcss.com/" target="_blank" rel="noopener">官网</a></p>
@@ -961,12 +1089,12 @@
   </entry>
   <entry>
     <title>统计学习方法第二章学习笔记</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
 <h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
 <p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
 <div align="center">    
-<img src="/机器学习/统计学习方法学习笔记/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
 <p>感知机模型</p>
 </div>
 
@@ -982,7 +1110,7 @@
 ]]></content>
       <categories>
         <category>机器学习</category>
-        <category>统计学习方法学习笔记</category>
+        <category>统计学习方法</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
@@ -991,7 +1119,7 @@
   </entry>
   <entry>
     <title>统计学习方法第一章学习笔记</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1.统计学习"></a>1.统计学习</h2><h3 id="1-1特点"><a href="#1-1特点" class="headerlink" title="1.1特点"></a>1.1特点</h3><ul>
 <li>建立于计算机及网络之上</li>
 <li>数据驱动</li>
@@ -1076,12 +1204,12 @@
 <p>测试误差$e_{\mathrm{test}}$：模型$Y=\hat{f}(X)$关于测试集的平均损失：<br>$e_{\mathrm{test}}=\frac{1}{N^{\prime}} \sum_{i=1}^{N^{\prime}} L\left(y_{i}, \hat{f}\left(x_{i}\right)\right)$</p>
 <h3 id="4-2-模型选择"><a href="#4-2-模型选择" class="headerlink" title="4.2 模型选择"></a>4.2 模型选择</h3><p>避免出现过拟合并提高模型的预测能力</p>
 <div align="center">    
-<img src="/机器学习/统计学习方法学习笔记/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法/统计学习方法第一章学习笔记/M次多项式函数拟合问题.png" width="500" height="300" alt="图片名称" align="center">
 <p>M次多项式函数拟合问题</p>
 </div>
 
 <div align="center">    
-<img src="/机器学习/统计学习方法学习笔记/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
+<img src="/机器学习/统计学习方法/统计学习方法第一章学习笔记/训练误差和测试误差与模型复杂度的关系.png" width="500" height="300" alt="图片名称" align="center">
 <p>训练误差和测试误差与模型复杂度的关系</p>
 </div>
 
@@ -1115,7 +1243,7 @@
 ]]></content>
       <categories>
         <category>机器学习</category>
-        <category>统计学习方法学习笔记</category>
+        <category>统计学习方法</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
