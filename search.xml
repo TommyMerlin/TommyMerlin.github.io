@@ -60,13 +60,11 @@
 <ul>
 <li>给表单项添加：class=”form-control” </li>
 </ul>
-<p><strong>组件</strong></p>
-<ul>
+<h3 id="4-2-组件"><a href="#4-2-组件" class="headerlink" title="4.2 组件"></a><strong>4.2 组件</strong></h3><ul>
 <li>导航条</li>
 <li>分页条</li>
 </ul>
-<p><strong>插件</strong></p>
-<ul>
+<h3 id="4-3-插件"><a href="#4-3-插件" class="headerlink" title="4.3 插件"></a><strong>4.3 插件</strong></h3><ul>
 <li>轮播图 Carousel </li>
 </ul>
 ]]></content>
