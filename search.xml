@@ -808,7 +808,7 @@ Epoch 5/5
 <li>5.获取连接：getConnection()</li>
 </ul>
 <p><strong>配置文件</strong> <code>druid.properties</code>：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">jdbc:mysql:///test01?useUnicode=true&amp;amp;useJDBCCompliantTimezoneShift=true&amp;amp;useLegacyDatetimeCode=false&amp;amp;serverTimezone=UTC</span></span><br><span class="line"><span class="attr">username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">root</span></span><br><span class="line"><span class="comment"># 初始化连接数</span></span><br><span class="line"><span class="attr">initialSize</span>=<span class="string">5</span></span><br><span class="line"><span class="comment"># 最大连接数</span></span><br><span class="line"><span class="attr">maxActive</span>=<span class="string">10</span></span><br><span class="line"><span class="comment"># 最大等待时间</span></span><br><span class="line"><span class="attr">maxWait</span>=<span class="string">3000</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">jdbc:mysql:///test01?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</span></span><br><span class="line"><span class="attr">username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">root</span></span><br><span class="line"><span class="comment"># 初始化连接数</span></span><br><span class="line"><span class="attr">initialSize</span>=<span class="string">5</span></span><br><span class="line"><span class="comment"># 最大连接数</span></span><br><span class="line"><span class="attr">maxActive</span>=<span class="string">10</span></span><br><span class="line"><span class="comment"># 最大等待时间</span></span><br><span class="line"><span class="attr">maxWait</span>=<span class="string">3000</span></span><br></pre></td></tr></table></figure>
 <p><strong>代码</strong>：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 加载配置文件</span></span><br><span class="line">    Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">    InputStream is = DruidDemo1.class.getClassLoader().getResourceAsStream(<span class="string">"druid.properties"</span>);</span><br><span class="line">    pro.load(is);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取连接池对象</span></span><br><span class="line">    DataSource ds = DruidDataSourceFactory.createDataSource(pro);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取连接</span></span><br><span class="line">    Connection conn = ds.getConnection();</span><br><span class="line">    System.out.println(conn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="定义工具类"><a href="#定义工具类" class="headerlink" title="定义工具类"></a>定义工具类</h4><p>1.定义一个工具类 <code>JDBCUtils</code>。</p>
@@ -1586,37 +1586,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第七章—支持向量机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
@@ -1689,6 +1658,37 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
 <li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
 <li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
 </ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -1809,45 +1809,6 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
-</ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第四章—朴素贝叶斯法</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
@@ -1929,6 +1890,45 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
 
 <h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
 ]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
