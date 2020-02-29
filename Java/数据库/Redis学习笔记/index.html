@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="HuYe的博客">
 <meta property="og:description" content="1.概念redis 是一款高性能的 NoSQL系列的非关系型数据库。 1.1 NoSQLNoSQL(NoSQL = Not Only SQL)，意即“不仅仅是 SQL”，是一项全新的数据库理念，泛指非关系型的数据库。 随着互联网 web2.0 网站的兴起，传统的关系数据库在应付 web2.0 网站，特别是超大规模和高并发的 SNS 类型的 web2.0 纯动态网站已经显得力不从心，暴露了很多难以克">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-29T04:51:40.286Z">
+<meta property="og:updated_time" content="2020-02-29T04:54:44.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis学习笔记">
 <meta name="twitter:description" content="1.概念redis 是一款高性能的 NoSQL系列的非关系型数据库。 1.1 NoSQLNoSQL(NoSQL = Not Only SQL)，意即“不仅仅是 SQL”，是一项全新的数据库理念，泛指非关系型的数据库。 随着互联网 web2.0 网站的兴起，传统的关系数据库在应付 web2.0 网站，特别是超大规模和高并发的 SNS 类型的 web2.0 纯动态网站已经显得力不从心，暴露了很多难以克">
@@ -445,7 +445,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 12:51:40" itemprop="dateModified" datetime="2020-02-29T12:51:40+08:00">2020-02-29</time>
+                <time title="修改时间：2020-02-29 12:54:44" itemprop="dateModified" datetime="2020-02-29T12:54:44+08:00">2020-02-29</time>
               
             
           </span>
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">15k</span>
+                <span title="本文字数">16k</span>
               
 
               
@@ -691,17 +691,19 @@
 <h2 id="4-持久化层"><a href="#4-持久化层" class="headerlink" title="4.持久化层"></a>4.持久化层</h2><p>redis 是一个内存数据库，当 redis 服务器重启，或电脑重启，数据会丢失，我们可以将 redis 内存中的数据持久化保存到硬盘的文件中。</p>
 <p>redis <strong>持久化机制</strong>：</p>
 <ul>
-<li><p>RDB：默认方式，不需要进行配置，在一定的间隔时间中，检测key的变化情况，然后持久化数据。</p>
+<li><p>RDB：默认方式，不需要进行配置，在一定的间隔时间中，检测 key 的变化情况，然后持久化数据。</p>
 <ul>
-<li><p>编辑 redis.windwos.conf 文件。</p>
+<li><p>编辑 redis.windwos.conf  文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   after 900 sec (15 min) if at least 1 key changed</span></span><br><span class="line">save 900 1</span><br><span class="line"><span class="comment">#   after 300 sec (5 min) if at least 10 keys changed</span></span><br><span class="line">save 300 10</span><br><span class="line"><span class="comment">#   after 60 sec if at least 10000 keys changed</span></span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>重新启动redis服务器，并指定配置文件名称。</p>
+<li><p>重新启动 redis 服务器，并指定配置文件名称。</p>
 </li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\JavaWeb2018\redis\windows-64\redis-2.8.9&gt;redis-server.exe redis.windows.conf</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>AOF：日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据。</p>
-</li>
+</ul>
+<ul>
+<li>AOF：日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据。</li>
 </ul>
 <h2 id="5-Java客户端-Jedis"><a href="#5-Java客户端-Jedis" class="headerlink" title="5.Java客户端 Jedis"></a>5.Java客户端 Jedis</h2>
       
