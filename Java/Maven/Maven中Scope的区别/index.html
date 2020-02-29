@@ -103,21 +103,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。 test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。 provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（">
+<meta name="keywords" content="Maven,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven中Scope的区别">
+<meta property="og:url" content="http://yoursite.com/Java/Maven/Maven中Scope的区别/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。 test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。 provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T09:52:57.685Z">
+<meta property="og:updated_time" content="2020-02-29T10:37:24.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="Maven中Scope的区别">
+<meta name="twitter:description" content="compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。 test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。 provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/">
+  <link rel="canonical" href="http://yoursite.com/Java/Maven/Maven中Scope的区别/">
 
 
 
@@ -127,7 +131,7 @@
   };
 </script>
 
-  <title>categories | HuYe的博客</title>
+  <title>Maven中Scope的区别 | HuYe的博客</title>
   
 
 
@@ -247,7 +251,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -361,150 +365,255 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Maven/Maven中Scope的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
+          <h1 class="post-title" itemprop="name headline">Maven中Scope的区别
+
               
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
               
-                
-                  
-                
+                <span class="post-meta-item-text">发表于</span>
               
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
+
               
                 
-                  
+              
+
+              <time title="创建时间：2020-02-29 18:24:17 / 修改时间：18:37:24" itemprop="dateCreated datePublished" datetime="2020-02-29T18:24:17+08:00">2020-02-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
                 
               
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a></span>
+
                 
-                  
-                
-              
-                
-                  
                 
               
-                
-                  
-                
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
               
-                
-                  
-                
+
               
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
                 
-                  
+                  <span class="post-meta-item-text">本文字数：</span>
                 
+                <span title="本文字数">2.6k</span>
               
-                
-                  
-                
+
               
-                
-                  
-                
+
               
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              目前共计 17 个分类
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/JavaWeb/">JavaWeb</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/JavaWeb/HTTP/">HTTP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/JavaWeb/JSP/">JSP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/JavaWeb/Servlet/">Servlet</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/JavaWeb/Tomcat/">Tomcat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/基础知识/">基础知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/数据库/">数据库</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/">微服务</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/微服务读书笔记/">微服务读书笔记</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/统计学习方法/">统计学习方法</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇总/">汇总</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="compile"><a href="#compile" class="headerlink" title="compile"></a>compile</h2><p>编译范围，不设置<strong>默认</strong>为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于<strong>强依赖</strong>。</p>
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p>该依赖仅仅参与<strong>测试</strong>相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。</p>
+<h2 id="provided"><a href="#provided" class="headerlink" title="provided"></a>provided</h2><p>容器或 JDK 已提供范围，表示该依赖包已经由目标容器（如tomcat）和 JDK 提供，只在编译的 classpath 中加载和使用，打包的时候不会包含在目标包中。最常见的是 j2ee 规范相关的 servlet-api 和 jsp-api 等 jar 包，一般由 servlet 容器提供，无需再打包到 war 包中，如果不配置为 provided ，把这些包打包到工程 war 包中，在 tomcat6 以上版本会出现冲突无法正常运行程序（版本不符的情况）。</p>
+<h2 id="runtime"><a href="#runtime" class="headerlink" title="runtime"></a>runtime</h2><p>一般是运行和测试环境使用，编译时候不用加入 classpath，打包时候会打包到目标包中。一般是通过动态加载或接口反射加载的情况比较多。一般这种类库都是接口与实现相分离的类库，比如 JDBC 类库，在编译之时仅依赖相关的接口，在具体的运行之时，才需要具体的 mysql、oracle 等等数据的驱动程序。</p>
+<h2 id="system"><a href="#system" class="headerlink" title="system"></a>system</h2><p>使用上与provided相同，不同之处在于该依赖不从maven仓库中提取，而是从本地文件系统中提取，其会参照systemPath的属性进行提取依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>sun.jdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;java.home&#125;/../lib/tools.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/wechatpay.jpg" alt="HuYe 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/alipay.jpg" alt="HuYe 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maven/" rel="tag"><i class="fa fa-tag"></i> Maven</a>
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/机器学习/卷积神经网络/" rel="next" title="卷积神经网络">
+                <i class="fa fa-chevron-left"></i> 卷积神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -533,8 +642,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -742,6 +860,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#compile"><span class="nav-text">compile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-text">test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#provided"><span class="nav-text">provided</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#runtime"><span class="nav-text">runtime</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#system"><span class="nav-text">system</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
