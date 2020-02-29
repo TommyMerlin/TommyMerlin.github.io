@@ -129,6 +129,187 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
+    <title>Redis学习笔记</title>
+    <url>/Java/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h2><p>redis 是一款高性能的 NoSQL系列的非关系型数据库。</p>
+<h3 id="1-1-NoSQL"><a href="#1-1-NoSQL" class="headerlink" title="1.1 NoSQL"></a>1.1 NoSQL</h3><p><strong>NoSQL</strong>(NoSQL = Not Only SQL)，意即“不仅仅是 SQL”，是一项全新的数据库理念，泛指非关系型的数据库。</p>
+<p>随着互联网 web2.0 网站的兴起，传统的关系数据库在应付 web2.0 网站，特别是超大规模和高并发的 SNS 类型的 web2.0 <strong>纯动态</strong>网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是<strong>大数据应用</strong>难题。</p>
+<h4 id="NoSQL和关系型数据库比较"><a href="#NoSQL和关系型数据库比较" class="headerlink" title="NoSQL和关系型数据库比较"></a>NoSQL和关系型数据库比较</h4><p><strong>优点：</strong></p>
+<ul>
+<li>成本：NoSQL 数据库<strong>简单易部署</strong>，基本都是开源软件，相比关系型数据库<strong>价格便宜</strong>。</li>
+<li>查询速度：NoSQL 数据库将数据存储于缓存之中，关系型数据库将数据存储在硬盘中，<strong>查询速度</strong>远不及 NoSQL 数据库。</li>
+<li>存储数据的格式：NoSQL 的存储格式是 key,value 形式、文档形式、图片形式等等，所以可以<strong>存储基础类型</strong>以及对象或者是集合等各种格式，而数据库则只支持基础类型。</li>
+<li>扩展性：关系型数据库有类似 join 这样的多表查询机制的限制导致扩展很艰难。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>维护的工具和资料有限，因为 NoSQL 是属于新的技术，不能和关系型数据库十几年的技术同日而语。</li>
+<li>不提供对 sql 的支持，如果不支持 sql 这样的工业标准，将产生一定用户的学习和使用成本。</li>
+<li>不提供关系型数据库对事务的处理。</li>
+</ul>
+<h4 id="非关系型数据库的优势"><a href="#非关系型数据库的优势" class="headerlink" title="非关系型数据库的优势"></a>非关系型数据库的优势</h4><ul>
+<li>NoSQL 是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过 SQL 层的解析，所以<strong>性能非常高</strong>。</li>
+<li>可扩展性同样也是因为基于键值对，数据之间没有耦合性，所以非常容易<strong>水平扩展</strong>。</li>
+</ul>
+<h4 id="关系型数据库的优势"><a href="#关系型数据库的优势" class="headerlink" title="关系型数据库的优势"></a>关系型数据库的优势</h4><ul>
+<li>复杂查询可以用 SQL 语句方便的在一个表以及多个表之间做非常<strong>复杂的数据查询</strong>。</li>
+<li><strong>事务支持</strong>使得对于安全性能很高的数据访问要求得以实现。</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>关系型数据库与 NoSQL 数据库并非对立而是<strong>互补</strong>的关系，即通常情况下使用关系型数据库，在适合使用 NoSQL 的时候使用 NoSQL 数据库，让 NoSQ L数据库对关系型数据库的不足进行弥补。</li>
+<li>一般会将数据存储在关系型数据库中，在 NoSQL 数据库中<strong>备份</strong>存储关系型数据库的数据</li>
+</ul>
+<h3 id="1-2-主流的-NoSQL-产品"><a href="#1-2-主流的-NoSQL-产品" class="headerlink" title="1.2 主流的 NoSQL 产品"></a>1.2 主流的 NoSQL 产品</h3><h4 id="键值-Key-Value-存储数据库"><a href="#键值-Key-Value-存储数据库" class="headerlink" title="键值(Key-Value)存储数据库"></a>键值(Key-Value)存储数据库</h4><ul>
+<li>相关产品： Tokyo Cabinet/Tyrant、Redis、Voldemort、Berkeley DB。</li>
+<li>典型应用： 内容缓存，主要用于处理大量数据的高访问负载。 </li>
+<li>数据模型： 一系列键值对。</li>
+<li>优势： 快速查询。</li>
+<li>劣势： 存储的数据缺少结构化。</li>
+</ul>
+<h4 id="列存储数据库"><a href="#列存储数据库" class="headerlink" title="列存储数据库"></a>列存储数据库</h4><ul>
+<li>相关产品：Cassandra, HBase, Riak。</li>
+<li>典型应用：分布式的文件系统。</li>
+<li>数据模型：以列簇式存储，将同一列数据存在一起。</li>
+<li>优势：查找速度快，可扩展性强，更容易进行分布式扩展。</li>
+<li>劣势：功能相对局限。</li>
+</ul>
+<h4 id="文档型数据库"><a href="#文档型数据库" class="headerlink" title="文档型数据库"></a>文档型数据库</h4><ul>
+<li>相关产品：CouchDB、MongoDB。</li>
+<li>典型应用：Web应用（与Key-Value类似，Value是结构化的）。</li>
+<li>数据模型： 一系列键值对。</li>
+<li>优势：数据结构要求不严格。</li>
+<li>劣势： 查询性能不高，而且缺乏统一的查询语法。</li>
+</ul>
+<h4 id="图形-Graph-数据库"><a href="#图形-Graph-数据库" class="headerlink" title="图形(Graph)数据库"></a>图形(Graph)数据库</h4><ul>
+<li>相关数据库：Neo4J、InfoGrid、Infinite Graph。</li>
+<li>典型应用：社交网络。</li>
+<li>数据模型：图结构。</li>
+<li>优势：利用图结构相关算法。</li>
+<li>劣势：需要对整个图做计算才能得出结果，不容易做分布式的集群方案。</li>
+</ul>
+<h3 id="1-3-什么是-Redis"><a href="#1-3-什么是-Redis" class="headerlink" title="1.3 什么是 Redis"></a>1.3 什么是 Redis</h3><p>Redis 是用 C 语言开发的一个开源的高性能键值对（key-value）数据库，官方提供测试数据，50 个并发执行 100000 个请求,读的速度是 110000 次/s，写的速度是 81000 次/s ，且 Redis 通过提供多种键值数据类型来适应不同场景下的存储需求。</p>
+<h4 id="Redis-的应用场景"><a href="#Redis-的应用场景" class="headerlink" title="Redis 的应用场景"></a>Redis 的应用场景</h4><ul>
+<li>缓存（数据查询、短连接、新闻内容、商品内容等等）。</li>
+<li>聊天室的在线好友列表。</li>
+<li>任务队列。（秒杀、抢购、12306 等等）。</li>
+<li>应用排行榜。</li>
+<li>网站访问统计。</li>
+<li>数据过期处理（可以精确到毫秒）。</li>
+<li>分布式集群架构中的 session 分离。</li>
+</ul>
+<h2 id="2-下载安装"><a href="#2-下载安装" class="headerlink" title="2.下载安装"></a>2.下载安装</h2><ul>
+<li><a href="https://redis.io/" target="_blank" rel="noopener">官网</a></li>
+<li><a href="http://www.redis.net.cn/" target="_blank" rel="noopener">中文网</a></li>
+<li>解压直接可以使用：<ul>
+<li>redis.windows.conf：<strong>配置文件</strong></li>
+<li>redis-cli.exe：redis的<strong>客户端</strong></li>
+<li>redis-server.exe：redis<strong>服务器端</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-命令操作"><a href="#3-命令操作" class="headerlink" title="3.命令操作"></a>3.命令操作</h2><h3 id="3-1-Redis-的数据结构"><a href="#3-1-Redis-的数据结构" class="headerlink" title="3.1 Redis 的数据结构"></a>3.1 Redis 的数据结构</h3><p>Redis 存储的是：key,value 格式的数据，其中 key 都是<strong>字符串</strong>，value 有 5 种不同的数据结构：</p>
+<ul>
+<li>字符串类型 string</li>
+<li>哈希类型 hash：map 格式 。</li>
+<li>列表类型 list：linkedlist 格式，<strong>支持重复元素</strong>。</li>
+<li>集合类型 set：<strong>不允许重复元素</strong>。</li>
+<li>有序集合类型 sortedset：<strong>不允许重复元素</strong>，且元素有顺序。</li>
+</ul>
+<h3 id="3-2-字符串类型-string"><a href="#3-2-字符串类型-string" class="headerlink" title="3.2 字符串类型 string"></a>3.2 字符串类型 string</h3><ul>
+<li>存储： set key value</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> username zhangsan</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取： get key</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get username</span><br><span class="line"><span class="string">"zhangsan"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除： del key</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; del age</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-哈希类型-hash"><a href="#3-3-哈希类型-hash" class="headerlink" title="3.3 哈希类型 hash"></a>3.3 哈希类型 hash</h3><ul>
+<li>存储： hset key field value</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset myhash username lisi</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; hset myhash password 123</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>获取： </p>
+<ul>
+<li>hget key field: 获取指定的field对应的值。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hget myhash username</span><br><span class="line"><span class="string">"lisi"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>hgetall key：获取所有的field和value。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hgetall myhash</span><br><span class="line">1) <span class="string">"username"</span></span><br><span class="line">2) <span class="string">"lisi"</span></span><br><span class="line">3) <span class="string">"password"</span></span><br><span class="line">4) <span class="string">"123"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>删除： hdel key field</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hdel myhash username</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-列表类型-list"><a href="#3-4-列表类型-list" class="headerlink" title="3.4 列表类型 list"></a>3.4 列表类型 list</h3><p>可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
+<ul>
+<li>添加：<ul>
+<li>lpush key value: 将元素加入列表左表。</li>
+<li>rpush key value：将元素加入列表右边。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpush myList a</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush myList b</span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; rpush myList c</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取：lrange key start end ：范围获取。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1</span><br><span class="line">1) <span class="string">"b"</span></span><br><span class="line">2) <span class="string">"a"</span></span><br><span class="line">3) <span class="string">"c"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除：<ul>
+<li>lpop key： 删除列表最左边的元素，并将元素返回。</li>
+<li>rpop key： 删除列表最右边的元素，并将元素返回。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-集合类型-set"><a href="#3-5-集合类型-set" class="headerlink" title="3.5 集合类型 set"></a>3.5 集合类型 set</h3><ul>
+<li>存储：sadd key value</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd myset a</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd myset a</span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取：smembers key：获取 set 集合中所有元素。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; smembers myset</span><br><span class="line">1) <span class="string">"a"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除：srem key value：删除 set 集合中的某个元素。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; srem myset a</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-有序集合类型-sortedset"><a href="#3-6-有序集合类型-sortedset" class="headerlink" title="3.6 有序集合类型 sortedset"></a>3.6 有序集合类型 sortedset</h3><p>不允许重复元素，且元素有顺序。每个元素都会关联一个 double 类型的分数。redis 正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<ul>
+<li>存储：zadd key score value</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd mysort 60 zhangsan</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd mysort 50 lisi</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd mysort 80 wangwu</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取：zrange key start end [withscores]</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zrange mysort 0 -1</span><br><span class="line">1) <span class="string">"lisi"</span></span><br><span class="line">2) <span class="string">"zhangsan"</span></span><br><span class="line">3) <span class="string">"wangwu"</span></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange mysort 0 -1 withscores</span><br><span class="line">1) <span class="string">"zhangsan"</span></span><br><span class="line">2) <span class="string">"60"</span></span><br><span class="line">3) <span class="string">"wangwu"</span></span><br><span class="line">4) <span class="string">"80"</span></span><br><span class="line">5) <span class="string">"lisi"</span></span><br><span class="line">6) <span class="string">"500"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除：zrem key value</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zrem mysort lisi</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<h3 id="3-7-通用命令"><a href="#3-7-通用命令" class="headerlink" title="3.7 通用命令"></a>3.7 通用命令</h3><ul>
+<li>keys * : 查询所有的键。</li>
+<li>type key ： 获取键对应的 value 的类型。</li>
+<li>del key：删除指定的key value。</li>
+</ul>
+<h2 id="4-持久化层"><a href="#4-持久化层" class="headerlink" title="4.持久化层"></a>4.持久化层</h2>]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Java</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bootstrap学习笔记</title>
     <url>/%E5%89%8D%E7%AB%AF/Bootstrap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><a href="https://www.bootcss.com/" target="_blank" rel="noopener">官网</a></p>
@@ -332,6 +513,201 @@ Epoch 5/5
         <tag>HTTP</tag>
         <tag>Cookie</tag>
         <tag>Session</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring JDBC</title>
+    <url>/Java/%E6%95%B0%E6%8D%AE%E5%BA%93/Spring-JDBC/</url>
+    <content><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>Spring</strong> 框架对 JDBC 的简单封装，提供了一个 JDBCTemplate 对象简化 JDBC 的开发。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h4 id="1-导入-jar-包。"><a href="#1-导入-jar-包。" class="headerlink" title="1.导入 jar 包。"></a>1.导入 jar 包。</h4><h4 id="2-创建-JdbcTemplate-对象。依赖于数据源DataSource"><a href="#2-创建-JdbcTemplate-对象。依赖于数据源DataSource" class="headerlink" title="2.创建 JdbcTemplate 对象。依赖于数据源DataSource"></a>2.创建 JdbcTemplate 对象。依赖于数据源DataSource</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JdbcTemplate template = <span class="keyword">new</span> JdbcTemplate(ds);</span><br></pre></td></tr></table></figure>
+<h4 id="3-调用JdbcTemplate的方法来完成CRUD的操作。"><a href="#3-调用JdbcTemplate的方法来完成CRUD的操作。" class="headerlink" title="3.调用JdbcTemplate的方法来完成CRUD的操作。"></a>3.调用JdbcTemplate的方法来完成CRUD的操作。</h4><ul>
+<li>update()：执行DML语句。增、删、改语句。</li>
+<li>queryForMap()：查询结果将结果集封装为map集合，将列名作为key，将值作为value 将这条记录封装为一个map集合。<ul>
+<li>注意：这个方法查询的结果集长度只能是1。</li>
+</ul>
+</li>
+<li>queryForList()：查询结果将结果集封装为list集合。<ul>
+<li>注意：将每一条记录封装为一个Map集合，再将Map集合装载到List集合中。</li>
+</ul>
+</li>
+<li>query()：查询结果，将结果封装为JavaBean对象。<ul>
+<li>query的参数：RowMapper<ul>
+<li>一般使用BeanPropertyRowMapper实现类，可以完成数据到JavaBean的自动封装。</li>
+<li>new BeanPropertyRowMapper&lt;类型&gt;(类型.class)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>queryForObject：查询结果，将结果封装为对象。<ul>
+<li>一般用于聚合函数的查询。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-示例"><a href="#4-示例" class="headerlink" title="4.示例"></a>4.示例</h4><p>需求：</p>
+<ul>
+<li>修改1号数据的 salary 为 10000。</li>
+<li>添加一条记录。</li>
+<li>删除刚才添加的记录。</li>
+<li>查询id为1的记录，将其封装为Map集合。</li>
+<li>查询所有记录，将其封装为List。</li>
+<li>查询所有记录，将其封装为<a href="https://gitee.com/TommyMerlin/code-host/blob/master/Java/Emp.java" target="_blank" rel="noopener">Emp对象</a>的List集。</li>
+<li>查询总记录数。</li>
+</ul>
+<p>数据表：</p>
+<p><img src="/Java/数据库/Spring-JDBC/表.png" alt="表" style="zoom:90%;"></p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取JDBCTemplate对象</span></span><br><span class="line"><span class="keyword">private</span> JdbcTemplate template = <span class="keyword">new</span> JdbcTemplate(JDBCUtils.getDataSource());</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 修改1号数据的 salary 为 10000</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//定义sql</span></span><br><span class="line">    String sql = <span class="string">"update emp set salary = 10000 where id = 1001"</span>;</span><br><span class="line">    <span class="comment">//执行sql</span></span><br><span class="line">    <span class="keyword">int</span> count = template.update(sql);</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2. 添加一条记录</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">"insert into emp(id,ename,dept_id) values(?,?,?)"</span>;</span><br><span class="line">    <span class="keyword">int</span> count = template.update(sql, <span class="number">1015</span>, <span class="string">"郭靖"</span>, <span class="number">10</span>);</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//3.删除刚才添加的记录</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">"delete from emp where id = ?"</span>;</span><br><span class="line">    <span class="keyword">int</span> count = template.update(sql, <span class="number">1015</span>);</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//4.查询id为1001的记录，将其封装为Map集合</span></span><br><span class="line"><span class="comment">//注意：这个方法查询的结果集长度只能是1</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">"select * from emp where id = ?"</span>;</span><br><span class="line">    Map&lt;String, Object&gt; map = template.queryForMap(sql, <span class="number">1001</span>);</span><br><span class="line">    System.out.println(map);</span><br><span class="line">    <span class="comment">//查询结果：&#123;id=1001, ename=孙悟空, job_id=4, mgr=1004, joindate=2000-12-17, salary=10000.00, bonus=null, dept_id=20&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//5. 查询所有记录，将其封装为List</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">"select * from emp"</span>;</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; list = template.queryForList(sql);</span><br><span class="line">    <span class="keyword">for</span> (Map&lt;String, Object&gt; stringObjectMap : list) 			           			         	System.out.println(stringObjectMap);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//6. 查询所有记录，将其封装为Emp对象的List集合--&gt;手动实现RowMapper接口</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span></span>&#123;</span><br><span class="line">	String sql = <span class="string">"select * from emp"</span>;</span><br><span class="line">	List&lt;Emp&gt; list = template.query(sql, <span class="keyword">new</span> RowMapper&lt;Emp&gt;() &#123;</span><br><span class="line">			</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Emp <span class="title">mapRow</span><span class="params">(ResultSet rs, <span class="keyword">int</span> i)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">            Emp emp = <span class="keyword">new</span> Emp();</span><br><span class="line">            <span class="keyword">int</span> id = rs.getInt(<span class="string">"id"</span>);</span><br><span class="line">            String ename = rs.getString(<span class="string">"ename"</span>);</span><br><span class="line">            <span class="keyword">int</span> job_id = rs.getInt(<span class="string">"job_id"</span>);</span><br><span class="line">            <span class="keyword">int</span> mgr = rs.getInt(<span class="string">"mgr"</span>);</span><br><span class="line">            Date joindate = rs.getDate(<span class="string">"joindate"</span>);</span><br><span class="line">            <span class="keyword">double</span> salary = rs.getDouble(<span class="string">"salary"</span>);</span><br><span class="line">            <span class="keyword">double</span> bonus = rs.getDouble(<span class="string">"bonus"</span>);</span><br><span class="line">            <span class="keyword">int</span> dept_id = rs.getInt(<span class="string">"dept_id"</span>);</span><br><span class="line">			</span><br><span class="line">            emp.setId(id);</span><br><span class="line">            emp.setEname(ename);</span><br><span class="line">            emp.setJob_id(job_id);</span><br><span class="line">            emp.setMgr(mgr);</span><br><span class="line">            emp.setJoindate(joindate);</span><br><span class="line">            emp.setSalary(salary);</span><br><span class="line">            emp.setBonus(bonus);</span><br><span class="line">            emp.setDept_id(dept_id);</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">return</span> emp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">for</span> (Emp emp : list) &#123;</span><br><span class="line">		System.out.println(emp);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>重点掌握</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//6. 查询所有记录，将其封装为Emp对象的List集合--&gt;自动封装emp对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span></span>&#123;</span><br><span class="line">	String sql = <span class="string">"select * from emp"</span>;</span><br><span class="line">	List&lt;Emp&gt; list = template.query(sql, <span class="keyword">new</span> BeanPropertyRowMapper&lt;Emp&gt;(Emp.class));</span><br><span class="line">	<span class="keyword">for</span> (Emp emp : list) &#123;</span><br><span class="line">		System.out.println(emp);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//7. 查询总记录数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String sql = <span class="string">"select count(id) from emp"</span>;</span><br><span class="line">    Long total = template.queryForObject(sql, Long.class);</span><br><span class="line">    System.out.println(total);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>注解</title>
+    <url>/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="注解的基本原理"><a href="#注解的基本原理" class="headerlink" title="注解的基本原理"></a><strong>注解的基本原理</strong></h2><p>意如其名，其本来的意思就是用来做<strong>标注</strong>用：可以在<strong>类</strong>、<strong>字段变量</strong>、<strong>方法</strong>、<strong>接口</strong>等位置进行一个<strong>特殊的标记</strong>，为后续做一些诸如：<strong>代码生成</strong>、<strong>数据校验</strong>、<strong>资源整合</strong>等工作做铺垫。</p>
+<p>注解一旦对代码标注完成，后续我们就可以结合Java强大的<strong>反射机制</strong>，在运行时动态地获取到注解的标注信息，从而可以执行很多其他逻辑，完成我们想要的自动化工作。</p>
+<hr>
+<h2 id="造一个注解"><a href="#造一个注解" class="headerlink" title="造一个注解"></a>造一个注解</h2><p><code>Spring</code>自身提供了非常多好用的注解可以用来方便地帮我们做数据校验的工作。</p>
+<p>比如，在没有注解加持时，我们想要校验 <code>Student</code>类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> Long id;        <span class="comment">// 学号    </span></span><br><span class="line">    <span class="keyword">private</span> String name;    <span class="comment">// 姓名    </span></span><br><span class="line">    <span class="keyword">private</span> String mobile;  <span class="comment">// 手机号码(11位)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们只能通过手写 <code>if</code>判断来进行校验：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"/add"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">addStudent</span><span class="params">( @RequestBody Student student )</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>( student == <span class="keyword">null</span> )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的Student对象为null，请传值"</span>;    </span><br><span class="line">    <span class="keyword">if</span>( student.getName()==<span class="keyword">null</span> || <span class="string">""</span>.equals(student.getName()) )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的学生姓名为空，请传值"</span>;    </span><br><span class="line">    <span class="keyword">if</span>( student.getScore()==<span class="keyword">null</span> )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的学生成绩为null，请传值"</span>;    </span><br><span class="line">    <span class="keyword">if</span>( (student.getScore()&lt;<span class="number">0</span>) || (student.getScore()&gt;<span class="number">100</span>) )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的学生成绩有误，分数应该在0~100之间"</span>;    </span><br><span class="line">    <span class="keyword">if</span>( student.getMobile()==<span class="keyword">null</span> || <span class="string">""</span>.equals(student.getMobile()) )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的学生电话号码为空，请传值"</span>;    </span><br><span class="line">    <span class="keyword">if</span>( student.getMobile().length()!=<span class="number">11</span> )        </span><br><span class="line">    	<span class="keyword">return</span> <span class="string">"传入的学生电话号码长度有误，应为11位"</span>;</span><br><span class="line">    </span><br><span class="line">    studentService.addStudent( student ); <span class="comment">// 将student对象存入MySQL数据库    </span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"SUCCESS"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式非常繁琐！</p>
+<p>但是借助于 <code>Spring</code> 提供的注解，数据校验工作可以变得非常优雅：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"传入的姓名为null，请传值"</span>)    </span><br><span class="line">    <span class="meta">@NotEmpty</span>(message = <span class="string">"传入的姓名为空字符串，请传值"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String name;    <span class="comment">// 姓名</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"传入的分数为null，请传值"</span>)    </span><br><span class="line">    <span class="meta">@Min</span>(value = <span class="number">0</span>,message = <span class="string">"传入的学生成绩有误，分数应该在0~100之间"</span>)    </span><br><span class="line">    <span class="meta">@Max</span>(value = <span class="number">100</span>,message = <span class="string">"传入的学生成绩有误，分数应该在0~100之间"</span>)    </span><br><span class="line">    <span class="keyword">private</span> Integer score;  <span class="comment">// 分数</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"传入的电话为null，请传值"</span>)    </span><br><span class="line">    <span class="meta">@NotEmpty</span>(message = <span class="string">"传入的电话为空字符串，请传值"</span>)    </span><br><span class="line">    <span class="meta">@Length</span>(min = <span class="number">11</span>, max = <span class="number">11</span>, message = <span class="string">"传入的电话号码长度有误，必须为11位"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String mobile;  <span class="comment">// 电话号码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上文的 <code>@Length</code>注解为例，自己动手实现一遍，这个学会了，其他注解实现原理也是类似。</p>
+<p><img src="/Java/基础知识/注解/640.jpg" alt="640" style="zoom:60%;"></p>
+<p>总共分三大步实现。</p>
+<h3 id="第一步：首先定义注解：-Length"><a href="#第一步：首先定义注解：-Length" class="headerlink" title="第一步：首先定义注解：@Length"></a><strong>第一步：首先定义注解：@Length</strong></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.FIELD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Length &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">()</span></span>;          <span class="comment">// 允许字符串长度的最小值</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">()</span></span>;          <span class="comment">// 允许字符串长度的最大值</span></span><br><span class="line">    <span class="function">String <span class="title">errorMsg</span><span class="params">()</span></span>;  <span class="comment">// 自定义的错误提示信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>几点说明：</p>
+<p>1、注解的定义有点像定义接口 <code>interface</code>，但唯一不同的是前面需要加一个 <code>@</code>符号。</p>
+<p>2、注解的成员变量只能使用基本类型、 <code>String</code>或者 <code>enum</code>枚举，比如 <code>int</code>可以，但 <code>Integer</code>这种包装类型就不行，需注意。</p>
+<p>3、像上面 <code>@Target</code>、 <code>@Retention</code>这种加在注解定义上面的注解，我们称为 <strong>“元注解”</strong>，元注解就是专门用于给注解添加注解的注解，元注解就是天生就有的注解，可直接用于注解的定义上。</p>
+<p>4、 <code>@Target(xxx)</code> 用来说明该自定义注解可以用在什么位置，比如：</p>
+<ul>
+<li><code>ElementType.FIELD</code>：说明自定义的注解可以用于类的变量</li>
+<li><code>ElementType.METHOD</code>：说明自定义的注解可以用于类的方法</li>
+<li><code>ElementType.TYPE</code>：说明自定义的注解可以用于类本身、接口或 <code>enum</code>类型</li>
+<li>等等… 还有很多，如果记不住，建议现用现查</li>
+</ul>
+<p>5、 <code>@Retention(xxx)</code> 用来说明你自定义注解的生命周期，比如：</p>
+<ul>
+<li><code>@Retention(RetentionPolicy.RUNTIME)</code>：表示注解可以一直保留到运行时，因此可以通过反射获取注解信息</li>
+<li><code>@Retention(RetentionPolicy.CLASS)</code>：表示注解被编译器编译进 <code>class</code>文件，但运行时会忽略</li>
+<li><code>@Retention(RetentionPolicy.SOURCE)</code>：表示注解仅在源文件中有效，编译时就会被忽略</li>
+</ul>
+<p>所以声明周期从长到短分别为：<strong>RUNTIME</strong> &gt; <strong>CLASS</strong> &gt; <strong>SOURCE</strong> ，一般来说，如果需要在运行时去动态获取注解的信息，还是得用RUNTIME，就像本文所用。</p>
+<h3 id="第二步：获取注解并对其进行验证"><a href="#第二步：获取注解并对其进行验证" class="headerlink" title="第二步：获取注解并对其进行验证"></a><strong>第二步：获取注解并对其进行验证</strong></h3><p>在运行时想获取注解所代包含的信息，该怎么办？那当然得用 <strong>Java的反射相关知识</strong>！</p>
+<p>下面写了一个验证函数 <code>validate()</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">validate</span><span class="params">( Object object )</span> <span class="keyword">throws</span> IllegalAccessException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 首先通过反射获取object对象的类有哪些字段    </span></span><br><span class="line">    <span class="comment">// 对本文来说就可以获取到Student类的id、name、mobile三个字段    </span></span><br><span class="line">    Field[] fields = object.getClass().getDeclaredFields();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// for循环逐个字段校验，看哪个字段上标了注解    </span></span><br><span class="line">    <span class="keyword">for</span>( Field field : fields ) &#123;</span><br><span class="line">    	<span class="comment">// if判断：检查该字段上有没有标注了@Length注解        </span></span><br><span class="line">    	<span class="keyword">if</span>( field.isAnnotationPresent(Length.class) ) &#123;            </span><br><span class="line">    		<span class="comment">// 通过反射获取到该字段上标注的@Length注解的详细信息            </span></span><br><span class="line">    		Length length = field.getAnnotation( Length.class );            </span><br><span class="line">    		field.setAccessible( <span class="keyword">true</span> ); <span class="comment">// 让我们在反射时能访问到私有变量           </span></span><br><span class="line">    		<span class="comment">// 用过反射获取字段的实际值            </span></span><br><span class="line">    		<span class="keyword">int</span> value =( (String)field.get(object) ).length();            </span><br><span class="line">    		<span class="comment">// 将字段的实际值和注解上做标示的值进行比对            </span></span><br><span class="line">    		<span class="keyword">if</span>( value&lt;length.min() || value&gt;length.max() ) &#123;                </span><br><span class="line">    			<span class="keyword">return</span> length.errorMsg();            </span><br><span class="line">    		&#125;        </span><br><span class="line">    	&#125;    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="第三步：使用注解"><a href="#第三步：使用注解" class="headerlink" title="第三步：使用注解"></a><strong>第三步：使用注解</strong></h3><p>这一步比较轻松，使用注解的过程往往都是很愉悦的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> Long id;        <span class="comment">// 学号</span></span><br><span class="line">    <span class="keyword">private</span> String name;    <span class="comment">// 姓名</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Length</span>(min = <span class="number">11</span>, max = <span class="number">11</span>, errorMsg = <span class="string">"电话号码的长度必须为11位"</span>)    </span><br><span class="line">    <span class="keyword">private</span> String mobile;  <span class="comment">// 手机号码(11位)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4ODI1MjA3NQ==&amp;mid=2247485261&amp;idx=1&amp;sn=aa8ba3e8f1de124067e87115635302c5&amp;chksm=fdded189caa9589f48ab4164116665480e2232141c307fb3a8625312e1a06f6bbf8567113175&amp;scene=0&amp;xtrack=1&amp;key=4f115a90f0767c08547738b5e2d2cf43683cc797ae0c99baf708937ded5dcab97ef53f7f0f83e5b3f1dd40e6b9a7e8f2e27b9c2c2edb51601454ab8fb7cd137d5b86d511e17d7679c74be5e6348f46a8&amp;ascene=14&amp;uin=OTM5MzQ5Njgx&amp;devicetype=Windows+10&amp;version=62080079&amp;lang=zh_CN&amp;exportkey=AYnDESjqgxG0ydMjUMfrM60%3D&amp;pass_ticket=cySe8rjRH%2Buu%2BpDboKyjbWa6XhAXVmVNUL5ebLAJYqqp%2FjFlzAEOVIiplI%2FD7WG9" target="_blank" rel="noopener">转载来源</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>基础知识</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>注解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库连接池</title>
+    <url>/Java/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/</url>
+    <content><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><h3 id="1-1概念"><a href="#1-1概念" class="headerlink" title="1.1概念"></a><strong>1.1概念</strong></h3><p>一个容器(集合)，存放数据库连接的容器。<br>        当系统初始化好后，容器被创建，容器中会申请一些连接对象，当用户来访问数据库时，从容器中获取连接对象，用户访问完之后，会将连接对象归还给容器。</p>
+<h3 id="1-2好处"><a href="#1-2好处" class="headerlink" title="1.2好处"></a><strong>1.2好处</strong></h3><ul>
+<li>节约资源</li>
+<li>用户访问高效</li>
+</ul>
+<h3 id="1-3实现"><a href="#1-3实现" class="headerlink" title="1.3实现"></a><strong>1.3实现</strong></h3><ul>
+<li>1.标准接口：DataSource   javax.sql包下。<ul>
+<li>获取连接：getConnection()</li>
+<li>归还连接：Connection.close()。如果连接对象Connection是从连接池中获取的，那么调用Connection.close()方法，则不会再关闭连接了。而是归还连接</li>
+</ul>
+</li>
+<li>2.数据库厂商实现<ul>
+<li>C3P0：数据库连接池技术。</li>
+<li>Druid：数据库连接池实现技术，由阿里巴巴提供。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-C3P0：数据库连接池技术"><a href="#1-4-C3P0：数据库连接池技术" class="headerlink" title="1.4 C3P0：数据库连接池技术"></a>1.4 C3P0：数据库连接池技术</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li><p>1.导入jar包 (两个) c3p0-0.9.5.2.jar  mchange-commons-java-0.2.12.jar ，</p>
+<ul>
+<li>不要忘记导入数据库驱动 jar 包。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>2.定义配置文件：</p>
+<ul>
+<li>名称： c3p0.properties 或 c3p0-config.xml</li>
+<li>路径：直接将文件放在 <code>src</code> 目录下即可。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>3.创建核心对象：数据库连接池对象ComboPooledDataSource。</p>
+</li>
+<li><p>4.获取连接： getConnection()</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.创建数据库连接池对象</span></span><br><span class="line">DataSource ds  = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line"><span class="comment">//2. 获取连接对象</span></span><br><span class="line">Connection conn = ds.getConnection();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a><strong>示例</strong></h4><p>C3P0配置文件 <code>c3p0-config.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">c3p0-config</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 使用默认的配置读取连接池对象 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">default-config</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--  连接参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql:///test01?useUnicode=true&amp;amp;useJDBCCompliantTimezoneShift=true&amp;amp;useLegacyDatetimeCode=false&amp;amp;serverTimezone=UTC<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 连接池参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"checkoutTimeout"</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">default-config</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">named-config</span> <span class="attr">name</span>=<span class="string">"otherc3p0"</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!--  连接参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql://localhost:3306/jdbc1?characterEncoding=utf-8&amp;amp;useSSL=true&amp;amp;serverTimezone=GMT<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>zjuhuye<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 连接池参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>8<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"checkoutTimeout"</span>&gt;</span>1000<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">named-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c3p0-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>类代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C3P0Demo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        DataSource ds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">        Connection conn = ds.getConnection();</span><br><span class="line">        System.out.println(conn);</span><br><span class="line">        conn.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-5-Druid：数据库连接池实现技术"><a href="#1-5-Druid：数据库连接池实现技术" class="headerlink" title="1.5 Druid：数据库连接池实现技术"></a>1.5 Druid：数据库连接池实现技术</h3><h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li>1.导入 jar 包 druid-1.0.9.jar</li>
+<li>2.定义配置文件：<ul>
+<li>properties 形式</li>
+<li>可以叫任意名称，可以放在任意目录下</li>
+</ul>
+</li>
+<li>3.加载配置文件。Properties</li>
+<li>4.获取数据库连接池对象：通过工厂类来获取  DruidDataSourceFactory</li>
+<li>5.获取连接：getConnection()</li>
+</ul>
+<p><strong>配置文件</strong> <code>druid.properties</code>：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">jdbc:mysql:///test01?useUnicode=true&amp;amp;useJDBCCompliantTimezoneShift=true&amp;amp;useLegacyDatetimeCode=false&amp;amp;serverTimezone=UTC</span></span><br><span class="line"><span class="attr">username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">root</span></span><br><span class="line"><span class="comment"># 初始化连接数</span></span><br><span class="line"><span class="attr">initialSize</span>=<span class="string">5</span></span><br><span class="line"><span class="comment"># 最大连接数</span></span><br><span class="line"><span class="attr">maxActive</span>=<span class="string">10</span></span><br><span class="line"><span class="comment"># 最大等待时间</span></span><br><span class="line"><span class="attr">maxWait</span>=<span class="string">3000</span></span><br></pre></td></tr></table></figure>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 加载配置文件</span></span><br><span class="line">    Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">    InputStream is = DruidDemo1.class.getClassLoader().getResourceAsStream(<span class="string">"druid.properties"</span>);</span><br><span class="line">    pro.load(is);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取连接池对象</span></span><br><span class="line">    DataSource ds = DruidDataSourceFactory.createDataSource(pro);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取连接</span></span><br><span class="line">    Connection conn = ds.getConnection();</span><br><span class="line">    System.out.println(conn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="定义工具类"><a href="#定义工具类" class="headerlink" title="定义工具类"></a>定义工具类</h4><p>1.定义一个工具类 <code>JDBCUtils</code>。</p>
+<p>2.提供静态代码块加载配置文件，初始化连接池对象。</p>
+<p>3.提供方法</p>
+<ul>
+<li>提供连接方法：通过数据库连接池获取连接。</li>
+<li>释放资源。</li>
+<li>获取连接池的方法。</li>
+</ul>
+<p><strong><a href="https://gitee.com/TommyMerlin/code-host/blob/master/Java/JDBCUtils.java#" target="_blank" rel="noopener">代码</a></strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: HuYe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2020/2/26</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: Druid 连接池工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span>: 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.定义成员变量 DataSource</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> DataSource ds;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//2.加载配置文件</span></span><br><span class="line">            Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">            pro.load(JDBCUtils.class.getClassLoader().</span><br><span class="line">                     getResourceAsStream(<span class="string">"druid.properties"</span>));</span><br><span class="line">            <span class="comment">//3.获取DataSource</span></span><br><span class="line">            ds = DruidDataSourceFactory.createDataSource(pro);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 连接对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ds.getConnection();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 释放资源</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> stmt SQL执行语句</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> conn 连接对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Statement stmt, Connection conn)</span> </span>&#123;</span><br><span class="line">        close(<span class="keyword">null</span>, stmt, conn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 释放资源</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rs   ResultSet</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> stmt SQL执行语句</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> conn 连接对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet rs, Statement stmt, Connection conn)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (rs != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (stmt != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                stmt.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//归还连接</span></span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取连接池</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 连接池</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataSource <span class="title">getDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ds;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用工具类代码</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 完成添加操作，给 stuinfo 表添加一条记录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Connection conn = <span class="keyword">null</span>;</span><br><span class="line">    PreparedStatement pstmt = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//1.获取连接</span></span><br><span class="line">        conn = JDBCUtils.getConnection();</span><br><span class="line">        <span class="comment">//2.定义sql</span></span><br><span class="line">        String sql = <span class="string">"insert into stuinfo values(?,?)"</span>;</span><br><span class="line">        <span class="comment">//3.获取pstmt对象</span></span><br><span class="line">        pstmt = conn.prepareStatement(sql);</span><br><span class="line">        <span class="comment">//4.给参数赋值</span></span><br><span class="line">        pstmt.setInt(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">        pstmt.setString(<span class="number">2</span>, <span class="string">"ZJU"</span>);</span><br><span class="line">        <span class="comment">//5.执行sql</span></span><br><span class="line">        <span class="comment">//executeUpdate--&gt; INSERT,UPDATE,DELETE</span></span><br><span class="line">        <span class="comment">//executeQuery --&gt; SELECT</span></span><br><span class="line">        <span class="keyword">int</span> count = pstmt.executeUpdate();</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">//6.释放资源</span></span><br><span class="line">        JDBCUtils.close(pstmt, conn);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1088,45 +1464,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
-</ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>监督学习各方法比较</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
     <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
@@ -1235,6 +1572,37 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第四章—朴素贝叶斯法</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
@@ -1254,6 +1622,45 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 <p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
 <p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
 ]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -1399,37 +1806,6 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
 </div>
 
 <h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
