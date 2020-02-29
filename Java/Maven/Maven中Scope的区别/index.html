@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="HuYe的博客">
 <meta property="og:description" content="compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。 test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。 provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-29T10:37:24.069Z">
+<meta property="og:updated_time" content="2020-02-29T12:15:39.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven中Scope的区别">
 <meta name="twitter:description" content="compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。 test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。 provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（">
@@ -428,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-02-29 18:24:17 / 修改时间：18:37:24" itemprop="dateCreated datePublished" datetime="2020-02-29T18:24:17+08:00">2020-02-29</time>
+              <time title="创建时间：2020-02-29 18:24:17 / 修改时间：20:15:39" itemprop="dateCreated datePublished" datetime="2020-02-29T18:24:17+08:00">2020-02-29</time>
             
 
             
@@ -493,7 +493,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.6k</span>
+                <span title="本文字数">3.8k</span>
               
 
               
@@ -523,6 +523,56 @@
 <h2 id="runtime"><a href="#runtime" class="headerlink" title="runtime"></a>runtime</h2><p>一般是运行和测试环境使用，编译时候不用加入 classpath，打包时候会打包到目标包中。一般是通过动态加载或接口反射加载的情况比较多。一般这种类库都是接口与实现相分离的类库，比如 JDBC 类库，在编译之时仅依赖相关的接口，在具体的运行之时，才需要具体的 mysql、oracle 等等数据的驱动程序。</p>
 <h2 id="system"><a href="#system" class="headerlink" title="system"></a>system</h2><p>使用上与provided相同，不同之处在于该依赖不从maven仓库中提取，而是从本地文件系统中提取，其会参照systemPath的属性进行提取依赖。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>sun.jdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;java.home&#125;/../lib/tools.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>依赖范围</th>
+<th style="text-align:center">对于编译有效</th>
+<th style="text-align:center">对于测试有效</th>
+<th style="text-align:center">对于运行时有效</th>
+<th style="text-align:left">例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compile</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:left">spring-core</td>
+</tr>
+<tr>
+<td>test</td>
+<td style="text-align:center">—</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">—</td>
+<td style="text-align:left">Junit</td>
+</tr>
+<tr>
+<td>provided</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">—</td>
+<td style="text-align:left">servlet-api</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td style="text-align:center">—</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:left">JDBC驱动</td>
+</tr>
+<tr>
+<td>system</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">—</td>
+<td style="text-align:left">Maven仓库之外的本地库</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
     </div>
