@@ -295,17 +295,20 @@ Epoch 5/5
 <ul>
 <li><p>RDB：默认方式，不需要进行配置，在一定的间隔时间中，检测 key 的变化情况，然后持久化数据。</p>
 <ul>
-<li><p>编辑 redis.windwos.conf  文件。</p>
+<li><p>1.编辑 redis.windwos.conf  文件。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#   after 900 sec (15 min) if at least 1 key changed</span></span><br><span class="line">save 900 1</span><br><span class="line"><span class="comment">#   after 300 sec (5 min) if at least 10 keys changed</span></span><br><span class="line">save 300 10</span><br><span class="line"><span class="comment">#   after 60 sec if at least 10000 keys changed</span></span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>重新启动 redis 服务器，并指定配置文件名称。</p>
+<li><p>2.重新启动 redis 服务器，并指定配置文件名称。</p>
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">D:\JavaWeb2018\redis\windows-64\redis-2.8.9&gt;redis-server.exe redis.windows.conf</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>AOF：日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据。</p>
 <ul>
-<li>AOF：日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据。</li>
+<li>编辑 redis.windwos.conf 文件。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">appendonly no（关闭aof） --&gt; appendonly yes （开启aof）</span><br><span class="line">				</span><br><span class="line"><span class="comment"># appendfsync always ： 每一次操作都进行持久化</span></span><br><span class="line">appendfsync everysec ： 每隔一秒进行一次持久化</span><br><span class="line"><span class="comment"># appendfsync no	 ： 不进行持久化</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h2 id="5-Java客户端-Jedis"><a href="#5-Java客户端-Jedis" class="headerlink" title="5.Java客户端 Jedis"></a>5.Java客户端 Jedis</h2>]]></content>
       <categories>
@@ -1473,65 +1476,103 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
+    <title>监督学习各方法比较</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>模型简单易懂，便于编程实现；</li>
+<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
 </ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>只能对线性可分数据集进行学习；</li>
+<li>不同参数设置会学到不同模型，泛化能力好差。</li>
+</ul>
+<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
+<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
+<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
+<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
+<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
+<li>需要大量内存；  </li>
+<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
+</ul>
+<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>有坚实的数学基础，以及稳定的分类效率；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
+<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
+</ul>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
+</ul>
+<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>计算简单，易于理解，可解释性强；</li>
+<li>比较适合处理有缺失属性的样本；</li>
+<li>能够处理不相关的特征；</li>
+<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
+</ul>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
+<li>忽略了数据之间的相关性；</li>
+<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
+</ul>
+<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力。</li>
+</ul>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
+<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
+<li>类严重重叠时，SVM的表现也很差；</li>
+<li>对缺失数据敏感。</li>
+</ul>
+<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>实现简单，广泛的应用于工业问题上；</li>
+<li>分类时计算量非常小，速度很快，存储资源低；</li>
+<li>便利的观测样本概率分数；</li>
+<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
+</ul>
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
+<li>容易欠拟合，一般准确度不太高；</li>
+<li>不能很好地处理大量多类特征或变量。</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
+<li>对于非线性特征，需要进行转换。</li>
+</ul>
+<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>Adaboost是一种有很高精度的分类器；</li>
+<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
+<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
+<li>简单，不用做特征筛选；</li>
+<li>不易发生overfitting。</li>
+</ul>
+<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>对outlier比较敏感。</li>
+</ul>
+<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>分类的准确度高；</li>
+<li>并行分布处理能力强,分布存储及学习能力强；</li>
+<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
+<li>具备联想记忆的功能；</li>
+<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
+<li>测试样例分类时非常快。</li>
+</ul>
+<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
+<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
+<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
+<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
+</ul>
+]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -1657,6 +1698,37 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第五章—决策树</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
@@ -1719,102 +1791,57 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
-    <title>监督学习各方法比较</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>模型简单易懂，便于编程实现；</li>
-<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
 </ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>只能对线性可分数据集进行学习；</li>
-<li>不同参数设置会学到不同模型，泛化能力好差。</li>
-</ul>
-<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
-<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
-<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
-<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
-<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
-</ul>
-<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
-<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
-<li>需要大量内存；  </li>
-<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
-</ul>
-<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>有坚实的数学基础，以及稳定的分类效率；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
-<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
-</ul>
-<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
-</ul>
-<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>计算简单，易于理解，可解释性强；</li>
-<li>比较适合处理有缺失属性的样本；</li>
-<li>能够处理不相关的特征；</li>
-<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
-</ul>
-<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
-<li>忽略了数据之间的相关性；</li>
-<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
-</ul>
-<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>可以解决高维问题，即大型特征空间；</li>
-<li>能够处理非线性特征的相互作用；</li>
-<li>无需依赖整个数据；</li>
-<li>可以提高泛化能力。</li>
-</ul>
-<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
-<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
-<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
-<li>类严重重叠时，SVM的表现也很差；</li>
-<li>对缺失数据敏感。</li>
-</ul>
-<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>实现简单，广泛的应用于工业问题上；</li>
-<li>分类时计算量非常小，速度很快，存储资源低；</li>
-<li>便利的观测样本概率分数；</li>
-<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
-</ul>
-<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
-<li>容易欠拟合，一般准确度不太高；</li>
-<li>不能很好地处理大量多类特征或变量。</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
-<li>对于非线性特征，需要进行转换。</li>
-</ul>
-<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>Adaboost是一种有很高精度的分类器；</li>
-<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
-<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
-<li>简单，不用做特征筛选；</li>
-<li>不易发生overfitting。</li>
-</ul>
-<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>对outlier比较敏感。</li>
-</ul>
-<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>分类的准确度高；</li>
-<li>并行分布处理能力强,分布存储及学习能力强；</li>
-<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
-<li>具备联想记忆的功能；</li>
-<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
-<li>测试样例分类时非常快。</li>
-</ul>
-<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
-<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
-<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
-<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
-</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第三章—k近邻法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
+<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
+<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
+<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
+<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
+<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
+<p>特征空间切分</p>
+</div>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -1957,30 +1984,6 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       <tags>
         <tag>机器学习</tag>
         <tag>统计学习方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第三章—k近邻法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
-<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
-<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
-<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
-<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
-<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
-<p>特征空间切分</p>
-</div>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
       </tags>
   </entry>
   <entry>
