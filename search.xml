@@ -7,16 +7,16 @@
 <p>Java 中 I/O 操作主要是指使用 <code>java.io</code> 包下的内容，进行输入、输出操作。<strong>输入</strong>也叫做<strong>读取</strong>数据，<strong>输出</strong>也叫做作<strong>写出</strong>数据。</p>
 <h2 id="1-2-IO的分类"><a href="#1-2-IO的分类" class="headerlink" title="1.2 IO的分类"></a>1.2 IO的分类</h2><p>根据数据的流向分为：<strong>输入流</strong>和<strong>输出流</strong>。</p>
 <ul>
-<li><strong>输入流</strong> ：把数据从<code>其他设备</code>上读取到<code>内存</code>中的流。 </li>
-<li><strong>输出流</strong> ：把数据从<code>内存</code> 中写出到<code>其他设备</code>上的流。</li>
+<li><strong>输入流</strong> ：把数据从 <code>其他设备</code> 上读取到 <code>内存</code> 中的流。 </li>
+<li><strong>输出流</strong> ：把数据从 <code>内存</code>  中写出到 <code>其他设备</code> 上的流。</li>
 </ul>
-<p>格局数据的类型分为：<strong>字节流</strong>和<strong>字符流</strong>。</p>
+<p>根据数据的类型分为：<strong>字节流</strong>和<strong>字符流</strong>。</p>
 <ul>
 <li><strong>字节流</strong> ：以字节为单位，读写数据的流。</li>
 <li><strong>字符流</strong> ：以字符为单位，读写数据的流。</li>
 </ul>
-<h2 id="1-3-IO的流向说明图解"><a href="#1-3-IO的流向说明图解" class="headerlink" title="1.3 IO的流向说明图解"></a>1.3 IO的流向说明图解</h2><p><img src="/Java/基础知识/I-O-字节流、字符流/1_io.jpg" style="zoom:80%;"></p>
-<h2 id="1-4-顶级父类们"><a href="#1-4-顶级父类们" class="headerlink" title="1.4 顶级父类们"></a>1.4 顶级父类们</h2><div class="table-container">
+<h2 id="1-3-IO的流向说明图解"><a href="#1-3-IO的流向说明图解" class="headerlink" title="1.3 IO的流向说明图解"></a>1.3 IO的流向说明图解</h2><p><img src="/Java/基础知识/I-O-字节流、字符流/1_io.jpg" style="zoom:60%;"></p>
+<h2 id="1-4-顶级父类"><a href="#1-4-顶级父类" class="headerlink" title="1.4 顶级父类"></a>1.4 顶级父类</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -39,26 +39,26 @@
 </tbody>
 </table>
 </div>
-<h1 id="2-字节流"><a href="#2-字节流" class="headerlink" title="2.字节流"></a>2.字节流</h1><h2 id="2-1-一切皆为字节"><a href="#2-1-一切皆为字节" class="headerlink" title="2.1 一切皆为字节"></a>2.1 一切皆为字节</h2><p>一切文件数据(文本、图片、视频等)在存储时，都是以二进制数字的形式保存，都一个一个的字节，那么传输时一样如此。所以，字节流可以传输任意文件数据。在操作流的时候，我们要时刻明确，无论使用什么样的流对象，底层传输的始终为二进制数据。</p>
-<h2 id="2-2-字节输出流【OutputStream】"><a href="#2-2-字节输出流【OutputStream】" class="headerlink" title="2.2 字节输出流【OutputStream】"></a>2.2 字节输出流【OutputStream】</h2><p><code>java.io.OutputStream</code>抽象类是表示字节输出流的所有类的超类，将指定的字节信息写出到目的地。它定义了字节输出流的基本共性功能方法。</p>
+<h1 id="2-字节流"><a href="#2-字节流" class="headerlink" title="2.字节流"></a>2.字节流</h1><h2 id="2-1-一切皆为字节"><a href="#2-1-一切皆为字节" class="headerlink" title="2.1 一切皆为字节"></a>2.1 一切皆为字节</h2><p>一切文件数据(文本、图片、视频等)在存储时，都是以<strong>二进制</strong>数字的形式保存，为一个一个的字节，那么传输时同样如此。所以，字节流可以传输任意文件数据。在操作流的时候，我们要时刻明确，无论使用什么样的流对象，底层传输的始终为二进制数据。</p>
+<h2 id="2-2-字节输出流【Output-Stream】"><a href="#2-2-字节输出流【Output-Stream】" class="headerlink" title="2.2 字节输出流【Output Stream】"></a>2.2 字节输出流【Output Stream】</h2><p><code>java.io.OutputStream</code> 抽象类是表示字节输出流的所有类的超类，将指定的字节信息写出到目的地。它定义了字节输出流的基本共性功能方法。</p>
 <ul>
 <li><code>public void close()</code> ：关闭此输出流并释放与此流相关联的任何系统资源。  </li>
 <li><code>public void flush()</code> ：刷新此输出流并强制任何缓冲的输出字节被写出。  </li>
-<li><code>public void write(byte[] b)</code>：将 b.length字节从指定的字节数组写入此输出流。  </li>
-<li><code>public void write(byte[] b, int off, int len)</code> ：从指定的字节数组写入 len字节，从偏移量 off开始输出到此输出流。  </li>
+<li><code>public void write(byte[] b)</code>：将 b.length 字节从指定的字节数组写入此输出流。  </li>
+<li><code>public void write(byte[] b, int off, int len)</code> ：从指定的字节数组写入 len 字节，从偏移量 off 开始输出到此输出流。  </li>
 <li><code>public abstract void write(int b)</code> ：将指定的字节输出流。</li>
 </ul>
 <blockquote>
-<p>小贴士：</p>
+<p>注意：</p>
 <p>close方法，当完成流的操作时，必须调用此方法，释放系统资源。</p>
 </blockquote>
-<h2 id="2-3-FileOutputStream类"><a href="#2-3-FileOutputStream类" class="headerlink" title="2.3 FileOutputStream类"></a>2.3 FileOutputStream类</h2><p><code>OutputStream</code>有很多子类，我们从最简单的一个子类开始。</p>
-<p><code>java.io.FileOutputStream</code>类是文件输出流，用于将数据写出到文件。</p>
+<h2 id="2-3-FileOutputStream类"><a href="#2-3-FileOutputStream类" class="headerlink" title="2.3 FileOutputStream类"></a>2.3 FileOutputStream类</h2><p><code>OutputStream</code>  有很多子类，我们从最简单的一个子类开始。</p>
+<p><code>java.io.FileOutputStream</code>  类是<strong>文件输出流</strong>，用于将数据写出到文件。</p>
 <h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
-<li><code>public FileOutputStream(File file)</code>：创建文件输出流以写入由指定的 File对象表示的文件。 </li>
+<li><code>public FileOutputStream(File file)</code>：创建文件输出流以写入由指定的 File 对象表示的文件。 </li>
 <li><code>public FileOutputStream(String name)</code>： 创建文件输出流以指定的名称写入文件。  </li>
 </ul>
-<p>当你创建一个流对象时，必须传入一个文件路径。该路径下，如果没有这个文件，会创建该文件。如果有这个文件，会清空这个文件的数据。</p>
+<p>当你创建一个流对象时，必须传入一个<strong>文件路径</strong>。该路径下，如果没有这个文件，会<strong>创建</strong>该文件。如果有这个文件，会<strong>清空</strong>这个文件的数据。</p>
 <ul>
 <li>构造举例，代码如下：</li>
 </ul>
@@ -68,10 +68,10 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FOSWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"fos.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 写出数据</span></span><br><span class="line">      	fos.write(<span class="number">97</span>); <span class="comment">// 写出第1个字节</span></span><br><span class="line">      	fos.write(<span class="number">98</span>); <span class="comment">// 写出第2个字节</span></span><br><span class="line">      	fos.write(<span class="number">99</span>); <span class="comment">// 写出第3个字节</span></span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">abc</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：</p>
+<p>注意：</p>
 <ol>
-<li>虽然参数为int类型四个字节，但是只会保留一个字节的信息写出。</li>
-<li>流操作完毕后，必须释放系统资源，调用close方法，千万记得。</li>
+<li>虽然参数为 int 类型四个字节，但是只会保留一个字节的信息写出。</li>
+<li>流操作完毕后，必须释放系统资源，调用 <strong>close</strong> 方法。</li>
 </ol>
 </blockquote>
 <ol>
@@ -79,7 +79,7 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FOSWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"fos.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串转换为字节数组</span></span><br><span class="line">      	<span class="keyword">byte</span>[] b = <span class="string">"黑马程序员"</span>.getBytes();</span><br><span class="line">      	<span class="comment">// 写出字节数组数据</span></span><br><span class="line">      	fos.write(b);</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">黑马程序员</span><br></pre></td></tr></table></figure>
 <ol>
-<li><strong>写出指定长度字节数组</strong>：<code>write(byte[] b, int off, int len)</code> ,每次写出从off索引开始，len个字节，代码使用演示：</li>
+<li><strong>写出指定长度字节数组</strong>：<code>write(byte[] b, int off, int len)</code> ,每次写出从 off 索引开始，len 个字节，代码使用演示：</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FOSWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"fos.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串转换为字节数组</span></span><br><span class="line">      	<span class="keyword">byte</span>[] b = <span class="string">"abcde"</span>.getBytes();</span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是c，两个字节，也就是cd。</span></span><br><span class="line">        fos.write(b,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">cd</span><br></pre></td></tr></table></figure>
 <h3 id="数据追加续写"><a href="#数据追加续写" class="headerlink" title="数据追加续写"></a>数据追加续写</h3><p>经过以上的演示，每次程序运行，创建输出流对象，都会清空目标文件中的数据。如何保留目标文件中数据，还能继续添加新数据呢？</p>
@@ -87,10 +87,10 @@
 <li><code>public FileOutputStream(File file, boolean append)</code>： 创建文件输出流以写入由指定的 File对象表示的文件。  </li>
 <li><code>public FileOutputStream(String name, boolean append)</code>： 创建文件输出流以指定的名称写入文件。  </li>
 </ul>
-<p>这两个构造方法，参数中都需要传入一个boolean类型的值，<code>true</code> 表示追加数据，<code>false</code> 表示清空原有数据。这样创建的输出流对象，就可以指定是否追加续写了，代码使用演示：</p>
+<p>这两个构造方法，参数中都需要传入一个 boolean 类型的值，<code>true</code>  表示追加数据，<code>false</code>  表示清空原有数据。这样创建的输出流对象，就可以指定是否追加续写了，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FOSWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"fos.txt"</span>，<span class="keyword">true</span>);     </span><br><span class="line">      	<span class="comment">// 字符串转换为字节数组</span></span><br><span class="line">      	<span class="keyword">byte</span>[] b = <span class="string">"abcde"</span>.getBytes();</span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是c，两个字节，也就是cd。</span></span><br><span class="line">        fos.write(b);</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">文件操作前：cd</span><br><span class="line">文件操作后：cdabcde</span><br></pre></td></tr></table></figure>
-<h3 id="写出换行"><a href="#写出换行" class="headerlink" title="写出换行"></a>写出换行</h3><p>Windows系统里，换行符号是<code>\r\n</code> 。把</p>
-<p>以指定是否追加续写了，代码使用演示：</p>
+<h3 id="写出换行"><a href="#写出换行" class="headerlink" title="写出换行"></a>写出换行</h3><p>Windows系统里，换行符号是 <code>\r\n</code> 。</p>
+<p>代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FOSWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"fos.txt"</span>);  </span><br><span class="line">      	<span class="comment">// 定义字节数组</span></span><br><span class="line">      	<span class="keyword">byte</span>[] words = &#123;<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>,<span class="number">100</span>,<span class="number">101</span>&#125;;</span><br><span class="line">      	<span class="comment">// 遍历数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">          	<span class="comment">// 写出一个字节</span></span><br><span class="line">            fos.write(words[i]);</span><br><span class="line">          	<span class="comment">// 写出一个换行, 换行符号转成数组写出</span></span><br><span class="line">            fos.write(<span class="string">"\r\n"</span>.getBytes());</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e</span><br></pre></td></tr></table></figure>
 <blockquote>
 <ul>
@@ -102,114 +102,112 @@
 <li>系统中的换行：<ul>
 <li>Windows系统里，每行结尾是 <code>回车+换行</code> ，即<code>\r\n</code>；</li>
 <li>Unix系统里，每行结尾只有 <code>换行</code> ，即<code>\n</code>；</li>
-<li>Mac系统里，每行结尾是 <code>回车</code> ，即<code>\r</code>。从 Mac OS X开始与Linux统一。</li>
+<li>Mac系统里，每行结尾是 <code>回车</code> ，即<code>\r</code>。从 Mac OS X 开始与 Linux 统一。</li>
 </ul>
 </li>
 </ul>
 </blockquote>
-<h2 id="2-4-字节输入流【InputStream】"><a href="#2-4-字节输入流【InputStream】" class="headerlink" title="2.4 字节输入流【InputStream】"></a>2.4 字节输入流【InputStream】</h2><p><code>java.io.InputStream</code>抽象类是表示字节输入流的所有类的超类，可以读取字节信息到内存中。它定义了字节输入流的基本共性功能方法。</p>
+<h2 id="2-4-字节输入流【InputStream】"><a href="#2-4-字节输入流【InputStream】" class="headerlink" title="2.4 字节输入流【InputStream】"></a>2.4 字节输入流【InputStream】</h2><p><code>java.io.InputStream</code> 抽象类是表示字节输入流的所有类的超类，可以读取字节信息到内存中。它定义了字节输入流的基本共性功能方法。</p>
 <ul>
 <li><code>public void close()</code> ：关闭此输入流并释放与此流相关联的任何系统资源。    </li>
 <li><code>public abstract int read()</code>： 从输入流读取数据的下一个字节。 </li>
 <li><code>public int read(byte[] b)</code>： 从输入流中读取一些字节数，并将它们存储到字节数组 b中 。</li>
 </ul>
 <blockquote>
-<p>小贴士：</p>
-<p>close方法，当完成流的操作时，必须调用此方法，释放系统资源。</p>
+<p>注意：</p>
+<p>close 方法，当完成流的操作时，必须调用此方法，释放系统资源。</p>
 </blockquote>
-<h2 id="2-5-FileInputStream类"><a href="#2-5-FileInputStream类" class="headerlink" title="2.5 FileInputStream类"></a>2.5 FileInputStream类</h2><p><code>java.io.FileInputStream</code>类是文件输入流，从文件中读取字节。</p>
+<h2 id="2-5-FileInputStream类"><a href="#2-5-FileInputStream类" class="headerlink" title="2.5 FileInputStream类"></a>2.5 FileInputStream类</h2><p><code>java.io.FileInputStream</code> 类是文件输入流，从文件中读取字节。</p>
 <h3 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
 <li><code>FileInputStream(File file)</code>： 通过打开与实际文件的连接来创建一个 FileInputStream ，该文件由文件系统中的 File对象 file命名。 </li>
-<li><code>FileInputStream(String name)</code>： 通过打开与实际文件的连接来创建一个 FileInputStream ，该文件由文件系统中的路径名 name命名。  </li>
+<li><code>FileInputStream(String name)</code>： 通过打开与实际文件的连接来创建一个 FileInputStream ，该文件由文件系统中的路径名 name 命名。  </li>
 </ul>
-<p>当你创建一个流对象时，必须传入一个文件路径。该路径下，如果没有该文件,会抛出<code>FileNotFoundException</code> 。</p>
+<p>当创建一个流对象时，必须传入文件路径。该路径下，如果没有该文件，会抛出<code>FileNotFoundException</code> 。</p>
 <ul>
 <li>构造举例，代码如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileInputStreamConstructor</span> <span class="title">throws</span> <span class="title">IOException</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   	 	<span class="comment">// 使用File对象创建流对象</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">        FileInputStream fos = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">      </span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileInputStream fos = <span class="keyword">new</span> FileInputStream(<span class="string">"b.txt"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="读取字节数据"><a href="#读取字节数据" class="headerlink" title="读取字节数据"></a>读取字节数据</h3><ol>
-<li><strong>读取字节</strong>：<code>read</code>方法，每次可以读取一个字节的数据，提升为int类型，读取到文件末尾，返回<code>-1</code>，代码使用演示：</li>
+<li><p><strong>读取字节</strong>：<code>read</code> 方法，每次可以读取一个字节的数据，提升为 int 类型，读取到文件末尾，返回 <code>-1</code>。</p>
+<p>代码使用演示：</p>
+</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 读取数据，返回一个字节</span></span><br><span class="line">        <span class="keyword">int</span> read = fis.read();</span><br><span class="line">        System.out.println((<span class="keyword">char</span>) read);</span><br><span class="line">        read = fis.read();</span><br><span class="line">        System.out.println((<span class="keyword">char</span>) read);</span><br><span class="line">        read = fis.read();</span><br><span class="line">        System.out.println((<span class="keyword">char</span>) read);</span><br><span class="line">        read = fis.read();</span><br><span class="line">        System.out.println((<span class="keyword">char</span>) read);</span><br><span class="line">        read = fis.read();</span><br><span class="line">        System.out.println((<span class="keyword">char</span>) read);</span><br><span class="line">      	<span class="comment">// 读取到末尾,返回-1</span></span><br><span class="line">       	read = fis.read();</span><br><span class="line">        System.out.println( read);</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e</span><br><span class="line">-<span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>循环改进读取方式，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存数据</span></span><br><span class="line">        <span class="keyword">int</span> b ；</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((b = fis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">char</span>)b);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：</p>
+<p>注意：</p>
 <ol>
-<li>虽然读取了一个字节，但是会自动提升为int类型。</li>
-<li>流操作完毕后，必须释放系统资源，调用close方法，千万记得。</li>
+<li>虽然读取了一个字节，但是会自动提升为 int 类型。</li>
+<li>流操作完毕后，必须释放系统资源，调用 close 方法。</li>
 </ol>
 </blockquote>
 <ol>
-<li><strong>使用字节数组读取</strong>：<code>read(byte[] b)</code>，每次读取b的长度个字节到数组中，返回读取到的有效字节个数，读取到末尾时，返回<code>-1</code> ，代码使用演示：</li>
+<li><strong>使用字节数组读取</strong>：<code>read(byte[] b)</code>，每次读取 b 的长度个字节到数组中，返回读取到的有效字节个数，读取到末尾时，返回 <code>-1</code> ，代码使用演示：</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象.</span></span><br><span class="line">       	FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"read.txt"</span>); <span class="comment">// 文件中为abcde</span></span><br><span class="line">      	<span class="comment">// 定义变量，作为有效个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字节数组，作为装字节数据的容器   </span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> (( len= fis.read(b))!=-<span class="number">1</span>) &#123;</span><br><span class="line">           	<span class="comment">// 每次读取后,把数组变成字符串打印</span></span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(b));</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">ab</span><br><span class="line">cd</span><br><span class="line">ed</span><br></pre></td></tr></table></figure>
-<p>错误数据<code>d</code>，是由于最后一次读取时，只读取一个字节<code>e</code>，数组中，上次读取的数据没有被完全替换，所以要通过<code>len</code> ，获取有效的字节，代码使用演示：</p>
+<p>错误数据 <code>d</code>，是由于最后一次读取时，只读取一个字节 <code>e</code>，数组中，上次读取的数据没有被完全替换，所以要通过<code>len</code> ，获取有效的字节，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象.</span></span><br><span class="line">       	FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"read.txt"</span>); <span class="comment">// 文件中为abcde</span></span><br><span class="line">      	<span class="comment">// 定义变量，作为有效个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字节数组，作为装字节数据的容器   </span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> (( len= fis.read(b))!=-<span class="number">1</span>) &#123;</span><br><span class="line">           	<span class="comment">// 每次读取后,把数组的有效字节部分，变成字符串打印</span></span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(b，<span class="number">0</span>，len));<span class="comment">//  len 每次读取的有效字节个数</span></span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">ab</span><br><span class="line">cd</span><br><span class="line">e</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：</p>
-<p>使用数组读取，每次读取多个字节，减少了系统间的IO操作次数，从而提高了读写的效率，建议开发中使用。</p>
+<p>注意：</p>
+<p>使用数组读取，每次读取多个字节，减少了系统间的 IO 操作次数，从而提高了读写的效率，建议开发中使用。</p>
 </blockquote>
-<h2 id="2-6-字节流练习：图片复制"><a href="#2-6-字节流练习：图片复制" class="headerlink" title="2.6 字节流练习：图片复制"></a>2.6 字节流练习：图片复制</h2><h3 id="复制原理图解"><a href="#复制原理图解" class="headerlink" title="复制原理图解"></a>复制原理图解</h3><p><img src="/Java/基础知识/I-O-字节流、字符流/desktop/02-Java语言进阶/day09_字节流、字符流/img/2_copy.jpg" alt></p>
+<h2 id="2-6-字节流练习：图片复制"><a href="#2-6-字节流练习：图片复制" class="headerlink" title="2.6 字节流练习：图片复制"></a>2.6 字节流练习：图片复制</h2><h3 id="复制原理图解"><a href="#复制原理图解" class="headerlink" title="复制原理图解"></a>复制原理图解</h3><p><img src="/Java/基础知识/I-O-字节流、字符流/2_copy.jpg" style="zoom:60%;"></p>
 <h3 id="案例实现"><a href="#案例实现" class="headerlink" title="案例实现"></a>案例实现</h3><p>复制图片文件，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Copy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 1.创建流对象</span></span><br><span class="line">        <span class="comment">// 1.1 指定数据源</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"D:\\test.jpg"</span>);</span><br><span class="line">        <span class="comment">// 1.2 指定目的地</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"test_copy.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.读写数据</span></span><br><span class="line">        <span class="comment">// 2.1 定义数组</span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="comment">// 2.2 定义长度</span></span><br><span class="line">        <span class="keyword">int</span> len;</span><br><span class="line">        <span class="comment">// 2.3 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((len = fis.read(b))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 2.4 写出数据</span></span><br><span class="line">            fos.write(b, <span class="number">0</span> , len);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">        fis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：</p>
+<p>注意：</p>
 <p>流的关闭原则：先开后关，后开先关。</p>
 </blockquote>
-<h1 id="3-字符流"><a href="#3-字符流" class="headerlink" title="3.字符流"></a>3.字符流</h1><p>当使用字节流读取文本文件时，可能会有一个小问题。就是遇到中文字符时，可能不会显示完整的字符，那是因为一个中文字符可能占用多个字节存储。所以Java提供一些字符流类，以字符为单位读写数据，专门用于处理文本文件。</p>
-<h2 id="3-1-字符输入流【Reader】"><a href="#3-1-字符输入流【Reader】" class="headerlink" title="3.1 字符输入流【Reader】"></a>3.1 字符输入流【Reader】</h2><p><code>java.io.Reader</code>抽象类是表示用于读取字符流的所有类的超类，可以读取字符信息到内存中。它定义了字符输入流的基本共性功能方法。</p>
+<h1 id="3-字符流"><a href="#3-字符流" class="headerlink" title="3.字符流"></a>3.字符流</h1><p>当使用字节流读取文本文件时，可能会有一个小问题。就是遇到<strong>中文字符</strong>时，可能不会显示完整的字符，那是因为一个中文字符可能占用多个字节存储。所以 Java 提供一些字符流类，以字符为单位读写数据，专门用于处理文本文件。</p>
+<h2 id="3-1-字符输入流【Reader】"><a href="#3-1-字符输入流【Reader】" class="headerlink" title="3.1 字符输入流【Reader】"></a>3.1 字符输入流【Reader】</h2><p><code>java.io.Reader</code> 抽象类是表示用于读取字符流的所有类的超类，可以读取字符信息到内存中。它定义了字符输入流的基本共性功能方法。</p>
 <ul>
 <li><code>public void close()</code> ：关闭此流并释放与此流相关联的任何系统资源。    </li>
 <li><code>public int read()</code>： 从输入流读取一个字符。 </li>
-<li><code>public int read(char[] cbuf)</code>： 从输入流中读取一些字符，并将它们存储到字符数组 cbuf中 。</li>
+<li><code>public int read(char[] cbuf)</code>： 从输入流中读取一些字符，并将它们存储到字符数组 cbuf 中 。</li>
 </ul>
-<h2 id="3-2-FileReader类"><a href="#3-2-FileReader类" class="headerlink" title="3.2 FileReader类"></a>3.2 FileReader类</h2><p><code>java.io.FileReader</code>类是读取字符文件的便利类。构造时使用系统默认的字符编码和默认字节缓冲区。</p>
+<h2 id="3-2-FileReader类"><a href="#3-2-FileReader类" class="headerlink" title="3.2 FileReader类"></a>3.2 FileReader类</h2><p><code>java.io.FileReader</code> 类是读取字符文件的便利类。构造时使用系统默认的字符编码和默认字节缓冲区。</p>
 <blockquote>
-<p>小贴士：</p>
-<ol>
-<li><p>字符编码：字节与字符的对应规则。Windows系统的中文编码默认是GBK编码表。</p>
-<p>idea中UTF-8</p>
-</li>
-<li><p>字节缓冲区：一个字节数组，用来临时存储字节数据。</p>
-</li>
-</ol>
+<p>注意：</p>
+<p>字符编码：字节与字符的对应规则。Windows 系统的中文编码默认是 GBK 编码表。</p>
+<p>idea 中 UTF-8</p>
+<p>字节缓冲区：一个字节数组，用来临时存储字节数据。</p>
 </blockquote>
 <h3 id="构造方法-2"><a href="#构造方法-2" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
 <li><code>FileReader(File file)</code>： 创建一个新的 FileReader ，给定要读取的File对象。   </li>
 <li><code>FileReader(String fileName)</code>： 创建一个新的 FileReader ，给定要读取的文件的名称。  </li>
 </ul>
-<p>当你创建一个流对象时，必须传入一个文件路径。类似于FileInputStream 。</p>
+<p>当你创建一个流对象时，必须传入一个文件路径。类似于 FileInputStream 。</p>
 <ul>
 <li>构造举例，代码如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileReaderConstructor</span> <span class="title">throws</span> <span class="title">IOException</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   	 	<span class="comment">// 使用File对象创建流对象</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">        FileReader fr = <span class="keyword">new</span> FileReader(file);</span><br><span class="line">      </span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"b.txt"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="读取字符数据"><a href="#读取字符数据" class="headerlink" title="读取字符数据"></a>读取字符数据</h3><ol>
-<li><strong>读取字符</strong>：<code>read</code>方法，每次可以读取一个字符的数据，提升为int类型，读取到文件末尾，返回<code>-1</code>，循环读取，代码使用演示：</li>
+<li><strong>读取字符</strong>：<code>read</code>方法，每次可以读取一个字符的数据，提升为 int 类型，读取到文件末尾，返回 <code>-1</code>，循环读取，代码使用演示：</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FRRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存数据</span></span><br><span class="line">        <span class="keyword">int</span> b ；</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((b = fr.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">char</span>)b);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">黑</span><br><span class="line">马</span><br><span class="line">程</span><br><span class="line">序</span><br><span class="line">员</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FRRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存数据</span></span><br><span class="line">        <span class="keyword">int</span> b ；</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((b = fr.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">char</span>)b);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：虽然读取了一个字符，但是会自动提升为int类型。</p>
+<p>注意：虽然读取了一个字符，但是会自动提升为int类型。</p>
 </blockquote>
 <ol>
-<li><strong>使用字符数组读取</strong>：<code>read(char[] cbuf)</code>，每次读取b的长度个字符到数组中，返回读取到的有效字符个数，读取到末尾时，返回<code>-1</code> ，代码使用演示：</li>
+<li><strong>使用字符数组读取</strong>：<code>read(char[] cbuf)</code>，每次读取 b 的长度个字符到数组中，返回读取到的有效字符个数，读取到末尾时，返回 <code>-1</code> ，代码使用演示：</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FRRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存有效字符个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字符数组，作为装字符数据的容器</span></span><br><span class="line">         <span class="keyword">char</span>[] cbuf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((len = fr.read(cbuf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(cbuf));</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">黑马</span><br><span class="line">程序</span><br><span class="line">员序</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FRRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存有效字符个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字符数组，作为装字符数据的容器</span></span><br><span class="line">         <span class="keyword">char</span>[] cbuf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((len = fr.read(cbuf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(cbuf));</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>获取有效的字符改进，代码使用演示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存有效字符个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字符数组，作为装字符数据的容器</span></span><br><span class="line">        <span class="keyword">char</span>[] cbuf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((len = fr.read(cbuf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(cbuf,<span class="number">0</span>,len));</span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">黑马</span><br><span class="line">程序</span><br><span class="line">员</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FISRead</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      	<span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">       	FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"read.txt"</span>);</span><br><span class="line">      	<span class="comment">// 定义变量，保存有效字符个数</span></span><br><span class="line">        <span class="keyword">int</span> len ；</span><br><span class="line">        <span class="comment">// 定义字符数组，作为装字符数据的容器</span></span><br><span class="line">        <span class="keyword">char</span>[] cbuf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 循环读取</span></span><br><span class="line">        <span class="keyword">while</span> ((len = fr.read(cbuf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> String(cbuf,<span class="number">0</span>,len));</span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="comment">// 关闭资源</span></span><br><span class="line">        fr.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="3-3-字符输出流【Writer】"><a href="#3-3-字符输出流【Writer】" class="headerlink" title="3.3 字符输出流【Writer】"></a>3.3 字符输出流【Writer】</h2><p><code>java.io.Writer</code>抽象类是表示用于写出字符流的所有类的超类，将指定的字符信息写出到目的地。它定义了字节输出流的基本共性功能方法。</p>
 <ul>
 <li><code>void write(int c)</code> 写入单个字符。</li>
 <li><code>void write(char[] cbuf)</code>写入字符数组。 </li>
-<li><code>abstract  void write(char[] cbuf, int off, int len)</code>写入字符数组的某一部分,off数组的开始索引,len写的字符个数。 </li>
+<li><code>abstract  void write(char[] cbuf, int off, int len)</code>写入字符数组的某一部分，off 数组的开始索引，len 写的字符个数。 </li>
 <li><code>void write(String str)</code>写入字符串。 </li>
 <li><code>void write(String str, int off, int len)</code> 写入字符串的某一部分,off字符串的开始索引,len写的字符个数。</li>
-<li><code>void flush()</code>刷新该流的缓冲。  </li>
+<li><code>void flush()</code>  刷新该流的缓冲。  </li>
 <li><code>void close()</code> 关闭此流，但要先刷新它。 </li>
 </ul>
-<h2 id="3-4-FileWriter类"><a href="#3-4-FileWriter类" class="headerlink" title="3.4 FileWriter类"></a>3.4 FileWriter类</h2><p><code>java.io.FileWriter</code>类是写出字符到文件的便利类。构造时使用系统默认的字符编码和默认字节缓冲区。</p>
+<h2 id="3-4-FileWriter类"><a href="#3-4-FileWriter类" class="headerlink" title="3.4 FileWriter类"></a>3.4 FileWriter类</h2><p><code>java.io.FileWriter</code> 类是写出字符到文件的便利类。构造时使用系统默认的字符编码和默认字节缓冲区。</p>
 <h3 id="构造方法-3"><a href="#构造方法-3" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
-<li><code>FileWriter(File file)</code>： 创建一个新的 FileWriter，给定要读取的File对象。   </li>
+<li><code>FileWriter(File file)</code>： 创建一个新的 FileWriter，给定要读取的 File 对象。   </li>
 <li><code>FileWriter(String fileName)</code>： 创建一个新的 FileWriter，给定要读取的文件的名称。  </li>
 </ul>
 <p>当你创建一个流对象时，必须传入一个文件路径，类似于FileOutputStream。</p>
@@ -220,55 +218,55 @@
 <h3 id="基本写出数据"><a href="#基本写出数据" class="headerlink" title="基本写出数据"></a>基本写出数据</h3><p><strong>写出字符</strong>：<code>write(int b)</code> 方法，每次可以写出一个字符数据，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 写出数据</span></span><br><span class="line">      	fw.write(<span class="number">97</span>); <span class="comment">// 写出第1个字符</span></span><br><span class="line">      	fw.write(<span class="string">'b'</span>); <span class="comment">// 写出第2个字符</span></span><br><span class="line">      	fw.write(<span class="string">'C'</span>); <span class="comment">// 写出第3个字符</span></span><br><span class="line">      	fw.write(<span class="number">30000</span>); <span class="comment">// 写出第4个字符，中文编码表中30000对应一个汉字。</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">/*</span></span><br><span class="line"><span class="comment">        【注意】关闭资源时,与FileOutputStream不同。</span></span><br><span class="line"><span class="comment">      	 如果不关闭,数据只是保存到缓冲区，并未保存到文件。</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="comment">// fw.close();</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">abC田</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：</p>
+<p>注意：</p>
 <ol>
-<li>虽然参数为int类型四个字节，但是只会保留一个字符的信息写出。</li>
-<li>未调用close方法，数据只是保存到了缓冲区，并未写出到文件中。</li>
+<li>虽然参数为 int 类型四个字节，但是只会保留一个字符的信息写出。</li>
+<li>未调用 close 方法，数据只是保存到了缓冲区，并未写出到文件中。</li>
 </ol>
 </blockquote>
-<h3 id="关闭和刷新"><a href="#关闭和刷新" class="headerlink" title="关闭和刷新"></a>关闭和刷新</h3><p>因为内置缓冲区的原因，如果不关闭输出流，无法写出字符到文件中。但是关闭的流对象，是无法继续写出数据的。如果我们既想写出数据，又想继续使用流，就需要<code>flush</code> 方法了。</p>
+<h3 id="关闭和刷新"><a href="#关闭和刷新" class="headerlink" title="关闭和刷新"></a>关闭和刷新</h3><p>因为内置缓冲区的原因，如果不关闭输出流，无法写出字符到文件中。但是关闭的流对象，是无法继续写出数据的。如果我们既想写出数据，又想继续使用流，就需要 <code>flush</code> 方法了。</p>
 <ul>
 <li><code>flush</code> ：刷新缓冲区，流对象可以继续使用。</li>
-<li><code>close</code>:先刷新缓冲区，然后通知系统释放资源。流对象不可以再被使用了。</li>
+<li><code>close</code>：先刷新缓冲区，然后通知系统释放资源。流对象不可以再被使用了。</li>
 </ul>
 <p>代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);</span><br><span class="line">        <span class="comment">// 写出数据，通过flush</span></span><br><span class="line">        fw.write(<span class="string">'刷'</span>); <span class="comment">// 写出第1个字符</span></span><br><span class="line">        fw.flush();</span><br><span class="line">        fw.write(<span class="string">'新'</span>); <span class="comment">// 继续写出第2个字符，写出成功</span></span><br><span class="line">        fw.flush();</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 写出数据，通过close</span></span><br><span class="line">        fw.write(<span class="string">'关'</span>); <span class="comment">// 写出第1个字符</span></span><br><span class="line">        fw.close();</span><br><span class="line">        fw.write(<span class="string">'闭'</span>); <span class="comment">// 继续写出第2个字符,【报错】java.io.IOException: Stream closed</span></span><br><span class="line">        fw.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：即便是flush方法写出了数据，操作的最后还是要调用close方法，释放系统资源。</p>
+<p>注意：即便是 flush 方法写出了数据，操作的最后还是要调用close方法，释放系统资源。</p>
 </blockquote>
 <h3 id="写出其他数据"><a href="#写出其他数据" class="headerlink" title="写出其他数据"></a>写出其他数据</h3><ol>
-<li><strong>写出字符数组</strong> ：<code>write(char[] cbuf)</code> 和 <code>write(char[] cbuf, int off, int len)</code> ，每次可以写出字符数组中的数据，用法类似FileOutputStream，代码使用演示：</li>
+<li><strong>写出字符数组</strong> ：<code>write(char[] cbuf)</code> 和 <code>write(char[] cbuf, int off, int len)</code> ，每次可以写出字符数组中的数据，用法类似 FileOutputStream，代码使用演示：</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串转换为字节数组</span></span><br><span class="line">      	<span class="keyword">char</span>[] chars = <span class="string">"黑马程序员"</span>.toCharArray();</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 写出字符数组</span></span><br><span class="line">      	fw.write(chars); <span class="comment">// 黑马程序员</span></span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是'程'，两个字节，也就是'程序'。</span></span><br><span class="line">        fw.write(b,<span class="number">2</span>,<span class="number">2</span>); <span class="comment">// 程序</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串转换为字节数组</span></span><br><span class="line">      	<span class="keyword">char</span>[] chars = <span class="string">"浙江大学"</span>.toCharArray();</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 写出字符数组</span></span><br><span class="line">      	fw.write(chars); <span class="comment">// 浙江大学</span></span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是'大'，两个字节，也就是'大学'。</span></span><br><span class="line">        fw.write(b,<span class="number">2</span>,<span class="number">2</span>); <span class="comment">// 大学</span></span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><strong>写出字符串</strong>：<code>write(String str)</code> 和 <code>write(String str, int off, int len)</code> ，每次可以写出字符串中的数据，更为方便，代码使用演示：</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串</span></span><br><span class="line">      	String msg = <span class="string">"黑马程序员"</span>;</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 写出字符数组</span></span><br><span class="line">      	fw.write(msg); <span class="comment">//黑马程序员</span></span><br><span class="line">      </span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是'程'，两个字节，也就是'程序'。</span></span><br><span class="line">        fw.write(msg,<span class="number">2</span>,<span class="number">2</span>);	<span class="comment">// 程序</span></span><br><span class="line">      	</span><br><span class="line">        <span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);     </span><br><span class="line">      	<span class="comment">// 字符串</span></span><br><span class="line">      	String msg = <span class="string">"浙江大学"</span>;</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 写出字符数组</span></span><br><span class="line">      	fw.write(msg); <span class="comment">//浙江大学</span></span><br><span class="line">      </span><br><span class="line">		<span class="comment">// 写出从索引2开始，2个字节。索引2是'大'，两个字节，也就是'大学'。</span></span><br><span class="line">        fw.write(msg,<span class="number">2</span>,<span class="number">2</span>);	<span class="comment">// 大学</span></span><br><span class="line">      	</span><br><span class="line">        <span class="comment">// 关闭资源</span></span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
-<li><strong>续写和换行</strong>：操作类似于FileOutputStream。</li>
+<li><strong>续写和换行</strong>：操作类似于 FileOutputStream。</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象，可以续写数据</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>，<span class="keyword">true</span>);     </span><br><span class="line">      	<span class="comment">// 写出字符串</span></span><br><span class="line">        fw.write(<span class="string">"黑马"</span>);</span><br><span class="line">      	<span class="comment">// 写出换行</span></span><br><span class="line">      	fw.write(<span class="string">"\r\n"</span>);</span><br><span class="line">      	<span class="comment">// 写出字符串</span></span><br><span class="line">  		fw.write(<span class="string">"程序员"</span>);</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fw.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果:</span><br><span class="line">黑马</span><br><span class="line">程序员</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FWWrite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 使用文件名称创建流对象，可以续写数据</span></span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>，<span class="keyword">true</span>);     </span><br><span class="line">      	<span class="comment">// 写出字符串</span></span><br><span class="line">        fw.write(<span class="string">"浙江"</span>);</span><br><span class="line">      	<span class="comment">// 写出换行</span></span><br><span class="line">      	fw.write(<span class="string">"\r\n"</span>);</span><br><span class="line">      	<span class="comment">// 写出字符串</span></span><br><span class="line">  		fw.write(<span class="string">"大学"</span>);</span><br><span class="line">      	<span class="comment">// 关闭资源</span></span><br><span class="line">        fw.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果:</span><br><span class="line">浙江</span><br><span class="line">大学</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：字符流，只能操作文本文件，不能操作图片，视频等非文本文件。</p>
-<p>当我们单纯读或者写文本文件时  使用字符流 其他情况使用字节流</p>
+<p>注意：字符流，只能操作文本文件，不能操作图片，视频等非文本文件。</p>
+<p>当我们单纯读或者写文本文件时  使用字符流 ，其他情况使用字节流。</p>
 </blockquote>
-<h1 id="4-IO异常的处理"><a href="#4-IO异常的处理" class="headerlink" title="4.IO异常的处理"></a>4.IO异常的处理</h1><h3 id="JDK7前处理"><a href="#JDK7前处理" class="headerlink" title="JDK7前处理"></a>JDK7前处理</h3><p>之前的入门练习，我们一直把异常抛出，而实际开发中并不能这样处理，建议使用<code>try...catch...finally</code> 代码块，处理异常部分，代码使用演示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandleException1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 声明变量</span></span><br><span class="line">        FileWriter fw = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建流对象</span></span><br><span class="line">            fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);</span><br><span class="line">            <span class="comment">// 写出数据</span></span><br><span class="line">            fw.write(<span class="string">"黑马程序员"</span>); <span class="comment">//黑马程序员</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fw != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fw.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="JDK7的处理-扩展知识点了解内容"><a href="#JDK7的处理-扩展知识点了解内容" class="headerlink" title="JDK7的处理(扩展知识点了解内容)"></a>JDK7的处理(扩展知识点了解内容)</h3><p>还可以使用JDK7优化后的<code>try-with-resource</code> 语句，该语句确保了每个资源在语句结束时关闭。所谓的资源（resource）是指在程序完成后，必须关闭的对象。</p>
+<h1 id="4-IO异常的处理"><a href="#4-IO异常的处理" class="headerlink" title="4.IO异常的处理"></a>4.IO异常的处理</h1><h3 id="JDK7-前处理"><a href="#JDK7-前处理" class="headerlink" title="JDK7 前处理"></a>JDK7 前处理</h3><p>之前的入门练习，我们一直把异常抛出，而实际开发中并不能这样处理，建议使用 <code>try...catch...finally</code>  代码块，处理异常部分，代码使用演示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandleException1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 声明变量</span></span><br><span class="line">        FileWriter fw = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建流对象</span></span><br><span class="line">            fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>);</span><br><span class="line">            <span class="comment">// 写出数据</span></span><br><span class="line">            fw.write(<span class="string">"浙江大学"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fw != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fw.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JDK7-的处理-扩展知识点了解内容"><a href="#JDK7-的处理-扩展知识点了解内容" class="headerlink" title="JDK7 的处理(扩展知识点了解内容)"></a>JDK7 的处理(扩展知识点了解内容)</h3><p>还可以使用JDK7优化后的 <code>try-with-resource</code>  语句，该语句确保了每个资源在语句结束时关闭。所谓的资源（resource）是指在程序完成后，必须关闭的对象。</p>
 <p>格式：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (创建流对象语句，如果多个,使用<span class="string">';'</span>隔开) &#123;</span><br><span class="line">	<span class="comment">// 读写数据</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">	e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码使用演示：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandleException2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 创建流对象</span></span><br><span class="line">        <span class="keyword">try</span> ( FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>); ) &#123;</span><br><span class="line">            <span class="comment">// 写出数据</span></span><br><span class="line">            fw.write(<span class="string">"黑马程序员"</span>); <span class="comment">//黑马程序员</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="JDK9的改进-扩展知识点了解内容"><a href="#JDK9的改进-扩展知识点了解内容" class="headerlink" title="JDK9的改进(扩展知识点了解内容)"></a>JDK9的改进(扩展知识点了解内容)</h3><p>JDK9中<code>try-with-resource</code> 的改进，对于<strong>引入对象</strong>的方式，支持的更加简洁。被引入的对象，同样可以自动关闭，无需手动close，我们来了解一下格式。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandleException2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">// 创建流对象</span></span><br><span class="line">        <span class="keyword">try</span> ( FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"fw.txt"</span>); ) &#123;</span><br><span class="line">            <span class="comment">// 写出数据</span></span><br><span class="line">            fw.write(<span class="string">"浙江大学"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JDK9的改进-扩展知识点了解内容"><a href="#JDK9的改进-扩展知识点了解内容" class="headerlink" title="JDK9的改进(扩展知识点了解内容)"></a>JDK9的改进(扩展知识点了解内容)</h3><p>JDK9中 <code>try-with-resource</code>  的改进，对于<strong>引入对象</strong>的方式，支持的更加简洁。被引入的对象，同样可以自动关闭，无需手动close，我们来了解一下格式。</p>
 <p>改进前格式：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 被final修饰的对象</span></span><br><span class="line"><span class="keyword">final</span> Resource resource1 = <span class="keyword">new</span> Resource(<span class="string">"resource1"</span>);</span><br><span class="line"><span class="comment">// 普通对象</span></span><br><span class="line">Resource resource2 = <span class="keyword">new</span> Resource(<span class="string">"resource2"</span>);</span><br><span class="line"><span class="comment">// 引入方式：创建新的变量保存</span></span><br><span class="line"><span class="keyword">try</span> (Resource r1 = resource1;</span><br><span class="line">     Resource r2 = resource2) &#123;</span><br><span class="line">     <span class="comment">// 使用对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改进后格式：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 被final修饰的对象</span></span><br><span class="line"><span class="keyword">final</span> Resource resource1 = <span class="keyword">new</span> Resource(<span class="string">"resource1"</span>);</span><br><span class="line"><span class="comment">// 普通对象</span></span><br><span class="line">Resource resource2 = <span class="keyword">new</span> Resource(<span class="string">"resource2"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入方式：直接引入</span></span><br><span class="line"><span class="keyword">try</span> (resource1; resource2) &#123;</span><br><span class="line">     <span class="comment">// 使用对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改进后，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       	<span class="comment">// 创建流对象</span></span><br><span class="line">        <span class="keyword">final</span>  FileReader fr  = <span class="keyword">new</span> FileReader(<span class="string">"in.txt"</span>);</span><br><span class="line">        FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"out.txt"</span>);</span><br><span class="line">       	<span class="comment">// 引入到try中</span></span><br><span class="line">        <span class="keyword">try</span> (fr; fw) &#123;</span><br><span class="line">          	<span class="comment">// 定义变量</span></span><br><span class="line">            <span class="keyword">int</span> b;</span><br><span class="line">          	<span class="comment">// 读取数据</span></span><br><span class="line">          	<span class="keyword">while</span> ((b = fr.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            	<span class="comment">// 写出数据</span></span><br><span class="line">            	fw.write(b);</span><br><span class="line">          	&#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="第五章-属性集"><a href="#第五章-属性集" class="headerlink" title="第五章 属性集"></a>第五章 属性集</h1><h2 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h2><p><code>java.util.Properties</code> 继承于<code>Hashtable</code> ，来表示一个持久的属性集。它使用键值结构存储数据，每个键及其对应值都是一个字符串。该类也被许多Java类使用，比如获取系统属性时，<code>System.getProperties</code> 方法就是返回一个<code>Properties</code>对象。</p>
+<h1 id="5-属性集"><a href="#5-属性集" class="headerlink" title="5.属性集"></a>5.属性集</h1><h2 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h2><p><code>java.util.Properties</code>  继承于 <code>Hashtable</code> ，来表示一个持久的属性集。它使用键值结构存储数据，每个键及其对应值都是一个字符串。该类也被许多 Java 类使用，比如获取系统属性时，<code>System.getProperties</code>  方法就是返回一个 <code>Properties</code> 对象。</p>
 <h2 id="5-2-Properties类"><a href="#5-2-Properties类" class="headerlink" title="5.2 Properties类"></a>5.2 Properties类</h2><h3 id="构造方法-4"><a href="#构造方法-4" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
-<li><code>public Properties()</code> :创建一个空的属性列表。</li>
+<li><code>public Properties()</code> ：创建一个空的属性列表。</li>
 </ul>
 <h3 id="基本的存储方法"><a href="#基本的存储方法" class="headerlink" title="基本的存储方法"></a>基本的存储方法</h3><ul>
 <li><code>public Object setProperty(String key, String value)</code> ： 保存一对属性。  </li>
@@ -284,7 +282,7 @@
 <p>加载代码演示：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        <span class="comment">// 创建属性集对象</span></span><br><span class="line">        Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="comment">// 加载文本中信息到属性集</span></span><br><span class="line">        pro.load(<span class="keyword">new</span> FileInputStream(<span class="string">"read.txt"</span>));</span><br><span class="line">        <span class="comment">// 遍历集合并打印</span></span><br><span class="line">        Set&lt;String&gt; strings = pro.stringPropertyNames();</span><br><span class="line">        <span class="keyword">for</span> (String key : strings ) &#123;</span><br><span class="line">          	System.out.println(key+<span class="string">" -- "</span>+pro.getProperty(key));</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">filename -- a.txt</span><br><span class="line">length -- <span class="number">209385038</span></span><br><span class="line">location -- D:\a.txt</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>小贴士：文本中的数据，必须是键值对形式，可以使用空格、等号、冒号等符号分隔。</p>
+<p>注意：文本中的数据，必须是键值对形式，可以使用空格、等号、冒号等符号分隔。</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -361,8 +359,8 @@
         <category>Maven</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Maven</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -722,8 +720,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
         <tag>Redis</tag>
       </tags>
   </entry>
@@ -990,8 +988,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -1124,8 +1122,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -1882,98 +1880,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第五章—决策树</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
-<p>决策树模型</p>
-</div>
-
-<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
-<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
-<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
-<p>主要步骤：</p>
-<ul>
-<li>特征选择</li>
-<li>决策树生成</li>
-<li>决策树剪枝</li>
-</ul>
-<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
-<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
-<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
-<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
-<script type="math/tex; mode=display">
-H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
-p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
-<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
-<script type="math/tex; mode=display">
-g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
-<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
-<script type="math/tex; mode=display">
-g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
-<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
-<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
-<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
-<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
-<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
-<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
-<ul>
-<li>回归树：平方误差最小化准则</li>
-<li>分类树：基尼指数最小化准则</li>
-</ul>
-<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
-<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
-<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
-" width="400" height="229" alt="图片名称" align="center">
-<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
-</div>
-
-<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第七章—支持向量机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
@@ -2058,6 +1964,68 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第五章—决策树</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
+<p>决策树模型</p>
+</div>
+
+<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
+<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
+<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
+<p>主要步骤：</p>
+<ul>
+<li>特征选择</li>
+<li>决策树生成</li>
+<li>决策树剪枝</li>
+</ul>
+<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
+<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
+<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
+<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
+<script type="math/tex; mode=display">
+H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
+p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
+<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
+<script type="math/tex; mode=display">
+g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
+<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
+<script type="math/tex; mode=display">
+g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
+<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
+<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
+<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
+<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
+<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
+<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
+<ul>
+<li>回归树：平方误差最小化准则</li>
+<li>分类树：基尼指数最小化准则</li>
+</ul>
+<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
+<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
+<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
+" width="400" height="229" alt="图片名称" align="center">
+<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
+</div>
+
+<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
@@ -2086,37 +2054,6 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </ul>
 <h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
 <h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -2224,6 +2161,67 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 <li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
 <li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
 </ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
