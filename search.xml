@@ -1194,8 +1194,8 @@ Epoch 5/5
       </categories>
       <tags>
         <tag>JavaWeb</tag>
-        <tag>Servlet</tag>
         <tag>HTTP</tag>
+        <tag>Servlet</tag>
       </tags>
   </entry>
   <entry>
@@ -1586,121 +1586,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第七章—支持向量机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
-<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
-<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
-<blockquote>
-<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
-</blockquote>
-<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
-<script type="math/tex; mode=display">
-\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
-<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
-\gamma&=\frac{\hat{\gamma}}{\|w\|}
-\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
-<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
-<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
-<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-H_{1}&: w \cdot x+b=1\\
-H_{2}&: w \cdot x+b=-1
-\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
-<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
-<script type="math/tex; mode=display">
-y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
-<script type="math/tex; mode=display">
-\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
-<p><strong>最小化目标函数的含义</strong>：</p>
-<ul>
-<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
-<li>使误分类点的个数尽量小</li>
-</ul>
-<p><strong>原始问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
-<p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
-b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
-\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
-<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
-<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
-<ul>
-<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>监督学习各方法比较</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
     <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
@@ -1809,25 +1694,65 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -1901,34 +1826,109 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第七章—支持向量机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
+<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
+<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
+<blockquote>
+<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
+</blockquote>
+<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
 <script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
 <script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
 <script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
+<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
 <script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
+\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
 <script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+\begin{aligned}
+\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
+\gamma&=\frac{\hat{\gamma}}{\|w\|}
+\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
+<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
+<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
+<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H_{1}&: w \cdot x+b=1\\
+H_{2}&: w \cdot x+b=-1
+\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
+<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
+<script type="math/tex; mode=display">
+y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
+<p><strong>最小化目标函数的含义</strong>：</p>
 <ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
+<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
+<li>使误分类点的个数尽量小</li>
 </ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+<p><strong>原始问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
+<p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
+b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
+\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
+<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
+<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
+<ul>
+<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
+</ul>
+]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -2100,7 +2100,6 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
     <title>GitHub 项目精选</title>
     <url>/%E6%B1%87%E6%80%BB/GitHub%E9%A1%B9%E7%9B%AE%E7%B2%BE%E9%80%89/</url>
     <content><![CDATA[<p><img src="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/pilot.jpg" alt><br><em>A collection of useful repositories.</em></p>
-<p><a href="https://github.com/TommyMerlin/Repository-Collection" target="_blank" rel="noopener">GitHub</a> </p>
 <hr>
 <h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><ol>
 <li><a href="https://github.com/apachecn/AiLearning" target="_blank" rel="noopener">apachecn / AiLearning</a><blockquote>
@@ -2216,6 +2215,69 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </li>
 <li><a href="https://github.com/rougier/matplotlib-cheatsheet" target="_blank" rel="noopener">rougier / matplotlib-cheatsheet</a><blockquote>
 <p>Matplotlib 3.1 cheat sheet. From an upcoming book on matplotlib.</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ol>
+<li><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Snailclimb / JavaGuide</a><blockquote>
+<p>【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。<br>网站: <a href="https://gitee.com/SnailClimb/JavaGuide" target="_blank" rel="noopener">https://gitee.com/SnailClimb/JavaGuide</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/doocs/advanced-java" target="_blank" rel="noopener">doocs / advanced-java</a><blockquote>
+<p>😮 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识，后端同学必看，前端同学也可学习。<br>网站: <a href="https://doocs.github.io/advanced-java" target="_blank" rel="noopener">https://doocs.github.io/advanced-java</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/xingshaocheng/architect-awesome" target="_blank" rel="noopener">xingshaocheng / architect-awesome</a><blockquote>
+<p>后端架构师技术图谱。<br>网站: <a href="https://docs.justauth.whnb.wang/" target="_blank" rel="noopener">https://docs.justauth.whnb.wang/</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/crossoverJie/JCSprout" target="_blank" rel="noopener">crossoverJie / JCSprout</a><blockquote>
+<p>👨‍🎓 Java Core Sprout : basic, concurrent, algorithm.<br>网站: <a href="https://crossoverjie.top/JCSprout" target="_blank" rel="noopener">https://crossoverjie.top/JCSprout</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/wuyouzhuguli/SpringAll" target="_blank" rel="noopener">wuyouzhuguli / SpringAll</a><blockquote>
+<p>循序渐进，学习Spring Boot、Spring Boot &amp; Shiro、Spring Cloud、Spring Security &amp; Spring Security OAuth2，博客Spring系列源码。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/hollischuang/toBeTopJavaer" target="_blank" rel="noopener">hollischuang / toBeTopJavaer</a><blockquote>
+<p>To Be Top Javaer - Java工程师成神之路。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/aalansehaiyang/technology-talk" target="_blank" rel="noopener">aalansehaiyang / technology-talk</a><blockquote>
+<p>汇总java生态圈常用技术框架、开源中间件，系统架构、数据库、大公司架构案例、常用三方类库、项目管理、线上问题排查、个人成长、思考等知识。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/AobingJava/JavaFamily" target="_blank" rel="noopener">AobingJava / JavaFamily</a><blockquote>
+<p>【互联网一线大厂面试+学习指南】进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务等领域知识。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/ZhongFuCheng3y/3y" target="_blank" rel="noopener">ZhongFuCheng3y / 3y</a><blockquote>
+<p>📓从Java基础、JavaWeb基础到常用的框架再到面试题都有完整的教程，几乎涵盖了Java后端必备的知识点。</p>
+</blockquote>
+</li>
+<li><a href="https://github.com/xkcoding/spring-boot-demo" target="_blank" rel="noopener">xkcoding / spring-boot-demo</a><blockquote>
+<p>spring boot demo 是一个用来深度学习并实战 spring boot 的项目，目前总共包含 65 个集成demo，已经完成 53 个。 该项目已成功集成 actuator(监控)、admin(可视化监控)、logback(日志)、aopLog(通过AOP记录web请求日志)、统一异常处理(json级别和页面级别)、freemarker(模板引擎)、thymeleaf(模板引擎)、Beetl(模板引擎)、Enjoy(模板引擎)、JdbcTemplate(通用JDBC操作数据库)、JPA(强大的ORM框架)、mybatis(强大的ORM框架)、通用Mapper(快速操作Mybatis)、PageHelper(通用的Mybatis分页插件)……  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/qiurunze123/miaosha" target="_blank" rel="noopener">qiurunze123 / miaosha</a><blockquote>
+<p>⭐⭐⭐⭐秒杀系统设计与实现.互联网工程师进阶与分析🙋🐓  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/alibaba/druid" target="_blank" rel="noopener">alibaba / druid</a><blockquote>
+<p>阿里巴巴数据库事业部出品，为监控而生的数据库连接池。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/justauth/JustAuth" target="_blank" rel="noopener">justauth / JustAuth</a><blockquote>
+<p>💯 史上最全的整合第三方登录的开源库。目前已支持Github、Gitee、微博、钉钉、百度、Coding、腾讯云开发者平台、OSChina、支付宝、QQ、微信、淘宝、Google、Facebook、抖音、领英、小米、微软、今日头条、Teambition、StackOverflow、Pinterest、人人、华为、企业微信、酷家乐、Gitlab、美团、饿了么和推特等第三方平台的授权登录。 Login, so easy!<br>网站: <a href="https://docs.justauth.whnb.wang/" target="_blank" rel="noopener">https://docs.justauth.whnb.wang/</a>  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/alibaba/p3c" target="_blank" rel="noopener">alibaba / p3c</a><blockquote>
+<p>Alibaba Java Coding Guidelines pmd implements and IDE plugin.</p>
+</blockquote>
+</li>
+<li><a href="https://github.com/pingfangx/jetbrains-in-chinese" target="_blank" rel="noopener">pingfangx / jetbrains-in-chinese</a><blockquote>
+<p>JetBrains 系列软件汉化包 关键字: Android Studio 3.5 汉化包 CLion 2019.3 汉化包 DataGrip 2019.3 汉化包 GoLand 2019.3 汉化包 IntelliJ IDEA 2019.3 汉化包 PhpStorm 2019.3 汉化包 PyCharm 2019.3 汉化包 Rider 2019.3 汉化包 RubyMine 2019.3 汉化包 WebStorm 2019.3 汉化包。   </p>
 </blockquote>
 </li>
 </ol>
@@ -2354,6 +2416,14 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 <p>前端入门和进阶学习笔记，超详细的Web前端学习图文教程。</p>
 </blockquote>
 </li>
+<li><a href="https://github.com/lydiahallie/javascript-questions" target="_blank" rel="noopener">lydiahallie / javascript-questions</a><blockquote>
+<p>A long list of (advanced) JavaScript questions, and their explanations ✨  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/EYHN/hexo-helper-live2d" target="_blank" rel="noopener">EYHN / hexo-helper-live2d</a><blockquote>
+<p>Add the Sseexxyyy live2d to your hexo!  </p>
+</blockquote>
+</li>
 </ol>
 <hr>
 <h2 id="资源汇总"><a href="#资源汇总" class="headerlink" title="资源汇总"></a>资源汇总</h2><ol>
@@ -2391,6 +2461,22 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </li>
 <li><a href="https://github.com/justjavac/awesome-wechat-weapp" target="_blank" rel="noopener">justjavac / awesome-wechat-weapp</a><blockquote>
 <p>微信小程序开发资源汇总 💯</p>
+</blockquote>
+</li>
+<li><a href="https://github.com/521xueweihan/HelloGitHub" target="_blank" rel="noopener">521xueweihan / HelloGitHub</a><blockquote>
+<p>Find pearls on open-source seashore 分享 GitHub 上有趣、入门级的开源项目。<br>网站: <a href="https://hellogithub.com/" target="_blank" rel="noopener">https://hellogithub.com/</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts" target="_blank" rel="noopener">kon9chunkit / GitHub-Chinese-Top-Charts</a><blockquote>
+<p>🇨🇳 GitHub中文排行榜，帮助你发现高分优秀中文项目、更高效地吸收国人的优秀经验成果；榜单每周更新一次，敬请关注！ </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/ruanyf/weekly" target="_blank" rel="noopener">ruanyf / weekly</a><blockquote>
+<p>科技爱好者周刊，每周五发布。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/niezhiyang/open_source_team" target="_blank" rel="noopener">niezhiyang / open_source_team</a><blockquote>
+<p>国内顶尖团队的开源地址。  </p>
 </blockquote>
 </li>
 </ol>
@@ -2540,6 +2626,41 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </li>
 <li><a href="https://github.com/carloscuesta/gitmoji" target="_blank" rel="noopener">carloscuesta / gitmoji</a><blockquote>
 <p>在commit信息中添加emoji。An emoji guide for your commit messages. 😜<br>网站: <a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">https://gitmoji.carloscuesta.me/</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/shimohq/chinese-programmer-wrong-pronunciation" target="_blank" rel="noopener">shimohq / chinese-programmer-wrong-pronunciation</a><blockquote>
+<p>中国程序员容易发音错误的单词。  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/SkalskiP/make-sense" target="_blank" rel="noopener">SkalskiP / make-sense</a><blockquote>
+<p>Free to use online tool for labelling photos.<br>网站: <a href="https://makesense.ai" target="_blank" rel="noopener">https://makesense.ai</a></p>
+</blockquote>
+</li>
+<li><a href="https://github.com/A3M4/YouTube-Report" target="_blank" rel="noopener">A3M4 / YouTube-Report</a><blockquote>
+<p>📊 Generate a personal YouTube report from your Google Takeout data  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/CopyTranslator/CopyTranslator" target="_blank" rel="noopener">CopyTranslator / CopyTranslator</a><blockquote>
+<p>Foreign language reading and translation assistant based on copy and translate.  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/nondanee/UnblockNeteaseMusic" target="_blank" rel="noopener">nondanee / UnblockNeteaseMusic</a><blockquote>
+<p>Revive unavailable songs for Netease Cloud Music.  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/kelseyhightower/nocode" target="_blank" rel="noopener">kelseyhightower / nocode</a><blockquote>
+<p>The best way to write secure and reliable applications. Write nothing; deploy nowhere.  </p>
+</blockquote>
+</li>
+<li><a href="https://github.com/monicahq/monica" target="_blank" rel="noopener">monicahq / monica</a><blockquote>
+<p>Personal CRM. Remember everything about your friends, family and business relationships.<br>网站: <a href="https://www.monicahq.com/" target="_blank" rel="noopener">https://www.monicahq.com/</a></p>
+</blockquote>
+</li>
+</ol>
+<p>Example</p>
+<ol>
+<li><a href="link">owner</a><blockquote>
+<p>content<br>网站: <link></p>
 </blockquote>
 </li>
 </ol>

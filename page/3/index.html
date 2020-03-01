@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第五章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/监督学习各方法比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第五章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第五章—决策树</a>
+                <a href="/机器学习/统计学习方法/监督学习各方法比较/" class="post-title-link" itemprop="url">监督学习各方法比较</a>
               
             
           </h1>
@@ -443,7 +443,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-28 21:13:21" itemprop="dateModified" datetime="2020-02-28T21:13:21+08:00">2020-02-28</time>
+                <time title="修改时间：2020-02-28 21:12:00" itemprop="dateModified" datetime="2020-02-28T21:12:00+08:00">2020-02-28</time>
               
             
           </span>
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.7k</span>
+                <span title="本文字数">4.4k</span>
               
 
               
@@ -523,30 +523,34 @@
         
           
             <p>
-              1.决策树模型与学习1.1 决策树模型内部节点代表一个特征或属性，叶结点代表一个类。
-    
+              1.感知机优点
+模型简单易懂，便于编程实现；
+是许多后续算法如SVM、神经网络、深度学习的基础。
 
-决策树模型
+缺点
+只能对线性可分数据集进行学习；
+不同参数设置会学到不同模型，泛化能力好差。
 
+2.k近邻法优点
+理论成熟，思想简单，既可以用来做分类也可以用来做回归；
+可用于非线性分类，可以生成任意形状的决策边界；
+训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；
+对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；
+基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。
 
-1.2 决策树与if-then规则可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。
-1.2 决策树与条件概率分布决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。
-1.3 决策树学习找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。
-主要步骤：
+缺点
+计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  
+样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   
+需要大量内存；  
+除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。
 
-特征选择
-决策树生成
-决策树剪枝
-
-2.特征选择 准则：信息增益/信息增益比
-2.1 信息增益熵：随机变量不确定程度。
-设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$随机变量X的
+3
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第五章学习笔记/#more" rel="contents">
+              <a class="btn" href="/机器学习/统计学习方法/监督学习各方法比较/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -606,7 +610,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第六章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习方法第二章学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -626,7 +630,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第六章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第六章—逻辑斯谛回归与最大熵模型</a>
+                <a href="/机器学习/统计学习方法/统计学习方法第二章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第二章—感知机</a>
               
             
           </h1>
@@ -668,7 +672,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 12:06:46" itemprop="dateModified" datetime="2020-02-29T12:06:46+08:00">2020-02-29</time>
+                <time title="修改时间：2020-02-28 21:14:00" itemprop="dateModified" datetime="2020-02-28T21:14:00+08:00">2020-02-28</time>
               
             
           </span>
@@ -721,7 +725,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">2.3k</span>
               
 
               
@@ -748,224 +752,21 @@
         
           
             <p>
-              1.逻辑斯谛回归模型1.1 逻辑斯谛分布逻辑斯谛分布：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：
+              感知机——二类分类的线性分类模型
+1.感知机模型输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置
+感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。
+    
 
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。
-f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心
+感知机模型
+
+
+2.感知机学习策略2.1 数据集的线性可分性存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第六章学习笔记/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第四章学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/机器学习/统计学习方法/统计学习第四章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第四章—朴素贝叶斯法</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-28 21:13:13" itemprop="dateModified" datetime="2020-02-28T21:13:13+08:00">2020-02-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.6k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.朴素贝叶斯法的学习与分类1.1 基本方法输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。条件概率分布有指数量级的参数，难以估计，现做出条件独立性假设：$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第四章学习笔记/#more" rel="contents">
+              <a class="btn" href="/机器学习/统计学习方法/统计学习方法第二章学习笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1412,6 +1213,222 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
           
             <div class="post-button text-center">
               <a class="btn" href="/机器学习/统计学习方法/统计学习方法第一章学习笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/汇总/GitHub项目精选/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/汇总/GitHub项目精选/" class="post-title-link" itemprop="url">GitHub 项目精选</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-13 20:44:44" itemprop="dateCreated datePublished" datetime="2019-08-13T20:44:44+08:00">2019-08-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-01 11:58:32" itemprop="dateModified" datetime="2020-03-01T11:58:32+08:00">2020-03-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/汇总/" itemprop="url" rel="index"><span itemprop="name">汇总</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">33k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              A collection of useful repositories.
+
+机器学习
+apachecn / AiLearning
+AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP。网站: http://ailearning.apachecn.org
+
+
+datawhalechina / pumpkin-book
+《机器学习》（西瓜书）公式推导解析，在线阅读地址：https://datawhalechina.github.io/pumpkin-book
+
+
+scutan90 / DeepLearning-500-questions
+深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述。
+
+
+zergtant / pytorch-handbo
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/汇总/GitHub项目精选/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2312,7 +2329,7 @@ Deploy to remote sites$ hexo dep
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">71k</span>
+    <span title="站点总字数">74k</span>
   
 
   
