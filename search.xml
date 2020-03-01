@@ -1110,6 +1110,53 @@ Epoch 5/5
 </ul>
 </li>
 </ul>
+<h2 id="3-Session"><a href="#3-Session" class="headerlink" title="3.Session"></a>3.Session</h2><h3 id="3-1-概念"><a href="#3-1-概念" class="headerlink" title="3.1 概念"></a>3.1 概念</h3><p>服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象中。HttpSession</p>
+<h3 id="3-2-快速入门"><a href="#3-2-快速入门" class="headerlink" title="3.2 快速入门"></a>3.2 快速入门</h3><ul>
+<li>1.获取 HttpSession 对象：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.使用 HttpSession 对象：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span>  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object value)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-原理"><a href="#3-3-原理" class="headerlink" title="3.3 原理"></a>3.3 原理</h3><p>Session 的实现是依赖于 <strong>Cookie</strong> 的。</p>
+<h3 id="3-4-细节"><a href="#3-4-细节" class="headerlink" title="3.4 细节"></a>3.4 细节</h3><ul>
+<li>当客户端关闭后，服务器不关闭，两次获取 session 是否为同一个？<ul>
+<li>默认情况下不是。</li>
+<li>如果需要相同，则可以创建 Cookie，键为 JSESSIONID，设置最大存活时间，让 cookie 持久化保存。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"JSESSIONID"</span>,session.getId());</span><br><span class="line">c.setMaxAge(<span class="number">60</span>*<span class="number">60</span>);</span><br><span class="line">response.addCookie(c);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>客户端不关闭，服务器关闭后，两次获取的 session 是同一个吗？<ul>
+<li>不是同一个，但是要确保数据不丢失。Tomcat 自动完成以下工作：<ul>
+<li>session 的钝化：在服务器正常关闭之前，将 session 对象系列化到硬盘上。</li>
+<li>session 的活化：在服务器启动后，将 session 文件转化为内存中的 session 对象即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>session 什么时候被销毁？<ul>
+<li>服务器关闭.</li>
+<li>session 对象调用 invalidate() 。</li>
+<li>session 默认失效时间 30分钟。<ul>
+<li>选择性配置修改</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-5-Session-的特点"><a href="#3-5-Session-的特点" class="headerlink" title="3.5 Session 的特点"></a>3.5 Session 的特点</h3><ul>
+<li>session 用于存储一次会话的多次请求的数据，存在服务器端。</li>
+<li>session 可以存储任意类型，任意大小的数据。</li>
+</ul>
+<h2 id="4-Session-与-Cookie-的区别"><a href="#4-Session-与-Cookie-的区别" class="headerlink" title="4.Session 与 Cookie 的区别"></a>4.Session 与 Cookie 的区别</h2><ul>
+<li>session 存储数据在服务器端，Cookie 在客户端。</li>
+<li>session没有数据大小限制，Cookie有。</li>
+<li>session数据安全，Cookie相对于不安全。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -2072,237 +2119,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
-</ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第七章—支持向量机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
-<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
-<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
-<blockquote>
-<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
-</blockquote>
-<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
-<script type="math/tex; mode=display">
-\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
-<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
-\gamma&=\frac{\hat{\gamma}}{\|w\|}
-\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
-<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
-<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
-<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-H_{1}&: w \cdot x+b=1\\
-H_{2}&: w \cdot x+b=-1
-\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
-<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
-<script type="math/tex; mode=display">
-y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
-<script type="math/tex; mode=display">
-\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
-<p><strong>最小化目标函数的含义</strong>：</p>
-<ul>
-<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
-<li>使误分类点的个数尽量小</li>
-</ul>
-<p><strong>原始问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
-<p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
-b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
-\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
-<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
-<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
-<ul>
-<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>监督学习各方法比较</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>模型简单易懂，便于编程实现；</li>
-<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>只能对线性可分数据集进行学习；</li>
-<li>不同参数设置会学到不同模型，泛化能力好差。</li>
-</ul>
-<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
-<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
-<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
-<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
-<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
-</ul>
-<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
-<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
-<li>需要大量内存；  </li>
-<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
-</ul>
-<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>有坚实的数学基础，以及稳定的分类效率；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
-<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
-</ul>
-<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
-</ul>
-<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>计算简单，易于理解，可解释性强；</li>
-<li>比较适合处理有缺失属性的样本；</li>
-<li>能够处理不相关的特征；</li>
-<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
-</ul>
-<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
-<li>忽略了数据之间的相关性；</li>
-<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
-</ul>
-<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>可以解决高维问题，即大型特征空间；</li>
-<li>能够处理非线性特征的相互作用；</li>
-<li>无需依赖整个数据；</li>
-<li>可以提高泛化能力。</li>
-</ul>
-<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
-<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
-<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
-<li>类严重重叠时，SVM的表现也很差；</li>
-<li>对缺失数据敏感。</li>
-</ul>
-<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>实现简单，广泛的应用于工业问题上；</li>
-<li>分类时计算量非常小，速度很快，存储资源低；</li>
-<li>便利的观测样本概率分数；</li>
-<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
-</ul>
-<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
-<li>容易欠拟合，一般准确度不太高；</li>
-<li>不能很好地处理大量多类特征或变量。</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
-<li>对于非线性特征，需要进行转换。</li>
-</ul>
-<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>Adaboost是一种有很高精度的分类器；</li>
-<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
-<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
-<li>简单，不用做特征筛选；</li>
-<li>不易发生overfitting。</li>
-</ul>
-<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>对outlier比较敏感。</li>
-</ul>
-<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>分类的准确度高；</li>
-<li>并行分布处理能力强,分布存储及学习能力强；</li>
-<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
-<li>具备联想记忆的功能；</li>
-<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
-<li>测试样例分类时非常快。</li>
-</ul>
-<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
-<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
-<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
-<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第四章—朴素贝叶斯法</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
@@ -2426,18 +2242,225 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第三章—k近邻法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
-<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
-<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
-<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
-<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
-<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
-<p>特征空间切分</p>
-</div>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>监督学习各方法比较</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>模型简单易懂，便于编程实现；</li>
+<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>只能对线性可分数据集进行学习；</li>
+<li>不同参数设置会学到不同模型，泛化能力好差。</li>
+</ul>
+<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
+<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
+<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
+<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
+<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
+<li>需要大量内存；  </li>
+<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
+</ul>
+<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>有坚实的数学基础，以及稳定的分类效率；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
+<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
+</ul>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
+</ul>
+<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>计算简单，易于理解，可解释性强；</li>
+<li>比较适合处理有缺失属性的样本；</li>
+<li>能够处理不相关的特征；</li>
+<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
+</ul>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
+<li>忽略了数据之间的相关性；</li>
+<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
+</ul>
+<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力。</li>
+</ul>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
+<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
+<li>类严重重叠时，SVM的表现也很差；</li>
+<li>对缺失数据敏感。</li>
+</ul>
+<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>实现简单，广泛的应用于工业问题上；</li>
+<li>分类时计算量非常小，速度很快，存储资源低；</li>
+<li>便利的观测样本概率分数；</li>
+<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
+</ul>
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
+<li>容易欠拟合，一般准确度不太高；</li>
+<li>不能很好地处理大量多类特征或变量。</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
+<li>对于非线性特征，需要进行转换。</li>
+</ul>
+<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>Adaboost是一种有很高精度的分类器；</li>
+<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
+<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
+<li>简单，不用做特征筛选；</li>
+<li>不易发生overfitting。</li>
+</ul>
+<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>对outlier比较敏感。</li>
+</ul>
+<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>分类的准确度高；</li>
+<li>并行分布处理能力强,分布存储及学习能力强；</li>
+<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
+<li>具备联想记忆的功能；</li>
+<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
+<li>测试样例分类时非常快。</li>
+</ul>
+<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
+<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
+<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
+<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第七章—支持向量机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
+<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
+<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
+<blockquote>
+<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
+</blockquote>
+<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
+<script type="math/tex; mode=display">
+\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
+<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
+\gamma&=\frac{\hat{\gamma}}{\|w\|}
+\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
+<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
+<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
+<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H_{1}&: w \cdot x+b=1\\
+H_{2}&: w \cdot x+b=-1
+\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
+<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
+<script type="math/tex; mode=display">
+y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
+<p><strong>最小化目标函数的含义</strong>：</p>
+<ul>
+<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
+<li>使误分类点的个数尽量小</li>
+</ul>
+<p><strong>原始问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
+<p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
+b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
+\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
+<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
+<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
+<ul>
+<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
+</ul>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -2580,6 +2603,30 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       <tags>
         <tag>机器学习</tag>
         <tag>统计学习方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第三章—k近邻法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
+<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
+<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
+<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
+<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
+<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
+<p>特征空间切分</p>
+</div>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
       </tags>
   </entry>
   <entry>
