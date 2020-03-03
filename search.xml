@@ -1,6 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>&#39;3.Spring学习笔记:依赖注入&#39;</title>
+    <url>/uncategorized/3-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>2.Spring学习笔记:Bean的装配与管理</title>
+    <url>/Java/Spring/Spring/2-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Bean%E7%9A%84%E8%A3%85%E9%85%8D%E4%B8%8E%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h2 id="1-Spring-中-Bean-的细节"><a href="#1-Spring-中-Bean-的细节" class="headerlink" title="1.Spring 中 Bean 的细节"></a>1.Spring 中 Bean 的细节</h2><h3 id="三种创建-bean-对象的方式"><a href="#三种创建-bean-对象的方式" class="headerlink" title="三种创建 bean 对象的方式"></a>三种创建 bean 对象的方式</h3><ol>
+<li><p>使用<strong>默认构造函数</strong>创建</p>
+<p>在 spring 的配置文件中，使用 id 和 class 属性之后，且没有其他属性和标签时，采用的就是默认构造函数创建 bean 对象，此时如果类中没有默认构造函数，则对象无法创建。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService"</span> <span class="attr">class</span> = <span class="string">"com.itheima.service.impl.AccountServiceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<strong>普通工厂中的方法</strong>创建对象（使用某个类中的方法创建对象，并存入  Spring 容器），如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *模拟一个工厂类，该类可能存在于jar包中，无法通过修改源码的方式来提供默认构造函数</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IAccountService <span class="title">getAccountService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置方式如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"instanceFactory"</span> <span class="attr">class</span> = <span class="string">"com.itheima.factory.InstanceFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService"</span> <span class="attr">factory-bean</span>=<span class="string">"instanceFactory"</span> <span class="attr">factory-method</span></span></span><br><span class="line"><span class="tag">          =<span class="string">"getAccountService"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<strong>工厂中的静态方法</strong>创建对象（使用某个类中的静态方法创建对象，并存入 Spring 容器），如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> IAccountService <span class="title">getAccountService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置方式如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService"</span> <span class="attr">class</span> = <span class="string">"com.itheima.factory.StaticFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getAccountService"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-bean-的作用范围调整"><a href="#2-bean-的作用范围调整" class="headerlink" title="2.bean 的作用范围调整"></a>2.bean 的作用范围调整</h2><ol>
+<li><p>bean 标签的 <strong>scope</strong> 属性</p>
+<p>作用：用于指定 bean 的<strong>作用范围。</strong></p>
+<p>取值：常用的就是<strong>单例</strong>和<strong>多例。</strong></p>
+<ul>
+<li><strong>singleton</strong> : 单例的（<strong>default</strong>）。</li>
+<li><strong>prototype</strong> : 多例的。</li>
+<li>request : 作用于 web 应用的请求范围。</li>
+<li>session : 作用于 web  应用的会话范围。</li>
+<li>global-session : 作用于集群的会话范围（全局会话范围），当不是集群范围时，它就是 session。</li>
+</ul>
+</li>
+<li><p>bean 对象的<strong>声明周期</strong></p>
+<p><strong>单例</strong>对象：</p>
+<ul>
+<li>出生：当容器创建时发生。</li>
+<li>活着：只要容器还在对象就一直活着。</li>
+<li>死亡：容器销毁，对象消亡。</li>
+</ul>
+<p>总结：单例对象的<strong>声明周期和容器相同</strong>。</p>
+<p><strong>多例</strong>对象：</p>
+<ul>
+<li>出生：当我们使用对象时 Spring 框架为我们创建。</li>
+<li>活着：对象只要是在使用过程中就活着。</li>
+<li>死亡：当对象长时间不用，且没有别的对象引用时，由 Java 的 GC 回收。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.Spring学习笔记:入门案例</title>
+    <url>/Java/Spring/Spring/1-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/</url>
+    <content><![CDATA[<h3 id="1-实例"><a href="#1-实例" class="headerlink" title="1.实例"></a>1.实例</h3><ol>
+<li>通过 Idea 创建 maven 项目</li>
+<li>配置 Spring 配置文件 ApplicationContext.xml</li>
+<li>编写接口及实现类</li>
+</ol>
+<ul>
+<li><p>IaccountDao</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的持久层接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟保存账户</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IaccountService</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户业务层的接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟保存账户</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountDaoImpl</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的持久层实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">implements</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"保存了账户"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao = <span class="keyword">new</span> AccountDaoImpl();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">saveAccount</span><span class="params">()</span></span>&#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>编写测试类 Client</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一个表现层，用于调用业务层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *获取IOC的核心容器，并根据id获取对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>);</span><br><span class="line">          <span class="comment">// 两种不同的方式获取Bean对象</span></span><br><span class="line">          IAccountService as = (IAccountService) ac.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">          IAccountDao adao = ac.getBean(<span class="string">"accountDao"</span>,IAccountDao.class);</span><br><span class="line">          System.out.println(as);</span><br><span class="line">          System.out.println(adao);</span><br><span class="line">          <span class="comment">// as.saveAccount();</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-知识点"><a href="#2-知识点" class="headerlink" title="2.知识点"></a>2.知识点</h3><ol>
+<li><p><strong>ApplicationContext</strong> 的三个常用实现类：</p>
+<ul>
+<li><p><strong>ClassPathXmlApplicationContext</strong>： 它可以加载<strong>路径下</strong>的配置文件，要求配置文件必须在路径下，否则加载不了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bea</span></span><br><span class="line"><span class="string">ns.xml"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>FileSyetemXmlApplicationContext</strong>：它可以加载<strong>磁盘任意路径下</strong>的配置文件（<strong>必须有访问权限</strong>）</p>
+<p>加载方式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"C:\\user\\greyson\\..."</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>AnnotationConfigApplicationContext</strong>：它是用于<strong>读取注解创建容器</strong>的</p>
+</li>
+</ul>
+</li>
+<li><p>核心容器的两个接口引发出来的问题</p>
+<ul>
+<li>ApplicationContext：它在创建核心容器时，创建对象采取的策略是采用立即加载的方式，也就是说，只要一读取完配置文件就马上创建配置文件中配置的对象<ul>
+<li><strong>单例对象</strong>适用</li>
+<li>开发中常采用此接口</li>
+</ul>
+</li>
+<li>BeanFactory: 它在构建核心容器时，创建对象的策略是采用延迟加载的方式，什么时候获取 id 对象了，什么时候就创建对象。<ul>
+<li><strong>多例对象</strong>适用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>缓冲流、转换流、序列化流</title>
     <url>/Java/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BC%93%E5%86%B2%E6%B5%81%E3%80%81%E8%BD%AC%E6%8D%A2%E6%B5%81%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81/</url>
     <content><![CDATA[<h1 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h1><p>能够高效读写的缓冲流，能够转换编码的转换流，能够持久化存储对象的序列化流。这些功能更为强大的流，都是在基本的流对象基础之上创建而来的，是对基本流对象的一种增强。</p>
@@ -551,8 +678,8 @@
         <category>Maven</category>
       </categories>
       <tags>
-        <tag>Maven</tag>
         <tag>Java</tag>
+        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -912,8 +1039,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>数据库</tag>
+        <tag>Java</tag>
         <tag>Redis</tag>
       </tags>
   </entry>
@@ -1227,8 +1354,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>数据库</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1361,8 +1488,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>数据库</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2119,114 +2246,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>监督学习各方法比较</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>模型简单易懂，便于编程实现；</li>
-<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>只能对线性可分数据集进行学习；</li>
-<li>不同参数设置会学到不同模型，泛化能力好差。</li>
-</ul>
-<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
-<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
-<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
-<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
-<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
-</ul>
-<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
-<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
-<li>需要大量内存；  </li>
-<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
-</ul>
-<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>有坚实的数学基础，以及稳定的分类效率；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
-<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
-</ul>
-<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
-</ul>
-<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>计算简单，易于理解，可解释性强；</li>
-<li>比较适合处理有缺失属性的样本；</li>
-<li>能够处理不相关的特征；</li>
-<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
-</ul>
-<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
-<li>忽略了数据之间的相关性；</li>
-<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
-</ul>
-<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>可以解决高维问题，即大型特征空间；</li>
-<li>能够处理非线性特征的相互作用；</li>
-<li>无需依赖整个数据；</li>
-<li>可以提高泛化能力。</li>
-</ul>
-<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
-<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
-<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
-<li>类严重重叠时，SVM的表现也很差；</li>
-<li>对缺失数据敏感。</li>
-</ul>
-<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>实现简单，广泛的应用于工业问题上；</li>
-<li>分类时计算量非常小，速度很快，存储资源低；</li>
-<li>便利的观测样本概率分数；</li>
-<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
-</ul>
-<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
-<li>容易欠拟合，一般准确度不太高；</li>
-<li>不能很好地处理大量多类特征或变量。</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
-<li>对于非线性特征，需要进行转换。</li>
-</ul>
-<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>Adaboost是一种有很高精度的分类器；</li>
-<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
-<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
-<li>简单，不用做特征筛选；</li>
-<li>不易发生overfitting。</li>
-</ul>
-<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>对outlier比较敏感。</li>
-</ul>
-<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>分类的准确度高；</li>
-<li>并行分布处理能力强,分布存储及学习能力强；</li>
-<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
-<li>具备联想记忆的功能；</li>
-<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
-<li>测试样例分类时非常快。</li>
-</ul>
-<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
-<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
-<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
-<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第七章—支持向量机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
@@ -2342,6 +2361,45 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第四章—朴素贝叶斯法</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
@@ -2434,34 +2492,103 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
+    <title>监督学习各方法比较</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>模型简单易懂，便于编程实现；</li>
+<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
 </ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>只能对线性可分数据集进行学习；</li>
+<li>不同参数设置会学到不同模型，泛化能力好差。</li>
+</ul>
+<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
+<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
+<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
+<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
+<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
+<li>需要大量内存；  </li>
+<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
+</ul>
+<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>有坚实的数学基础，以及稳定的分类效率；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
+<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
+</ul>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
+</ul>
+<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>计算简单，易于理解，可解释性强；</li>
+<li>比较适合处理有缺失属性的样本；</li>
+<li>能够处理不相关的特征；</li>
+<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
+</ul>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
+<li>忽略了数据之间的相关性；</li>
+<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
+</ul>
+<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力。</li>
+</ul>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
+<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
+<li>类严重重叠时，SVM的表现也很差；</li>
+<li>对缺失数据敏感。</li>
+</ul>
+<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>实现简单，广泛的应用于工业问题上；</li>
+<li>分类时计算量非常小，速度很快，存储资源低；</li>
+<li>便利的观测样本概率分数；</li>
+<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
+</ul>
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
+<li>容易欠拟合，一般准确度不太高；</li>
+<li>不能很好地处理大量多类特征或变量。</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
+<li>对于非线性特征，需要进行转换。</li>
+</ul>
+<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>Adaboost是一种有很高精度的分类器；</li>
+<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
+<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
+<li>简单，不用做特征筛选；</li>
+<li>不易发生overfitting。</li>
+</ul>
+<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>对outlier比较敏感。</li>
+</ul>
+<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>分类的准确度高；</li>
+<li>并行分布处理能力强,分布存储及学习能力强；</li>
+<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
+<li>具备联想记忆的功能；</li>
+<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
+<li>测试样例分类时非常快。</li>
+</ul>
+<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
+<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
+<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
+<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
+</ul>
+]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
