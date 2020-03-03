@@ -597,7 +597,7 @@ zergtant / pytorch-handbo
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/3-Spring学习笔记-依赖注入/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/3-Spring学习笔记-依赖注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -617,7 +617,7 @@ zergtant / pytorch-handbo
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/uncategorized/3-Spring学习笔记-依赖注入/" class="post-title-link" itemprop="url">'3.Spring学习笔记:依赖注入'</a>
+                <a href="/Java/Spring/Spring/3-Spring学习笔记-依赖注入/" class="post-title-link" itemprop="url">3.Spring学习笔记:依赖注入</a>
               
             
           </h1>
@@ -642,12 +642,48 @@ zergtant / pytorch-handbo
                 
               
 
-              <time title="创建时间：2020-03-03 21:42:54" itemprop="dateCreated datePublished" datetime="2020-03-03T21:42:54+08:00">2020-03-03</time>
+              <time title="创建时间：2020-03-03 21:42:54 / 修改时间：22:23:43" itemprop="dateCreated datePublished" datetime="2020-03-03T21:42:54+08:00">2020-03-03</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -671,7 +707,7 @@ zergtant / pytorch-handbo
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">23k</span>
               
 
               
@@ -698,13 +734,33 @@ zergtant / pytorch-handbo
         
           
             <p>
-              
-              
+              1.概述能注入的数据
+基本类型和 String
+其他 bean 类型（在配置文件中或者注解中配置过的 bean）
+复杂类型/集合类型
+
+IOC 的作用减低程序间的耦合（即依赖关系）
+在当前类需要用到其他类的对象，由 Spring 为我们提供，而我们在配置文件中说明依赖关系的维护，这种方式就称为依赖注入。
+2.注入方式注入的方式：
+
+第一种：使用构造函数提供
+第二种：使用 set方法提供
+第三种：使用注解提供
+
+2.1 操作实例：
+接口如下：
+   public interface IAccountDao &#123;    void saveAccount();&#125;public interface IAccountService &#123;    /**     * 模拟保存账户     */    void saveAccount();&#125;
+
+
+
+实现类：
+   @Se
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/uncategorized/3-Spring学习笔记-依赖注入/#more" rel="contents">
+              <a class="btn" href="/Java/Spring/Spring/3-Spring学习笔记-依赖注入/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2703,7 +2759,7 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">108k</span>
+    <span title="站点总字数">113k</span>
   
 
   
