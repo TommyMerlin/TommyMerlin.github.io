@@ -3,267 +3,60 @@
   <entry>
     <title>7.Spring学习笔记:事务管理</title>
     <url>/Java/Spring/Spring/7-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h3 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h3><ol>
-<li><p>Spring中基于 xml 的声明式事务控制配置步骤</p>
-<p>( 1 ) 配置事务管理器</p>
+    <content><![CDATA[<h2 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h2><h3 id="Spring中基于-xml-的声明式事务控制配置步骤"><a href="#Spring中基于-xml-的声明式事务控制配置步骤" class="headerlink" title="Spring中基于 xml 的声明式事务控制配置步骤"></a>Spring中基于 xml 的声明式事务控制配置步骤</h3><p>( 1 ) 配置事务管理器</p>
 <p>( 2 ) 配置事务的通知</p>
 <ul>
 <li>1 ) 导入事务的约束</li>
-<li>2 ) 使用tx:advice标签配置事务通知<ul>
+<li>2 ) 使用 <strong>tx:advice</strong> 标签配置事务通知<ul>
 <li>属性：<ul>
-<li>id：给事务通知起一个唯一标识</li>
-<li>transaction-manager：给事务通知提供一个事务管理器引用</li>
+<li><strong>id</strong>：给事务通知起一个唯一标识</li>
+<li><strong>transaction-manager</strong>：给事务通知提供一个事务管理器引用</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>3 ) 配置AOP中的通用切入点表达式</li>
-<li>4 ) 建立十五通知和切入点表达式的对应关系</li>
+<li>3 ) 配置 AOP 中的通用切入点表达式</li>
+<li>4 ) 建立事务通知和切入点表达式的对应关系</li>
 <li>5 ) 配置事务的属性（在事务的通知 tx : advice标签的内部）<ul>
-<li>isolation：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
-<li>propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。</li>
-<li>read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。</li>
-<li>timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。</li>
-<li>rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
-<li>no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
+<li><strong>isolation</strong>：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
+<li><strong>propagation</strong>：用于指定事务的传播行为。默认值是 REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择 SUPPORTS。</li>
+<li><strong>read-only</strong>：用于指定事务是否只读。只有查询方法才能设置为 true。默认值是 false，表示读写。</li>
+<li><strong>timeout</strong>：用于指定事务的超时时间，默认值是 -1，表示永不超时。如果指定了数值，以秒为单位。</li>
+<li><strong>rollback-for</strong>：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
+<li><strong>no-rollback-for</strong>：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>基于xml配置实例</p>
+<p><strong>基于xml配置实例</strong></p>
 <ul>
 <li><p>bean.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-       xsi:schemaLocation=&quot;
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
-
-    &lt;!--configure service layer--&gt;
-    &lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.AccountServiceImpl&quot;&gt;
-        &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 配置账户的持久层--&gt;
-    &lt;bean id=&quot;accountDao&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;
-        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-</code></pre></li>
-</ul>
-</li>
-</ol>
-<pre><code> ​    
-
-         &lt;!-- 配置数据源--&gt;
-         &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
-             &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/eesy&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;password&quot; value=&quot;HotteMYSQL&quot;&gt;&lt;/property&gt;
-         &lt;/bean&gt;
-
-         &lt;!--Declarative transaction management--&gt;
-         &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
-             &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-         &lt;/bean&gt;
-
-         &lt;!--configure transaction advice--&gt;
-         &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
-             &lt;tx:attributes&gt;
-                 &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;/&gt;
-                 &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot;&gt;&lt;/tx:method&gt;
-             &lt;/tx:attributes&gt;
-         &lt;/tx:advice&gt;
-
-         &lt;!--configure pointcut expression--&gt;
-         &lt;aop:config&gt;
-             &lt;aop:pointcut id=&quot;pt1&quot; expression=&quot;execution(* com.itheima.service.*.*(..))&quot;&gt;&lt;/aop:pointcut&gt;
-             &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pt1&quot;&gt;&lt;/aop:advisor&gt;
-         &lt;/aop:config&gt;
-     &lt;/beans&gt;
-</code></pre><ul>
-<li><p>IAccountDao</p>
-<pre><code>public interface IAccountDao {
-
-    /**
-     * 根据Id查询账户
-     * @param accountId
-     * @return
-     */
-    Account findAccountById(Integer accountId);
-
-    /**
-     * 根据名称查询账户
-     * @param accountName
-     * @return
-     */
-    Account findAccountByName(String accountName);
-
-    /**
-     * 更新账户
-     * @param account
-     */
-    void updateAccount(Account account);
-}
-</code></pre></li>
-<li><p>AccountDaoImpl</p>
-<pre><code>public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
-
-    @Override
-    public Account findAccountById(Integer accountId) {
-        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where id = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);
-        return accounts.isEmpty()?null:accounts.get(0);
-    }
-
-    @Override
-    public Account findAccountByName(String accountName) {
-        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where name = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);
-        if(accounts.isEmpty()){
-            return null;
-        }
-        if(accounts.size()&gt;1){
-            throw new RuntimeException(&quot;结果集不唯一&quot;);
-        }
-        return accounts.get(0);
-    }
-
-    @Override
-    public void updateAccount(Account account) {
-        super.getJdbcTemplate().update(&quot;update account set name=?,money=? where id=?&quot;,account.getName(),account.getMoney(),account.getId());
-    }
-}
-</code></pre></li>
-<li><p>Accont</p>
-<pre><code>public class Account implements Serializable {
-
-    private Integer id;
-    private String name;
-    private Float money;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Float getMoney() {
-        return money;
-    }
-
-    public void setMoney(Float money) {
-        this.money = money;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Account{&quot; +
-                &quot;id=&quot; + id +
-                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
-                &quot;, money=&quot; + money +
-                &#39;}&#39;;
-    }
-}
-</code></pre></li>
-<li><p>IAccountService</p>
-<pre><code>/**
- * Service layer interface of the account
- */
-public interface IAccountService {
-
-    /**
-     * query account information by id
-     * @param accountId
-     * @return
-     */
-    Account findAccountById(Integer accountId);
-
-    /**
-     * transfer
-     * @param sourceName    transfer out account
-     * @param targetName    transfer to account
-     * @param Money     transfer amount
-     */
-    void transfer(String sourceName, String targetName, Float Money);
-}
-</code></pre></li>
-<li><p>AccountServiceImpl</p>
-<pre><code>public class AccountServiceImpl implements IAccountService{
-
-    private IAccountDao accountDao;
-
-    public void setAccountDao(IAccountDao accountDao) {
-        this.accountDao = accountDao;
-    }
-
-    @Override
-    public Account findAccountById(Integer accountId) {
-        return accountDao.findAccountById(accountId);
-    }
-
-    @Override
-    public void transfer(String sourceName, String targetName, Float money) {
-        System.out.println(&quot;transfer....&quot;);
-        //2.1根据名称查询转出账户
-        Account source = accountDao.findAccountByName(sourceName);
-        //2.2根据名称查询转入账户
-        Account target = accountDao.findAccountByName(targetName);
-        //2.3转出账户减钱
-        source.setMoney(source.getMoney()-money);
-        //2.4转入账户加钱
-        target.setMoney(target.getMoney()+money);
-        //2.5更新转出账户
-        accountDao.updateAccount(source);
-
-                int i=1/0;
-
-        //2.6更新转入账户
-        accountDao.updateAccount(target);
-    }
-}
-</code></pre></li>
-<li><p>AccountServiceTest</p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = &quot;classpath:bean.xml&quot;)
-public class AccountServiceTest {
-
-    @Autowired
-    private  IAccountService as;
-
-    @Test
-    public  void testTransfer(){
-        as.transfer(&quot;aaa&quot;,&quot;bbb&quot;,100f);
-
-    }
-
-}
-</code></pre></li>
-</ul>
-<ol>
-<li><p>Spring 中基于注解的声明式事务控制配置步骤</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx/spring-tx.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure service layer--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"com.itheima.service.AccountServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"accountDao"</span> <span class="attr">ref</span>=<span class="string">"accountDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置账户的持久层--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountDao"</span> <span class="attr">class</span>=<span class="string">"com.itheima.dao.impl.AccountDaoImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">     <span class="comment">&lt;!-- 配置数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/eesy"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"HotteMYSQL"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">     </span><br><span class="line">    <span class="comment">&lt;!--Declarative transaction management--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure transaction advice--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span> <span class="attr">read-only</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">propagation</span>=<span class="string">"SUPPORTS"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">tx:method</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure pointcut expression--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.itheima.service.*.*(..))"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:advisor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>1 ) 配置事务管理器</li>
-<li>2 ) 开启spring对注解事务的支持</li>
-<li>3 ) 在需要事务支持的地方使用@Transactional注解</li>
+<li><p>IAccountDao</p>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据Id查询账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> accountId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span></span>;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据名称查询账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> accountName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Account <span class="title">findAccountByName</span><span class="params">(String accountName)</span></span>;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> account</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(Account account)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountDaoImpl</p>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">extends</span> <span class="title">JdbcDaoSupport</span> <span class="keyword">implements</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        List&lt;Account&gt; accounts = <span class="keyword">super</span>.getJdbcTemplate().query(<span class="string">"select * from account where id = ?"</span>,<span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);</span><br><span class="line">        <span class="keyword">return</span> accounts.isEmpty()?<span class="keyword">null</span>:accounts.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountByName</span><span class="params">(String accountName)</span> </span>&#123;</span><br><span class="line">        List&lt;Account&gt; accounts = <span class="keyword">super</span>.getJdbcTemplate().query(<span class="string">"select * from account where name = ?"</span>,<span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);</span><br><span class="line">        <span class="keyword">if</span>(accounts.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(accounts.size()&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"结果集不唯一"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> accounts.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(Account account)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getJdbcTemplate().update(<span class="string">"update account set name=?,money=? where id=?"</span>,account.getName(),account.getMoney(),account.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Accont</p>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Integer id;</span><br><span class="line">     <span class="keyword">private</span> String name;</span><br><span class="line">     <span class="keyword">private</span> Float money;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.id = id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.name = name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Float <span class="title">getMoney</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> money;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMoney</span><span class="params">(Float money)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.money = money;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="string">"Account&#123;"</span> +</span><br><span class="line">                 <span class="string">"id="</span> + id +</span><br><span class="line">                 <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                 <span class="string">", money="</span> + money +</span><br><span class="line">                 <span class="string">'&#125;'</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceImpl</p>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao;</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccountDao</span><span class="params">(IAccountDao accountDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accountDao = accountDao;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findAccountById(accountId);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String sourceName, String targetName, Float money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"transfer...."</span>);</span><br><span class="line">        <span class="comment">//2.1根据名称查询转出账户</span></span><br><span class="line">        Account source = accountDao.findAccountByName(sourceName);</span><br><span class="line">        <span class="comment">//2.2根据名称查询转入账户</span></span><br><span class="line">        Account target = accountDao.findAccountByName(targetName);</span><br><span class="line">        <span class="comment">//2.3转出账户减钱</span></span><br><span class="line">        source.setMoney(source.getMoney()-money);</span><br><span class="line">        <span class="comment">//2.4转入账户加钱</span></span><br><span class="line">        target.setMoney(target.getMoney()+money);</span><br><span class="line">        <span class="comment">//2.5更新转出账户</span></span><br><span class="line">        accountDao.updateAccount(source);</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.6更新转入账户</span></span><br><span class="line">        accountDao.updateAccount(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceTest</p>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations = <span class="string">"classpath:bean.xml"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  IAccountService as;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">testTransfer</span><span class="params">()</span></span>&#123;</span><br><span class="line">        as.transfer(<span class="string">"aaa"</span>,<span class="string">"bbb"</span>,<span class="number">100f</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-</ol>
+</ul>
+<h3 id="Spring-中基于注解的声明式事务控制配置步骤"><a href="#Spring-中基于注解的声明式事务控制配置步骤" class="headerlink" title="Spring 中基于注解的声明式事务控制配置步骤"></a>Spring 中基于注解的声明式事务控制配置步骤</h3><ul>
+<li>1 ) 配置事务管理器。</li>
+<li>2 ) 开启 spring 对注解事务的支持。</li>
+<li>3 ) 在需要事务支持的地方使用 @Transactional 注解。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置spring创建容器时要扫描的包--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置JdbcTemplate--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/eesy"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"1234"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- spring中基于注解 的声明式事务控制配置步骤</span></span><br><span class="line"><span class="comment">        1、配置事务管理器</span></span><br><span class="line"><span class="comment">        2、开启spring对注解事务的支持</span></span><br><span class="line"><span class="comment">        3、在需要事务支持的地方使用@Transactional注解</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置事务管理器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 开启spring对注解事务的支持--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span><span class="tag">&lt;/<span class="name">tx:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 事务控制应该都是在业务层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span>(<span class="string">"accountService"</span>)</span><br><span class="line"><span class="meta">@Transactional</span>(propagation= Propagation.SUPPORTS,readOnly=<span class="keyword">true</span>)<span class="comment">//只读型事务的配置</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findAccountById(accountId);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//需要的是读写型事务配置</span></span><br><span class="line">    <span class="meta">@Transactional</span>(propagation= Propagation.REQUIRED,readOnly=<span class="keyword">false</span>)</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String sourceName, String targetName, Float money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"transfer...."</span>);</span><br><span class="line">            <span class="comment">//2.1根据名称查询转出账户</span></span><br><span class="line">            Account source = accountDao.findAccountByName(sourceName);</span><br><span class="line">            <span class="comment">//2.2根据名称查询转入账户</span></span><br><span class="line">            Account target = accountDao.findAccountByName(targetName);</span><br><span class="line">            <span class="comment">//2.3转出账户减钱</span></span><br><span class="line">            source.setMoney(source.getMoney()-money);</span><br><span class="line">            <span class="comment">//2.4转入账户加钱</span></span><br><span class="line">            target.setMoney(target.getMoney()+money);</span><br><span class="line">            <span class="comment">//2.5更新转出账户</span></span><br><span class="line">            accountDao.updateAccount(source);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//2.6更新转入账户</span></span><br><span class="line">            accountDao.updateAccount(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -370,7 +163,7 @@ public class AccountServiceTest {
 </ol>
 </li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置切入点表达式 id属性用于指定表达式的唯一标识。expression属性用于指定表达式内容</span></span><br><span class="line"><span class="comment">              此标签写在aop:aspect标签内部只能当前切面使用。</span></span><br><span class="line"><span class="comment">              它还可以写在aop:aspect外面，此时就变成了所有切面可用</span></span><br><span class="line"><span class="comment">          --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.itheima.service.impl.*.*(..))"</span>&gt;</span>       <span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置切面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAdvice"</span> <span class="attr">ref</span>=<span class="string">"logger"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 配置前置通知：在切入点方法执行之前执行--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"beforePrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span> &gt;</span><span class="tag">&lt;/<span class="name">aop:before</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置后置通知：在切入点方法正常执行之后值。它和异常通知永远只能执行一个--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"afterReturningPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span>		         <span class="tag">&lt;/<span class="name">aop:after-returning</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置异常通知：在切入点方法执行产生异常之后执行。它和后置通知永远只能执行一个--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"afterThrowingPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span>                   <span class="tag">&lt;/<span class="name">aop:after-throwing</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置最终通知：无论切入点方法是否正常执行它都会在其后面执行--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"afterPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:after</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置环绕通知 详细的注释请看Logger类中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"aroundPringLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:around</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置切入点表达式 id属性用于指定表达式的唯一标识。expression属性用于指定表达式内容</span></span><br><span class="line"><span class="comment">              此标签写在aop:aspect标签内部只能当前切面使用。</span></span><br><span class="line"><span class="comment">              它还可以写在aop:aspect外面，此时就变成了所有切面可用</span></span><br><span class="line"><span class="comment">          --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.itheima.service.impl.*.*(..))"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置切面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAdvice"</span> <span class="attr">ref</span>=<span class="string">"logger"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 配置前置通知：在切入点方法执行之前执行--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"beforePrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span> &gt;</span><span class="tag">&lt;/<span class="name">aop:before</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置后置通知：在切入点方法正常执行之后值。它和异常通知永远只能执行一个--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"afterReturningPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:after-returning</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置异常通知：在切入点方法执行产生异常之后执行。它和后置通知永远只能执行一个--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"afterThrowingPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:after-throwing</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置最终通知：无论切入点方法是否正常执行它都会在其后面执行--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"afterPrintLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:after</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 配置环绕通知 详细的注释请看Logger类中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"aroundPringLog"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:around</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="2-3-实例"><a href="#2-3-实例" class="headerlink" title="2.3 实例"></a>2.3 实例</h3><p>1.引入 Maven 工程</p>
 <ul>
 <li><p>Pom.xml</p>
@@ -2880,6 +2673,67 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>监督学习各方法比较</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
     <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
@@ -2976,37 +2830,6 @@ Epoch 5/5
 <li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
 <li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
 </ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3193,36 +3016,6 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </ul>
 <h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
 <h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>

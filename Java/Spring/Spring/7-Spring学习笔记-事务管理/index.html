@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
+  <meta name="description" content="声明式事务管理Spring中基于 xml 的声明式事务控制配置步骤( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用 tx:advice 标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置 AOP 中的通用切入点表达式 4 ) 建立事务通知和切入点表达式">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7.Spring学习笔记:事务管理">
 <meta property="og:url" content="http://yoursite.com/Java/Spring/Spring/7-Spring学习笔记-事务管理/index.html">
 <meta property="og:site_name" content="HuYe的博客">
-<meta property="og:description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
+<meta property="og:description" content="声明式事务管理Spring中基于 xml 的声明式事务控制配置步骤( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用 tx:advice 标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置 AOP 中的通用切入点表达式 4 ) 建立事务通知和切入点表达式">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T02:03:44.326Z">
+<meta property="og:updated_time" content="2020-03-04T02:37:08.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7.Spring学习笔记:事务管理">
-<meta name="twitter:description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
+<meta name="twitter:description" content="声明式事务管理Spring中基于 xml 的声明式事务控制配置步骤( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用 tx:advice 标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置 AOP 中的通用切入点表达式 4 ) 建立事务通知和切入点表达式">
 
 
 
@@ -428,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 10:02:24 / 修改时间：10:03:44" itemprop="dateCreated datePublished" datetime="2020-03-04T10:02:24+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 10:02:24 / 修改时间：10:37:08" itemprop="dateCreated datePublished" datetime="2020-03-04T10:02:24+08:00">2020-03-04</time>
             
 
             
@@ -500,7 +500,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.5k</span>
+                <span title="本文字数">40k</span>
               
 
               
@@ -524,267 +524,60 @@
       
 
       
-        <h3 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h3><ol>
-<li><p>Spring中基于 xml 的声明式事务控制配置步骤</p>
-<p>( 1 ) 配置事务管理器</p>
+        <h2 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h2><h3 id="Spring中基于-xml-的声明式事务控制配置步骤"><a href="#Spring中基于-xml-的声明式事务控制配置步骤" class="headerlink" title="Spring中基于 xml 的声明式事务控制配置步骤"></a>Spring中基于 xml 的声明式事务控制配置步骤</h3><p>( 1 ) 配置事务管理器</p>
 <p>( 2 ) 配置事务的通知</p>
 <ul>
 <li>1 ) 导入事务的约束</li>
-<li>2 ) 使用tx:advice标签配置事务通知<ul>
+<li>2 ) 使用 <strong>tx:advice</strong> 标签配置事务通知<ul>
 <li>属性：<ul>
-<li>id：给事务通知起一个唯一标识</li>
-<li>transaction-manager：给事务通知提供一个事务管理器引用</li>
+<li><strong>id</strong>：给事务通知起一个唯一标识</li>
+<li><strong>transaction-manager</strong>：给事务通知提供一个事务管理器引用</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>3 ) 配置AOP中的通用切入点表达式</li>
-<li>4 ) 建立十五通知和切入点表达式的对应关系</li>
+<li>3 ) 配置 AOP 中的通用切入点表达式</li>
+<li>4 ) 建立事务通知和切入点表达式的对应关系</li>
 <li>5 ) 配置事务的属性（在事务的通知 tx : advice标签的内部）<ul>
-<li>isolation：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
-<li>propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。</li>
-<li>read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。</li>
-<li>timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。</li>
-<li>rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
-<li>no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
+<li><strong>isolation</strong>：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
+<li><strong>propagation</strong>：用于指定事务的传播行为。默认值是 REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择 SUPPORTS。</li>
+<li><strong>read-only</strong>：用于指定事务是否只读。只有查询方法才能设置为 true。默认值是 false，表示读写。</li>
+<li><strong>timeout</strong>：用于指定事务的超时时间，默认值是 -1，表示永不超时。如果指定了数值，以秒为单位。</li>
+<li><strong>rollback-for</strong>：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
+<li><strong>no-rollback-for</strong>：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>基于xml配置实例</p>
+<p><strong>基于xml配置实例</strong></p>
 <ul>
 <li><p>bean.xml</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-       xsi:schemaLocation=&quot;
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
-
-    &lt;!--configure service layer--&gt;
-    &lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.AccountServiceImpl&quot;&gt;
-        &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 配置账户的持久层--&gt;
-    &lt;bean id=&quot;accountDao&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;
-        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-</code></pre></li>
-</ul>
-</li>
-</ol>
-<pre><code> ​    
-
-         &lt;!-- 配置数据源--&gt;
-         &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
-             &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/eesy&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
-             &lt;property name=&quot;password&quot; value=&quot;HotteMYSQL&quot;&gt;&lt;/property&gt;
-         &lt;/bean&gt;
-
-         &lt;!--Declarative transaction management--&gt;
-         &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
-             &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
-         &lt;/bean&gt;
-
-         &lt;!--configure transaction advice--&gt;
-         &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
-             &lt;tx:attributes&gt;
-                 &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;/&gt;
-                 &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot;&gt;&lt;/tx:method&gt;
-             &lt;/tx:attributes&gt;
-         &lt;/tx:advice&gt;
-
-         &lt;!--configure pointcut expression--&gt;
-         &lt;aop:config&gt;
-             &lt;aop:pointcut id=&quot;pt1&quot; expression=&quot;execution(* com.itheima.service.*.*(..))&quot;&gt;&lt;/aop:pointcut&gt;
-             &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pt1&quot;&gt;&lt;/aop:advisor&gt;
-         &lt;/aop:config&gt;
-     &lt;/beans&gt;
-</code></pre><ul>
-<li><p>IAccountDao</p>
-<pre><code>public interface IAccountDao {
-
-    /**
-     * 根据Id查询账户
-     * @param accountId
-     * @return
-     */
-    Account findAccountById(Integer accountId);
-
-    /**
-     * 根据名称查询账户
-     * @param accountName
-     * @return
-     */
-    Account findAccountByName(String accountName);
-
-    /**
-     * 更新账户
-     * @param account
-     */
-    void updateAccount(Account account);
-}
-</code></pre></li>
-<li><p>AccountDaoImpl</p>
-<pre><code>public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
-
-    @Override
-    public Account findAccountById(Integer accountId) {
-        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where id = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);
-        return accounts.isEmpty()?null:accounts.get(0);
-    }
-
-    @Override
-    public Account findAccountByName(String accountName) {
-        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where name = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);
-        if(accounts.isEmpty()){
-            return null;
-        }
-        if(accounts.size()&gt;1){
-            throw new RuntimeException(&quot;结果集不唯一&quot;);
-        }
-        return accounts.get(0);
-    }
-
-    @Override
-    public void updateAccount(Account account) {
-        super.getJdbcTemplate().update(&quot;update account set name=?,money=? where id=?&quot;,account.getName(),account.getMoney(),account.getId());
-    }
-}
-</code></pre></li>
-<li><p>Accont</p>
-<pre><code>public class Account implements Serializable {
-
-    private Integer id;
-    private String name;
-    private Float money;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Float getMoney() {
-        return money;
-    }
-
-    public void setMoney(Float money) {
-        this.money = money;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Account{&quot; +
-                &quot;id=&quot; + id +
-                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
-                &quot;, money=&quot; + money +
-                &#39;}&#39;;
-    }
-}
-</code></pre></li>
-<li><p>IAccountService</p>
-<pre><code>/**
- * Service layer interface of the account
- */
-public interface IAccountService {
-
-    /**
-     * query account information by id
-     * @param accountId
-     * @return
-     */
-    Account findAccountById(Integer accountId);
-
-    /**
-     * transfer
-     * @param sourceName    transfer out account
-     * @param targetName    transfer to account
-     * @param Money     transfer amount
-     */
-    void transfer(String sourceName, String targetName, Float Money);
-}
-</code></pre></li>
-<li><p>AccountServiceImpl</p>
-<pre><code>public class AccountServiceImpl implements IAccountService{
-
-    private IAccountDao accountDao;
-
-    public void setAccountDao(IAccountDao accountDao) {
-        this.accountDao = accountDao;
-    }
-
-    @Override
-    public Account findAccountById(Integer accountId) {
-        return accountDao.findAccountById(accountId);
-    }
-
-    @Override
-    public void transfer(String sourceName, String targetName, Float money) {
-        System.out.println(&quot;transfer....&quot;);
-        //2.1根据名称查询转出账户
-        Account source = accountDao.findAccountByName(sourceName);
-        //2.2根据名称查询转入账户
-        Account target = accountDao.findAccountByName(targetName);
-        //2.3转出账户减钱
-        source.setMoney(source.getMoney()-money);
-        //2.4转入账户加钱
-        target.setMoney(target.getMoney()+money);
-        //2.5更新转出账户
-        accountDao.updateAccount(source);
-
-                int i=1/0;
-
-        //2.6更新转入账户
-        accountDao.updateAccount(target);
-    }
-}
-</code></pre></li>
-<li><p>AccountServiceTest</p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = &quot;classpath:bean.xml&quot;)
-public class AccountServiceTest {
-
-    @Autowired
-    private  IAccountService as;
-
-    @Test
-    public  void testTransfer(){
-        as.transfer(&quot;aaa&quot;,&quot;bbb&quot;,100f);
-
-    }
-
-}
-</code></pre></li>
-</ul>
-<ol>
-<li><p>Spring 中基于注解的声明式事务控制配置步骤</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/tx/spring-tx.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure service layer--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"com.itheima.service.AccountServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"accountDao"</span> <span class="attr">ref</span>=<span class="string">"accountDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置账户的持久层--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountDao"</span> <span class="attr">class</span>=<span class="string">"com.itheima.dao.impl.AccountDaoImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">     <span class="comment">&lt;!-- 配置数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/eesy"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"HotteMYSQL"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">     </span><br><span class="line">    <span class="comment">&lt;!--Declarative transaction management--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure transaction advice--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span> <span class="attr">read-only</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">propagation</span>=<span class="string">"SUPPORTS"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">tx:method</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--configure pointcut expression--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* com.itheima.service.*.*(..))"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:advisor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>1 ) 配置事务管理器</li>
-<li>2 ) 开启spring对注解事务的支持</li>
-<li>3 ) 在需要事务支持的地方使用@Transactional注解</li>
+<li><p>IAccountDao</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据Id查询账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> accountId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span></span>;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据名称查询账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> accountName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Account <span class="title">findAccountByName</span><span class="params">(String accountName)</span></span>;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> account</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(Account account)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountDaoImpl</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">extends</span> <span class="title">JdbcDaoSupport</span> <span class="keyword">implements</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        List&lt;Account&gt; accounts = <span class="keyword">super</span>.getJdbcTemplate().query(<span class="string">"select * from account where id = ?"</span>,<span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);</span><br><span class="line">        <span class="keyword">return</span> accounts.isEmpty()?<span class="keyword">null</span>:accounts.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountByName</span><span class="params">(String accountName)</span> </span>&#123;</span><br><span class="line">        List&lt;Account&gt; accounts = <span class="keyword">super</span>.getJdbcTemplate().query(<span class="string">"select * from account where name = ?"</span>,<span class="keyword">new</span> BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);</span><br><span class="line">        <span class="keyword">if</span>(accounts.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(accounts.size()&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"结果集不唯一"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> accounts.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(Account account)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getJdbcTemplate().update(<span class="string">"update account set name=?,money=? where id=?"</span>,account.getName(),account.getMoney(),account.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Accont</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Integer id;</span><br><span class="line">     <span class="keyword">private</span> String name;</span><br><span class="line">     <span class="keyword">private</span> Float money;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.id = id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.name = name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Float <span class="title">getMoney</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> money;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMoney</span><span class="params">(Float money)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.money = money;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="string">"Account&#123;"</span> +</span><br><span class="line">                 <span class="string">"id="</span> + id +</span><br><span class="line">                 <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                 <span class="string">", money="</span> + money +</span><br><span class="line">                 <span class="string">'&#125;'</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceImpl</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao;</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccountDao</span><span class="params">(IAccountDao accountDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accountDao = accountDao;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findAccountById(accountId);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String sourceName, String targetName, Float money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"transfer...."</span>);</span><br><span class="line">        <span class="comment">//2.1根据名称查询转出账户</span></span><br><span class="line">        Account source = accountDao.findAccountByName(sourceName);</span><br><span class="line">        <span class="comment">//2.2根据名称查询转入账户</span></span><br><span class="line">        Account target = accountDao.findAccountByName(targetName);</span><br><span class="line">        <span class="comment">//2.3转出账户减钱</span></span><br><span class="line">        source.setMoney(source.getMoney()-money);</span><br><span class="line">        <span class="comment">//2.4转入账户加钱</span></span><br><span class="line">        target.setMoney(target.getMoney()+money);</span><br><span class="line">        <span class="comment">//2.5更新转出账户</span></span><br><span class="line">        accountDao.updateAccount(source);</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.6更新转入账户</span></span><br><span class="line">        accountDao.updateAccount(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceTest</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations = <span class="string">"classpath:bean.xml"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  IAccountService as;</span><br><span class="line">        </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">testTransfer</span><span class="params">()</span></span>&#123;</span><br><span class="line">        as.transfer(<span class="string">"aaa"</span>,<span class="string">"bbb"</span>,<span class="number">100f</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-</ol>
+</ul>
+<h3 id="Spring-中基于注解的声明式事务控制配置步骤"><a href="#Spring-中基于注解的声明式事务控制配置步骤" class="headerlink" title="Spring 中基于注解的声明式事务控制配置步骤"></a>Spring 中基于注解的声明式事务控制配置步骤</h3><ul>
+<li>1 ) 配置事务管理器。</li>
+<li>2 ) 开启 spring 对注解事务的支持。</li>
+<li>3 ) 在需要事务支持的地方使用 @Transactional 注解。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置spring创建容器时要扫描的包--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置JdbcTemplate--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/eesy"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"1234"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- spring中基于注解 的声明式事务控制配置步骤</span></span><br><span class="line"><span class="comment">        1、配置事务管理器</span></span><br><span class="line"><span class="comment">        2、开启spring对注解事务的支持</span></span><br><span class="line"><span class="comment">        3、在需要事务支持的地方使用@Transactional注解</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置事务管理器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 开启spring对注解事务的支持--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span><span class="tag">&lt;/<span class="name">tx:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 事务控制应该都是在业务层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span>(<span class="string">"accountService"</span>)</span><br><span class="line"><span class="meta">@Transactional</span>(propagation= Propagation.SUPPORTS,readOnly=<span class="keyword">true</span>)<span class="comment">//只读型事务的配置</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">findAccountById</span><span class="params">(Integer accountId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findAccountById(accountId);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//需要的是读写型事务配置</span></span><br><span class="line">    <span class="meta">@Transactional</span>(propagation= Propagation.REQUIRED,readOnly=<span class="keyword">false</span>)</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String sourceName, String targetName, Float money)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"transfer...."</span>);</span><br><span class="line">            <span class="comment">//2.1根据名称查询转出账户</span></span><br><span class="line">            Account source = accountDao.findAccountByName(sourceName);</span><br><span class="line">            <span class="comment">//2.2根据名称查询转入账户</span></span><br><span class="line">            Account target = accountDao.findAccountByName(targetName);</span><br><span class="line">            <span class="comment">//2.3转出账户减钱</span></span><br><span class="line">            source.setMoney(source.getMoney()-money);</span><br><span class="line">            <span class="comment">//2.4转入账户加钱</span></span><br><span class="line">            target.setMoney(target.getMoney()+money);</span><br><span class="line">            <span class="comment">//2.5更新转出账户</span></span><br><span class="line">            accountDao.updateAccount(source);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//2.6更新转入账户</span></span><br><span class="line">            accountDao.updateAccount(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1139,7 +932,7 @@ public class AccountServiceTest {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明式事务管理"><span class="nav-text">声明式事务管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明式事务管理"><span class="nav-text">声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring中基于-xml-的声明式事务控制配置步骤"><span class="nav-text">Spring中基于 xml 的声明式事务控制配置步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-中基于注解的声明式事务控制配置步骤"><span class="nav-text">Spring 中基于注解的声明式事务控制配置步骤</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1172,7 +965,7 @@ public class AccountServiceTest {
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">129k</span>
+    <span title="站点总字数">131k</span>
   
 
   
