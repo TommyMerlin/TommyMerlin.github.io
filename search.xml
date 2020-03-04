@@ -1,15 +1,435 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>7.Spring学习笔记:事务管理</title>
+    <url>/Java/Spring/Spring/7-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h3 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h3><ol>
+<li><p>Spring中基于 xml 的声明式事务控制配置步骤</p>
+<p>( 1 ) 配置事务管理器</p>
+<p>( 2 ) 配置事务的通知</p>
+<ul>
+<li>1 ) 导入事务的约束</li>
+<li>2 ) 使用tx:advice标签配置事务通知<ul>
+<li>属性：<ul>
+<li>id：给事务通知起一个唯一标识</li>
+<li>transaction-manager：给事务通知提供一个事务管理器引用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3 ) 配置AOP中的通用切入点表达式</li>
+<li>4 ) 建立十五通知和切入点表达式的对应关系</li>
+<li>5 ) 配置事务的属性（在事务的通知 tx : advice标签的内部）<ul>
+<li>isolation：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
+<li>propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。</li>
+<li>read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。</li>
+<li>timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。</li>
+<li>rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
+<li>no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基于xml配置实例</p>
+<ul>
+<li><p>bean.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
+
+    &lt;!--configure service layer--&gt;
+    &lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.AccountServiceImpl&quot;&gt;
+        &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置账户的持久层--&gt;
+    &lt;bean id=&quot;accountDao&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<pre><code> ​    
+
+         &lt;!-- 配置数据源--&gt;
+         &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
+             &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/eesy&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;password&quot; value=&quot;HotteMYSQL&quot;&gt;&lt;/property&gt;
+         &lt;/bean&gt;
+
+         &lt;!--Declarative transaction management--&gt;
+         &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+             &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+         &lt;/bean&gt;
+
+         &lt;!--configure transaction advice--&gt;
+         &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+             &lt;tx:attributes&gt;
+                 &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;/&gt;
+                 &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot;&gt;&lt;/tx:method&gt;
+             &lt;/tx:attributes&gt;
+         &lt;/tx:advice&gt;
+
+         &lt;!--configure pointcut expression--&gt;
+         &lt;aop:config&gt;
+             &lt;aop:pointcut id=&quot;pt1&quot; expression=&quot;execution(* com.itheima.service.*.*(..))&quot;&gt;&lt;/aop:pointcut&gt;
+             &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pt1&quot;&gt;&lt;/aop:advisor&gt;
+         &lt;/aop:config&gt;
+     &lt;/beans&gt;
+</code></pre><ul>
+<li><p>IAccountDao</p>
+<pre><code>public interface IAccountDao {
+
+    /**
+     * 根据Id查询账户
+     * @param accountId
+     * @return
+     */
+    Account findAccountById(Integer accountId);
+
+    /**
+     * 根据名称查询账户
+     * @param accountName
+     * @return
+     */
+    Account findAccountByName(String accountName);
+
+    /**
+     * 更新账户
+     * @param account
+     */
+    void updateAccount(Account account);
+}
+</code></pre></li>
+<li><p>AccountDaoImpl</p>
+<pre><code>public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
+
+    @Override
+    public Account findAccountById(Integer accountId) {
+        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where id = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);
+        return accounts.isEmpty()?null:accounts.get(0);
+    }
+
+    @Override
+    public Account findAccountByName(String accountName) {
+        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where name = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);
+        if(accounts.isEmpty()){
+            return null;
+        }
+        if(accounts.size()&gt;1){
+            throw new RuntimeException(&quot;结果集不唯一&quot;);
+        }
+        return accounts.get(0);
+    }
+
+    @Override
+    public void updateAccount(Account account) {
+        super.getJdbcTemplate().update(&quot;update account set name=?,money=? where id=?&quot;,account.getName(),account.getMoney(),account.getId());
+    }
+}
+</code></pre></li>
+<li><p>Accont</p>
+<pre><code>public class Account implements Serializable {
+
+    private Integer id;
+    private String name;
+    private Float money;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Float getMoney() {
+        return money;
+    }
+
+    public void setMoney(Float money) {
+        this.money = money;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Account{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, money=&quot; + money +
+                &#39;}&#39;;
+    }
+}
+</code></pre></li>
+<li><p>IAccountService</p>
+<pre><code>/**
+ * Service layer interface of the account
+ */
+public interface IAccountService {
+
+    /**
+     * query account information by id
+     * @param accountId
+     * @return
+     */
+    Account findAccountById(Integer accountId);
+
+    /**
+     * transfer
+     * @param sourceName    transfer out account
+     * @param targetName    transfer to account
+     * @param Money     transfer amount
+     */
+    void transfer(String sourceName, String targetName, Float Money);
+}
+</code></pre></li>
+<li><p>AccountServiceImpl</p>
+<pre><code>public class AccountServiceImpl implements IAccountService{
+
+    private IAccountDao accountDao;
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+
+    @Override
+    public Account findAccountById(Integer accountId) {
+        return accountDao.findAccountById(accountId);
+    }
+
+    @Override
+    public void transfer(String sourceName, String targetName, Float money) {
+        System.out.println(&quot;transfer....&quot;);
+        //2.1根据名称查询转出账户
+        Account source = accountDao.findAccountByName(sourceName);
+        //2.2根据名称查询转入账户
+        Account target = accountDao.findAccountByName(targetName);
+        //2.3转出账户减钱
+        source.setMoney(source.getMoney()-money);
+        //2.4转入账户加钱
+        target.setMoney(target.getMoney()+money);
+        //2.5更新转出账户
+        accountDao.updateAccount(source);
+
+                int i=1/0;
+
+        //2.6更新转入账户
+        accountDao.updateAccount(target);
+    }
+}
+</code></pre></li>
+<li><p>AccountServiceTest</p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = &quot;classpath:bean.xml&quot;)
+public class AccountServiceTest {
+
+    @Autowired
+    private  IAccountService as;
+
+    @Test
+    public  void testTransfer(){
+        as.transfer(&quot;aaa&quot;,&quot;bbb&quot;,100f);
+
+    }
+
+}
+</code></pre></li>
+</ul>
+<ol>
+<li><p>Spring 中基于注解的声明式事务控制配置步骤</p>
+<ul>
+<li>1 ) 配置事务管理器</li>
+<li>2 ) 开启spring对注解事务的支持</li>
+<li>3 ) 在需要事务支持的地方使用@Transactional注解</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6.Spring学习笔记:面向切面编程(AOP)</title>
-    <url>/uncategorized/6-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B-AOP/</url>
-    <content><![CDATA[]]></content>
+    <url>/Java/Spring/Spring/6-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B-AOP/</url>
+    <content><![CDATA[<h2 id="1-AOP-面向切面编程-的概念"><a href="#1-AOP-面向切面编程-的概念" class="headerlink" title="1.AOP ( 面向切面编程 ) 的概念"></a>1.AOP ( 面向切面编程 ) 的概念</h2><h3 id="1-1-什么是AOP"><a href="#1-1-什么是AOP" class="headerlink" title="1.1 什么是AOP?"></a>1.1 什么是AOP?</h3><p>在单体架构下的软件开发中，一个大型项目通常是依照功能拆分成各个模块。但是如日志、安全和事务管理此类重要且繁琐的开发却没有必要参与到各个模块中，将这些功能与业务逻辑相关的模块分离就是面向切面编程所要解决的问题</p>
+<p>AOP采取的是<strong>横向抽取</strong>机制，取代了传统纵向继承体系重复性代码。</p>
+<h3 id="1-2-何为软件的横向和纵向？"><a href="#1-2-何为软件的横向和纵向？" class="headerlink" title="1.2 何为软件的横向和纵向？"></a>1.2 何为软件的横向和纵向？</h3><p>从<strong>纵向结构</strong>来看就是我们软件的各个模块，它所负责的是软件的核心业务（如购商品购买、添加购物车等）；从<strong>横向</strong>来看的话，软件的各个模块之间又有所关联，其中会包含一些公共模块（例如日志、权限等）；这些公共模块可以存在于各个核心业务中，而AOP的处理将两者分离，使开发人员可以专注于核心业务的开发，提高了开发效率。</p>
+<h3 id="1-3-AOP-的作用及优势"><a href="#1-3-AOP-的作用及优势" class="headerlink" title="1.3 AOP 的作用及优势"></a>1.3 AOP 的作用及优势</h3><p><strong>作用</strong>： 在程序运行期间，不修改源码<strong>对已有方法进行增强</strong>。</p>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>减少重复代码 </li>
+<li>提高开发效率 </li>
+<li>维护方便</li>
+</ul>
+<h3 id="1-4-AOP底层原理"><a href="#1-4-AOP底层原理" class="headerlink" title="1.4 AOP底层原理"></a>1.4 AOP底层原理</h3><p>使用<strong>动态代理</strong>实现<br>（1）基于 JDK 的代理</p>
+<blockquote>
+<p>适用于有接口情况，使用动态代理创建接口实现类代理对象</p>
+</blockquote>
+<p>（2）基于 CGLIB 动态代理</p>
+<blockquote>
+<p>适用于没有接口情况，使用动态代理创建类的子类代理对象</p>
+</blockquote>
+<h2 id="2-Spring-中的-AOP"><a href="#2-Spring-中的-AOP" class="headerlink" title="2.Spring 中的 AOP"></a>2.Spring 中的 AOP</h2><h3 id="2-1-AOP术语"><a href="#2-1-AOP术语" class="headerlink" title="2.1 AOP术语"></a>2.1 AOP术语</h3><ul>
+<li><strong>Advice</strong> (通知/增强): 所谓通知是指拦截到 Joinpoint 之后所要做的事情就是通知。<ul>
+<li>前置通知</li>
+<li>后置通知</li>
+<li>异常通知</li>
+<li>最终通知</li>
+<li>环绕通知</li>
+</ul>
+</li>
+<li><strong>Joinpoint</strong> (连接点): 所谓连接点是指那些<strong>被拦截到的点</strong>。在 Spring 中，这些点指的是<strong>方法</strong>，因为 Spring 只支持方法类型的连接点。</li>
+<li><strong>Pointcut</strong> (切入点): 所谓切入点是指我们要对哪些 Joinpoint 进行拦截的定义。</li>
+<li><strong>Introduction</strong> (引介): 引介是一种特殊的通知在不修改类代码的前提下, Introduction 可以在运行期为类动态地添加一些方 法或 Field。 Target(目标对象): 代理的目标对象。</li>
+<li><strong>Weaving</strong> (织入): 是指把增强应用到目标对象来创建新的代理对象的过程。 Spring 采用动态代理织入，而 AspectJ 采用编译期织入和类装载期织入。</li>
+<li><strong>Proxy</strong>（代理）: 一个类被 AOP 织入增强后，就产生一个结果代理类。 Aspect(切面): 是切入点和通知（引介）的结合。</li>
+</ul>
+<h3 id="2-2-Spring-中基于-xml-的-AOP-配置步骤"><a href="#2-2-Spring-中基于-xml-的-AOP-配置步骤" class="headerlink" title="2.2 Spring 中基于 xml 的 AOP 配置步骤"></a>2.2 Spring 中基于 xml 的 AOP 配置步骤</h3><ol>
+<li>把通知 Bean 也交给 Spring 来管理</li>
+<li>使用 aop : config 标签来表明开始 AOP 的设置</li>
+<li>使用 aop : aspect 标签配置切面<ul>
+<li>id 属性：是给切面提供一个唯一标识</li>
+<li>ref 属性：是指定通知类 Bean 的 id</li>
+</ul>
+</li>
+<li>在 aop : aspect 标签的内部使用对应标签来配置通知的类型<ol>
+<li>aop : before 标识前置通知<ul>
+<li>method 属性：用于指定类中哪个放啊是前置通知</li>
+<li>pointcut 属性：用于指定切入点表达式，该切入点表达式指的是对业务层中哪些方法增强</li>
+</ul>
+</li>
+<li>切入点表达式的写法：<ul>
+<li>关键字：execution ( 表达式 )</li>
+<li>表达式：<ul>
+<li>标准写法：访问修饰符 + 返回值 + 包名.类名.方法名（参数列表）</li>
+<li>举例：public void com.greyson.service.impl.IAccountServiceImpl.saveAccount ( )</li>
+</ul>
+</li>
+<li>全通配写法：<code>* * ..*.*(..)</code><ul>
+<li>访问修饰符可以省略</li>
+<li>返回值可以使用通配符，表示任意返回值</li>
+<li>包名可以使用通配符，表示任意包，但是有几级包就需要写几个 <code>*.</code></li>
+<li>包名可以使用  <code>..</code> 表示当前包和子包</li>
+<li>类名和方法名都可以使用  <code>*</code> 来实现通配</li>
+<li>参数列表：<ul>
+<li>可以直接使写数据类型：<ul>
+<li>基本类型直接写名称（如 int ）</li>
+<li>引用类型写包名.类名的方式 （如 java.lang.String ）</li>
+</ul>
+</li>
+<li>可以使用通配符表四任意类型，但是必须有参数</li>
+<li>可以使用 <code>..</code> 表示有无参数即可，有参数可以是任意类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实际开发中切入点表达式的通常写法：<ul>
+<li>切到业务层类实现下的所有方法：<code>* com.greyson.service.impl.*.*(..)</code></li>
+</ul>
+</li>
+<li>配置切入点表达式（aop : pointcut）：<ul>
+<li>id属性用于指定表达式的唯一标识，expression属性用于指定表达式内容</li>
+<li>此标签写在 aop : aspect 标签内部只能当前切面使用，在其外部则所有切面可用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Spring常用通知类型<ul>
+<li>前置通知（aop : before）：在切入点方法执行之前执行</li>
+<li>后置通知（aop : after-returning）：在切入点方法正常执行之后执行，它和异常通知永远只能执行一个</li>
+<li>异常通知（aop : after-throwing）：在切入点方法执行产生异常之后执行，它和后置通知永远只能执行一个</li>
+<li>最终通知（aop : after）：无论切入点方法是否正常执行它都会在其后面执行</li>
+</ul>
+</li>
+<li>环绕通知</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-3-实例"><a href="#2-3-实例" class="headerlink" title="2.3 实例"></a>2.3 实例</h3><p>1.引入 Maven 工程</p>
+<ul>
+<li><p>Pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.greyson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>day03_SpringAOP<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>webapp<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--解析切入点表达式--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>2.编写业务代码</p>
+<ul>
+<li><p>IAccountService</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟保存账户</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟更新账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除账户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteAccount</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AccountServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行了保存"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateAccount</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行了更新"</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行了删除"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Logger</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于记录日志的工具类，它里面提供了公共的代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printLog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"lOGGER类中的printLog开始记录日志了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>3.配置Spring</p>
+<ul>
+<li><p>bean.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置Spring的IOC,把Service对象配置进来--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"com.greyson.service.impl.AccountServiceImpl"</span>&gt;</span>		  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置Logger类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"logger"</span> <span class="attr">class</span>=<span class="string">"com.greyson.utils.Logger"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置切面--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAdvice"</span> <span class="attr">ref</span>=<span class="string">"logger"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置通知的类型，并且建立通知方法和切入点方法的关联--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"printLog"</span> <span class="attr">pointcut</span>=</span></span><br><span class="line"><span class="tag">                        "<span class="attr">execution</span>(*<span class="attr">com.greyson.service.impl.</span>*<span class="attr">.</span>*(<span class="attr">..</span>))"&gt;</span><span class="tag">&lt;/<span class="name">aop:before</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>4.编写测试类</p>
+<ul>
+<li><p>TestAOP</p>
+<pre><code>/**
+ * 测试AOP的配置
+ */
+public class TestAOP {
+    public static void main(String[] args) {
+        // 1. 获取容器
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;bean.xml&quot;);
+        // 2. 获取对象
+        IAccountService accountService = (IAccountService)applicationContext.getBean(&quot;accountService&quot;);
+        // 3. 执行方法
+        accountService.saveAccount();
+        accountService.updateAccount(1);
+        accountService.deleteAccount();
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="2-4-Spring-中基于注解的-AOP-配置"><a href="#2-4-Spring-中基于注解的-AOP-配置" class="headerlink" title="2.4 Spring 中基于注解的 AOP 配置"></a>2.4 Spring 中基于注解的 AOP 配置</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于记录日志的工具类，它里面提供了公共的代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span>(<span class="string">"logger"</span>)</span><br><span class="line"><span class="meta">@Aspect</span><span class="comment">//表示当前类是一个切面类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* com.itheima.service.impl.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pt1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 前置通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	<span class="meta">@Before</span>(<span class="string">"pt1()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">beforePrintLog</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"前置通知Logger类中的beforePrintLog方法开始记录日志了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 后置通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	<span class="meta">@AfterReturning</span>(<span class="string">"pt1()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">afterReturningPrintLog</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"后置通知Logger类中的afterReturningPrintLog方法开始记录日志了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异常通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@AfterThrowing</span>(<span class="string">"pt1()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">afterThrowingPrintLog</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"异常通知Logger类中的afterThrowingPrintLog方法开始记录日志了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 最终通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	<span class="meta">@After</span>(<span class="string">"pt1()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">afterPrintLog</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"最终通知Logger类中的afterPrintLog方法开始记录日志了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 环绕通知</span></span><br><span class="line"><span class="comment">     * 问题：</span></span><br><span class="line"><span class="comment">     *      当我们配置了环绕通知之后，切入点方法没有执行，而通知方法执行了。</span></span><br><span class="line"><span class="comment">     * 分析：</span></span><br><span class="line"><span class="comment">     *      通过对比动态代理中的环绕通知代码，发现动态代理的环绕通知有明确的切入点方法调用，</span></span><br><span class="line"><span class="comment">     *      而我们的代码中没有。</span></span><br><span class="line"><span class="comment">     * 解决：</span></span><br><span class="line"><span class="comment">     *      Spring框架为我们提供了一个接口：ProceedingJoinPoint。该接口有一个方法proceed()，</span></span><br><span class="line"><span class="comment">     *      此方法就相当于明确调用切入点方法。</span></span><br><span class="line"><span class="comment">     *      该接口可以作为环绕通知的方法参数，在程序执行时，spring框架会为我们提供该接口的实现类</span></span><br><span class="line"><span class="comment">     *      供我们使用。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * spring中的环绕通知：</span></span><br><span class="line"><span class="comment">     *      它是spring框架为我们提供的一种可以在代码中手动控制增强方法何时执行的方式。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"pt1()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">aroundPringLog</span><span class="params">(ProceedingJoinPoint pjp)</span></span>&#123;</span><br><span class="line">        Object rtValue = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Object[] args = pjp.getArgs();<span class="comment">//得到方法执行所需的参数</span></span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Logger类中的aroundPringLog方法开始记录日志了。。。前置"</span>);</span><br><span class="line"></span><br><span class="line">            rtValue = pjp.proceed(args);<span class="comment">//明确调用业务层方法（切入点方法）</span></span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Logger类中的aroundPringLog方法开始记录日志了。。。后置"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> rtValue;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Throwable t)&#123;</span><br><span class="line">            System.out.println(<span class="string">"Logger类中的aroundPringLog方法开始记录日志了。。。异常"</span>);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(t);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"Logger类中的aroundPringLog方法开始记录日志了。。。最终"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
   </entry>
   <entry>
     <title>5.Spring学习笔记:Spring整合Junit</title>
     <url>/Java/Spring/Spring/5-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Spring%E6%95%B4%E5%90%88Junit/</url>
-    <content><![CDATA[<p>1.导入 Spring 整合 Junit 的 jar ( 坐标 )</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>1.导入 Spring 整合 Junit 的 jar ( 坐标 )<br><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>2.使用 Junit 提供的一个注解把原有的 main 方法替换了，替换成 Spring 提供的。</p>
 <ul>
 <li><strong>@Runwith</strong></li>
@@ -22,8 +442,7 @@
 </ul>
 </li>
 </ul>
-<p>4.使用 @Autowired 给测试类中的变量注入数据。</p>
-<p>5.当使用 spring 5.x 版本的时候，要求 junit 的 jar 必须是 4.12 及以上。</p>
+<p>4.使用 @Autowired 给测试类中的变量注入数据。<br>5.当使用 spring 5.x 版本的时候，要求 junit 的 jar 必须是 4.12 及以上。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(classes = SpringConfiguration.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IAccountService as = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//3.执行方法</span></span><br><span class="line">        List&lt;Account&gt; accounts = as.findAllAccount();</span><br><span class="line">        <span class="keyword">for</span>(Account account : accounts)&#123;</span><br><span class="line">            System.out.println(account);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -38,7 +457,7 @@
   <entry>
     <title>4.Spring学习笔记:基于注解的IOC</title>
     <url>/Java/Spring/Spring/4-Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IOC/</url>
-    <content><![CDATA[<h2 id><a href="#" class="headerlink" title=" "></a> </h2><h2 id="Spring-中的新注解"><a href="#Spring-中的新注解" class="headerlink" title="Spring 中的新注解"></a>Spring 中的新注解</h2><ul>
+    <content><![CDATA[<h2 id="Spring-中的新注解"><a href="#Spring-中的新注解" class="headerlink" title="Spring 中的新注解"></a>Spring 中的新注解</h2><ul>
 <li><p><strong>@Configuration</strong></p>
 <ul>
 <li>作用：指定当前类是一个配置类。</li>
@@ -47,46 +466,28 @@
 </li>
 <li><p><strong>@ComponentScan</strong></p>
 <ul>
-<li><p>作用：用于通过注解指定 Spring 在创建容器时要扫描的包。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 它和 basepackages 的作用是一样的，都是用于指定创建容器时要扫描的包。</p>
-<p>使用此注解就等同于在 xml 中配置了：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.greyson"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>作用：用于通过注解指定 Spring 在创建容器时要扫描的包。</li>
+<li>属性：<br>value : 它和 basepackages 的作用是一样的，都是用于指定创建容器时要扫描的包。<br>使用此注解就等同于在 xml 中配置了：<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.greyson"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p><strong>@Bean</strong></p>
 <ul>
-<li><p>作用：用于把当前方法的返回值作为 bean 对象放入 Spring 的IOC容器中。</p>
-</li>
-<li><p>属性：</p>
-<p>name : 用于指定 bean 的 id，当不写时，默认值为当前方法的名称。</p>
-</li>
-<li><p>细节：</p>
-<p>当我们使用注解配置方法时，如果方法有参数，Spring 框架会去容器中查找有没有可用的 bean 对象，</p>
-<p>查找的方式和 Autowired 注解的作用是一样的。</p>
-</li>
+<li>作用：用于把当前方法的返回值作为 bean 对象放入 Spring 的IOC容器中。</li>
+<li>属性：<br>name : 用于指定 bean 的 id，当不写时，默认值为当前方法的名称。</li>
+<li>细节：<br>当我们使用注解配置方法时，如果方法有参数，Spring 框架会去容器中查找有没有可用的 bean 对象，<br>查找的方式和 Autowired 注解的作用是一样的。</li>
 </ul>
 </li>
 <li><p><strong>@Import</strong></p>
 <ul>
-<li><p>作用：用于导入其他的配置类。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 用于指定其他配置类的字节码。</p>
-<p>当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类。</p>
-</li>
+<li>作用：用于导入其他的配置类。</li>
+<li>属性：<br>value : 用于指定其他配置类的字节码。<br>当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类。</li>
 </ul>
 </li>
 <li><p><strong>@Properties</strong></p>
 <ul>
-<li><p>作用：用于指定 properties 文件的位置。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 指定文件的名称和路径。</p>
-<p>关键字：classpath , 表示类路径下。</p>
-</li>
+<li>作用：用于指定 properties 文件的位置。</li>
+<li>属性：<br>value : 指定文件的名称和路径。<br>关键字：classpath , 表示类路径下。</li>
 </ul>
 </li>
 </ul>
@@ -174,19 +575,14 @@
 </ul>
 <p>结构相同，标签可以<strong>互换</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService3"</span> <span class="attr">class</span>=<span class="string">"com.itheima.service.impl.AccountServiceImpl3"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myStrs"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mySet"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myMap"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"testC"</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"testD"</span>&gt;</span>ddd<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myProps"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"testA"</span> <span class="attr">value</span>=<span class="string">"aaa"</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"testB"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-5-使用注解注入"><a href="#2-5-使用注解注入" class="headerlink" title="2.5 使用注解注入"></a>2.5 使用注解注入</h3><h4 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h4><p>第一步：在类或方法的前面加上<strong>注解关键字</strong></p>
-<p>第二步：<strong>引入约束</strong>，注意此处约束多了 xmlns:context…</p>
-<p>第三步：<strong>添加配置</strong>，告知 Spring 在创建容器时要扫描的包，配置所需的标签不是在 bean 约束中，而是一个名称为 context 的名称空间和约束中，完整配置如下：</p>
+<h3 id="2-5-使用注解注入"><a href="#2-5-使用注解注入" class="headerlink" title="2.5 使用注解注入"></a>2.5 使用注解注入</h3><h4 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h4><p>第一步：在类或方法的前面加上<strong>注解关键字</strong><br>第二步：<strong>引入约束</strong>，注意此处约束多了 xmlns:context…<br>第三步：<strong>添加配置</strong>，告知 Spring 在创建容器时要扫描的包，配置所需的标签不是在 bean 约束中，而是一个名称为 context 的名称空间和约束中，完整配置如下：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="有哪些注解？"><a href="#有哪些注解？" class="headerlink" title="有哪些注解？"></a>有哪些注解？</h4><h5 id="用于创建对象的"><a href="#用于创建对象的" class="headerlink" title="用于创建对象的"></a>用于<strong>创建对象</strong>的</h5><p>作用：等同于 xml 配置文件中编写一个 <bean> 标签</bean></p>
 <ul>
-<li><p><strong>@Component</strong></p>
-<ul>
+<li><strong>@Component</strong><ul>
 <li>形式：@Component(value=” “)   /  @Component(“ “)</li>
 <li>作用：用于把当前类对象存入 Spring 容器中</li>
-<li><p>属性：</p>
-<p>value : 用于指定 bean 的 id，当我们不写的时候，它的默认值是当前类名，且首字母改小写;当值只有一个的时候可以省略</p>
-</li>
+<li>属性：<br>value : 用于指定 bean 的 id，当我们不写的时候，它的默认值是当前类名，且首字母改小写;当值只有一个的时候可以省略</li>
 </ul>
 </li>
 </ul>
@@ -270,9 +666,7 @@
 </li>
 </ol>
 <h2 id="2-bean-的作用范围调整"><a href="#2-bean-的作用范围调整" class="headerlink" title="2.bean 的作用范围调整"></a>2.bean 的作用范围调整</h2><ol>
-<li><p>bean 标签的 <strong>scope</strong> 属性</p>
-<p>作用：用于指定 bean 的<strong>作用范围。</strong></p>
-<p>取值：常用的就是<strong>单例</strong>和<strong>多例。</strong></p>
+<li><p>bean 标签的 <strong>scope</strong> 属性<br>作用：用于指定 bean 的<strong>作用范围。</strong><br>取值：常用的就是<strong>单例</strong>和<strong>多例。</strong></p>
 <ul>
 <li><strong>singleton</strong> : 单例的（<strong>default</strong>）。</li>
 <li><strong>prototype</strong> : 多例的。</li>
@@ -281,8 +675,7 @@
 <li>global-session : 作用于集群的会话范围（全局会话范围），当不是集群范围时，它就是 session。</li>
 </ul>
 </li>
-<li><p>bean 对象的<strong>声明周期</strong></p>
-<p><strong>单例</strong>对象：</p>
+<li><p>bean 对象的<strong>声明周期</strong><br><strong>单例</strong>对象：</p>
 <ul>
 <li>出生：当容器创建时发生。</li>
 <li>活着：只要容器还在对象就一直活着。</li>
@@ -329,19 +722,15 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao = <span class="keyword">new</span> AccountDaoImpl();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">saveAccount</span><span class="params">()</span></span>&#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li><p>编写测试类 Client</p>
+<p>4.编写测试类 Client</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一个表现层，用于调用业务层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *获取IOC的核心容器，并根据id获取对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>);</span><br><span class="line">          <span class="comment">// 两种不同的方式获取Bean对象</span></span><br><span class="line">          IAccountService as = (IAccountService) ac.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">          IAccountDao adao = ac.getBean(<span class="string">"accountDao"</span>,IAccountDao.class);</span><br><span class="line">          System.out.println(as);</span><br><span class="line">          System.out.println(adao);</span><br><span class="line">          <span class="comment">// as.saveAccount();</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
 <h3 id="2-知识点"><a href="#2-知识点" class="headerlink" title="2.知识点"></a>2.知识点</h3><ol>
 <li><p><strong>ApplicationContext</strong> 的三个常用实现类：</p>
 <ul>
-<li><p><strong>ClassPathXmlApplicationContext</strong>： 它可以加载<strong>路径下</strong>的配置文件，要求配置文件必须在路径下，否则加载不了</p>
+<li><p><strong>ClassPathXmlApplicationContext</strong>： 它可以加载<strong>路径下</strong>的配置文件，要求配置文件必须在路径下，否则加载不了。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bea</span></span><br><span class="line"><span class="string">ns.xml"</span>);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>FileSyetemXmlApplicationContext</strong>：它可以加载<strong>磁盘任意路径下</strong>的配置文件（<strong>必须有访问权限</strong>）</p>
-<p>加载方式如下：</p>
+<li><p><strong>FileSyetemXmlApplicationContext</strong>：它可以加载<strong>磁盘任意路径下</strong>的配置文件（<strong>必须有访问权限</strong>）。<br>加载方式如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"C:\\user\\greyson\\..."</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>AnnotationConfigApplicationContext</strong>：它是用于<strong>读取注解创建容器</strong>的</p>
@@ -350,13 +739,13 @@
 </li>
 <li><p>核心容器的两个接口引发出来的问题</p>
 <ul>
-<li>ApplicationContext：它在创建核心容器时，创建对象采取的策略是采用立即加载的方式，也就是说，只要一读取完配置文件就马上创建配置文件中配置的对象<ul>
-<li><strong>单例对象</strong>适用</li>
-<li>开发中常采用此接口</li>
+<li>ApplicationContext：它在创建核心容器时，创建对象采取的策略是采用立即加载的方式，也就是说，只要一读取完配置文件就马上创建配置文件中配置的对象。<ul>
+<li><strong>单例对象</strong>适用。</li>
+<li>开发中常采用此接口。</li>
 </ul>
 </li>
 <li>BeanFactory: 它在构建核心容器时，创建对象的策略是采用延迟加载的方式，什么时候获取 id 对象了，什么时候就创建对象。<ul>
-<li><strong>多例对象</strong>适用</li>
+<li><strong>多例对象</strong>适用。</li>
 </ul>
 </li>
 </ul>
@@ -923,8 +1312,8 @@
         <category>Maven</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Maven</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1284,8 +1673,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
         <tag>Redis</tag>
       </tags>
   </entry>
@@ -1599,8 +1988,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -1733,8 +2122,8 @@ Epoch 5/5
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Java</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -2491,6 +2880,106 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>监督学习各方法比较</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
     <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
@@ -2587,67 +3076,6 @@ Epoch 5/5
 <li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
 <li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
 </ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -2795,45 +3223,6 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
 <li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
-</ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>

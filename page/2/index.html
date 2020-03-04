@@ -381,6 +381,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Maven/Maven中Scope的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/Maven/Maven中Scope的区别/" class="post-title-link" itemprop="url">Maven中Scope的区别</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-29 18:24:17 / 修改时间：21:26:51" itemprop="dateCreated datePublished" datetime="2020-02-29T18:24:17+08:00">2020-02-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.8k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。
+test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。
+provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（如tomcat）和 JDK 提供，只在编译的 classpath 中加载和使用，打包的时候不会包含在目标包中。最常见的是 j2ee 规范相关的 servlet-api 和 jsp-api 等 jar 包，一般由 servlet 容器提供，无需再打包到 war 包中，如果不配置为 provided ，把这些包打包到工程 war 包中，在 tomcat6 以上版本会出现冲突无法正常运行程序（版本不符的
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/Maven/Maven中Scope的区别/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/卷积神经网络/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2356,237 +2554,6 @@ User-Agent：告诉服务器访问所使用的浏览器版本信息，解决浏�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/Servlet/Servlet学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Java/JavaWeb/Servlet/Servlet学习笔记/" class="post-title-link" itemprop="url">Servlet学习笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-25 08:51:04" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-26 13:43:47" itemprop="dateModified" datetime="2020-02-26T13:43:47+08:00">2020-02-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/Servlet/" itemprop="url" rel="index"><span itemprop="name">Servlet</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.3k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.Servlet 概述
-概念：运行在服务器端的小程序。
-
-Servlet 就是一个接口，定义了 Java 类被浏览器访问（Tomcat识别）的规则。
-
-
-快速入门：
-
-1.创建 JavaEE 项目。
-2.定义一个类，实现 Servlet 接口。
-
-public class ServerletDemo1 implements Servlet
-
-3.实现接口中的抽象方法。
-4.配置 Servlet：web\WEB-INF\web.xml。
-
-&lt;servlet&gt;    &lt;servlet-name&gt;demo1&lt;/servlet-name&gt;    &lt;servlet-class&gt;com.coderhuye.web.servlet.ServerletDemo1&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servle
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/Servlet/Servlet学习笔记/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2635,7 +2602,7 @@ public class ServerletDemo1 implements Servlet
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2861,7 +2828,7 @@ public class ServerletDemo1 implements Servlet
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">128k</span>
   
 
   
@@ -3356,9 +3323,9 @@ public class ServerletDemo1 implements Servlet
   
     
       
-        
-      
     
+      
+        
       
     
       

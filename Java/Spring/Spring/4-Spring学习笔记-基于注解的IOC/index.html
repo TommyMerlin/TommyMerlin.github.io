@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。  属性： value : 它和 basepackages 的作用是一">
+  <meta name="description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。 属性：value : 它和 basepackages 的作用是一样的，">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4.Spring学习笔记:基于注解的IOC">
 <meta property="og:url" content="http://yoursite.com/Java/Spring/Spring/4-Spring学习笔记-基于注解的IOC/index.html">
 <meta property="og:site_name" content="HuYe的博客">
-<meta property="og:description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。  属性： value : 它和 basepackages 的作用是一">
+<meta property="og:description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。 属性：value : 它和 basepackages 的作用是一样的，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T01:43:27.195Z">
+<meta property="og:updated_time" content="2020-03-04T02:05:40.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4.Spring学习笔记:基于注解的IOC">
-<meta name="twitter:description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。  属性： value : 它和 basepackages 的作用是一">
+<meta name="twitter:description" content="Spring 中的新注解 @Configuration  作用：指定当前类是一个配置类。 细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。   @ComponentScan  作用：用于通过注解指定 Spring 在创建容器时要扫描的包。 属性：value : 它和 basepackages 的作用是一样的，">
 
 
 
@@ -428,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 09:31:19 / 修改时间：09:43:27" itemprop="dateCreated datePublished" datetime="2020-03-04T09:31:19+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 09:31:19 / 修改时间：10:05:40" itemprop="dateCreated datePublished" datetime="2020-03-04T09:31:19+08:00">2020-03-04</time>
             
 
             
@@ -500,7 +500,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.2k</span>
+                <span title="本文字数">5.1k</span>
               
 
               
@@ -524,7 +524,7 @@
       
 
       
-        <h2 id><a href="#" class="headerlink" title=" "></a> </h2><h2 id="Spring-中的新注解"><a href="#Spring-中的新注解" class="headerlink" title="Spring 中的新注解"></a>Spring 中的新注解</h2><ul>
+        <h2 id="Spring-中的新注解"><a href="#Spring-中的新注解" class="headerlink" title="Spring 中的新注解"></a>Spring 中的新注解</h2><ul>
 <li><p><strong>@Configuration</strong></p>
 <ul>
 <li>作用：指定当前类是一个配置类。</li>
@@ -533,46 +533,28 @@
 </li>
 <li><p><strong>@ComponentScan</strong></p>
 <ul>
-<li><p>作用：用于通过注解指定 Spring 在创建容器时要扫描的包。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 它和 basepackages 的作用是一样的，都是用于指定创建容器时要扫描的包。</p>
-<p>使用此注解就等同于在 xml 中配置了：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.greyson"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>作用：用于通过注解指定 Spring 在创建容器时要扫描的包。</li>
+<li>属性：<br>value : 它和 basepackages 的作用是一样的，都是用于指定创建容器时要扫描的包。<br>使用此注解就等同于在 xml 中配置了：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.greyson"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p><strong>@Bean</strong></p>
 <ul>
-<li><p>作用：用于把当前方法的返回值作为 bean 对象放入 Spring 的IOC容器中。</p>
-</li>
-<li><p>属性：</p>
-<p>name : 用于指定 bean 的 id，当不写时，默认值为当前方法的名称。</p>
-</li>
-<li><p>细节：</p>
-<p>当我们使用注解配置方法时，如果方法有参数，Spring 框架会去容器中查找有没有可用的 bean 对象，</p>
-<p>查找的方式和 Autowired 注解的作用是一样的。</p>
-</li>
+<li>作用：用于把当前方法的返回值作为 bean 对象放入 Spring 的IOC容器中。</li>
+<li>属性：<br>name : 用于指定 bean 的 id，当不写时，默认值为当前方法的名称。</li>
+<li>细节：<br>当我们使用注解配置方法时，如果方法有参数，Spring 框架会去容器中查找有没有可用的 bean 对象，<br>查找的方式和 Autowired 注解的作用是一样的。</li>
 </ul>
 </li>
 <li><p><strong>@Import</strong></p>
 <ul>
-<li><p>作用：用于导入其他的配置类。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 用于指定其他配置类的字节码。</p>
-<p>当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类。</p>
-</li>
+<li>作用：用于导入其他的配置类。</li>
+<li>属性：<br>value : 用于指定其他配置类的字节码。<br>当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类。</li>
 </ul>
 </li>
 <li><p><strong>@Properties</strong></p>
 <ul>
-<li><p>作用：用于指定 properties 文件的位置。</p>
-</li>
-<li><p>属性：</p>
-<p>value : 指定文件的名称和路径。</p>
-<p>关键字：classpath , 表示类路径下。</p>
-</li>
+<li>作用：用于指定 properties 文件的位置。</li>
+<li>属性：<br>value : 指定文件的名称和路径。<br>关键字：classpath , 表示类路径下。</li>
 </ul>
 </li>
 </ul>
@@ -725,7 +707,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -935,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text"> </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-中的新注解"><span class="nav-text">Spring 中的新注解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-中的新注解"><span class="nav-text">Spring 中的新注解</span></a></li></ol></div>
             
 
           </div>
@@ -968,7 +950,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">128k</span>
   
 
   

@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="HuYe的博客">
 <meta property="og:description" content="1.概述能注入的数据 基本类型和 String 其他 bean 类型（在配置文件中或者注解中配置过的 bean） 复杂类型/集合类型  IOC 的作用减低程序间的耦合（即依赖关系） 在当前类需要用到其他类的对象，由 Spring 为我们提供，而我们在配置文件中说明依赖关系的维护，这种方式就称为依赖注入。 2.注入方式注入的方式：  第一种：使用构造函数提供 第二种：使用 set方法提供 第三种：使">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-03T14:29:09.015Z">
+<meta property="og:updated_time" content="2020-03-04T02:07:51.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3.Spring学习笔记:依赖注入">
 <meta name="twitter:description" content="1.概述能注入的数据 基本类型和 String 其他 bean 类型（在配置文件中或者注解中配置过的 bean） 复杂类型/集合类型  IOC 的作用减低程序间的耦合（即依赖关系） 在当前类需要用到其他类的对象，由 Spring 为我们提供，而我们在配置文件中说明依赖关系的维护，这种方式就称为依赖注入。 2.注入方式注入的方式：  第一种：使用构造函数提供 第二种：使用 set方法提供 第三种：使">
@@ -428,12 +428,24 @@
                 
               
 
-              <time title="创建时间：2020-03-03 21:42:54 / 修改时间：22:29:09" itemprop="dateCreated datePublished" datetime="2020-03-03T21:42:54+08:00">2020-03-03</time>
+              <time title="创建时间：2020-03-03 21:42:54" itemprop="dateCreated datePublished" datetime="2020-03-03T21:42:54+08:00">2020-03-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-04 10:07:51" itemprop="dateModified" datetime="2020-03-04T10:07:51+08:00">2020-03-04</time>
               
             
           </span>
@@ -594,19 +606,14 @@
 </ul>
 <p>结构相同，标签可以<strong>互换</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"accountService3"</span> <span class="attr">class</span>=<span class="string">"com.itheima.service.impl.AccountServiceImpl3"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myStrs"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mySet"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>AAA<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span>CCC<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myMap"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"testC"</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"testD"</span>&gt;</span>ddd<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myProps"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"testA"</span> <span class="attr">value</span>=<span class="string">"aaa"</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"testB"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">value</span>&gt;</span>BBB<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-5-使用注解注入"><a href="#2-5-使用注解注入" class="headerlink" title="2.5 使用注解注入"></a>2.5 使用注解注入</h3><h4 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h4><p>第一步：在类或方法的前面加上<strong>注解关键字</strong></p>
-<p>第二步：<strong>引入约束</strong>，注意此处约束多了 xmlns:context…</p>
-<p>第三步：<strong>添加配置</strong>，告知 Spring 在创建容器时要扫描的包，配置所需的标签不是在 bean 约束中，而是一个名称为 context 的名称空间和约束中，完整配置如下：</p>
+<h3 id="2-5-使用注解注入"><a href="#2-5-使用注解注入" class="headerlink" title="2.5 使用注解注入"></a>2.5 使用注解注入</h3><h4 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h4><p>第一步：在类或方法的前面加上<strong>注解关键字</strong><br>第二步：<strong>引入约束</strong>，注意此处约束多了 xmlns:context…<br>第三步：<strong>添加配置</strong>，告知 Spring 在创建容器时要扫描的包，配置所需的标签不是在 bean 约束中，而是一个名称为 context 的名称空间和约束中，完整配置如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="有哪些注解？"><a href="#有哪些注解？" class="headerlink" title="有哪些注解？"></a>有哪些注解？</h4><h5 id="用于创建对象的"><a href="#用于创建对象的" class="headerlink" title="用于创建对象的"></a>用于<strong>创建对象</strong>的</h5><p>作用：等同于 xml 配置文件中编写一个 <bean> 标签</bean></p>
 <ul>
-<li><p><strong>@Component</strong></p>
-<ul>
+<li><strong>@Component</strong><ul>
 <li>形式：@Component(value=” “)   /  @Component(“ “)</li>
 <li>作用：用于把当前类对象存入 Spring 容器中</li>
-<li><p>属性：</p>
-<p>value : 用于指定 bean 的 id，当我们不写的时候，它的默认值是当前类名，且首字母改小写;当值只有一个的时候可以省略</p>
-</li>
+<li>属性：<br>value : 用于指定 bean 的 id，当我们不写的时候，它的默认值是当前类名，且首字母改小写;当值只有一个的时候可以省略</li>
 </ul>
 </li>
 </ul>
@@ -808,7 +815,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1051,7 +1058,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">128k</span>
   
 
   

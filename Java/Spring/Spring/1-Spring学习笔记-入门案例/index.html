@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="HuYe的博客">
 <meta property="og:description" content="1.实例 通过 Idea 创建 maven 项目 配置 Spring 配置文件 ApplicationContext.xml 编写接口及实现类   IaccountDao 12345678910/** * 账户的持久层接口 */public interface IAccountDao &amp;#123;    /**     * 模拟保存账户     */    void saveAccount();&amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-03T13:35:36.585Z">
+<meta property="og:updated_time" content="2020-03-04T02:09:55.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.Spring学习笔记:入门案例">
 <meta name="twitter:description" content="1.实例 通过 Idea 创建 maven 项目 配置 Spring 配置文件 ApplicationContext.xml 编写接口及实现类   IaccountDao 12345678910/** * 账户的持久层接口 */public interface IAccountDao &amp;#123;    /**     * 模拟保存账户     */    void saveAccount();&amp;">
@@ -428,12 +428,24 @@
                 
               
 
-              <time title="创建时间：2020-03-03 21:28:00 / 修改时间：21:35:36" itemprop="dateCreated datePublished" datetime="2020-03-03T21:28:00+08:00">2020-03-03</time>
+              <time title="创建时间：2020-03-03 21:28:00" itemprop="dateCreated datePublished" datetime="2020-03-03T21:28:00+08:00">2020-03-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-04 10:09:55" itemprop="dateModified" datetime="2020-03-04T10:09:55+08:00">2020-03-04</time>
               
             
           </span>
@@ -543,19 +555,15 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 账户的业务层实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao = <span class="keyword">new</span> AccountDaoImpl();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">saveAccount</span><span class="params">()</span></span>&#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li><p>编写测试类 Client</p>
+<p>4.编写测试类 Client</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟一个表现层，用于调用业务层</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *获取IOC的核心容器，并根据id获取对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>);</span><br><span class="line">          <span class="comment">// 两种不同的方式获取Bean对象</span></span><br><span class="line">          IAccountService as = (IAccountService) ac.getBean(<span class="string">"accountService"</span>);</span><br><span class="line">          IAccountDao adao = ac.getBean(<span class="string">"accountDao"</span>,IAccountDao.class);</span><br><span class="line">          System.out.println(as);</span><br><span class="line">          System.out.println(adao);</span><br><span class="line">          <span class="comment">// as.saveAccount();</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
 <h3 id="2-知识点"><a href="#2-知识点" class="headerlink" title="2.知识点"></a>2.知识点</h3><ol>
 <li><p><strong>ApplicationContext</strong> 的三个常用实现类：</p>
 <ul>
-<li><p><strong>ClassPathXmlApplicationContext</strong>： 它可以加载<strong>路径下</strong>的配置文件，要求配置文件必须在路径下，否则加载不了</p>
+<li><p><strong>ClassPathXmlApplicationContext</strong>： 它可以加载<strong>路径下</strong>的配置文件，要求配置文件必须在路径下，否则加载不了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bea</span></span><br><span class="line"><span class="string">ns.xml"</span>);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>FileSyetemXmlApplicationContext</strong>：它可以加载<strong>磁盘任意路径下</strong>的配置文件（<strong>必须有访问权限</strong>）</p>
-<p>加载方式如下：</p>
+<li><p><strong>FileSyetemXmlApplicationContext</strong>：它可以加载<strong>磁盘任意路径下</strong>的配置文件（<strong>必须有访问权限</strong>）。<br>加载方式如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> FileSystemXmlApplicationContext(<span class="string">"C:\\user\\greyson\\..."</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>AnnotationConfigApplicationContext</strong>：它是用于<strong>读取注解创建容器</strong>的</p>
@@ -564,13 +572,13 @@
 </li>
 <li><p>核心容器的两个接口引发出来的问题</p>
 <ul>
-<li>ApplicationContext：它在创建核心容器时，创建对象采取的策略是采用立即加载的方式，也就是说，只要一读取完配置文件就马上创建配置文件中配置的对象<ul>
-<li><strong>单例对象</strong>适用</li>
-<li>开发中常采用此接口</li>
+<li>ApplicationContext：它在创建核心容器时，创建对象采取的策略是采用立即加载的方式，也就是说，只要一读取完配置文件就马上创建配置文件中配置的对象。<ul>
+<li><strong>单例对象</strong>适用。</li>
+<li>开发中常采用此接口。</li>
 </ul>
 </li>
 <li>BeanFactory: 它在构建核心容器时，创建对象的策略是采用延迟加载的方式，什么时候获取 id 对象了，什么时候就创建对象。<ul>
-<li><strong>多例对象</strong>适用</li>
+<li><strong>多例对象</strong>适用。</li>
 </ul>
 </li>
 </ul>
@@ -724,7 +732,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -967,7 +975,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">128k</span>
   
 
   

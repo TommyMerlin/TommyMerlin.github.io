@@ -103,21 +103,25 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="6.Spring学习笔记:面向切面编程(AOP)">
-<meta property="og:url" content="http://yoursite.com/uncategorized/6-Spring学习笔记-面向切面编程-AOP/index.html">
+  <meta name="description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7.Spring学习笔记:事务管理">
+<meta property="og:url" content="http://yoursite.com/Java/Spring/Spring/7-Spring学习笔记-事务管理/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T01:44:34.766Z">
+<meta property="og:updated_time" content="2020-03-04T02:03:44.326Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="6.Spring学习笔记:面向切面编程(AOP)">
+<meta name="twitter:title" content="7.Spring学习笔记:事务管理">
+<meta name="twitter:description" content="声明式事务管理 Spring中基于 xml 的声明式事务控制配置步骤 ( 1 ) 配置事务管理器 ( 2 ) 配置事务的通知  1 ) 导入事务的约束 2 ) 使用tx:advice标签配置事务通知 属性： id：给事务通知起一个唯一标识 transaction-manager：给事务通知提供一个事务管理器引用     3 ) 配置AOP中的通用切入点表达式 4 ) 建立十五通知和切入点表达式的对">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/uncategorized/6-Spring学习笔记-面向切面编程-AOP/">
+  <link rel="canonical" href="http://yoursite.com/Java/Spring/Spring/7-Spring学习笔记-事务管理/">
 
 
 
@@ -127,7 +131,7 @@
   };
 </script>
 
-  <title>6.Spring学习笔记:面向切面编程(AOP) | HuYe的博客</title>
+  <title>7.Spring学习笔记:事务管理 | HuYe的博客</title>
   
 
 
@@ -381,7 +385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/6-Spring学习笔记-面向切面编程-AOP/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/7-Spring学习笔记-事务管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -398,7 +402,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">6.Spring学习笔记:面向切面编程(AOP)
+          <h1 class="post-title" itemprop="name headline">7.Spring学习笔记:事务管理
 
               
             
@@ -424,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 09:44:23 / 修改时间：09:44:34" itemprop="dateCreated datePublished" datetime="2020-03-04T09:44:23+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 10:02:24 / 修改时间：10:03:44" itemprop="dateCreated datePublished" datetime="2020-03-04T10:02:24+08:00">2020-03-04</time>
             
 
             
@@ -434,6 +438,38 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -464,7 +500,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">8.5k</span>
               
 
               
@@ -488,7 +524,268 @@
       
 
       
-        
+        <h3 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h3><ol>
+<li><p>Spring中基于 xml 的声明式事务控制配置步骤</p>
+<p>( 1 ) 配置事务管理器</p>
+<p>( 2 ) 配置事务的通知</p>
+<ul>
+<li>1 ) 导入事务的约束</li>
+<li>2 ) 使用tx:advice标签配置事务通知<ul>
+<li>属性：<ul>
+<li>id：给事务通知起一个唯一标识</li>
+<li>transaction-manager：给事务通知提供一个事务管理器引用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3 ) 配置AOP中的通用切入点表达式</li>
+<li>4 ) 建立十五通知和切入点表达式的对应关系</li>
+<li>5 ) 配置事务的属性（在事务的通知 tx : advice标签的内部）<ul>
+<li>isolation：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别</li>
+<li>propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。</li>
+<li>read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。</li>
+<li>timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。</li>
+<li>rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。</li>
+<li>no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基于xml配置实例</p>
+<ul>
+<li><p>bean.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
+
+    &lt;!--configure service layer--&gt;
+    &lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.AccountServiceImpl&quot;&gt;
+        &lt;property name=&quot;accountDao&quot; ref=&quot;accountDao&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置账户的持久层--&gt;
+    &lt;bean id=&quot;accountDao&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<pre><code> ​    
+
+         &lt;!-- 配置数据源--&gt;
+         &lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
+             &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/eesy&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+             &lt;property name=&quot;password&quot; value=&quot;HotteMYSQL&quot;&gt;&lt;/property&gt;
+         &lt;/bean&gt;
+
+         &lt;!--Declarative transaction management--&gt;
+         &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+             &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+         &lt;/bean&gt;
+
+         &lt;!--configure transaction advice--&gt;
+         &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+             &lt;tx:attributes&gt;
+                 &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;/&gt;
+                 &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; read-only=&quot;true&quot;&gt;&lt;/tx:method&gt;
+             &lt;/tx:attributes&gt;
+         &lt;/tx:advice&gt;
+
+         &lt;!--configure pointcut expression--&gt;
+         &lt;aop:config&gt;
+             &lt;aop:pointcut id=&quot;pt1&quot; expression=&quot;execution(* com.itheima.service.*.*(..))&quot;&gt;&lt;/aop:pointcut&gt;
+             &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;pt1&quot;&gt;&lt;/aop:advisor&gt;
+         &lt;/aop:config&gt;
+     &lt;/beans&gt;
+</code></pre><ul>
+<li><p>IAccountDao</p>
+<pre><code>public interface IAccountDao {
+
+    /**
+     * 根据Id查询账户
+     * @param accountId
+     * @return
+     */
+    Account findAccountById(Integer accountId);
+
+    /**
+     * 根据名称查询账户
+     * @param accountName
+     * @return
+     */
+    Account findAccountByName(String accountName);
+
+    /**
+     * 更新账户
+     * @param account
+     */
+    void updateAccount(Account account);
+}
+</code></pre></li>
+<li><p>AccountDaoImpl</p>
+<pre><code>public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
+
+    @Override
+    public Account findAccountById(Integer accountId) {
+        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where id = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountId);
+        return accounts.isEmpty()?null:accounts.get(0);
+    }
+
+    @Override
+    public Account findAccountByName(String accountName) {
+        List&lt;Account&gt; accounts = super.getJdbcTemplate().query(&quot;select * from account where name = ?&quot;,new BeanPropertyRowMapper&lt;Account&gt;(Account.class),accountName);
+        if(accounts.isEmpty()){
+            return null;
+        }
+        if(accounts.size()&gt;1){
+            throw new RuntimeException(&quot;结果集不唯一&quot;);
+        }
+        return accounts.get(0);
+    }
+
+    @Override
+    public void updateAccount(Account account) {
+        super.getJdbcTemplate().update(&quot;update account set name=?,money=? where id=?&quot;,account.getName(),account.getMoney(),account.getId());
+    }
+}
+</code></pre></li>
+<li><p>Accont</p>
+<pre><code>public class Account implements Serializable {
+
+    private Integer id;
+    private String name;
+    private Float money;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Float getMoney() {
+        return money;
+    }
+
+    public void setMoney(Float money) {
+        this.money = money;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Account{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, money=&quot; + money +
+                &#39;}&#39;;
+    }
+}
+</code></pre></li>
+<li><p>IAccountService</p>
+<pre><code>/**
+ * Service layer interface of the account
+ */
+public interface IAccountService {
+
+    /**
+     * query account information by id
+     * @param accountId
+     * @return
+     */
+    Account findAccountById(Integer accountId);
+
+    /**
+     * transfer
+     * @param sourceName    transfer out account
+     * @param targetName    transfer to account
+     * @param Money     transfer amount
+     */
+    void transfer(String sourceName, String targetName, Float Money);
+}
+</code></pre></li>
+<li><p>AccountServiceImpl</p>
+<pre><code>public class AccountServiceImpl implements IAccountService{
+
+    private IAccountDao accountDao;
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+
+    @Override
+    public Account findAccountById(Integer accountId) {
+        return accountDao.findAccountById(accountId);
+    }
+
+    @Override
+    public void transfer(String sourceName, String targetName, Float money) {
+        System.out.println(&quot;transfer....&quot;);
+        //2.1根据名称查询转出账户
+        Account source = accountDao.findAccountByName(sourceName);
+        //2.2根据名称查询转入账户
+        Account target = accountDao.findAccountByName(targetName);
+        //2.3转出账户减钱
+        source.setMoney(source.getMoney()-money);
+        //2.4转入账户加钱
+        target.setMoney(target.getMoney()+money);
+        //2.5更新转出账户
+        accountDao.updateAccount(source);
+
+                int i=1/0;
+
+        //2.6更新转入账户
+        accountDao.updateAccount(target);
+    }
+}
+</code></pre></li>
+<li><p>AccountServiceTest</p>
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = &quot;classpath:bean.xml&quot;)
+public class AccountServiceTest {
+
+    @Autowired
+    private  IAccountService as;
+
+    @Test
+    public  void testTransfer(){
+        as.transfer(&quot;aaa&quot;,&quot;bbb&quot;,100f);
+
+    }
+
+}
+</code></pre></li>
+</ul>
+<ol>
+<li><p>Spring 中基于注解的声明式事务控制配置步骤</p>
+<ul>
+<li>1 ) 配置事务管理器</li>
+<li>2 ) 开启spring对注解事务的支持</li>
+<li>3 ) 在需要事务支持的地方使用@Transactional注解</li>
+</ul>
+</li>
+</ol>
+
       
     </div>
 
@@ -538,6 +835,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
 
       
       
@@ -547,8 +850,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Java/Spring/Spring/5-Spring学习笔记-Spring整合Junit/" rel="next" title="5.Spring学习笔记:Spring整合Junit">
-                <i class="fa fa-chevron-left"></i> 5.Spring学习笔记:Spring整合Junit
+              <a href="/Java/Spring/Spring/6-Spring学习笔记-面向切面编程-AOP/" rel="next" title="6.Spring学习笔记:面向切面编程(AOP)">
+                <i class="fa fa-chevron-left"></i> 6.Spring学习笔记:面向切面编程(AOP)
               </a>
             
           </div>
@@ -599,8 +902,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -617,7 +929,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -817,6 +1129,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明式事务管理"><span class="nav-text">声明式事务管理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -843,7 +1172,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">115k</span>
+    <span title="站点总字数">128k</span>
   
 
   
