@@ -103,21 +103,25 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="数据库基础5:事">
-<meta property="og:url" content="http://yoursite.com/uncategorized/数据库基础5-事务/index.html">
+  <meta name="description" content="1.笛卡尔积 有两个集合A、B ，取这两个集合的所有组成情况。 要完成多表查询，需要消除无用的数据。  2.分类2.1 内连接查询隐式内连接使用 where 条件消除无用数据 12345678910111213-- 查询所有员工信息和对应的部门信息SELECT * FROM emp,dept WHERE emp.`dept_id` = dept.`id`;			-- 查询员工表的名称，性别。部门表">
+<meta name="keywords" content="数据库,MySql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库基础4:多表查询">
+<meta property="og:url" content="http://yoursite.com/数据库/数据库基础4-多表查询/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.笛卡尔积 有两个集合A、B ，取这两个集合的所有组成情况。 要完成多表查询，需要消除无用的数据。  2.分类2.1 内连接查询隐式内连接使用 where 条件消除无用数据 12345678910111213-- 查询所有员工信息和对应的部门信息SELECT * FROM emp,dept WHERE emp.`dept_id` = dept.`id`;			-- 查询员工表的名称，性别。部门表">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T08:12:12.412Z">
+<meta property="og:updated_time" content="2020-03-04T09:07:54.809Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库基础5:事">
+<meta name="twitter:title" content="数据库基础4:多表查询">
+<meta name="twitter:description" content="1.笛卡尔积 有两个集合A、B ，取这两个集合的所有组成情况。 要完成多表查询，需要消除无用的数据。  2.分类2.1 内连接查询隐式内连接使用 where 条件消除无用数据 12345678910111213-- 查询所有员工信息和对应的部门信息SELECT * FROM emp,dept WHERE emp.`dept_id` = dept.`id`;			-- 查询员工表的名称，性别。部门表">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/uncategorized/数据库基础5-事务/">
+  <link rel="canonical" href="http://yoursite.com/数据库/数据库基础4-多表查询/">
 
 
 
@@ -127,7 +131,7 @@
   };
 </script>
 
-  <title>数据库基础5:事 | HuYe的博客</title>
+  <title>数据库基础4:多表查询 | HuYe的博客</title>
   
 
 
@@ -381,7 +385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/数据库基础5-事务/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据库/数据库基础4-多表查询/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -398,7 +402,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库基础5:事
+          <h1 class="post-title" itemprop="name headline">数据库基础4:多表查询
 
               
             
@@ -424,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 16:11:26 / 修改时间：16:12:12" itemprop="dateCreated datePublished" datetime="2020-03-04T16:11:26+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 16:11:17 / 修改时间：17:07:54" itemprop="dateCreated datePublished" datetime="2020-03-04T16:11:17+08:00">2020-03-04</time>
             
 
             
@@ -434,6 +438,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -464,7 +486,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">9.5k</span>
               
 
               
@@ -488,7 +510,48 @@
       
 
       
-        
+        <h2 id="1-笛卡尔积"><a href="#1-笛卡尔积" class="headerlink" title="1.笛卡尔积"></a>1.笛卡尔积</h2><ul>
+<li>有两个集合A、B ，取这两个集合的所有组成情况。</li>
+<li>要完成多表查询，需要消除无用的数据。</li>
+</ul>
+<h2 id="2-分类"><a href="#2-分类" class="headerlink" title="2.分类"></a>2.分类</h2><h3 id="2-1-内连接查询"><a href="#2-1-内连接查询" class="headerlink" title="2.1 内连接查询"></a>2.1 内连接查询</h3><h4 id="隐式内连接"><a href="#隐式内连接" class="headerlink" title="隐式内连接"></a>隐式内连接</h4><p>使用 where 条件消除无用数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询所有员工信息和对应的部门信息</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp,dept <span class="keyword">WHERE</span> emp.<span class="string">`dept_id`</span> = dept.<span class="string">`id`</span>;</span><br><span class="line">			</span><br><span class="line"><span class="comment">-- 查询员工表的名称，性别。部门表的名称</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    t1.name, <span class="comment">-- 员工表的姓名</span></span><br><span class="line">    t1.gender,<span class="comment">-- 员工表的性别</span></span><br><span class="line">    t2.name <span class="comment">-- 部门表的名称</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    emp t1,</span><br><span class="line">    dept t2</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    t1.<span class="string">`dept_id`</span> = t2.<span class="string">`id`</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="显式内连接"><a href="#显式内连接" class="headerlink" title="显式内连接"></a>显式内连接</h4><p>select 字段列表 from 表名1 [inner] join 表名2 on 条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp [<span class="keyword">INNER</span>] <span class="keyword">JOIN</span> dept <span class="keyword">ON</span> emp.<span class="string">`dept_id`</span> = dept.<span class="string">`id`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-外链接查询"><a href="#2-2-外链接查询" class="headerlink" title="2.2 外链接查询"></a>2.2 外链接查询</h3><h4 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h4><ul>
+<li>select 字段列表 from 表1 left [outer] join 表2 on 条件</li>
+<li>查询的是左表所有数据以及其交集部分。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询所有员工信息，如果员工有部门，则查询部门名称，没有部门，则不显示部门名称</span></span><br><span class="line"><span class="keyword">SELECT</span> t1.*,t2.<span class="string">`name`</span> <span class="keyword">FROM</span> emp t1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> dept t2 <span class="keyword">ON</span> t1.<span class="string">`dept_id`</span> = t2.<span class="string">`id`</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h4><ul>
+<li>select 字段列表 from 表1 right [outer] join 表2 on 条件</li>
+<li>查询的是右表所有数据以及其交集部分。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dept t2 <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> emp t1 <span class="keyword">ON</span> t1.<span class="string">`dept_id`</span> = t2.<span class="string">`id`</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-子查询"><a href="#2-3-子查询" class="headerlink" title="2.3 子查询"></a>2.3 子查询</h3><p><strong>概念</strong>：查询中嵌套查询，称嵌套查询为子查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询工资最高的员工信息</span></span><br><span class="line"><span class="comment">-- 1 查询最高的工资是多少 9000</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) <span class="keyword">FROM</span> emp;</span><br><span class="line">			</span><br><span class="line"><span class="comment">-- 2 查询员工信息，并且工资等于9000的</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.<span class="string">`salary`</span> = <span class="number">9000</span>;</span><br><span class="line">			</span><br><span class="line"><span class="comment">-- 一条sql就完成这个操作--&gt;子查询:查询最高工资的员工信息</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.<span class="string">`salary`</span> = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) <span class="keyword">FROM</span> emp);</span><br></pre></td></tr></table></figure>
+<h4 id="子查询不同情况"><a href="#子查询不同情况" class="headerlink" title="子查询不同情况"></a>子查询不同情况</h4><ul>
+<li>子查询的结果是<strong>单行单列</strong>的<ul>
+<li>子查询可以作为条件，使用运算符去判断。 运算符： &gt;     &gt;=     &lt;    &lt;=     =</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询员工工资小于平均工资的人</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.salary &lt; (<span class="keyword">SELECT</span> <span class="keyword">AVG</span>(salary) <span class="keyword">FROM</span> emp);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>子查询的结果是<strong>多行单列</strong>的<ul>
+<li>子查询可以作为条件，使用运算符 in 来判断。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询'财务部'和'市场部'所有的员工信息</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> dept <span class="keyword">WHERE</span> <span class="keyword">NAME</span> = <span class="string">'财务部'</span> <span class="keyword">OR</span> <span class="keyword">NAME</span> = <span class="string">'市场部'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> dept_id = <span class="number">3</span> <span class="keyword">OR</span> dept_id = <span class="number">2</span>;</span><br><span class="line"><span class="comment">-- 子查询</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> dept_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> dept <span class="keyword">WHERE</span> <span class="keyword">NAME</span> = <span class="string">'财务部'</span> <span class="keyword">OR</span> <span class="keyword">NAME</span> = <span class="string">'市场部'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>子查询的结果是<strong>多行多列</strong>的<ul>
+<li>子查询可以作为一张<strong>虚拟表</strong>参与查询。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询员工入职日期是2011-11-11日之后的员工信息和部门信息</span></span><br><span class="line"><span class="comment">-- 子查询</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dept t1 ,(<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.<span class="string">`join_date`</span> &gt; <span class="string">'2011-11-11'</span>) t2 <span class="keyword">WHERE</span> t1.id = t2.dept_id;</span><br><span class="line">				</span><br><span class="line"><span class="comment">-- 普通内连接</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp t1,dept t2 <span class="keyword">WHERE</span> t1.<span class="string">`dept_id`</span> = t2.<span class="string">`id`</span> <span class="keyword">AND</span> t1.<span class="string">`join_date`</span> &gt;  <span class="string">'2011-11-11'</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -538,6 +601,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+          
+            <a href="/tags/MySql/" rel="tag"><i class="fa fa-tag"></i> MySql</a>
+          
+        </div>
+      
 
       
       
@@ -547,8 +618,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/uncategorized/数据库基础4-多表查询/" rel="next" title="数据库基础4:多表查询">
-                <i class="fa fa-chevron-left"></i> 数据库基础4:多表查询
+              <a href="/数据库/数据库基础3-数据库的备份和还原/" rel="next" title="数据库基础3:数据库的备份和还原">
+                <i class="fa fa-chevron-left"></i> 数据库基础3:数据库的备份和还原
               </a>
             
           </div>
@@ -557,8 +628,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/uncategorized/数据库基础6-用户管理DCL/" rel="prev" title="数据库基础6:用户管理DCL">
-                数据库基础6:用户管理DCL <i class="fa fa-chevron-right"></i>
+              <a href="/数据库/数据库基础5-事务/" rel="prev" title="数据库基础5:事">
+                数据库基础5:事 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -603,8 +674,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -825,6 +905,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-笛卡尔积"><span class="nav-text">1.笛卡尔积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-分类"><span class="nav-text">2.分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-内连接查询"><span class="nav-text">2.1 内连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式内连接"><span class="nav-text">隐式内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显式内连接"><span class="nav-text">显式内连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-外链接查询"><span class="nav-text">2.2 外链接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左外连接"><span class="nav-text">左外连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#右外连接"><span class="nav-text">右外连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-子查询"><span class="nav-text">2.3 子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询不同情况"><span class="nav-text">子查询不同情况</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -851,7 +948,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">137k</span>
   
 
   

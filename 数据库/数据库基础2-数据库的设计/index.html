@@ -103,21 +103,29 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
+<meta name="keywords" content="数据库,MySql">
+<meta property="og:type" content="article">
 <meta property="og:title" content="数据库基础2:数据库的设计">
-<meta property="og:url" content="http://yoursite.com/uncategorized/数据库基础2-数据库的设计/index.html">
+<meta property="og:url" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T08:11:57.341Z">
+<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/1NF.png">
+<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/2NF.png">
+<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/3NF.png">
+<meta property="og:updated_time" content="2020-03-04T08:51:34.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础2:数据库的设计">
+<meta name="twitter:description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
+<meta name="twitter:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/1NF.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/uncategorized/数据库基础2-数据库的设计/">
+  <link rel="canonical" href="http://yoursite.com/数据库/数据库基础2-数据库的设计/">
 
 
 
@@ -381,7 +389,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/数据库基础2-数据库的设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据库/数据库基础2-数据库的设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -424,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 16:10:09 / 修改时间：16:11:57" itemprop="dateCreated datePublished" datetime="2020-03-04T16:10:09+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 16:10:09 / 修改时间：16:51:34" itemprop="dateCreated datePublished" datetime="2020-03-04T16:10:09+08:00">2020-03-04</time>
             
 
             
@@ -434,6 +442,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -464,7 +490,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -488,7 +514,75 @@
       
 
       
-        
+        <h2 id="1-多表之间的关系"><a href="#1-多表之间的关系" class="headerlink" title="1.多表之间的关系"></a>1.多表之间的关系</h2><h3 id="1-1-分类"><a href="#1-1-分类" class="headerlink" title="1.1 分类"></a>1.1 分类</h3><ul>
+<li>一对一<ul>
+<li>人和身份证</li>
+</ul>
+</li>
+<li>一对多(多对一)<ul>
+<li>部门和员工</li>
+</ul>
+</li>
+<li>多对多<ul>
+<li>学生和课程</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-实现关系"><a href="#1-2-实现关系" class="headerlink" title="1.2 实现关系"></a>1.2 实现关系</h3><ul>
+<li>一对一<ul>
+<li>一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。</li>
+</ul>
+</li>
+<li>一对多(多对一)<ul>
+<li><strong>在多的一方建立外键</strong>，指向一的一方的主键。</li>
+</ul>
+</li>
+<li>多对多<ul>
+<li>多对多关系实现需要借助第三张<strong>中间表</strong>。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-数据库设计的范式"><a href="#2-数据库设计的范式" class="headerlink" title="2.数据库设计的范式"></a>2.数据库设计的范式</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><p>设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的<strong>范式</strong>，各种范式呈递次规范，<strong>越高的范式数据库冗余越小</strong>。</p>
+<p>目前关系数据库有<strong>六种范式</strong>：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。</p>
+<h3 id="2-2-分类"><a href="#2-2-分类" class="headerlink" title="2.2 分类"></a>2.2 分类</h3><ul>
+<li><strong>第一范式（1NF）</strong>：每一列都是不可分割的<strong>原子数据项</strong>。</li>
+</ul>
+<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\1NF.png" alt="1NF" style="zoom:60%;"></p>
+<ul>
+<li><strong>第二范式（2NF）</strong>：在 1NF 的基础上，非码属性必须完全依赖于码（在 1NF 基础上<strong>消除非主属性对主码的部分函数依赖</strong>）。</li>
+</ul>
+<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\2NF.png" alt="2NF" style="zoom:60%;"></p>
+<ul>
+<li><strong>第三范式（3NF）</strong>：在 2NF 基础上，任何非主属性不依赖于其它非主属性（在 2NF 基础上<strong>消除传递依赖</strong>）。</li>
+</ul>
+<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\3NF.png" alt="3NF" style="zoom:60%;"></p>
+<p><strong>概念：</strong></p>
+<ul>
+<li><strong>函数依赖</strong>：A—&gt;B，如果通过 A 属性(属性组)的值，可以确定唯一 B 属性的值。则称 B 依赖于 A。<ul>
+<li>学号—&gt;姓名</li>
+<li>(学号，课程名称)—&gt; 分数</li>
+</ul>
+</li>
+<li><strong>完全函数依赖</strong>：A—&gt;B， 如果A是一个属性组，则B属性值得确定需要依赖于A属性组中<strong>所有的属性值</strong>。<ul>
+<li>(学号，课程名称)—&gt; 分数</li>
+</ul>
+</li>
+<li><strong>部分函数依赖</strong>：A—&gt;B， 如果A是一个属性组，则B属性值得确定只需要依赖于A属性组中<strong>某一些值</strong>即可。<ul>
+<li>(学号，课程名称)—&gt; 姓名</li>
+</ul>
+</li>
+<li><strong>传递函数依赖</strong>：A—&gt;B, B — &gt;C . 如果通过A属性(属性组)的值，可以确定唯一B属性的值，在通过B属性（属性组）的值可以确定唯一C属性的值，则称 C 传递函数依赖于A。<ul>
+<li>学号—&gt;系名，系名—&gt;系主任</li>
+</ul>
+</li>
+<li><strong>码</strong>：如果在一张表中，一个属性或属性组，被其他所有属性所<strong>完全依赖</strong>，则称这个属性(属性组)为该表的码。<ul>
+<li>该表中码为：（学号，课程名称）</li>
+<li><strong>主属性</strong>：码属性组中的所有属性。</li>
+<li><strong>非主属性</strong>：除过码属性组的属性</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
 
@@ -538,6 +632,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+          
+            <a href="/tags/MySql/" rel="tag"><i class="fa fa-tag"></i> MySql</a>
+          
+        </div>
+      
 
       
       
@@ -557,7 +659,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/uncategorized/数据库基础3-数据库的备份和还原/" rel="prev" title="数据库基础3:数据库的备份和还原">
+              <a href="/数据库/数据库基础3-数据库的备份和还原/" rel="prev" title="数据库基础3:数据库的备份和还原">
                 数据库基础3:数据库的备份和还原 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -603,8 +705,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -825,6 +936,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-多表之间的关系"><span class="nav-text">1.多表之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-分类"><span class="nav-text">1.1 分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-实现关系"><span class="nav-text">1.2 实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数据库设计的范式"><span class="nav-text">2.数据库设计的范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-概念"><span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-分类"><span class="nav-text">2.2 分类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -851,7 +979,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">137k</span>
   
 
   

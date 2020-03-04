@@ -103,21 +103,25 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="SQL分类 DDL：操作数据库和表 DML：增删改表中数据 DQL：查询表中数据 DCL：管理用户，授权  DCL：管理用户，授权1.管理用户 添加用户 CREATE USER ‘用户名’@’主机名’ IDENTIFIED BY ‘密码’;   删除用户 DROP USER ‘用户名’@’主机名’;   修改用户密码  12345UPDATE USER SET PASSWORD = PASSWOR">
+<meta name="keywords" content="数据库,MySql">
+<meta property="og:type" content="article">
 <meta property="og:title" content="数据库基础6:用户管理DCL">
-<meta property="og:url" content="http://yoursite.com/uncategorized/数据库基础6-用户管理DCL/index.html">
+<meta property="og:url" content="http://yoursite.com/数据库/数据库基础6-用户管理DCL/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="SQL分类 DDL：操作数据库和表 DML：增删改表中数据 DQL：查询表中数据 DCL：管理用户，授权  DCL：管理用户，授权1.管理用户 添加用户 CREATE USER ‘用户名’@’主机名’ IDENTIFIED BY ‘密码’;   删除用户 DROP USER ‘用户名’@’主机名’;   修改用户密码  12345UPDATE USER SET PASSWORD = PASSWOR">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-04T08:12:16.431Z">
+<meta property="og:updated_time" content="2020-03-04T11:02:59.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础6:用户管理DCL">
+<meta name="twitter:description" content="SQL分类 DDL：操作数据库和表 DML：增删改表中数据 DQL：查询表中数据 DCL：管理用户，授权  DCL：管理用户，授权1.管理用户 添加用户 CREATE USER ‘用户名’@’主机名’ IDENTIFIED BY ‘密码’;   删除用户 DROP USER ‘用户名’@’主机名’;   修改用户密码  12345UPDATE USER SET PASSWORD = PASSWOR">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/uncategorized/数据库基础6-用户管理DCL/">
+  <link rel="canonical" href="http://yoursite.com/数据库/数据库基础6-用户管理DCL/">
 
 
 
@@ -381,7 +385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/数据库基础6-用户管理DCL/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据库/数据库基础6-用户管理DCL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -424,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 16:11:35 / 修改时间：16:12:16" itemprop="dateCreated datePublished" datetime="2020-03-04T16:11:35+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-04 16:11:35 / 修改时间：19:02:59" itemprop="dateCreated datePublished" datetime="2020-03-04T16:11:35+08:00">2020-03-04</time>
             
 
             
@@ -434,6 +438,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -464,7 +486,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">5.3k</span>
               
 
               
@@ -488,7 +510,44 @@
       
 
       
-        
+        <h2 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h2><ul>
+<li>DDL：操作数据库和表</li>
+<li>DML：增删改表中数据</li>
+<li>DQL：查询表中数据</li>
+<li>DCL：管理用户，授权</li>
+</ul>
+<h2 id="DCL：管理用户，授权"><a href="#DCL：管理用户，授权" class="headerlink" title="DCL：管理用户，授权"></a>DCL：管理用户，授权</h2><h3 id="1-管理用户"><a href="#1-管理用户" class="headerlink" title="1.管理用户"></a>1.管理用户</h3><ul>
+<li>添加用户<ul>
+<li>CREATE USER ‘用户名’@’主机名’ IDENTIFIED BY ‘密码’;</li>
+</ul>
+</li>
+<li>删除用户<ul>
+<li>DROP USER ‘用户名’@’主机名’;</li>
+</ul>
+</li>
+<li>修改用户密码</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">USER</span> <span class="keyword">SET</span> <span class="keyword">PASSWORD</span> = <span class="keyword">PASSWORD</span>(<span class="string">'新密码'</span>) <span class="keyword">WHERE</span> <span class="keyword">USER</span> = <span class="string">'用户名'</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">USER</span> <span class="keyword">SET</span> <span class="keyword">PASSWORD</span> = <span class="keyword">PASSWORD</span>(<span class="string">'abc'</span>) <span class="keyword">WHERE</span> <span class="keyword">USER</span> = <span class="string">'lisi'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> <span class="string">'用户名'</span>@<span class="string">'主机名'</span> = <span class="keyword">PASSWORD</span>(<span class="string">'新密码'</span>);</span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = <span class="keyword">PASSWORD</span>(<span class="string">'123'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询用户<ul>
+<li>通配符： % 表示可以在任意主机使用用户登录数据库</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1. 切换到mysql数据库</span></span><br><span class="line"><span class="keyword">USE</span> myql;</span><br><span class="line"><span class="comment">-- 2. 查询user表</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">USER</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-权限管理"><a href="#2-权限管理" class="headerlink" title="2.权限管理"></a>2.权限管理</h3><ul>
+<li>查询权限</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询权限</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">GRANTS</span> <span class="keyword">FOR</span> <span class="string">'用户名'</span>@<span class="string">'主机名'</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">GRANTS</span> <span class="keyword">FOR</span> <span class="string">'lisi'</span>@<span class="string">'%'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>授予权限</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 授予权限</span></span><br><span class="line"><span class="keyword">grant</span> 权限列表 <span class="keyword">on</span> 数据库名.表名 <span class="keyword">to</span> <span class="string">'用户名'</span>@<span class="string">'主机名'</span>;</span><br><span class="line"><span class="comment">-- 给张三用户授予所有权限，在任意数据库任意表上</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'zhangsan'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>撤销权限</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 撤销权限：</span></span><br><span class="line"><span class="keyword">revoke</span> 权限列表 <span class="keyword">on</span> 数据库名.表名 <span class="keyword">from</span> <span class="string">'用户名'</span>@<span class="string">'主机名'</span>;</span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">UPDATE</span> <span class="keyword">ON</span> db3.<span class="string">`account`</span> <span class="keyword">FROM</span> <span class="string">'lisi'</span>@<span class="string">'%'</span>;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -538,6 +597,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+          
+            <a href="/tags/MySql/" rel="tag"><i class="fa fa-tag"></i> MySql</a>
+          
+        </div>
+      
 
       
       
@@ -547,7 +614,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/uncategorized/数据库基础5-事务/" rel="next" title="数据库基础5:事">
+              <a href="/数据库/数据库基础5-事务/" rel="next" title="数据库基础5:事">
                 <i class="fa fa-chevron-left"></i> 数据库基础5:事
               </a>
             
@@ -599,8 +666,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -821,6 +897,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL分类"><span class="nav-text">SQL分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL：管理用户，授权"><span class="nav-text">DCL：管理用户，授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-管理用户"><span class="nav-text">1.管理用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-权限管理"><span class="nav-text">2.权限管理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -847,7 +940,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">137k</span>
   
 
   
