@@ -1,6 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringMVC学习笔记2:请求参数绑定</title>
+    <url>/Java/Spring/SpringMVC/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<h2 id="1-请求参数的绑定说明"><a href="#1-请求参数的绑定说明" class="headerlink" title="1.请求参数的绑定说明"></a>1.请求参数的绑定说明</h2><h3 id="1-1-绑定机制"><a href="#1-1-绑定机制" class="headerlink" title="1.1 绑定机制"></a>1.1 绑定机制</h3><ul>
+<li>表单提交的数据都是 k=v 格式的 username=haha&amp;password=123</li>
+<li>SpringMVC 的参数绑定过程是把表单提交的请求参数，作为控制器中方法的参数进行绑定的。</li>
+<li>要求：提交表单的 name 和参数的名称是相同的。</li>
+</ul>
+<h3 id="1-2-支持的数据类型"><a href="#1-2-支持的数据类型" class="headerlink" title="1.2 支持的数据类型"></a>1.2 支持的数据类型</h3><ul>
+<li>基本数据类型和字符串类型。</li>
+<li>实体类型（JavaBean）。</li>
+<li>集合数据类型（List、map集合等）。</li>
+</ul>
+<h2 id="2-基本数据类型和字符串类型"><a href="#2-基本数据类型和字符串类型" class="headerlink" title="2.基本数据类型和字符串类型"></a>2.基本数据类型和字符串类型</h2><ul>
+<li>提交表单的 name 和参数的名称是相同的。</li>
+<li>区分大小写。</li>
+</ul>
+<h2 id="3-实体类型（JavaBean）"><a href="#3-实体类型（JavaBean）" class="headerlink" title="3.实体类型（JavaBean）"></a>3.实体类型（JavaBean）</h2><ul>
+<li>提交表单的 name 和 JavaBean 中的属性名称需要一致。</li>
+<li>如果一个 JavaBean 类中包含其他的引用类型，那么表单的 name 属性需要编写成：对象.属性 例如：<br> address.name。</li>
+</ul>
+<h2 id="4-给集合属性数据封装"><a href="#4-给集合属性数据封装" class="headerlink" title="4.给集合属性数据封装"></a>4.给集合属性数据封装</h2><ul>
+<li>JSP页面编写方式：list[0].属性</li>
+</ul>
+<h2 id="5-请求参数中文乱码的解决"><a href="#5-请求参数中文乱码的解决" class="headerlink" title="5.请求参数中文乱码的解决"></a>5.请求参数中文乱码的解决</h2><p>在 <code>web.xml</code> 中配置Spring提供的过滤器类。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置过滤器，解决中文乱码的问题 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>characterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filterclass</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定字符集 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>characterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-自定义类型转换器"><a href="#6-自定义类型转换器" class="headerlink" title="6.自定义类型转换器"></a>6.自定义类型转换器</h2><p>表单提交的任何数据类型全部都是字符串类型，但是后台定义 Integer 类型，数据也可以封装上，说明 Spring 框架内部会<strong>默认进行数据类型转换</strong>。</p>
+<p>如果想自定义数据类型转换，可以实现 Converter 的接口:</p>
+<ul>
+<li>自定义类型转换器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 把字符串转换成日期的转换器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringToDateConverter</span> <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">String</span>, <span class="title">Date</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 进行类型转换的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">convert</span><span class="params">(String source)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断</span></span><br><span class="line">    <span class="keyword">if</span>(source == <span class="keyword">null</span>) &#123;</span><br><span class="line">    	<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"参数不能为空"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        DateFormat df = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">        <span class="comment">// 解析字符串</span></span><br><span class="line">        Date date = df.parse(source);</span><br><span class="line">        <span class="keyword">return</span> date;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"类型转换错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注册自定义类型转换器，在 springmvc.xml 配置文件中编写配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 注册自定义类型转换器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"conversionService"</span></span></span><br><span class="line"><span class="tag"><span class="attr">class</span>=<span class="string">"org.springframework.context.support.ConversionServiceFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"converters"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.itcast.utils.StringToDateConverter"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 开启Spring对MVC注解的支持 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span> <span class="attr">conversion-service</span>=<span class="string">"conversionService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="7-在控制器中使用原生的-ServletAPI-对象"><a href="#7-在控制器中使用原生的-ServletAPI-对象" class="headerlink" title="7.在控制器中使用原生的 ServletAPI 对象"></a>7.在控制器中使用原生的 ServletAPI 对象</h2><p>只需要在控制器的方法参数定义 HttpServletRequest 和 HttpServletResponse 对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testServlet"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testServlet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span>&#123;</span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line">    ServletContext servletContext = session.getServletContext();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC学习笔记1:入门案例</title>
+    <url>/Java/Spring/SpringMVC/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/</url>
+    <content><![CDATA[<h2 id="1-MVC-模型"><a href="#1-MVC-模型" class="headerlink" title="1.MVC 模型"></a>1.MVC 模型</h2><p>MVC 全名是 Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，是一种用于设计创建 Web 应用程序<strong>表现层</strong>的模式。</p>
+<ul>
+<li><strong>Model</strong>（模型）<ul>
+<li>通常指的就是我们的数据模型。作用一般情况下用于封装数据。</li>
+</ul>
+</li>
+<li><strong>View</strong>（视图）<ul>
+<li>通常指的就是我们的jsp或者html。作用一般就是展示数据。</li>
+<li>通常视图是依据模型数据创建的。</li>
+</ul>
+</li>
+<li><strong>Controller</strong>（控制器）<ul>
+<li>是应用程序中处理用户交互的部分。作用一般就是处理程序逻辑的。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-SpringMVC-概述"><a href="#2-SpringMVC-概述" class="headerlink" title="2.SpringMVC 概述"></a>2.SpringMVC 概述</h2><p>SpringMVC 是一种基于 Java 的实现 MVC 设计模型的请求驱动类型的轻量级 Web 框架，属于 Spring FrameWork 的后续产品，已经融合在 Spring Web Flow 里面。Spring 框架提供了构建 Web 应用程序的全功能 MVC 模块。</p>
+<h2 id="3-SpringMVC-入门案例"><a href="#3-SpringMVC-入门案例" class="headerlink" title="3.SpringMVC 入门案例"></a>3.SpringMVC 入门案例</h2><h4 id="3-1-创建-WEB-工程，引入开发的-jar-包"><a href="#3-1-创建-WEB-工程，引入开发的-jar-包" class="headerlink" title="3.1 创建 WEB 工程，引入开发的 jar 包"></a>3.1 创建 WEB 工程，引入开发的 jar 包</h4><ul>
+<li><code>pom.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 版本锁定 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">spring.version</span>&gt;</span>5.0.2.RELEASE<span class="tag">&lt;/<span class="name">spring.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet.jsp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-配置核心的控制器（配置-DispatcherServlet）"><a href="#3-2-配置核心的控制器（配置-DispatcherServlet）" class="headerlink" title="3.2 配置核心的控制器（配置 DispatcherServlet）"></a>3.2 配置核心的控制器（配置 DispatcherServlet）</h4><ul>
+<li><code>web.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- SpringMVC的核心控制器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servletclass</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置Servlet的初始化参数，读取springmvc的配置文件，创建spring容器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置servlet启动时加载对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-3-编写-springmvc-xml-的配置文件"><a href="#3-3-编写-springmvc-xml-的配置文件" class="headerlink" title="3.3 编写 springmvc.xml 的配置文件"></a>3.3 编写 springmvc.xml 的配置文件</h4><ul>
+<li><code>springmvc.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/mvc/spring-mvc.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 配置spring创建容器时要扫描的包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 配置视图解析器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"viewResolver"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/pages/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 配置spring开启注解mvc的支持</span></span><br><span class="line"><span class="comment">    &lt;mvc:annotation-driven&gt;&lt;/mvc:annotation-driven&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-4-编写-index-jsp-和-HelloController-控制器类"><a href="#3-4-编写-index-jsp-和-HelloController-控制器类" class="headerlink" title="3.4 编写 index.jsp 和 HelloController 控制器类"></a>3.4 编写 index.jsp 和 HelloController 控制器类</h4><ul>
+<li><code>index.jsp</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>入门案例<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"$&#123; pageContext.request.contextPath &#125;/hello"</span>&gt;</span>入门案例<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>HelloController</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 控制器</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 接收请求</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(path=<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello SpringMVC!!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-在-WEB-INF-目录下创建-pages-文件夹，编写-success-jsp-的成功页面"><a href="#3-5-在-WEB-INF-目录下创建-pages-文件夹，编写-success-jsp-的成功页面" class="headerlink" title="3.5 在 WEB-INF 目录下创建 pages 文件夹，编写 success.jsp 的成功页面"></a>3.5 在 WEB-INF 目录下创建 pages 文件夹，编写 success.jsp 的成功页面</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h3</span>&gt;</span>入门成功！！<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-6-启动Tomcat服务器，进行测试"><a href="#3-6-启动Tomcat服务器，进行测试" class="headerlink" title="3.6 启动Tomcat服务器，进行测试"></a>3.6 启动Tomcat服务器，进行测试</h4><h2 id="4-入门案例的执行过程分析"><a href="#4-入门案例的执行过程分析" class="headerlink" title="4.入门案例的执行过程分析"></a>4.入门案例的执行过程分析</h2><h3 id="4-1-入门案例的执行流程"><a href="#4-1-入门案例的执行流程" class="headerlink" title="4.1 入门案例的执行流程"></a>4.1 入门案例的执行流程</h3><ul>
+<li>1.当启动 Tomcat 服务器的时候，因为配置了 load-on-startup 标签，所以会创建 DispatcherServlet 对象，就会加载 springmvc.xml 配置文件。</li>
+<li>2.开启了注解扫描，那么 HelloController 对象就会被创建</li>
+<li>3.从 index.jsp 发送请求，请求会先到达 DispatcherServlet 核心控制器，根据配置 @RequestMapping 注解找到执行的具体方法。</li>
+<li>4.根据执行方法的返回值，再根据配置的视图解析器，去指定的目录下查找指定名称的 JSP 文件。</li>
+<li>5.Tomcat 服务器渲染页面，做出响应。</li>
+</ul>
+<p><img src="/Java/Spring/SpringMVC/SpringMVC学习笔记1-入门案例/Blog\source\_posts\SpringMVC学习笔记1-入门案例\03.bmp" alt="03" style="zoom:80%;"></p>
+<h3 id="4-2-入门案例设计组件"><a href="#4-2-入门案例设计组件" class="headerlink" title="4.2 入门案例设计组件"></a>4.2 入门案例设计组件</h3><p><img src="/Java/Spring/SpringMVC/SpringMVC学习笔记1-入门案例/Blog\source\_posts\SpringMVC学习笔记1-入门案例\04.bmp" alt="04" style="zoom:80%;"></p>
+<ul>
+<li><strong>DispatcherServlet</strong>：前端控制器<ul>
+<li>用户请求到达前端控制器，它就相当于 mvc 模式中的 c ，dispatcherServlet 是整个流程控制的中心，由它调用其它组件处理用户的请求，dispatcherServlet 的存在降低了组件之间的耦合性。</li>
+</ul>
+</li>
+<li><strong>HandlerMapping</strong>：处理器映射器<ul>
+<li>HandlerMapping 负责根据用户请求找到 Handler 即处理器，SpringMVC 提供了不同的映射器实现不同的映射方式，例如：配置文件方式，实现接口方式，注解方式等。</li>
+</ul>
+</li>
+<li><strong>Handler</strong>：处理器<ul>
+<li>它就是我们开发中要编写的具体业务控制器。由 DispatcherServlet 把用户请求转发到 Handler。由 Handler 对具体的用户请求进行处理。</li>
+</ul>
+</li>
+<li><strong>HandlAdapter</strong>：处理器适配器<ul>
+<li>通过 HandlerAdapter 对处理器进行执行，这是适配器模式的应用，通过扩展适配器可以对更多类型的处理器进行执行。</li>
+</ul>
+</li>
+<li><strong>View Resolver</strong>：视图解析器<ul>
+<li>View Resolver 负责将处理结果生成 View 视图，View Resolver 首先根据逻辑视图名解析成物理视图名即具体的页面地址，再生成 View 视图对象，最后对 View 进行渲染将处理结果通过页面展示给用户。</li>
+</ul>
+</li>
+<li><strong>View</strong>：视图<ul>
+<li>SpringMVC 框架提供了很多的 View 视图类型的支持，包括：jstlView、freemarkerView、pdfView 等。我们最常用的视图就是 jsp。</li>
+</ul>
+</li>
+<li><code>&lt;mvc:annotation-driven&gt;</code> 标签说明<ul>
+<li>在SpringMVC 的各个组件中，处理器映射器、处理器适配器、视图解析器称为 SpringMVC 的三大组件。</li>
+<li>使用 <code>&lt;mvc:annotation-driven&gt;</code> 自动加载 RequestMappingHandlerMapping（处理映射器）和 RequestMappingHandlerAdapter（处理适配器），可用在 SpringMVC.xml 配置文件中使用 <code>&lt;mvc:annotation-driven&gt;</code> 替代注解处理器和适配器的配置。</li>
+<li>它就相当于在xml中配置了：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 上面的标签相当于 如下配置--&gt;</span> </span><br><span class="line"><span class="comment">&lt;!-- HandlerMapping --&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- HandlerAdapter --&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- HadnlerExceptionResolvers --&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">beanclass="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-RequestMapping注解"><a href="#5-RequestMapping注解" class="headerlink" title="5.RequestMapping注解"></a>5.RequestMapping注解</h2><p>RequestMapping 注解的作用是建立请求 URL 和处理方法之间的对应关系。</p>
+<p>RequestMapping注解可以作用在方法和类上：</p>
+<ul>
+<li>作用在<strong>类</strong>上：<strong>第一级</strong>的访问目录。</li>
+<li>作用在<strong>方法</strong>上：<strong>第二级</strong>的访问目录。</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<blockquote>
+<p>路径可以不编写 / 表示应用的根目录开始</p>
+<p>${ pageContext.request.contextPath } 也可以省略不写，但是路径上不能写 /</p>
+</blockquote>
+<p>RequestMapping 的<strong>属性</strong>：</p>
+<ul>
+<li>path：指定请求路径的url</li>
+<li>value：value属性和path属性是一样的</li>
+<li>mthod：指定该方法的请求方式</li>
+<li>params：指定限制请求参数的条件</li>
+<li>headers：发送的请求中必须包含的请求头</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据库基础6:用户管理DCL</title>
     <url>/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%806-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86DCL/</url>
     <content><![CDATA[<h2 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h2><ul>
@@ -3106,102 +3266,56 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
       </tags>
   </entry>
   <entry>
-    <title>监督学习各方法比较</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>模型简单易懂，便于编程实现；</li>
-<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
+    <title>统计学习方法第五章—决策树</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
+<p>决策树模型</p>
+</div>
+
+<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
+<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
+<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
+<p>主要步骤：</p>
+<ul>
+<li>特征选择</li>
+<li>决策树生成</li>
+<li>决策树剪枝</li>
 </ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>只能对线性可分数据集进行学习；</li>
-<li>不同参数设置会学到不同模型，泛化能力好差。</li>
+<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
+<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
+<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
+<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
+<script type="math/tex; mode=display">
+H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
+p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
+<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
+<script type="math/tex; mode=display">
+g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
+<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
+<script type="math/tex; mode=display">
+g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
+<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
+<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
+<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
+<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
+<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
+<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
+<ul>
+<li>回归树：平方误差最小化准则</li>
+<li>分类树：基尼指数最小化准则</li>
 </ul>
-<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
-<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
-<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
-<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
-<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
-</ul>
-<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
-<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
-<li>需要大量内存；  </li>
-<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
-</ul>
-<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>有坚实的数学基础，以及稳定的分类效率；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
-<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
-</ul>
-<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
-</ul>
-<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>计算简单，易于理解，可解释性强；</li>
-<li>比较适合处理有缺失属性的样本；</li>
-<li>能够处理不相关的特征；</li>
-<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
-</ul>
-<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
-<li>忽略了数据之间的相关性；</li>
-<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
-</ul>
-<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>可以解决高维问题，即大型特征空间；</li>
-<li>能够处理非线性特征的相互作用；</li>
-<li>无需依赖整个数据；</li>
-<li>可以提高泛化能力。</li>
-</ul>
-<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
-<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
-<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
-<li>类严重重叠时，SVM的表现也很差；</li>
-<li>对缺失数据敏感。</li>
-</ul>
-<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>实现简单，广泛的应用于工业问题上；</li>
-<li>分类时计算量非常小，速度很快，存储资源低；</li>
-<li>便利的观测样本概率分数；</li>
-<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
-</ul>
-<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
-<li>容易欠拟合，一般准确度不太高；</li>
-<li>不能很好地处理大量多类特征或变量。</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
-<li>对于非线性特征，需要进行转换。</li>
-</ul>
-<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>Adaboost是一种有很高精度的分类器；</li>
-<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
-<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
-<li>简单，不用做特征筛选；</li>
-<li>不易发生overfitting。</li>
-</ul>
-<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>对outlier比较敏感。</li>
-</ul>
-<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>分类的准确度高；</li>
-<li>并行分布处理能力强,分布存储及学习能力强；</li>
-<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
-<li>具备联想记忆的功能；</li>
-<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
-<li>测试样例分类时非常快。</li>
-</ul>
-<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
-<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
-<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
-<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
-</ul>
+<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
+<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
+<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
+" width="400" height="229" alt="图片名称" align="center">
+<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
+</div>
+
+<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3329,56 +3443,102 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第五章—决策树</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
-<p>决策树模型</p>
-</div>
-
-<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
-<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
-<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
-<p>主要步骤：</p>
-<ul>
-<li>特征选择</li>
-<li>决策树生成</li>
-<li>决策树剪枝</li>
+    <title>监督学习各方法比较</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="1-感知机"><a href="#1-感知机" class="headerlink" title="1.感知机"></a>1.感知机</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>模型简单易懂，便于编程实现；</li>
+<li>是许多后续算法如SVM、神经网络、深度学习的基础。</li>
 </ul>
-<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
-<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
-<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
-<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
-<script type="math/tex; mode=display">
-H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
-p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
-<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
-<script type="math/tex; mode=display">
-g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
-<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
-<script type="math/tex; mode=display">
-g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
-<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
-<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
-<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
-<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
-<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
-<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
-<ul>
-<li>回归树：平方误差最小化准则</li>
-<li>分类树：基尼指数最小化准则</li>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>只能对线性可分数据集进行学习；</li>
+<li>不同参数设置会学到不同模型，泛化能力好差。</li>
 </ul>
-<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
-<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
-<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
-" width="400" height="229" alt="图片名称" align="center">
-<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
-</div>
-
-<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
+<h2 id="2-k近邻法"><a href="#2-k近邻法" class="headerlink" title="2.k近邻法"></a>2.k近邻法</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>理论成熟，思想简单，既可以用来做分类也可以用来做回归；</li>
+<li>可用于非线性分类，可以生成任意形状的决策边界；</li>
+<li>训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；</li>
+<li>对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；</li>
+<li>基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  </li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   </li>
+<li>需要大量内存；  </li>
+<li>除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。</li>
+</ul>
+<h2 id="3-朴素贝叶斯法"><a href="#3-朴素贝叶斯法" class="headerlink" title="3.朴素贝叶斯法"></a>3.朴素贝叶斯法</h2><h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>有坚实的数学基础，以及稳定的分类效率；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练；</li>
+<li>面对孤立的噪声点，朴素贝叶斯分类器是健壮的。通过在建模和分类时忽略样例，朴素贝叶斯法对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>面对无关属性，朴素贝叶斯法是健壮的。如果 $X_i$ 是无关属性，那么 $P(X_i,Y_i)$ 几乎变成了均匀分布。 $X_i$ 的类条件概率不会对总的后验概率的计算产生影响。</li>
+</ul>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>输入变量必须都是条件独立的，如果假设它们之间存在概率依存关系，模型就变成了贝叶斯网，相关属性可能会降低朴素贝叶斯分类器的性能。</li>
+</ul>
+<h2 id="4-决策树"><a href="#4-决策树" class="headerlink" title="4.决策树"></a>4.决策树</h2><h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>计算简单，易于理解，可解释性强；</li>
+<li>比较适合处理有缺失属性的样本；</li>
+<li>能够处理不相关的特征；</li>
+<li>在相对短的时间内能够对大型数据源做出可行且效果良好的结果。</li>
+</ul>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>容易发生过拟合（随机森林可以很大程度上减少过拟合），剪枝是解决决策树过拟合并缩小决策树的方法之一；</li>
+<li>忽略了数据之间的相关性；</li>
+<li>对于那些各类别样本数量不一致的数据，在决策树当中,信息增益的结果偏向于那些具有更多数值的特征（只要是使用了信息增益，都有这个缺点，如RF）。</li>
+</ul>
+<h2 id="5-支持向量机"><a href="#5-支持向量机" class="headerlink" title="5.支持向量机"></a>5.支持向量机</h2><h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力。</li>
+</ul>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当观测样本很多时，效率并不是很高，因为在大数据中，SVM时间复杂度为<img src="https://www.zhihu.com/equation?tex=O%28n%5E%7B3%7D%29+" alt="[公式]">；</li>
+<li>对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>在噪声过多的情况下，SVM容易造成过拟合；</li>
+<li>类严重重叠时，SVM的表现也很差；</li>
+<li>对缺失数据敏感。</li>
+</ul>
+<h2 id="6-逻辑斯谛回归"><a href="#6-逻辑斯谛回归" class="headerlink" title="6.逻辑斯谛回归"></a>6.逻辑斯谛回归</h2><h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>实现简单，广泛的应用于工业问题上；</li>
+<li>分类时计算量非常小，速度很快，存储资源低；</li>
+<li>便利的观测样本概率分数；</li>
+<li>对逻辑回归而言，多重共线性并不是问题，它可以结合L2正则化来解决该问题。</li>
+</ul>
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>当特征空间很大时，逻辑回归的性能不是很好；</li>
+<li>容易欠拟合，一般准确度不太高；</li>
+<li>不能很好地处理大量多类特征或变量。</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须<strong>线性可分</strong>；</li>
+<li>对于非线性特征，需要进行转换。</li>
+</ul>
+<h2 id="7-提升方法AdaBoost算法"><a href="#7-提升方法AdaBoost算法" class="headerlink" title="7.提升方法AdaBoost算法"></a>7.提升方法AdaBoost算法</h2><h3 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>Adaboost是一种有很高精度的分类器；</li>
+<li>可以使用各种方法构建子分类器，Adaboost算法提供的是框架；</li>
+<li>当使用简单分类器时，计算出的结果是可以理解的，并且弱分类器的构造极其简单；</li>
+<li>简单，不用做特征筛选；</li>
+<li>不易发生overfitting。</li>
+</ul>
+<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>对outlier比较敏感。</li>
+</ul>
+<h2 id="8-人工神经网络"><a href="#8-人工神经网络" class="headerlink" title="8.人工神经网络"></a>8.人工神经网络</h2><h3 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>分类的准确度高；</li>
+<li>并行分布处理能力强,分布存储及学习能力强；</li>
+<li>对噪声神经有较强的鲁棒性和容错能力，能充分逼近复杂的非线性关系；</li>
+<li>具备联想记忆的功能；</li>
+<li>ANN可以处理冗余特征，因为权值在训练过程中自动学习。冗余特征的权值非常小；</li>
+<li>测试样例分类时非常快。</li>
+</ul>
+<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>神经网络需要大量的参数，如网络拓扑结构、权值和阈值的初始值；</li>
+<li>不能观察之间的学习过程，输出结果难以解释，会影响到结果的可信度和可接受程度；</li>
+<li>学习时间过长,特别是当隐藏结点数量很大时，甚至可能达不到学习的目的。</li>
+<li>ANN权值学习使用的梯度下降方法经常会收敛到局部最优解。避免局部最优解的方法: 在权值更新公式中加上一个冲量（momentum term）；使用高价的导数；随机优化思想</li>
+</ul>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3409,30 +3569,6 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
 <script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
 <p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
 <p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第三章—k近邻法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
-<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
-<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
-<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
-<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
-<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
-<p>特征空间切分</p>
-</div>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3575,6 +3711,30 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       <tags>
         <tag>机器学习</tag>
         <tag>统计学习方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第三章—k近邻法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
+<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
+<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
+<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
+<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
+<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
+<p>特征空间切分</p>
+</div>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
       </tags>
   </entry>
   <entry>
