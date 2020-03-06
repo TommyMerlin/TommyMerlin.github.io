@@ -1,9 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Spring Boot学习笔记1:Spring Boot入门</title>
+    <url>/uncategorized/Spring-Boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-Spring-Boot%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="1-Spring-Boot-简介"><a href="#1-Spring-Boot-简介" class="headerlink" title="1.Spring Boot 简介"></a>1.Spring Boot 简介</h2><blockquote>
+<p>简化Spring应用开发的一个框架；</p>
+<p>整个Spring技术栈的一个大整合；</p>
+<p>J2EE开发的一站式解决方案；</p>
+</blockquote>
+<h2 id="2-微服务"><a href="#2-微服务" class="headerlink" title="2.微服务"></a>2.微服务</h2><p>2014，martin fowler</p>
+<p>微服务：架构风格（服务微化）</p>
+<p>一个应用应该是一组小型服务；可以通过HTTP的方式进行互通；</p>
+<p>单体应用：ALL IN ONE</p>
+<p>微服务：每一个功能元素最终都是一个可独立替换和独立升级的软件单元；</p>
+<p><a href="https://martinfowler.com/articles/microservices.html#MicroservicesAndSoa" target="_blank" rel="noopener">微服务文档</a> </p>
+<p><a href="http://blog.cuicc.com/blog/2015/07/22/microservices/" target="_blank" rel="noopener">中文版</a></p>
+<h2 id="3-Spring-Boot-HelloWorld"><a href="#3-Spring-Boot-HelloWorld" class="headerlink" title="3.Spring Boot HelloWorld"></a>3.Spring Boot HelloWorld</h2><p>实现功能：浏览器发送 hello 请求，服务器接受请求并处理，响应 Hello World 字符串；</p>
+<h3 id="3-1-创建一个maven工程（jar）"><a href="#3-1-创建一个maven工程（jar）" class="headerlink" title="3.1 创建一个maven工程（jar）"></a>3.1 创建一个maven工程（jar）</h3><h3 id="3-2-导入spring-boot相关的依赖"><a href="#3-2-导入spring-boot相关的依赖" class="headerlink" title="3.2 导入spring boot相关的依赖"></a>3.2 导入spring boot相关的依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-编写一个主程序，启动Spring-Boot应用"><a href="#3-3-编写一个主程序，启动Spring-Boot应用" class="headerlink" title="3.3 编写一个主程序，启动Spring Boot应用"></a>3.3 编写一个主程序，启动Spring Boot应用</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  <span class="doctag">@SpringBootApplication</span> 来标注一个主程序类，说明这是一个Spring Boot应用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldMainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Spring应用启动起来</span></span><br><span class="line">        SpringApplication.run(HelloWorldMainApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-编写相关的Controller、Service"><a href="#3-4-编写相关的Controller、Service" class="headerlink" title="3.4 编写相关的Controller、Service"></a>3.4 编写相关的Controller、Service</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello World!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-运行主程序测试"><a href="#3-5-运行主程序测试" class="headerlink" title="3.5 运行主程序测试"></a>3.5 运行主程序测试</h3><h3 id="3-6-简化部署"><a href="#3-6-简化部署" class="headerlink" title="3.6 简化部署"></a>3.6 简化部署</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="comment">&lt;!-- 这个插件，可以将应用打包成一个可执行的jar包；--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>将这个应用打成 jar 包，直接使用 <code>java -jar</code> 的命令进行执行。</p>
+<h2 id="4-Hello-World探究"><a href="#4-Hello-World探究" class="headerlink" title="4.Hello World探究"></a>4.Hello World探究</h2><h3 id="4-1-POM文件"><a href="#4-1-POM文件" class="headerlink" title="4.1 POM文件"></a>4.1 POM文件</h3><h4 id="父项目"><a href="#父项目" class="headerlink" title="父项目"></a>父项目</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">他的父项目是</span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../../spring-boot-dependencies<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">他来真正管理Spring Boot应用里面的所有依赖版本；</span><br></pre></td></tr></table></figure>
+<p>Spring Boot 的<strong>版本仲裁中心</strong>；</p>
+<p>以后我们<strong>导入依赖默认不需要写版本</strong>；（没有在dependencies里面管理的依赖自然需要声明版本号）</p>
+<h4 id="启动器"><a href="#启动器" class="headerlink" title="启动器"></a>启动器</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>spring-boot-starter-<em>web</em></strong>：</p>
+<ul>
+<li>spring-boot-starter：spring-boot <strong>场景启动器</strong>；帮我们导入了 web 模块正常运行所依赖的组件。</li>
+</ul>
+<p>Spring Boot将所有的功能场景都抽取出来，做成一个个的 starters（启动器），只需要在项目里面引入这些 starter 相关场景的所有依赖都会导入进来。要用什么功能就导入什么场景的启动器。</p>
+<h3 id="4-2-主程序类，主入口类"><a href="#4-2-主程序类，主入口类" class="headerlink" title="4.2 主程序类，主入口类"></a>4.2 主程序类，主入口类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  <span class="doctag">@SpringBootApplication</span> 来标注一个主程序类，说明这是一个Spring Boot应用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldMainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Spring应用启动起来</span></span><br><span class="line">        SpringApplication.run(HelloWorldMainApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@<strong>SpringBootApplication</strong>:    Spring Boot 应用标注在某个类上说明这个类是 SpringBoot 的主配置类， SpringBoot 就应该运行这个类的 main 方法来启动 SpringBoot 应用；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123;</span><br><span class="line">      <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),</span><br><span class="line">      <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) &#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br></pre></td></tr></table></figure>
+<p>@<strong>SpringBootConfiguration</strong>：Spring Boot的配置类，标注在某个类上，表示这是一个Spring Boot的配置类。</p>
+<ul>
+<li><p>@<strong>Configuration</strong>：配置类上来标注这个注解，配置类代替配置文件；配置类也是容器中的一个组件。</p>
+</li>
+<li><p>@<strong>EnableAutoConfiguration</strong>：开启自动配置功能。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import</span>(EnableAutoConfigurationImportSelector.class)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>@<strong>AutoConfigurationPackage</strong>：自动配置包。</p>
+<ul>
+<li>@<strong>Import</strong>(AutoConfigurationPackages.Registrar.class)：Spring的底层注解 <strong>@Import</strong>，给容器中导入一个组件；导入的组件由AutoConfigurationPackages.Registrar.class 将主配置类（@SpringBootApplication标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器。</li>
+</ul>
+</li>
+<li><p>@<strong>Import</strong>(EnableAutoConfigurationImportSelector.class)：给容器中导入组件。</p>
+<p><strong>EnableAutoConfigurationImportSelector</strong>：导入哪些组件的选择器，将所有需要导入的组件以全类名的方式返回，这些组件就会被添加到容器中。最终会给容器中导入非常多的自动配置类（xxxAutoConfiguration）；就是给容器中导入这个场景需要的所有组件，并配置好这些组件。有了自动配置类，免去了我们手动编写配置注入功能组件等的工作。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/uncategorized/Spring-Boot学习笔记1-Spring-Boot入门/自动配置类.png" alt="自动配置类" style="zoom:67%;"></p>
+<h2 id="5-使用-Spring-Initializer-快速创建-Spring-Boot-项目"><a href="#5-使用-Spring-Initializer-快速创建-Spring-Boot-项目" class="headerlink" title="5.使用 Spring Initializer 快速创建 Spring Boot 项目"></a>5.使用 Spring Initializer 快速创建 Spring Boot 项目</h2><h3 id="IDEA：使用-Spring-Initializer-快速创建项目"><a href="#IDEA：使用-Spring-Initializer-快速创建项目" class="headerlink" title="IDEA：使用 Spring Initializer 快速创建项目"></a>IDEA：使用 Spring Initializer 快速创建项目</h3><p>选择我们需要的模块，向导会联网创建 Spring Boot 项目。</p>
+<p>默认生成的 Spring Boot 项目：</p>
+<ul>
+<li>主程序已经自动生成。</li>
+<li>resources 文件夹中目录结构<ul>
+<li>static：保存所有的静态资源； js css  images。</li>
+<li>templates：保存所有的模板页面；（Spring Boot 默认 jar 包使用嵌入式的 Tomcat，默认不支持 JSP 页面）；可以使用模板引擎（freemarker、thymeleaf）。</li>
+<li>application.properties：Spring Boot 应用的配置文件；可以修改一些默认设置。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringMVC学习笔记7:拦截器</title>
+    <url>/Java/Spring/SpringMVC/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07-%E6%8B%A6%E6%88%AA%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="1-拦截器的概述"><a href="#1-拦截器的概述" class="headerlink" title="1.拦截器的概述"></a>1.拦截器的概述</h2><ul>
+<li>SpringMVC 框架中的拦截器用于对处理器进行<strong>预处理</strong>和<strong>后处理</strong>的技术。</li>
+<li>可以定义<strong>拦截器链</strong>，连接器链就是将拦截器按着一定的顺序结成一条链，在访问被拦截的方法时，拦截器链中的拦截器会按着定义的顺序执行。</li>
+<li>拦截器和过滤器的功能比较类似，有区别<ul>
+<li>过滤器是 Servlet 规范的一部分，任何框架都可以使用过滤器技术。</li>
+<li>拦截器是 SpringMVC 框架独有的。</li>
+<li>过滤器配置了 /*，可以拦截任何资源。</li>
+<li>拦截器只会对控制器中的方法进行拦截。</li>
+</ul>
+</li>
+<li>拦截器也是 AOP 思想的一种实现方式。</li>
+<li>想要自定义拦截器，需要实现 <strong>HandlerInterceptor</strong> 接口。</li>
+</ul>
+<h2 id="2-自定义拦截器步骤"><a href="#2-自定义拦截器步骤" class="headerlink" title="2.自定义拦截器步骤"></a>2.自定义拦截器步骤</h2><ul>
+<li>创建类，实现 HandlerInterceptor 接口，重写需要的方法。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">* 自定义拦截器</span><br><span class="line">*/</span><br><span class="line">public class MyInterceptor1 implements HandlerInterceptor&#123;</span><br><span class="line">    /**</span><br><span class="line">    * controller方法执行前，进行拦截的方法</span><br><span class="line">    * return true放行</span><br><span class="line">    * return false拦截</span><br><span class="line">    * 可以使用转发或者重定向直接跳转到指定的页面。</span><br><span class="line">    */</span><br><span class="line">    public boolean preHandle(HttpServletRequest request,</span><br><span class="line">							HttpServletResponse response,</span><br><span class="line">    						Object handler)</span><br><span class="line">							throws Exception &#123;</span><br><span class="line">        System.out.println("拦截器执行了...");</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 springmvc.xml 中配置拦截器类。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置拦截器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 哪些方法进行拦截 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/user/*"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 哪些方法不进行拦截</span></span><br><span class="line"><span class="comment">        &lt;mvc:exclude-mapping path=""/&gt;</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 注册拦截器对象 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.itcast.demo1.MyInterceptor1"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-HandlerInterceptor-接口中的方法"><a href="#3-HandlerInterceptor-接口中的方法" class="headerlink" title="3.HandlerInterceptor 接口中的方法"></a>3.HandlerInterceptor 接口中的方法</h2><ul>
+<li>preHandle 方法是 controller 方法执行前拦截的方法。<ul>
+<li>可以使用 request 或者 response 跳转到指定的页面。</li>
+<li>return true 放行，执行下一个拦截器，如果没有拦截器，执行 controller 中的方法。</li>
+<li>return false 不放行，不会执行 controller 中的方法。</li>
+</ul>
+</li>
+<li>postHandle 是 controller 方法执行后执行的方法，在 JSP 视图执行前。<ul>
+<li>可以使用 request 或者 response 跳转到指定的页面。</li>
+<li>如果指定了跳转的页面，那么 controller 方法跳转的页面将不会显示。</li>
+</ul>
+</li>
+<li>postHandle 方法是在 JSP 执行后执行。<ul>
+<li>request 或者 response 不能再跳转页面了。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-配置多个拦截器"><a href="#4-配置多个拦截器" class="headerlink" title="4.配置多个拦截器"></a>4.配置多个拦截器</h2><ul>
+<li>1.再编写一个拦截器的类</li>
+<li>2.配置2个拦截器</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置拦截器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 哪些方法进行拦截 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/user/*"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 注册拦截器对象 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.itcast.demo1.MyInterceptor1"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/**"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.itcast.demo1.MyInterceptor2"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringMVC学习笔记6:SpringMVC的异常处理</title>
     <url>/Java/Spring/SpringMVC/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06-SpringMVC%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="1-异常处理思路"><a href="#1-异常处理思路" class="headerlink" title="1.异常处理思路"></a>1.异常处理思路</h2><p>Controller 调用 service，service 调用 dao，异常都是向上抛出的，最终由 DispatcherServlet 找异常处理器进行异常的处理。</p>
+<p><img src="/Java/Spring/SpringMVC/SpringMVC学习笔记6-SpringMVC的异常处理/05.bmp" alt="05" style="zoom:80%;"></p>
+<h2 id="2-SpringMVC的异常处理"><a href="#2-SpringMVC的异常处理" class="headerlink" title="2.SpringMVC的异常处理"></a>2.SpringMVC的异常处理</h2><ul>
+<li>自定义异常类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">4055945147128016300L</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 异常提示信息</span></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SysException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自定义异常处理器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 异常处理器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysExceptionResolver</span> <span class="keyword">implements</span> <span class="title">HandlerExceptionResolver</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 跳转到具体的错误页面的方法</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         HttpServletResponse response, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         Object handler,Exception ex)</span> </span>&#123;</span><br><span class="line">        ex.printStackTrace();</span><br><span class="line">        SysException e = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 获取到异常对象</span></span><br><span class="line">        <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> SysException) &#123;</span><br><span class="line">        	e = (SysException) ex;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        	e = <span class="keyword">new</span> SysException(<span class="string">"请联系管理员"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        <span class="comment">// 存入错误的提示信息</span></span><br><span class="line">        mv.addObject(<span class="string">"message"</span>, e.getMessage());</span><br><span class="line">        <span class="comment">// 跳转的Jsp页面</span></span><br><span class="line">        mv.setViewName(<span class="string">"error"</span>);</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置异常处理器</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置异常处理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sysExceptionResolver"</span> <span class="attr">class</span>=<span class="string">"cn.itcast.exception.SysExceptionResolver"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>Java</category>
         <category>Spring</category>
@@ -3407,37 +3542,6 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第四章—朴素贝叶斯法</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
@@ -3468,56 +3572,78 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第五章—决策树</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
-<p>决策树模型</p>
-</div>
-
-<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
-<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
-<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
-<p>主要步骤：</p>
+    <title>统计学习方法第七章—支持向量机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
+<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
+<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
+<blockquote>
+<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
+</blockquote>
+<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
+<script type="math/tex; mode=display">
+\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
+<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
+\gamma&=\frac{\hat{\gamma}}{\|w\|}
+\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
+<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
+<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
+<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H_{1}&: w \cdot x+b=1\\
+H_{2}&: w \cdot x+b=-1
+\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
+<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
+<script type="math/tex; mode=display">
+y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
+<p><strong>最小化目标函数的含义</strong>：</p>
 <ul>
-<li>特征选择</li>
-<li>决策树生成</li>
-<li>决策树剪枝</li>
+<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
+<li>使误分类点的个数尽量小</li>
 </ul>
-<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
-<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
-<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
-<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
+<p><strong>原始问题</strong>：</p>
 <script type="math/tex; mode=display">
-H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
-p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
-<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
+\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
+<p><strong>对偶问题</strong>：</p>
 <script type="math/tex; mode=display">
-g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
-<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
+\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
 <script type="math/tex; mode=display">
-g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
-<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
-<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
-<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
-<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
-<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
-<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
+\begin{aligned}
+w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
+b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
+\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
+<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
+<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
 <ul>
-<li>回归树：平方误差最小化准则</li>
-<li>分类树：基尼指数最小化准则</li>
+<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
 </ul>
-<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
-<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
-<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
-" width="400" height="229" alt="图片名称" align="center">
-<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
-</div>
-
-<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3638,6 +3764,99 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第五章—决策树</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
+<p>决策树模型</p>
+</div>
+
+<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
+<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
+<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
+<p>主要步骤：</p>
+<ul>
+<li>特征选择</li>
+<li>决策树生成</li>
+<li>决策树剪枝</li>
+</ul>
+<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
+<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
+<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
+<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
+<script type="math/tex; mode=display">
+H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
+p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
+<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
+<script type="math/tex; mode=display">
+g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
+<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
+<script type="math/tex; mode=display">
+g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
+<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
+<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
+<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
+<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
+<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
+<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
+<ul>
+<li>回归树：平方误差最小化准则</li>
+<li>分类树：基尼指数最小化准则</li>
+</ul>
+<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
+<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
+<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
+" width="400" height="229" alt="图片名称" align="center">
+<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
+</div>
+
+<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
@@ -3677,78 +3896,18 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第七章—支持向量机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
-<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
-<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
-<blockquote>
-<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
-</blockquote>
-<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
-<script type="math/tex; mode=display">
-\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
-<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
-\gamma&=\frac{\hat{\gamma}}{\|w\|}
-\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
-<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
-<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
-<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-H_{1}&: w \cdot x+b=1\\
-H_{2}&: w \cdot x+b=-1
-\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
-<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
-<script type="math/tex; mode=display">
-y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
-<script type="math/tex; mode=display">
-\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
-<p><strong>最小化目标函数的含义</strong>：</p>
-<ul>
-<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
-<li>使误分类点的个数尽量小</li>
-</ul>
-<p><strong>原始问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
-<p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
-b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
-\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
-<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
-<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
-<ul>
-<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
-</ul>
+    <title>统计学习方法第三章—k近邻法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
+<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
+<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
+<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
+<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
+<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
+<p>特征空间切分</p>
+</div>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -3891,30 +4050,6 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       <tags>
         <tag>机器学习</tag>
         <tag>统计学习方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第三章—k近邻法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
-<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
-<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
-<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
-<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
-<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
-<p>特征空间切分</p>
-</div>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
       </tags>
   </entry>
   <entry>

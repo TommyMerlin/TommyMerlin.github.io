@@ -103,15 +103,20 @@
 
 
 
-  <meta name="keywords" content="SpringMVC">
+  <meta name="description" content="1.异常处理思路Controller 调用 service，service 调用 dao，异常都是向上抛出的，最终由 DispatcherServlet 找异常处理器进行异常的处理。  2.SpringMVC的异常处理 自定义异常类  12345678910111213141516171819public class SysException extends Exception&amp;#123;">
+<meta name="keywords" content="SpringMVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC学习笔记6:SpringMVC的异常处理">
 <meta property="og:url" content="http://yoursite.com/Java/Spring/SpringMVC/SpringMVC学习笔记6-SpringMVC的异常处理/index.html">
 <meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.异常处理思路Controller 调用 service，service 调用 dao，异常都是向上抛出的，最终由 DispatcherServlet 找异常处理器进行异常的处理。  2.SpringMVC的异常处理 自定义异常类  12345678910111213141516171819public class SysException extends Exception&amp;#123;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-05T09:34:53.607Z">
+<meta property="og:image" content="http://yoursite.com/Java/Spring/SpringMVC/SpringMVC学习笔记6-SpringMVC的异常处理/05.bmp">
+<meta property="og:updated_time" content="2020-03-05T12:04:07.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC学习笔记6:SpringMVC的异常处理">
+<meta name="twitter:description" content="1.异常处理思路Controller 调用 service，service 调用 dao，异常都是向上抛出的，最终由 DispatcherServlet 找异常处理器进行异常的处理。  2.SpringMVC的异常处理 自定义异常类  12345678910111213141516171819public class SysException extends Exception&amp;#123;">
+<meta name="twitter:image" content="http://yoursite.com/Java/Spring/SpringMVC/SpringMVC学习笔记6-SpringMVC的异常处理/05.bmp">
 
 
 
@@ -425,7 +430,7 @@
                 
               
 
-              <time title="创建时间：2020-03-05 17:34:26 / 修改时间：17:34:53" itemprop="dateCreated datePublished" datetime="2020-03-05T17:34:26+08:00">2020-03-05</time>
+              <time title="创建时间：2020-03-05 17:34:26 / 修改时间：20:04:07" itemprop="dateCreated datePublished" datetime="2020-03-05T17:34:26+08:00">2020-03-05</time>
             
 
             
@@ -497,7 +502,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">0</span>
+                <span title="本文字数">7k</span>
               
 
               
@@ -521,7 +526,21 @@
       
 
       
-        
+        <h2 id="1-异常处理思路"><a href="#1-异常处理思路" class="headerlink" title="1.异常处理思路"></a>1.异常处理思路</h2><p>Controller 调用 service，service 调用 dao，异常都是向上抛出的，最终由 DispatcherServlet 找异常处理器进行异常的处理。</p>
+<p><img src="/Java/Spring/SpringMVC/SpringMVC学习笔记6-SpringMVC的异常处理/05.bmp" alt="05" style="zoom:80%;"></p>
+<h2 id="2-SpringMVC的异常处理"><a href="#2-SpringMVC的异常处理" class="headerlink" title="2.SpringMVC的异常处理"></a>2.SpringMVC的异常处理</h2><ul>
+<li>自定义异常类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">4055945147128016300L</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 异常提示信息</span></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SysException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自定义异常处理器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 异常处理器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysExceptionResolver</span> <span class="keyword">implements</span> <span class="title">HandlerExceptionResolver</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 跳转到具体的错误页面的方法</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         HttpServletResponse response, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         Object handler,Exception ex)</span> </span>&#123;</span><br><span class="line">        ex.printStackTrace();</span><br><span class="line">        SysException e = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 获取到异常对象</span></span><br><span class="line">        <span class="keyword">if</span>(ex <span class="keyword">instanceof</span> SysException) &#123;</span><br><span class="line">        	e = (SysException) ex;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        	e = <span class="keyword">new</span> SysException(<span class="string">"请联系管理员"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        <span class="comment">// 存入错误的提示信息</span></span><br><span class="line">        mv.addObject(<span class="string">"message"</span>, e.getMessage());</span><br><span class="line">        <span class="comment">// 跳转的Jsp页面</span></span><br><span class="line">        mv.setViewName(<span class="string">"error"</span>);</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置异常处理器</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置异常处理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sysExceptionResolver"</span> <span class="attr">class</span>=<span class="string">"cn.itcast.exception.SysExceptionResolver"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -596,6 +615,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/Java/Spring/SpringMVC/SpringMVC学习笔记7-拦截器/" rel="prev" title="SpringMVC学习笔记7:拦截器">
+                SpringMVC学习笔记7:拦截器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -638,8 +661,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -656,7 +688,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -864,6 +896,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-异常处理思路"><span class="nav-text">1.异常处理思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-SpringMVC的异常处理"><span class="nav-text">2.SpringMVC的异常处理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -890,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">158k</span>
+    <span title="站点总字数">165k</span>
   
 
   
