@@ -112,7 +112,7 @@
 <meta property="og:description" content="1.配置文件SpringBoot 使用一个全局的配置文件，配置文件名是固定的。  application.properties application.yml  配置文件的作用：修改 SpringBoot 自动配置的默认值；SpringBoot在底层都给我们自动配置好。 YAML（YAML Ain’t Markup Language）  YAML  A Markup Language：是一个标记语">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/Java/Spring/Spring-Boot/Spring-Boot学习笔记2-配置文件/IDEA乱码.png">
-<meta property="og:updated_time" content="2020-03-06T07:12:58.163Z">
+<meta property="og:updated_time" content="2020-03-06T07:56:31.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot学习笔记2:配置文件">
 <meta name="twitter:description" content="1.配置文件SpringBoot 使用一个全局的配置文件，配置文件名是固定的。  application.properties application.yml  配置文件的作用：修改 SpringBoot 自动配置的默认值；SpringBoot在底层都给我们自动配置好。 YAML（YAML Ain’t Markup Language）  YAML  A Markup Language：是一个标记语">
@@ -430,7 +430,7 @@
                 
               
 
-              <time title="创建时间：2020-03-06 09:56:15 / 修改时间：15:12:58" itemprop="dateCreated datePublished" datetime="2020-03-06T09:56:15+08:00">2020-03-06</time>
+              <time title="创建时间：2020-03-06 09:56:15 / 修改时间：15:56:31" itemprop="dateCreated datePublished" datetime="2020-03-06T09:56:15+08:00">2020-03-06</time>
             
 
             
@@ -502,7 +502,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">44k</span>
+                <span title="本文字数">42k</span>
               
 
               
@@ -647,7 +647,6 @@
 </ul>
 <h2 id="4-配置文件占位符"><a href="#4-配置文件占位符" class="headerlink" title="4.配置文件占位符"></a>4.配置文件占位符</h2><h3 id="4-1-随机数"><a href="#4-1-随机数" class="headerlink" title="4.1 随机数"></a>4.1 随机数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;random.value&#125;、$&#123;random.<span class="keyword">int</span>&#125;、$&#123;random.<span class="keyword">long</span>&#125;</span><br><span class="line">$&#123;random.<span class="keyword">int</span>(<span class="number">10</span>)&#125;、$&#123;random.<span class="keyword">int</span>[<span class="number">1024</span>,<span class="number">65536</span>]&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="4-2-占位符获取之前配置的值"><a href="#4-2-占位符获取之前配置的值" class="headerlink" title="4.2 占位符获取之前配置的值"></a>4.2 占位符获取之前配置的值</h3><p><strong>如果没有可以使用 : 指定默认值</strong></p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">person.last-name</span>=<span class="string">张三$&#123;random.uuid&#125;</span></span><br><span class="line"><span class="meta">person.age</span>=<span class="string">$&#123;random.int&#125;</span></span><br><span class="line"><span class="meta">person.birth</span>=<span class="string">2017/12/15</span></span><br><span class="line"><span class="meta">person.boss</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">person.maps.k1</span>=<span class="string">v1</span></span><br><span class="line"><span class="meta">person.maps.k2</span>=<span class="string">14</span></span><br><span class="line"><span class="meta">person.lists</span>=<span class="string">a,b,c</span></span><br><span class="line"><span class="meta">person.dog.name</span>=<span class="string">$&#123;person.hello:hello&#125;_dog</span></span><br><span class="line"><span class="meta">person.dog.age</span>=<span class="string">15</span></span><br></pre></td></tr></table></figure>
 <h2 id="5-Profile"><a href="#5-Profile" class="headerlink" title="5.Profile"></a>5.Profile</h2><h3 id="5-1-多Profile文件"><a href="#5-1-多Profile文件" class="headerlink" title="5.1 多Profile文件"></a>5.1 多Profile文件</h3><p>我们在主配置文件编写的时候，文件名可以是   <code>application-{profile}.properties/yml</code></p>
 <p>默认使用 application.properties 的配置；</p>
 <h3 id="5-2-yml支持多文档块方式"><a href="#5-2-yml支持多文档块方式" class="headerlink" title="5.2 yml支持多文档块方式"></a>5.2 yml支持多文档块方式</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span></span><br><span class="line"><span class="attr">    active:</span> <span class="string">prod</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8083</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span> <span class="string">dev</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8084</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span> <span class="string">prod</span>  <span class="comment">#指定属于哪个环境</span></span><br></pre></td></tr></table></figure>
@@ -849,7 +848,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/uncategorized/Spring-Boot学习笔记3-日志/" rel="prev" title="Spring Boot学习笔记3:日志">
+              <a href="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/" rel="prev" title="Spring Boot学习笔记3:日志">
                 Spring Boot学习笔记3:日志 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1056,7 +1055,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1177,7 +1178,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">176k</span>
+    <span title="站点总字数">181k</span>
   
 
   

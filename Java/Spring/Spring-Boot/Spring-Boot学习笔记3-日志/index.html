@@ -103,29 +103,30 @@
 
 
 
-  <meta name="description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
-<meta name="keywords" content="数据库,MySql">
+  <meta name="description" content="1、日志框架 小张；开发一个大型系统； ​        1、System.out.println(“”)；将关键数据打印在控制台；去掉？写在一个文件？ ​        2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar； ​        3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？ ​        4">
+<meta name="keywords" content="Spring Boot,日志">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库基础2:数据库的设计">
-<meta property="og:url" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/index.html">
+<meta property="og:title" content="Spring Boot学习笔记3:日志">
+<meta property="og:url" content="http://yoursite.com/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/index.html">
 <meta property="og:site_name" content="HuYe的博客">
-<meta property="og:description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
+<meta property="og:description" content="1、日志框架 小张；开发一个大型系统； ​        1、System.out.println(“”)；将关键数据打印在控制台；去掉？写在一个文件？ ​        2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar； ​        3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？ ​        4">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/1NF.png">
-<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/2NF.png">
-<meta property="og:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/3NF.png">
-<meta property="og:updated_time" content="2020-03-04T08:51:34.506Z">
+<meta property="og:image" content="http://yoursite.com/Java/desktop/JAVA/springboot/核心技术篇/Spring%20Boot%20笔记+课件/images/concrete-bindings.png">
+<meta property="og:image" content="http://yoursite.com/Java/desktop/JAVA/springboot/核心技术篇/Spring%20Boot%20笔记+课件/images/legacy.png">
+<meta property="og:image" content="http://yoursite.com/Java/desktop/JAVA/springboot/核心技术篇/Spring%20Boot%20笔记+课件/images/搜狗截图20180131220946.png">
+<meta property="og:image" content="http://yoursite.com/Java/desktop/JAVA/springboot/核心技术篇/Spring%20Boot%20笔记+课件/images/搜狗截图20180131221411.png">
+<meta property="og:updated_time" content="2020-03-06T07:54:47.171Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库基础2:数据库的设计">
-<meta name="twitter:description" content="1.多表之间的关系1.1 分类 一对一 人和身份证   一对多(多对一) 部门和员工   多对多 学生和课程    1.2 实现关系 一对一 一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。   一对多(多对一) 在多的一方建立外键，指向一的一方的主键。   多对多 多对多关系实现需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。">
-<meta name="twitter:image" content="http://yoursite.com/数据库/数据库基础2-数据库的设计/Blog/source/_posts/数据库基础2-数据库的设计/1NF.png">
+<meta name="twitter:title" content="Spring Boot学习笔记3:日志">
+<meta name="twitter:description" content="1、日志框架 小张；开发一个大型系统； ​        1、System.out.println(“”)；将关键数据打印在控制台；去掉？写在一个文件？ ​        2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar； ​        3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？ ​        4">
+<meta name="twitter:image" content="http://yoursite.com/Java/desktop/JAVA/springboot/核心技术篇/Spring%20Boot%20笔记+课件/images/concrete-bindings.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/数据库/数据库基础2-数据库的设计/">
+  <link rel="canonical" href="http://yoursite.com/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/">
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>数据库基础2:数据库的设计 | HuYe的博客</title>
+  <title>Spring Boot学习笔记3:日志 | HuYe的博客</title>
   
 
 
@@ -389,7 +390,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据库/数据库基础2-数据库的设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -406,7 +407,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库基础2:数据库的设计
+          <h1 class="post-title" itemprop="name headline">Spring Boot学习笔记3:日志
 
               
             
@@ -432,7 +433,7 @@
                 
               
 
-              <time title="创建时间：2020-03-04 16:10:09 / 修改时间：16:51:34" itemprop="dateCreated datePublished" datetime="2020-03-04T16:10:09+08:00">2020-03-04</time>
+              <time title="创建时间：2020-03-06 15:03:11 / 修改时间：15:54:47" itemprop="dateCreated datePublished" datetime="2020-03-06T15:03:11+08:00">2020-03-06</time>
             
 
             
@@ -454,7 +455,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a></span>
 
                 
                 
@@ -490,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.6k</span>
+                <span title="本文字数">25k</span>
               
 
               
@@ -514,74 +529,147 @@
       
 
       
-        <h2 id="1-多表之间的关系"><a href="#1-多表之间的关系" class="headerlink" title="1.多表之间的关系"></a>1.多表之间的关系</h2><h3 id="1-1-分类"><a href="#1-1-分类" class="headerlink" title="1.1 分类"></a>1.1 分类</h3><ul>
-<li>一对一<ul>
-<li>人和身份证</li>
-</ul>
-</li>
-<li>一对多(多对一)<ul>
-<li>部门和员工</li>
-</ul>
-</li>
-<li>多对多<ul>
-<li>学生和课程</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-2-实现关系"><a href="#1-2-实现关系" class="headerlink" title="1.2 实现关系"></a>1.2 实现关系</h3><ul>
-<li>一对一<ul>
-<li>一对一关系实现，可以在任意一方添加唯一外键指向另一方的主键。</li>
-</ul>
-</li>
-<li>一对多(多对一)<ul>
-<li><strong>在多的一方建立外键</strong>，指向一的一方的主键。</li>
-</ul>
-</li>
-<li>多对多<ul>
-<li>多对多关系实现需要借助第三张<strong>中间表</strong>。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-数据库设计的范式"><a href="#2-数据库设计的范式" class="headerlink" title="2.数据库设计的范式"></a>2.数据库设计的范式</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><p>设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的<strong>范式</strong>，各种范式呈递次规范，<strong>越高的范式数据库冗余越小</strong>。</p>
-<p>目前关系数据库有<strong>六种范式</strong>：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。</p>
-<h3 id="2-2-分类"><a href="#2-2-分类" class="headerlink" title="2.2 分类"></a>2.2 分类</h3><ul>
-<li><strong>第一范式（1NF）</strong>：每一列都是不可分割的<strong>原子数据项</strong>。</li>
-</ul>
-<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\1NF.png" alt="1NF" style="zoom:60%;"></p>
-<ul>
-<li><strong>第二范式（2NF）</strong>：在 1NF 的基础上，非码属性必须完全依赖于码（在 1NF 基础上<strong>消除非主属性对主码的部分函数依赖</strong>）。</li>
-</ul>
-<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\2NF.png" alt="2NF" style="zoom:60%;"></p>
-<ul>
-<li><strong>第三范式（3NF）</strong>：在 2NF 基础上，任何非主属性不依赖于其它非主属性（在 2NF 基础上<strong>消除传递依赖</strong>）。</li>
-</ul>
-<p><img src="/数据库/数据库基础2-数据库的设计/Blog\source\_posts\数据库基础2-数据库的设计\3NF.png" alt="3NF" style="zoom:60%;"></p>
-<p><strong>概念：</strong></p>
-<ul>
-<li><strong>函数依赖</strong>：A—&gt;B，如果通过 A 属性(属性组)的值，可以确定唯一 B 属性的值。则称 B 依赖于 A。<ul>
-<li>学号—&gt;姓名</li>
-<li>(学号，课程名称)—&gt; 分数</li>
-</ul>
-</li>
-<li><strong>完全函数依赖</strong>：A—&gt;B， 如果A是一个属性组，则B属性值得确定需要依赖于A属性组中<strong>所有的属性值</strong>。<ul>
-<li>(学号，课程名称)—&gt; 分数</li>
-</ul>
-</li>
-<li><strong>部分函数依赖</strong>：A—&gt;B， 如果A是一个属性组，则B属性值得确定只需要依赖于A属性组中<strong>某一些值</strong>即可。<ul>
-<li>(学号，课程名称)—&gt; 姓名</li>
-</ul>
-</li>
-<li><strong>传递函数依赖</strong>：A—&gt;B, B — &gt;C . 如果通过A属性(属性组)的值，可以确定唯一B属性的值，在通过B属性（属性组）的值可以确定唯一C属性的值，则称 C 传递函数依赖于A。<ul>
-<li>学号—&gt;系名，系名—&gt;系主任</li>
-</ul>
-</li>
-<li><strong>码</strong>：如果在一张表中，一个属性或属性组，被其他所有属性所<strong>完全依赖</strong>，则称这个属性(属性组)为该表的码。<ul>
-<li>该表中码为：（学号，课程名称）</li>
-<li><strong>主属性</strong>：码属性组中的所有属性。</li>
-<li><strong>非主属性</strong>：除过码属性组的属性</li>
-</ul>
-</li>
-</ul>
+        <h2 id="1、日志框架"><a href="#1、日志框架" class="headerlink" title="1、日志框架"></a>1、日志框架</h2><p> 小张；开发一个大型系统；</p>
+<p>​        1、System.out.println(“”)；将关键数据打印在控制台；去掉？写在一个文件？</p>
+<p>​        2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar；</p>
+<p>​        3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？</p>
+<p>​        4、将以前框架卸下来？换上新的框架，重新修改之前相关的API；zhanglogging-prefect.jar；</p>
+<p>​        5、JDBC—-数据库驱动；</p>
+<p>​            写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；</p>
+<p>​            给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；</p>
+<p><strong>市面上的日志框架；</strong></p>
+<p>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>日志门面  （日志的抽象层）</th>
+<th>日志实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><del>JCL（Jakarta  Commons Logging）</del>    SLF4j（Simple  Logging Facade for Java）    <strong><del>jboss-logging</del></strong></td>
+<td>Log4j  JUL（java.util.logging）  Log4j2  <strong>Logback</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>左边选一个门面（抽象层）、右边来选一个实现；</p>
+<p>日志门面：  SLF4J；</p>
+<p>日志实现：Logback；</p>
+<p>SpringBoot：底层是Spring框架，Spring框架默认是用JCL；‘</p>
+<p>​    <strong>==SpringBoot选用 SLF4j和logback；==</strong></p>
+<h2 id="2、SLF4j使用"><a href="#2、SLF4j使用" class="headerlink" title="2、SLF4j使用"></a>2、SLF4j使用</h2><h3 id="1、如何在系统中使用SLF4j-https-www-slf4j-org"><a href="#1、如何在系统中使用SLF4j-https-www-slf4j-org" class="headerlink" title="1、如何在系统中使用SLF4j   https://www.slf4j.org"></a>1、如何在系统中使用SLF4j   <a href="https://www.slf4j.org" target="_blank" rel="noopener">https://www.slf4j.org</a></h3><p>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法；</p>
+<p>给系统里面导入slf4j的jar和  logback的实现jar</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(HelloWorld.class);</span><br><span class="line">    logger.info(<span class="string">"Hello World"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>图示；</p>
+<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/concrete-bindings.png" alt="images/concrete-bindings.png"></p>
+<p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
+<h3 id="2、遗留问题"><a href="#2、遗留问题" class="headerlink" title="2、遗留问题"></a>2、遗留问题</h3><p>a（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
+<p>统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？</p>
+<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/legacy.png" alt></p>
+<p><strong>如何让系统中所有的日志都统一到slf4j；</strong></p>
+<p>==1、将系统中其他日志框架先排除出去；==</p>
+<p>==2、用中间包来替换原有的日志框架；==</p>
+<p>==3、我们导入slf4j其他的实现==</p>
+<h2 id="3、SpringBoot日志关系"><a href="#3、SpringBoot日志关系" class="headerlink" title="3、SpringBoot日志关系"></a>3、SpringBoot日志关系</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>SpringBoot使用它来做日志功能；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>底层依赖关系</p>
+<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/搜狗截图20180131220946.png" alt></p>
+<p>总结：</p>
+<p>​    1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录</p>
+<p>​    2）、SpringBoot也把其他的日志都替换成了slf4j；</p>
+<p>​    3）、中间替换包？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"rawtypes"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">LogFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = <span class="string">"http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> LogFactory logFactory = <span class="keyword">new</span> SLF4JLogFactory();</span><br></pre></td></tr></table></figure>
+<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/搜狗截图20180131221411.png" alt></p>
+<p>​    4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？</p>
+<p>​            Spring框架用的是commons-logging；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>==SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可；==</strong></p>
+<h2 id="4、日志使用；"><a href="#4、日志使用；" class="headerlink" title="4、日志使用；"></a>4、日志使用；</h2><h3 id="1、默认配置"><a href="#1、默认配置" class="headerlink" title="1、默认配置"></a>1、默认配置</h3><p>SpringBoot默认帮我们配置好了日志；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//记录器</span></span><br><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//System.out.println();</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//日志的级别；</span></span><br><span class="line">	<span class="comment">//由低到高   trace&lt;debug&lt;info&lt;warn&lt;error</span></span><br><span class="line">	<span class="comment">//可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效</span></span><br><span class="line">	logger.trace(<span class="string">"这是trace日志..."</span>);</span><br><span class="line">	logger.debug(<span class="string">"这是debug日志..."</span>);</span><br><span class="line">	<span class="comment">//SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别</span></span><br><span class="line">	logger.info(<span class="string">"这是info日志..."</span>);</span><br><span class="line">	logger.warn(<span class="string">"这是warn日志..."</span>);</span><br><span class="line">	logger.error(<span class="string">"这是error日志..."</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>    日志输出格式：
+        %d表示日期时间，
+        %thread表示线程名，
+        %-5level：级别从左显示5个字符宽度
+        %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+        %msg：日志消息，
+        %n是换行符
+    --&gt;
+    %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+</code></pre><p>SpringBoot修改日志的默认配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.level.com.atguigu</span>=<span class="string">trace</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#logging.path=</span></span><br><span class="line"><span class="comment"># 不指定路径在当前项目下生成springboot.log日志</span></span><br><span class="line"><span class="comment"># 可以指定完整的路径；</span></span><br><span class="line"><span class="comment">#logging.file=G:/springboot.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件</span></span><br><span class="line"><span class="meta">logging.path</span>=<span class="string">/spring/log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  在控制台输出的日志的格式</span></span><br><span class="line"><span class="meta">logging.pattern.console</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n</span></span><br><span class="line"><span class="comment"># 指定文件中日志输出的格式</span></span><br><span class="line"><span class="meta">logging.pattern.file</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; === [%thread] === %-5level === %logger&#123;50&#125; ==== %msg%n</span></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>logging.file</th>
+<th>logging.path</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(none)</td>
+<td>(none)</td>
+<td></td>
+<td>只在控制台输出</td>
+</tr>
+<tr>
+<td>指定文件名</td>
+<td>(none)</td>
+<td>my.log</td>
+<td>输出日志到my.log文件</td>
+</tr>
+<tr>
+<td>(none)</td>
+<td>指定目录</td>
+<td>/var/log</td>
+<td>输出到指定目录的 spring.log 文件中</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2、指定配置"><a href="#2、指定配置" class="headerlink" title="2、指定配置"></a>2、指定配置</h3><p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用他默认配置的了</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Logging System</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logback</td>
+<td><code>logback-spring.xml</code>, <code>logback-spring.groovy</code>, <code>logback.xml</code> or <code>logback.groovy</code></td>
+</tr>
+<tr>
+<td>Log4j2</td>
+<td><code>log4j2-spring.xml</code> or <code>log4j2.xml</code></td>
+</tr>
+<tr>
+<td>JDK (Java Util Logging)</td>
+<td><code>logging.properties</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>logback.xml：直接就被日志框架识别了；</p>
+<p><strong>logback-spring.xml</strong>：日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot的高级Profile功能</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"staging"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- configuration to be enabled when the "staging" profile is active --&gt;</span></span><br><span class="line">  	可以指定某段配置只在某个环境下生效</span><br><span class="line"><span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"stdout"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        日志输出格式：</span></span><br><span class="line"><span class="comment">			%d表示日期时间，</span></span><br><span class="line"><span class="comment">			%thread表示线程名，</span></span><br><span class="line"><span class="comment">			%-5level：级别从左显示5个字符宽度</span></span><br><span class="line"><span class="comment">			%logger&#123;50&#125; 表示logger名字最长50个字符，否则按照句点分割。 </span></span><br><span class="line"><span class="comment">			%msg：日志消息，</span></span><br><span class="line"><span class="comment">			%n是换行符</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"dev"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; ----&gt; [%thread] ---&gt; %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"!dev"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; ==== [%thread] ==== %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果使用logback.xml作为日志配置文件，还要使用profile功能，会有以下错误</p>
+<p> <code>no applicable action for [springProfile]</code></p>
+<h2 id="5、切换日志框架"><a href="#5、切换日志框架" class="headerlink" title="5、切换日志框架"></a>5、切换日志框架</h2><p>可以按照slf4j的日志适配图，进行相关的切换；</p>
+<p>slf4j+log4j的方式；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>切换为log4j2</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -634,9 +722,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+            <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
           
-            <a href="/tags/MySql/" rel="tag"><i class="fa fa-tag"></i> MySql</a>
+            <a href="/tags/日志/" rel="tag"><i class="fa fa-tag"></i> 日志</a>
           
         </div>
       
@@ -649,8 +737,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/数据库/数据库基础1-约束/" rel="next" title="数据库基础1:约束">
-                <i class="fa fa-chevron-left"></i> 数据库基础1:约束
+              <a href="/Java/Spring/Spring-Boot/Spring-Boot学习笔记2-配置文件/" rel="next" title="Spring Boot学习笔记2:配置文件">
+                <i class="fa fa-chevron-left"></i> Spring Boot学习笔记2:配置文件
               </a>
             
           </div>
@@ -658,10 +746,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/数据库/数据库基础3-数据库的备份和还原/" rel="prev" title="数据库基础3:数据库的备份和还原">
-                数据库基础3:数据库的备份和还原 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -956,7 +1040,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-多表之间的关系"><span class="nav-text">1.多表之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-分类"><span class="nav-text">1.1 分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-实现关系"><span class="nav-text">1.2 实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数据库设计的范式"><span class="nav-text">2.数据库设计的范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-概念"><span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-分类"><span class="nav-text">2.2 分类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、日志框架"><span class="nav-text">1、日志框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、SLF4j使用"><span class="nav-text">2、SLF4j使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、如何在系统中使用SLF4j-https-www-slf4j-org"><span class="nav-text">1、如何在系统中使用SLF4j   https://www.slf4j.org</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、遗留问题"><span class="nav-text">2、遗留问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、SpringBoot日志关系"><span class="nav-text">3、SpringBoot日志关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、日志使用；"><span class="nav-text">4、日志使用；</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、默认配置"><span class="nav-text">1、默认配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、指定配置"><span class="nav-text">2、指定配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、切换日志框架"><span class="nav-text">5、切换日志框架</span></a></li></ol></div>
             
 
           </div>
