@@ -3,16 +3,7 @@
   <entry>
     <title>Spring Boot学习笔记3:日志</title>
     <url>/Java/Spring/Spring-Boot/Spring-Boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h2 id="1、日志框架"><a href="#1、日志框架" class="headerlink" title="1、日志框架"></a>1、日志框架</h2><p> 小张；开发一个大型系统；</p>
-<p>​        1、System.out.println(“”)；将关键数据打印在控制台；去掉？写在一个文件？</p>
-<p>​        2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar；</p>
-<p>​        3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？</p>
-<p>​        4、将以前框架卸下来？换上新的框架，重新修改之前相关的API；zhanglogging-prefect.jar；</p>
-<p>​        5、JDBC—-数据库驱动；</p>
-<p>​            写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；</p>
-<p>​            给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；</p>
-<p><strong>市面上的日志框架；</strong></p>
-<p>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
+    <content><![CDATA[<h2 id="1-日志框架"><a href="#1-日志框架" class="headerlink" title="1.日志框架"></a>1.日志框架</h2><p><strong>市面上的日志框架；</strong><br>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
 <div class="table-container">
 <table>
 <thead>
@@ -23,58 +14,69 @@
 </thead>
 <tbody>
 <tr>
-<td><del>JCL（Jakarta  Commons Logging）</del>    SLF4j（Simple  Logging Facade for Java）    <strong><del>jboss-logging</del></strong></td>
-<td>Log4j  JUL（java.util.logging）  Log4j2  <strong>Logback</strong></td>
+<td><del>JCL（Jakarta  Commons Logging）</del>  <br>SLF4j（Simple  Logging Facade for Java）<br> <del>jboss-logging</del></td>
+<td>Log4j <br> JUL（java.util.logging）<br> Log4j2 <br> <strong>Logback</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>左边选一个门面（抽象层）、右边来选一个实现；</p>
-<p>日志门面：  SLF4J；</p>
-<p>日志实现：Logback；</p>
-<p>SpringBoot：底层是Spring框架，Spring框架默认是用JCL；‘</p>
-<p>​    <strong>==SpringBoot选用 SLF4j和logback；==</strong></p>
-<h2 id="2、SLF4j使用"><a href="#2、SLF4j使用" class="headerlink" title="2、SLF4j使用"></a>2、SLF4j使用</h2><h3 id="1、如何在系统中使用SLF4j-https-www-slf4j-org"><a href="#1、如何在系统中使用SLF4j-https-www-slf4j-org" class="headerlink" title="1、如何在系统中使用SLF4j   https://www.slf4j.org"></a>1、如何在系统中使用SLF4j   <a href="https://www.slf4j.org" target="_blank" rel="noopener">https://www.slf4j.org</a></h3><p>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法；</p>
-<p>给系统里面导入slf4j的jar和  logback的实现jar</p>
+<ul>
+<li>日志门面：  SLF4J；</li>
+<li>日志实现：Logback；</li>
+</ul>
+<p>SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL。</p>
+<p><strong>SpringBoot 选用 SLF4j 和 logback</strong></p>
+<h2 id="2-SLF4j使用"><a href="#2-SLF4j使用" class="headerlink" title="2.SLF4j使用"></a>2.SLF4j使用</h2><h3 id="2-1-如何在系统中使用SLF4j-https-www-slf4j-org"><a href="#2-1-如何在系统中使用SLF4j-https-www-slf4j-org" class="headerlink" title="2.1 如何在系统中使用SLF4j   https://www.slf4j.org"></a>2.1 如何在系统中使用SLF4j   <a href="https://www.slf4j.org" target="_blank" rel="noopener">https://www.slf4j.org</a></h3><p>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法；</p>
+<p>给系统里面导入 slf4j 的 jar 和 logback 的实现 jar。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(HelloWorld.class);</span><br><span class="line">    logger.info(<span class="string">"Hello World"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>图示；</p>
-<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/concrete-bindings.png" alt="images/concrete-bindings.png"></p>
-<p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
-<h3 id="2、遗留问题"><a href="#2、遗留问题" class="headerlink" title="2、遗留问题"></a>2、遗留问题</h3><p>a（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
-<p>统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？</p>
-<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/legacy.png" alt></p>
-<p><strong>如何让系统中所有的日志都统一到slf4j；</strong></p>
-<p>==1、将系统中其他日志框架先排除出去；==</p>
-<p>==2、用中间包来替换原有的日志框架；==</p>
-<p>==3、我们导入slf4j其他的实现==</p>
-<h2 id="3、SpringBoot日志关系"><a href="#3、SpringBoot日志关系" class="headerlink" title="3、SpringBoot日志关系"></a>3、SpringBoot日志关系</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>SpringBoot使用它来做日志功能；</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>底层依赖关系</p>
-<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/搜狗截图20180131220946.png" alt></p>
-<p>总结：</p>
-<p>​    1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录</p>
-<p>​    2）、SpringBoot也把其他的日志都替换成了slf4j；</p>
-<p>​    3）、中间替换包？</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"rawtypes"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">LogFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = <span class="string">"http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> LogFactory logFactory = <span class="keyword">new</span> SLF4JLogFactory();</span><br></pre></td></tr></table></figure>
-<p><img src="../../../desktop/JAVA/springboot/核心技术篇/Spring Boot 笔记+课件/images/搜狗截图20180131221411.png" alt></p>
-<p>​    4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？</p>
-<p>​            Spring框架用的是commons-logging；</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>==SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可；==</strong></p>
-<h2 id="4、日志使用；"><a href="#4、日志使用；" class="headerlink" title="4、日志使用；"></a>4、日志使用；</h2><h3 id="1、默认配置"><a href="#1、默认配置" class="headerlink" title="1、默认配置"></a>1、默认配置</h3><p>SpringBoot默认帮我们配置好了日志；</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//记录器</span></span><br><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//System.out.println();</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//日志的级别；</span></span><br><span class="line">	<span class="comment">//由低到高   trace&lt;debug&lt;info&lt;warn&lt;error</span></span><br><span class="line">	<span class="comment">//可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效</span></span><br><span class="line">	logger.trace(<span class="string">"这是trace日志..."</span>);</span><br><span class="line">	logger.debug(<span class="string">"这是debug日志..."</span>);</span><br><span class="line">	<span class="comment">//SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别</span></span><br><span class="line">	logger.info(<span class="string">"这是info日志..."</span>);</span><br><span class="line">	logger.warn(<span class="string">"这是warn日志..."</span>);</span><br><span class="line">	logger.error(<span class="string">"这是error日志..."</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>    日志输出格式：
-        %d表示日期时间，
-        %thread表示线程名，
-        %-5level：级别从左显示5个字符宽度
-        %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
-        %msg：日志消息，
-        %n是换行符
-    --&gt;
-    %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
-</code></pre><p>SpringBoot修改日志的默认配置</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">logging.level.com.atguigu</span>=<span class="string">trace</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#logging.path=</span></span><br><span class="line"><span class="comment"># 不指定路径在当前项目下生成springboot.log日志</span></span><br><span class="line"><span class="comment"># 可以指定完整的路径；</span></span><br><span class="line"><span class="comment">#logging.file=G:/springboot.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件</span></span><br><span class="line"><span class="meta">logging.path</span>=<span class="string">/spring/log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  在控制台输出的日志的格式</span></span><br><span class="line"><span class="meta">logging.pattern.console</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n</span></span><br><span class="line"><span class="comment"># 指定文件中日志输出的格式</span></span><br><span class="line"><span class="meta">logging.pattern.file</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; === [%thread] === %-5level === %logger&#123;50&#125; ==== %msg%n</span></span><br></pre></td></tr></table></figure>
+<p>图示</p>
+<p><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/slf4j.png" alt="slf4j"></p>
+<p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件。</strong></p>
+<h3 id="2、遗留问题"><a href="#2、遗留问题" class="headerlink" title="2、遗留问题"></a>2、遗留问题</h3><p>（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
+<p>统一日志记录，即使是别的框架如何让一起统一使用 slf4j 进行输出？</p>
+<p><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/legacy.png" alt="legacy"></p>
+<p><strong>如何让系统中所有的日志都统一到 slf4j</strong></p>
+<ul>
+<li><p>1.将系统中其他日志框架先排除出去；</p>
+</li>
+<li><p>2.用中间包来替换原有的日志框架；</p>
+</li>
+<li><p>3.我们导入slf4j其他的实现。</p>
+</li>
+</ul>
+<h2 id="3-SpringBoot日志关系"><a href="#3-SpringBoot日志关系" class="headerlink" title="3.SpringBoot日志关系"></a>3.SpringBoot日志关系</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>SpringBoot 使用它来做日志功能；</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>底层依赖关系</strong></p>
+<p><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/底层实现.png" alt="底层实现" style="zoom:80%;"></p>
+<p><strong>总结</strong></p>
+<ul>
+<li><p>SpringBoot 底层也是使用 slf4j+logback 的方式进行日志记录。</p>
+</li>
+<li><p>SpringBoot 把其他的日志都替换成了 slf4j。</p>
+</li>
+<li><p>如果我们要引入其他框架，一定要把这个框架的默认日志依赖移除掉。</p>
+<ul>
+<li>Spring 框架用的是 commons-logging；</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>SpringBoot能自动适配所有的日志，而且底层使用 slf4j+logback 的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可。</strong></p>
+<h2 id="4-日志使用"><a href="#4-日志使用" class="headerlink" title="4.日志使用"></a>4.日志使用</h2><h3 id="4-1-默认配置"><a href="#4-1-默认配置" class="headerlink" title="4.1 默认配置"></a>4.1 默认配置</h3><p>SpringBoot 默认帮我们配置好了日志；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//记录器</span></span><br><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//System.out.println();</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//日志的级别；</span></span><br><span class="line">    <span class="comment">//由低到高   trace&lt;debug&lt;info&lt;warn&lt;error</span></span><br><span class="line">    <span class="comment">//可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效</span></span><br><span class="line">    logger.trace(<span class="string">"这是trace日志..."</span>);</span><br><span class="line">    logger.debug(<span class="string">"这是debug日志..."</span>);</span><br><span class="line">    <span class="comment">//SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别</span></span><br><span class="line">    logger.info(<span class="string">"这是info日志..."</span>);</span><br><span class="line">    logger.warn(<span class="string">"这是warn日志..."</span>);</span><br><span class="line">    logger.error(<span class="string">"这是error日志..."</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>日志输出格式：
+%d表示日期时间，
+%thread表示线程名，
+%-5level：级别从左显示5个字符宽度
+%logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+%msg：日志消息，
+%n是换行符
+--&gt;
+%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+</code></pre><p>SpringBoot 修改日志的默认配置</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">logging.level.com.atguigu</span>=<span class="string">trace</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#logging.path=</span></span><br><span class="line"><span class="comment"># 不指定路径在当前项目下生成springboot.log日志</span></span><br><span class="line"><span class="comment"># 可以指定完整的路径；</span></span><br><span class="line"><span class="comment">#logging.file=G:/springboot.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件</span></span><br><span class="line"><span class="meta">logging.path</span>=<span class="string">/spring/log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  在控制台输出的日志的格式</span></span><br><span class="line"><span class="meta">logging.pattern.console</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n</span></span><br><span class="line"><span class="comment"># 指定文件中日志输出的格式</span></span><br><span class="line"><span class="meta">logging.pattern.file</span>=<span class="string">%d&#123;yyyy-MM-dd&#125; === [%thread] === %-5level === %logger&#123;50&#125; ==== %msg%n</span></span><br></pre></td></tr></table></figure>
 <div class="table-container">
 <table>
 <thead>
@@ -107,7 +109,7 @@
 </tbody>
 </table>
 </div>
-<h3 id="2、指定配置"><a href="#2、指定配置" class="headerlink" title="2、指定配置"></a>2、指定配置</h3><p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用他默认配置的了</p>
+<h3 id="4-2-指定配置"><a href="#4-2-指定配置" class="headerlink" title="4.2 指定配置"></a>4.2 指定配置</h3><p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用他默认配置的了</p>
 <div class="table-container">
 <table>
 <thead>
@@ -139,10 +141,10 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"stdout"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        日志输出格式：</span></span><br><span class="line"><span class="comment">			%d表示日期时间，</span></span><br><span class="line"><span class="comment">			%thread表示线程名，</span></span><br><span class="line"><span class="comment">			%-5level：级别从左显示5个字符宽度</span></span><br><span class="line"><span class="comment">			%logger&#123;50&#125; 表示logger名字最长50个字符，否则按照句点分割。 </span></span><br><span class="line"><span class="comment">			%msg：日志消息，</span></span><br><span class="line"><span class="comment">			%n是换行符</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"dev"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; ----&gt; [%thread] ---&gt; %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"!dev"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; ==== [%thread] ==== %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如果使用logback.xml作为日志配置文件，还要使用profile功能，会有以下错误</p>
 <p> <code>no applicable action for [springProfile]</code></p>
-<h2 id="5、切换日志框架"><a href="#5、切换日志框架" class="headerlink" title="5、切换日志框架"></a>5、切换日志框架</h2><p>可以按照slf4j的日志适配图，进行相关的切换；</p>
-<p>slf4j+log4j的方式；</p>
+<h2 id="5-切换日志框架"><a href="#5-切换日志框架" class="headerlink" title="5.切换日志框架"></a>5.切换日志框架</h2><p>可以按照 slf4j 的日志适配图，进行相关的切换。</p>
+<p><strong>slf4j+log4j的方式</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>切换为log4j2</p>
+<p><strong>切换为 log4j2</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -325,8 +327,8 @@
 <li>10.@Configuration 注解类上的 @PropertySource</li>
 <li>11.通过 SpringApplication.setDefaultProperties 指定的默认属性</li>
 </ul>
-<h2 id="7-外部配置加载顺序-1"><a href="#7-外部配置加载顺序-1" class="headerlink" title="7.外部配置加载顺序"></a>7.外部配置加载顺序</h2><p><a href="https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/appendix-application-properties.html" target="_blank" rel="noopener">配置文件能配置的属性参照</a></p>
-<h2 id="8-自动配置原理"><a href="#8-自动配置原理" class="headerlink" title="8.自动配置原理"></a>8.自动配置原理</h2><h3 id="8-1-自动配置原理"><a href="#8-1-自动配置原理" class="headerlink" title="8.1 自动配置原理"></a>8.1 自动配置原理</h3><p>1.SpringBoot 启动的时候加载主配置类，开启了自动配置功能 <strong>@EnableAutoConfiguration</strong><br>2.@EnableAutoConfiguration 作用：</p>
+<h2 id="8-自动配置原理"><a href="#8-自动配置原理" class="headerlink" title="8.自动配置原理"></a>8.自动配置原理</h2><p><a href="https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/html/appendix-application-properties.html" target="_blank" rel="noopener">配置文件能配置的属性参照</a></p>
+<h3 id="8-1-自动配置原理"><a href="#8-1-自动配置原理" class="headerlink" title="8.1 自动配置原理"></a>8.1 自动配置原理</h3><p>1.SpringBoot 启动的时候加载主配置类，开启了自动配置功能 <strong>@EnableAutoConfiguration</strong><br>2.@EnableAutoConfiguration 作用：</p>
 <ul>
 <li>利用 EnableAutoConfigurationImportSelector 给容器中导入一些组件<br><strong>将 类路径下  META-INF/spring.factories 里面配置的所有EnableAutoConfiguration的值加入到了容器中；</strong><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Auto Configure</span></span><br><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\</span><br><span class="line"></span><br><span class="line"><span class="comment">//......</span></span><br><span class="line"><span class="comment">//......</span></span><br><span class="line"></span><br><span class="line">org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.websocket.WebSocketMessagingAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration</span><br></pre></td></tr></table></figure>
 </li>
@@ -3958,6 +3960,107 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
+<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
+<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
+<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
+<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
+<script type="math/tex; mode=display">
+\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
+<script type="math/tex; mode=display">
+\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
+<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
+<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
+<p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
+<ul>
+<li>梯度下降法</li>
+<li>拟牛顿法</li>
+</ul>
+<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
+<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第五章—决策树</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
+<p>决策树模型</p>
+</div>
+
+<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
+<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
+<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
+<p>主要步骤：</p>
+<ul>
+<li>特征选择</li>
+<li>决策树生成</li>
+<li>决策树剪枝</li>
+</ul>
+<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
+<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
+<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
+<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
+<script type="math/tex; mode=display">
+H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
+p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
+<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
+<script type="math/tex; mode=display">
+g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
+<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
+<script type="math/tex; mode=display">
+g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
+<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
+<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
+<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
+<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
+<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
+<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
+<ul>
+<li>回归树：平方误差最小化准则</li>
+<li>分类树：基尼指数最小化准则</li>
+</ul>
+<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
+<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
+<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
+<div align="center">    
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
+" width="400" height="229" alt="图片名称" align="center">
+<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
+</div>
+
+<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第二章—感知机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
@@ -3977,6 +4080,120 @@ Epoch 5/5
 <h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
 <h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
 <p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>统计学习方法第七章—支持向量机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
+<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
+<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
+<blockquote>
+<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
+</blockquote>
+<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
+<script type="math/tex; mode=display">
+\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
+<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
+\gamma&=\frac{\hat{\gamma}}{\|w\|}
+\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
+<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
+<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
+<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H_{1}&: w \cdot x+b=1\\
+H_{2}&: w \cdot x+b=-1
+\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
+<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
+<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
+<script type="math/tex; mode=display">
+y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
+<p><strong>最小化目标函数的含义</strong>：</p>
+<ul>
+<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
+<li>使误分类点的个数尽量小</li>
+</ul>
+<p><strong>原始问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
+<p><strong>对偶问题</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
+b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
+\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
+<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
+<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
+<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
+<ul>
+<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
+<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
+</ul>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -4097,209 +4314,18 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}</script><p>其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。</p>
-<p>f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心附近增长得越快。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第六章学习笔记/逻辑斯谛分布密度函数.png" alt="逻辑斯谛分布密度函数" style="zoom:60%;"></p>
-<h3 id="1-2-二项逻辑斯谛回归模型"><a href="#1-2-二项逻辑斯谛回归模型" class="headerlink" title="1.2 二项逻辑斯谛回归模型"></a>1.2 二项逻辑斯谛回归模型</h3><p><strong>逻辑斯谛回归模型</strong>：如下条件概率分布：</p>
-<script type="math/tex; mode=display">
-\begin{array}{l}{P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}} \\ {P(Y=0 | x)=\frac{1}{1+\exp (w \cdot x)}}\end{array}</script><p>其中 $w=\left(w^{(1)}, w^{(2)}, \cdots, w^{(n)}, b\right)^{\mathrm{T}}$ ， $x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}, 1\right)^{\mathrm{T}}$。</p>
-<p>逻辑斯谛回归比较两个条件概率值的大小，将实例 x 分到概率值较大的那一类。</p>
-<p>一个事件(发生概率为p)的对数几率或 logit 函数是：</p>
-<script type="math/tex; mode=display">
-\operatorname{logit}(p)=\log \frac{p}{1-p}</script><p>对于逻辑斯谛回归，可得</p>
-<script type="math/tex; mode=display">
-\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x</script><p>即输出 Y=1 的对数几率是输入 x 的线性函数。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3 模型参数估计"></a>1.3 模型参数估计</h3><p>极大似然估计法</p>
-<p>令 $P(Y=1 | x)=\pi(x),\ P(Y=0 | x)=1-\pi(x)$ </p>
-<p>似然函数为 $\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$ </p>
-<p>对数似然函数为</p>
-<script type="math/tex; mode=display">
-L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]</script><p>对 L(w) 求极大值，得到 w 的估计值：</p>
-<ul>
-<li>梯度下降法</li>
-<li>拟牛顿法</li>
-</ul>
-<h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
-<h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第七章—支持向量机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
-<h2 id="1-线性可分支持向量机与硬间隔最大化"><a href="#1-线性可分支持向量机与硬间隔最大化" class="headerlink" title="1.线性可分支持向量机与硬间隔最大化"></a>1.线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p><strong>支持向量机：二类分类</strong></p>
-<p>在特征空间中找到以一个分离超平面将实例分到不同的类。</p>
-<blockquote>
-<p>感知机：误分类最小策略，解无穷多。<br>线性可分支持向量机：间隔最大化策略，解唯一。</p>
-</blockquote>
-<h3 id="1-2-函数间隔和几何间隔"><a href="#1-2-函数间隔和几何间隔" class="headerlink" title="1.2 函数间隔和几何间隔"></a>1.2 函数间隔和几何间隔</h3><p><strong>函数间隔</strong>：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)</script><p>超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}</script><p><strong>几何间隔</strong>：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间隔→几何间隔，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的几何间隔为</p>
-<script type="math/tex; mode=display">
-\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)</script><p>其中 $|w|$ 为 w 的 $L_2$ 范数。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/几何间隔.png" alt="几何间隔" style="zoom:60%;"></p>
-<p>超平面 $(w,b)$ 关于训练数据集 T 的几何间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的几何间隔之最小值，即</p>
-<script type="math/tex; mode=display">
-\gamma=\min _{i=1, \cdots, N} \gamma_{i}</script><p>函数间隔和几何间隔的<strong>关系</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\gamma_{i}&=\frac{\hat{\gamma}_{i}}{\|w\|}\\
-\gamma&=\frac{\hat{\gamma}}{\|w\|}
-\end{aligned}</script><h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机<strong>基本思想</strong>：求解能够正确划分训练集并且几何间隔最大的分离超平面。</p>
-<h4 id="1-3-1最大间隔分离超平面"><a href="#1-3-1最大间隔分离超平面" class="headerlink" title="1.3.1最大间隔分离超平面"></a>1.3.1最大间隔分离超平面</h4><p>求解几何间隔最大的分离超平面即为<strong>求解约束最优化问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\max _{w, b}} & {\frac{\hat{\gamma}}{\|w\|}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, \quad i=1,2, \cdots, N}\end{array}</script><p>函数间隔 $\hat{\gamma}$  的取值不影响最优化问题的解，故可取 $\hat{\gamma}=1$ ，由于最大化  $\frac{1}{|w|}$ 和最小化 $\frac{1}{2}{|w|}^2$ 是等价的，可将原问题转化为下面的最优化问题（<strong>原始问题</strong>）：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b}} & {\frac{1}{2}\|w\|^{2}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right)-1 \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>求得最优解 $w^<em>$,$b^</em>$，就可得到最大间隔分离超平面 $w^<em>\cdot x+b^</em>=0$ 及分类决策函数 $f(x)=sign(w^<em>\cdot x+b^</em>)$ 。</p>
-<h4 id="1-3-2支持向量和间隔边界"><a href="#1-3-2支持向量和间隔边界" class="headerlink" title="1.3.2支持向量和间隔边界"></a>1.3.2支持向量和间隔边界</h4><p><strong>支持向量</strong>：与分离超平面距离最近的样本点的实例，满足 $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/支持向量.png" alt="支持向量" style="zoom:60%;"></p>
-<p><strong>间隔边界</strong>：$H_1$ 和 $H_2$，其中</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-H_{1}&: w \cdot x+b=1\\
-H_{2}&: w \cdot x+b=-1
-\end{aligned}</script><p><strong>间隔</strong>：$H_1$ 和 $H_2$ 之间的距离，等于 $\frac{2}{|w|}$ 。</p>
-<h3 id="1-4学习的对偶算法"><a href="#1-4学习的对偶算法" class="headerlink" title="1.4学习的对偶算法"></a>1.4学习的对偶算法</h3><p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{cl}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {\alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，则存在下标 j ，使得 $\alpha_{j}^{<em>}&gt;0$ ，并可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned} w^{*} &=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ b^{*}&=y_{j} -\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right) \end{aligned}</script><p><strong>支持向量</strong>：训练数据集中对应于 $\alpha_{i}^{*}&gt;0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i\in R^n$ ，也即  $y_{i}\left(w \cdot x_{i}+b\right)-1=0$ 。</p>
-<h2 id="2-线性支持向量机与软间隔最大化"><a href="#2-线性支持向量机与软间隔最大化" class="headerlink" title="2.线性支持向量机与软间隔最大化"></a>2.线性支持向量机与软间隔最大化</h2><h3 id="2-1线性支持向量机"><a href="#2-1线性支持向量机" class="headerlink" title="2.1线性支持向量机"></a>2.1线性支持向量机</h3><p>训练集中存在一些<strong>特异点</strong>，即这些样本点不满足函数间隔大于等于1的约束条件，为解决这一问题，可对每个样本点 $(x_i,y_i)$ 引入一个<strong>松弛变量</strong>  $\xi_{i} \geqslant 0$ ，是函数间隔大于等于1，此时约束条件变为：</p>
-<script type="math/tex; mode=display">
-y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}</script><p>目标函数变为：</p>
-<script type="math/tex; mode=display">
-\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}</script><p>其中，$C&gt;0$ 称为<strong>惩罚函数</strong>，C值越大，对误分类的惩罚越大。</p>
-<p><strong>最小化目标函数的含义</strong>：</p>
-<ul>
-<li>使 $\frac{1}{2}|w|^{2}$ 尽量小，即间隔尽量大</li>
-<li>使误分类点的个数尽量小</li>
-</ul>
-<p><strong>原始问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{w, b, \xi}} & {\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}} \\ {\text { s.t. }} & {y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, \quad i=1,2, \cdots, N} \\ {} & {\xi_{i} \geqslant 0, \quad i=1,2, \cdots, N}\end{array}</script><p>w的解唯一，b的解存在于一个区间。</p>
-<p><strong>对偶问题</strong>：</p>
-<script type="math/tex; mode=display">
-\begin{array}{ll}{\min _{\alpha}} & {\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}} \\ {\text { s.t. }} & {\sum_{i=1}^{N} \alpha_{i} y_{i}=0} \\ {} & {0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N}\end{array}</script><p>设 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 是对偶问题的解，若存在 $\alpha^<em>$ 的一个分量 $\alpha^</em>_j$ ，$0&lt;\alpha^<em>_j&lt;C$，则可通过下式求得原始问题的解 $w^</em>$,$b^*$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-w^{*}&=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i} \\ 
-b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
-\end{aligned}</script><p>由于 b 的解不唯一，可在满足条件的样本点上取平均值。</p>
-<h3 id="2-2支持向量"><a href="#2-2支持向量" class="headerlink" title="2.2支持向量"></a>2.2支持向量</h3><p><strong>支持向量</strong>：对偶问题的解 $\alpha^{<em>}=\left(\alpha_{1}^{</em>}, \alpha_{2}^{<em>}, \cdots, \alpha_{l}^{</em>}\right)^{\mathrm{T}}$ 中对应于 $\alpha^*_i&gt;0$ 的样本点的实例。</p>
-<p><img src="/机器学习/统计学习方法/统计学习第七章学习笔记/软间隔的支持向量.png" alt="软间隔的支持向量" style="zoom:60%;"></p>
-<p><strong>$\alpha^*$ 不同大小代表支持向量不同位置：</strong></p>
-<ul>
-<li>若 $\alpha^*_i&gt;C$ ，则 $\xi_i=0$ ，支持向量 $x_i$ 恰好落在间隔边界上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $0&lt;\xi_i&lt;0$ ，$x_i$ 在间隔边界与分离超平面之间。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i=1$ ，支持向量 $x_i$ 在分离超平面上。</li>
-<li>若 $\alpha^*_i=C$ ，则 $\xi_i&gt;0$ ，支持向量 $x_i$ 在分离超平面误分一侧。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第五章—决策树</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
+    <title>统计学习方法第三章—k近邻法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
+<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
+<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
+<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
+<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
+<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
 <div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E5%86%B3%E7%AD%96%E6%A0%91%E6%A8%A1%E5%9E%8B.png" width="300" height="250" alt="图片名称" align="center">
-<p>决策树模型</p>
+<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
+<p>特征空间切分</p>
 </div>
-
-<h3 id="1-2-决策树与if-then规则"><a href="#1-2-决策树与if-then规则" class="headerlink" title="1.2 决策树与if-then规则"></a>1.2 决策树与if-then规则</h3><p>可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。</p>
-<h3 id="1-2-决策树与条件概率分布"><a href="#1-2-决策树与条件概率分布" class="headerlink" title="1.2 决策树与条件概率分布"></a>1.2 决策树与条件概率分布</h3><p>决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。</p>
-<h3 id="1-3-决策树学习"><a href="#1-3-决策树学习" class="headerlink" title="1.3 决策树学习"></a>1.3 决策树学习</h3><p>找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。</p>
-<p>主要步骤：</p>
-<ul>
-<li>特征选择</li>
-<li>决策树生成</li>
-<li>决策树剪枝</li>
-</ul>
-<h2 id="2-特征选择"><a href="#2-特征选择" class="headerlink" title="2.特征选择"></a>2.特征选择</h2><p> 准则：信息增益/信息增益比</p>
-<h3 id="2-1-信息增益"><a href="#2-1-信息增益" class="headerlink" title="2.1 信息增益"></a>2.1 信息增益</h3><p>熵：随机变量不确定程度。</p>
-<p>设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$<br>随机变量X的<strong>熵</strong>：$H(X)=H(p)=-\sum_{i=1}^{n} p_{i} \log p_{i}$<br>$H(p)$满足$0 \leqslant H(p) \leqslant \log n$</p>
-<p><strong>条件熵</strong>$H(Y|X)$：已知随机变量X的条件下随机变量Y的不确定性，定义为X给定条件下Y的条件概率分布的熵对X的数学期望</p>
-<script type="math/tex; mode=display">
-H(Y | X)=\sum_{i=1}^{n} p_{i} H\left(Y | X=x_{i}\right) \\
-p_i=P(X=x_i),i=1,2,\cdots,n</script><p>熵和条件熵中的概率由数据估计（特别是极大似然估计）得到，分别称为经验熵和经验条件熵。</p>
-<p><strong>信息增益g(D,A)</strong>：特征A对训练集D信息增益为D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差：</p>
-<script type="math/tex; mode=display">
-g(D, A)=H(D)-H(D | A)</script><p>根据信息增益的特征选择方法：对训练集（或子集）D，计算其各个特征的信息增益，选择信息增益最大的特征。</p>
-<h3 id="2-2-信息增益比"><a href="#2-2-信息增益比" class="headerlink" title="2.2 信息增益比"></a>2.2 信息增益比</h3><p><strong>信息增益比</strong>：特征A对训练集D信息增益比为其信息增益g(D,A)与D的经验熵H(D)之比：</p>
-<script type="math/tex; mode=display">
-g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="#3-决策树的生成" class="headerlink" title="3.决策树的生成"></a>3.决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。ID3相当于用极大似然法进行概率模型的选择。</p>
-<h3 id="3-2-C4-5算法"><a href="#3-2-C4-5算法" class="headerlink" title="3.2 C4.5算法"></a>3.2 C4.5算法</h3><p>过程与ID3算法相似，不同的是用信息增益比来选择特征。</p>
-<h2 id="4-决策树的剪枝"><a href="#4-决策树的剪枝" class="headerlink" title="4.决策树的剪枝"></a>4.决策树的剪枝</h2><p>过程：从已生成的树上裁掉一些子树或叶结点，并将其根结点或父结点作为新的叶结点，从而简化分类树模型，极小化决策树整体的损失函数。</p>
-<p>决策树学习的<strong>损失函数</strong>：$C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$<br>其中经验熵：$H_{t}(T)=-\sum_{k} \frac{N_{tk}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$<br>将损失函数右端第一项记作：$C(T)==-\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{t k} \log \frac{N_{t k}}{N_{t}}$</p>
-<p>此时有：$C_{\alpha}(T)=C(T)+\alpha|T|$</p>
-<p>C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度，|T|表示模型复杂度，参数 $\alpha\geq0$ 控制两者之间的影响。较大的 $\alpha$ 促使选择较简单的模型。</p>
-<h2 id="5-CART算法"><a href="#5-CART算法" class="headerlink" title="5.CART算法"></a>5.CART算法</h2><p>分类与回归树</p>
-<ul>
-<li>回归树：平方误差最小化准则</li>
-<li>分类树：基尼指数最小化准则</li>
-</ul>
-<h3 id="5-1-分类树生成"><a href="#5-1-分类树生成" class="headerlink" title="5.1 分类树生成"></a>5.1 分类树生成</h3><p>（1）概率分布的<strong>基尼指数</strong>：$\operatorname{Gini}(p)=\sum_{k=1}^{K} p_{k}\left(1-p_{k}\right)=1-\sum_{k=1}^{K} p_{k}^{2}$<br>对于二类问题：$\operatorname{Gini}(p)=2p(1-p)$<br>给定样本集合D的基尼指数：$\operatorname{Gini}(D)=1-\sum_{k=1}^{K}\left(\frac{\left|C_{k}\right|}{|D|}\right)^{2}$，$C_k$为属于第k类的样本子集。</p>
-<p>若样本集合D根据某一可能值a被分成$D_1$和$D_2$两部分，在特征A条件下，集合D的基尼指数为</p>
-<script type="math/tex; mode=display">\operatorname{Gini}(D, A)=\frac{\left|D_{1}\right|}{|D|} \operatorname{Gini}\left(D_{1}\right)+\frac{\left|D_{2}\right|}{|D|} \operatorname{Gini}\left(D_{2}\right)</script><p>基尼指数Gini(D)表示集合D的不确定性，基尼指数Gini(D,A)表示经A=a分割后集合D的不确定性。基尼指数值越大，样本集合的不确定性也就越大。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/ML/%E4%BA%8C%E7%B1%BB%E5%88%86%E7%B1%BB%E4%B8%AD%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E3%80%81%E7%86%B5%E4%B9%8B%E5%8D%8A%E5%92%8C%E5%88%86%E7%B1%BB%E8%AF%AF%E5%B7%AE%E7%8E%87%E7%9A%84%E5%85%B3%E7%B3%BB.png
-" width="400" height="229" alt="图片名称" align="center">
-<p>二类分类中基尼指数、熵之半和分类误差率的关系</p>
-</div>
-
-<h3 id="5-2-CART剪枝"><a href="#5-2-CART剪枝" class="headerlink" title="5.2 CART剪枝"></a>5.2 CART剪枝</h3><p>（1）首先从生成算法产生的决策树$T_0$底端开始不断剪枝，直到$T_0$的根结点，形成一个子树序列$\left\{T_{0}, T_{1}, \cdots, T_{n}\right\}$<br>（2）然后通过交叉验证法在独立的验证数据集上对子树序列进行测试，从中选择最优子树.</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -4442,30 +4468,6 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       <tags>
         <tag>机器学习</tag>
         <tag>统计学习方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第三章—k近邻法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="统计学习方法第三章—k近邻法"><a href="#统计学习方法第三章—k近邻法" class="headerlink" title="统计学习方法第三章—k近邻法"></a>统计学习方法第三章—k近邻法</h2><h3 id="1-k近邻算法"><a href="#1-k近邻算法" class="headerlink" title="1.k近邻算法"></a>1.k近邻算法</h3><p>给定训练集，对新的输入实例，在训练集中找到与该实例最邻近的k个实例，把该实例归入到这k个实例的多数属于的类。</p>
-<h3 id="2-k近邻模型"><a href="#2-k近邻模型" class="headerlink" title="2.k近邻模型"></a>2.k近邻模型</h3><h4 id="2-1-距离度量：实例点间相似程度的反映。"><a href="#2-1-距离度量：实例点间相似程度的反映。" class="headerlink" title="2.1 距离度量：实例点间相似程度的反映。"></a>2.1 距离度量：实例点间相似程度的反映。</h4><p>$x_i,x_j$的$L_p$距离：$L_{p}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(i)}-x_{j}^{(n)}\right|^{p}\right)^{\frac{1}{p}}$<br>p=2，欧式距离：$L_{2}\left(x_{i}, x_{j}\right)=\left(\sum_{i=1}^{n}\left|x_{i}^{(n)}-x_{j}^{(n)}\right|^{2}\right)^{\frac{1}{2}}$<br>p=1，曼哈顿距离：$L_{1}\left(x_{i}, x_{j}\right)=\sum_{l=1}^{n}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$<br>p=$\infty$，各坐标距离最大值：$L_{\infty}\left(x_{i}, x_{j}\right)=\max _{l}\left|x_{i}^{(l)}-x_{j}^{(l)}\right|$</p>
-<h4 id="2-2-k值的选择"><a href="#2-2-k值的选择" class="headerlink" title="2.2 k值的选择"></a>2.2 k值的选择</h4><p>较小k值：近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，模型复杂，易过拟合。<br>较大k值：估计误差减小，近似误差增大，模型简单。</p>
-<p>k值一般取比较小的数值，采用交叉验证法选取最优k值。</p>
-<h4 id="2-3-分类决策规则"><a href="#2-3-分类决策规则" class="headerlink" title="2.3 分类决策规则"></a>2.3 分类决策规则</h4><p>核心思想：多数表决</p>
-<h3 id="3-k近邻法实现：kd树"><a href="#3-k近邻法实现：kd树" class="headerlink" title="3.k近邻法实现：kd树"></a>3.k近邻法实现：kd树</h3><p>kd树是二叉树，表示对k维空间的一个划分，构造过程相当于不断用垂直于坐标轴的超平面将k维空间切分，构成一系列k维超矩形区域，kd树每个结点对应于一个k维超矩形区域。<br>例：给定二维空间数据集$T=\left\{(2,3)^{\mathrm{T}},(5,4)^{\mathrm{T}},(9,6)^{\mathrm{T}},(4,7)^{\mathrm{T}},(8,1)^{\mathrm{T}},(7,2)^{\mathrm{T}}\right\}$，构造一个平衡kd树。</p>
-<div align="center">    
-<img src="https://raw.githubusercontent.com/TommyMerlin/Image-Hosting/master/%E6%9E%84%E9%80%A0kd%E6%A0%91.png" width="300" height="250" alt="图片名称" align="center">
-<p>特征空间切分</p>
-</div>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
       </tags>
   </entry>
   <entry>
