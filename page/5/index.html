@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/微服务/微服务读书笔记/微服务架构与实践第2章-微服务架构综述/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Maven/Maven中Scope的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/微服务/微服务读书笔记/微服务架构与实践第2章-微服务架构综述/" class="post-title-link" itemprop="url">微服务架构与实践 第2章-微服务架构综述</a>
+                <a href="/Java/Maven/Maven中Scope的区别/" class="post-title-link" itemprop="url">Maven中Scope的区别</a>
               
             
           </h1>
@@ -426,24 +426,12 @@
                 
               
 
-              <time title="创建时间：2020-01-10 20:05:51" itemprop="dateCreated datePublished" datetime="2020-01-10T20:05:51+08:00">2020-01-10</time>
+              <time title="创建时间：2020-02-29 18:24:17 / 修改时间：21:26:51" itemprop="dateCreated datePublished" datetime="2020-02-29T18:24:17+08:00">2020-02-29</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-25 09:39:21" itemprop="dateModified" datetime="2020-02-25T09:39:21+08:00">2020-02-25</time>
               
             
           </span>
@@ -460,14 +448,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/微服务读书笔记/" itemprop="url" rel="index"><span itemprop="name">微服务读书笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a></span>
 
                 
                 
@@ -496,7 +484,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.7k</span>
+                <span title="本文字数">3.8k</span>
               
 
               
@@ -523,33 +511,15 @@
         
           
             <p>
-              1微服务架构概述微服务定义(Martin Fowler)：微服务架构为一种架构模式，提倡将单一应用划分成一组小的服务，服务之间互相协调、互相配合。每个服务运行在独立进程中，服务间沟通采用轻量级通信机制。每个服务围绕具体业务构建，可独立部署。
-1.1 “微”的定义
-代码行数：×
-重写时间：×
-团队共识
-业务独立性
-团队自主性：人数≤10，全功能团队。
-
-
-
-1.2 单一职责
-高内聚，低耦合。
-
-单一职责原则(SRP)：一个对象只能有一个发生变化的原因。若一个对象可被多个原因改变，则说明该对象承担了多个职责。
-
-
-1.3 轻量级通信轻量级通信：语言无关、平台无关的交互方式。
-1.4 独立性在应用交付过程中，开发、测试以及部署的独立。
-
-1.4 进程隔离单块架构：对应用进行部署时，需先停掉当前运行应用，部署完成后在重新启动，无法做到独立部署。
-微服务架构：每个服务均为高度自治的独立业务实体，能很
+              compile编译范围，不设置默认为 compile，在工程环境的classpath（编译环境）和打包（如果是WAR包，会包含在WAR包中）时候都有效，属于强依赖。
+test该依赖仅仅参与测试相关的内容，包括测试用例的编译和执行，一般是单元测试场景使用，在编译环境加入classpath，但打包时不会加入，如 junit 等。
+provided容器或 JDK 已提供范围，表示该依赖包已经由目标容器（如tomcat）和 JDK 提供，只在编译的 classpath 中加载和使用，打包的时候不会包含在目标包中。最常见的是 j2ee 规范相关的 servlet-api 和 jsp-api 等 jar 包，一般由 servlet 容器提供，无需再打包到 war 包中，如果不配置为 provided ，把这些包打包到工程 war 包中，在 tomcat6 以上版本会出现冲突无法正常运行程序（版本不符的
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/微服务/微服务读书笔记/微服务架构与实践第2章-微服务架构综述/#more" rel="contents">
+              <a class="btn" href="/Java/Maven/Maven中Scope的区别/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -609,7 +579,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/微服务/微服务读书笔记/微服务架构与实践第1章-单块架构及其面临的挑战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/卷积神经网络/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -629,7 +599,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/微服务/微服务读书笔记/微服务架构与实践第1章-单块架构及其面临的挑战/" class="post-title-link" itemprop="url">微服务架构与实践 第1章-单块架构及其面临的挑战</a>
+                <a href="/机器学习/卷积神经网络/" class="post-title-link" itemprop="url">卷积神经网络</a>
               
             
           </h1>
@@ -654,461 +624,12 @@
                 
               
 
-              <time title="创建时间：2020-01-10 18:07:53" itemprop="dateCreated datePublished" datetime="2020-01-10T18:07:53+08:00">2020-01-10</time>
+              <time title="创建时间：2020-02-28 14:42:19 / 修改时间：14:47:41" itemprop="dateCreated datePublished" datetime="2020-02-28T14:42:19+08:00">2020-02-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-25 09:39:08" itemprop="dateModified" datetime="2020-02-25T09:39:08+08:00">2020-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微服务/微服务读书笔记/" itemprop="url" rel="index"><span itemprop="name">微服务读书笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.5k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.三层应用架构1.1 三层架构
-表示层：用户交互部分。
-业务逻辑层：根据用户输入信息，进行逻辑运算或业务处理。
-数据访问层：有效地将数据存储到数据库、文件系统等。
-
-
-1.2 三层架构优势
-解决应用程序中代码间调用复杂、代码职责不清问题。
-接口与实现分离，易于用不同实现替代现有实现。
-有效降低层与层之间的依赖。
-使不同职责人负责不同部分。
-
-2.单块架构2.1 单块架构定义单块架构应用：功能集中、代码和数据中心化、一个发布包、部署后运行在同一进程的应用程序。
-2.2 单块架构优势
-易于开发
-易于测试
-易于部署
-易于水平伸缩
-
-2.3 单块架构面临的挑战
-维护成本增加
-持续交付时间长
-新人培养周期长
-技术选型成本高
-可扩展性差
-垂直扩展——成本高
-水平扩展——建立集群，在集群中不断增加新节点
-
-
-构建全功能团队难
-
-
-垂直伸缩: 升级到更强大的服务器（多CPU 昂贵大中型机）。水平伸缩: 
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/微服务/微服务读书笔记/微服务架构与实践第1章-单块架构及其面临的挑战/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/教程/Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/教程/Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法/" class="post-title-link" itemprop="url">Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-10 12:14:27 / 修改时间：12:34:24" itemprop="dateCreated datePublished" datetime="2020-01-10T12:14:27+08:00">2020-01-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.2k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.许可证问题1.1 解决方法1MATLAB 在启动时，一直停留在“正在初始化”的状态，有可能是因为 MATLAB 一直在找着本机的许可证。
-有可能是设置了 LM_LICENSE_FILE 的环境变量。这个变量告诉 MATLAB 或者其他应用程序去哪里查找许可证文件。如果您有一个网络许可证，但是当前又没有联网，那么 MATLAB 就会一直停留在这个状态。
-注意：还有一个环境变量 MLM_LICENSE_FILE 也会导致这一问题。这个环境变量只用于 MATLAB。
-要解决这个问题，您可以执行以下操作：
-
-1.右击“我的电脑”，然后选择“属性”。（有可能需要在控制面板中双击“系统”）。
-2.选择“高级”标签，点击“环境变量”。
-3.在窗口下方的系统变量中，查找变量 LM_LICENSE_FILE。
-4.如果有 LM_LICENSE_FILE 变量存在，请看第5步。如果没有，请创建一个 LM_
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/教程/Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/监督学习各方法比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/机器学习/统计学习方法/监督学习各方法比较/" class="post-title-link" itemprop="url">监督学习各方法比较</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-28 21:12:00" itemprop="dateModified" datetime="2020-02-28T21:12:00+08:00">2020-02-28</time>
               
             
           </span>
@@ -1129,13 +650,6 @@
 
                 
                 
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
-
-                
-                
               
             </span>
           
@@ -1161,7 +675,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.4k</span>
+                <span title="本文字数">19k</span>
               
 
               
@@ -1188,34 +702,28 @@
         
           
             <p>
-              1.感知机优点
-模型简单易懂，便于编程实现；
-是许多后续算法如SVM、神经网络、深度学习的基础。
+              1.卷积神经网络结构
 
-缺点
-只能对线性可分数据集进行学习；
-不同参数设置会学到不同模型，泛化能力好差。
+输入层：将每个像素代表一个特征节点输入到网络中。
+卷积层：卷积运算的主要目的是使原信号特征增强，并降低噪音。
+降采样层：降低网络训练参数及模型的过拟合程度。
+全连接层：对生成的特征进行加权。
 
-2.k近邻法优点
-理论成熟，思想简单，既可以用来做分类也可以用来做回归；
-可用于非线性分类，可以生成任意形状的决策边界；
-训练时间复杂度为O(n)，因为是消极的学习方法不需要建立模型；
-对数据没有假设，准确度高，对outlier（离群值、逸出值）不敏感；
-基于局部信息进行预测，正因为这样而局部分类决策，KNN（k很小时）对噪声非常敏感。
+2.卷积运算
+1.求点积：将5×5输入矩阵中3×3深蓝色区域中每个元素分别与其对应位置的权值（红色数字）相乘，然后再相加，所得到的值作为3×3输出矩阵（绿色）的第一个元素。  
+2.滑动窗口：将3×3权值矩阵向右移动一个格（即，步长为1）。  
+3.重复操作：同样地，将此时深色区域内每个元素分别与对应的权值相乘然后再相加，所得到的值作为输出矩阵的第二个元素；重复上述“求点积-滑动窗口”操作，直至输出矩阵所有值被填满。
 
-缺点
-计算量大（体现在距离计算上），因为需要逐个计算测试样例和训练样例之间的而相似度；  
-样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）效果差；   
-需要大量内存；  
-除非采用适当的邻近性度量k和数据预处理，否则最近邻分类器可能做出错误的预测。
 
-3
+注意点：
+
+卷积核在2 维输入数据上“滑动”，对当前输入部分的元素进行矩阵乘法，然后将结果汇为单个输出像素值，重复这个过程直到遍历整张图像，这个过程就叫做卷
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/监督学习各方法比较/#more" rel="contents">
+              <a class="btn" href="/机器学习/卷积神经网络/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1275,7 +783,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习方法第二章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/数据库/Redis学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1295,7 +803,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习方法第二章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第二章—感知机</a>
+                <a href="/Java/数据库/Redis学习笔记/" class="post-title-link" itemprop="url">Redis学习笔记</a>
               
             
           </h1>
@@ -1320,7 +828,7 @@
                 
               
 
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-28 09:02:24" itemprop="dateCreated datePublished" datetime="2020-02-28T09:02:24+08:00">2020-02-28</time>
             
 
             
@@ -1337,7 +845,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-28 21:14:00" itemprop="dateModified" datetime="2020-02-28T21:14:00+08:00">2020-02-28</time>
+                <time title="修改时间：2020-02-29 16:01:18" itemprop="dateModified" datetime="2020-02-29T16:01:18+08:00">2020-02-29</time>
               
             
           </span>
@@ -1354,14 +862,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -1390,7 +898,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">32k</span>
               
 
               
@@ -1417,21 +925,19 @@
         
           
             <p>
-              感知机——二类分类的线性分类模型
-1.感知机模型输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置
-感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。
-    
+              1.概念redis 是一款高性能的 NoSQL系列的非关系型数据库。
+1.1 NoSQLNoSQL(NoSQL = Not Only SQL)，意即“不仅仅是 SQL”，是一项全新的数据库理念，泛指非关系型的数据库。
+随着互联网 web2.0 网站的兴起，传统的关系数据库在应付 web2.0 网站，特别是超大规模和高并发的 SNS 类型的 web2.0 纯动态网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题。
+NoSQL和关系型数据库比较优点：
 
-感知机模型
-
-
-2.感知机学习策略2.1 数据集的线性可分性存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两
+成本：NoSQL 数据库简单易部署，基本都是开源软件，相比关系型数据库价格便宜。
+查询速度：NoSQL 数据库将数据存储于缓存之中，关系型数据库将数据存储在硬盘中，查询速度远不及 NoSQL 数据
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习方法第二章学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/数据库/Redis学习笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1491,7 +997,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第七章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/前端/Bootstrap学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1511,7 +1017,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第七章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第七章—支持向量机</a>
+                <a href="/前端/Bootstrap学习笔记/" class="post-title-link" itemprop="url">Bootstrap学习笔记</a>
               
             
           </h1>
@@ -1536,7 +1042,7 @@
                 
               
 
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-27 15:54:53" itemprop="dateCreated datePublished" datetime="2020-02-27T15:54:53+08:00">2020-02-27</time>
             
 
             
@@ -1553,7 +1059,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-28 21:13:35" itemprop="dateModified" datetime="2020-02-28T21:13:35+08:00">2020-02-28</time>
+                <time title="修改时间：2020-02-28 08:37:38" itemprop="dateModified" datetime="2020-02-28T08:37:38+08:00">2020-02-28</time>
               
             
           </span>
@@ -1570,14 +1076,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
 
                 
                 
@@ -1606,7 +1105,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.9k</span>
+                <span title="本文字数">8.7k</span>
               
 
               
@@ -1633,23 +1132,20 @@
         
           
             <p>
-              
-1.线性可分支持向量机与硬间隔最大化1.1 线性可分支持向量机支持向量机：二类分类
-在特征空间中找到以一个分离超平面将实例分到不同的类。
+              官网
+1.概念一个前端开发的框架，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 基于 HTML、CSS、JavaScript ，简洁灵活，使得 Web 开发更加快捷。
+响应式布局：同一套页面可以兼容不同分辨率的设备。
+2.快速入门
+1.下载 Bootstrap。
+2.在项目中将三个文件夹复制。
 
-感知机：误分类最小策略，解无穷多。线性可分支持向量机：间隔最大化策略，解唯一。
-
-1.2 函数间隔和几何间隔函数间隔：表示分类预测的正确性及确信度，超平面 $(w,b)$ 关于样本点 $(x_i,y_i)$ 的函数间隔为
-
-\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)超平面 $(w,b)$ 关于训练数据集 T 的函数间隔为超平面 $(w,b)$ 关于 T 中所有样本点 $(x_i,y_i)$ 的函数间隔之最小值，即
-
-\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}几何间隔：对分离超平面的法向量w加上规范化约束，使得间隔为确定值，此时函数间
+bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.css.map│   ├── bootstrap.min.css│   ├── bootstrap.min.css.map│   ├── bootstrap-theme.css│   ├── bootstrap-theme.css.map│   ├── bootstrap-theme.min.css│   └── bootstrap-theme.min.css.m
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第七章学习笔记/#more" rel="contents">
+              <a class="btn" href="/前端/Bootstrap学习笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1709,7 +1205,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第五章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/JSP/JSP学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1729,7 +1225,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第五章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第五章—决策树</a>
+                <a href="/Java/JavaWeb/JSP/JSP学习笔记/" class="post-title-link" itemprop="url">JSP学习笔记</a>
               
             
           </h1>
@@ -1754,24 +1250,12 @@
                 
               
 
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-27 14:18:34 / 修改时间：15:08:56" itemprop="dateCreated datePublished" datetime="2020-02-27T14:18:34+08:00">2020-02-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-28 21:13:21" itemprop="dateModified" datetime="2020-02-28T21:13:21+08:00">2020-02-28</time>
               
             
           </span>
@@ -1788,14 +1272,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a></span>
 
                 
                 
@@ -1824,7 +1315,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.7k</span>
+                <span title="本文字数">638</span>
               
 
               
@@ -1851,30 +1342,25 @@
         
           
             <p>
-              1.决策树模型与学习1.1 决策树模型内部节点代表一个特征或属性，叶结点代表一个类。
-    
+              概念Java Server Pages： Java 服务器端页面。
 
-决策树模型
+可理解为：一个特殊的页面，其中既可定义html标签，又可定义 Java 代码。
+用于简化书写。
+
+原理JSP 本质上就是一个 Servlet。
+JSP 脚本JSP 定义 Java 代码的方式：
+
+1.&lt;%  代码 %&gt;：定义的java代码，在service方法中。service方法中可以定义什么，该脚本中就可以定义什么。
+2.&lt;%! 代码 %&gt;：定义的java代码，在jsp转换后的java类的成员位置。
+3.&lt;%= 代码 %&gt;：定义的java代码，会输出到页面上。输出语句中可以定义什么，该脚本中就可以定义什么。
 
 
-1.2 决策树与if-then规则可将决策树看成一个if-then规则的集合，重要性质：互斥且完备，每一个实例有且只被一条路径或规则覆盖。
-1.2 决策树与条件概率分布决策树还表示给定特征条件下类的条件概率分布。这一条件概率分布定义在特征空间的一个划分上。决策树的一条路径对应于划分中的一个单元。
-1.3 决策树学习找到与训练数据矛盾较小且泛化能力好的决策树。损失函数：正则化的极大似然函数。
-主要步骤：
-
-特征选择
-决策树生成
-决策树剪枝
-
-2.特征选择 准则：信息增益/信息增益比
-2.1 信息增益熵：随机变量不确定程度。
-设X为取有限个值的随机变量，概率分布为：$P\left(X=x_{i}\right)=p_{i}, \quad i=1,2, \cdots, n$随机变量X的
-              ...
+              
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第五章学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/JavaWeb/JSP/JSP学习笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1934,7 +1420,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第四章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/HTTP/会话技术Cookie-Session/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1954,7 +1440,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第四章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第四章—朴素贝叶斯法</a>
+                <a href="/Java/JavaWeb/HTTP/会话技术Cookie-Session/" class="post-title-link" itemprop="url">会话技术Cookie&Session</a>
               
             
           </h1>
@@ -1979,7 +1465,7 @@
                 
               
 
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-27 12:23:35" itemprop="dateCreated datePublished" datetime="2020-02-27T12:23:35+08:00">2020-02-27</time>
             
 
             
@@ -1996,7 +1482,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-28 21:13:13" itemprop="dateModified" datetime="2020-02-28T21:13:13+08:00">2020-02-28</time>
+                <time title="修改时间：2020-05-21 11:38:50" itemprop="dateModified" datetime="2020-05-21T11:38:50+08:00">2020-05-21</time>
               
             
           </span>
@@ -2013,14 +1499,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
 
                 
                 
@@ -2049,7 +1542,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.6k</span>
+                <span title="本文字数">7.8k</span>
               
 
               
@@ -2076,13 +1569,37 @@
         
           
             <p>
-              1.朴素贝叶斯法的学习与分类1.1 基本方法输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。条件概率分布有指数量级的参数，难以估计，现做出条件独立性假设：$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X
+              1.会话技术会话：一次会话中包含多次请求和响应。
+
+一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止。
+
+功能：在一次会话的范围内的多次请求间，共享数据。
+方式：
+
+客户端会话技术：Cookie
+服务器端会话技术：Session
+
+2.Cookie2.1 概念客户端会话技术，将数据保存到客户端。
+2.2 使用步骤
+创建Cookie对象，绑定数据。
+new Cookie(String name, String value)
+
+发送Cookie对象。
+response.addCookie(Cookie cookie)
+
+获取Cookie，拿到数据。
+Cookie[]  request.getCookies()
+
+
+2.3 实现原理基于响应头 set-cookie 和请求头 cookie 实现
+2.4 cookie 的细节1.一次发送多个 cookie
+可以创建多个 Co
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第四章学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/JavaWeb/HTTP/会话技术Cookie-Session/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2142,7 +1659,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习第六章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/数据库/Spring-JDBC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -2162,7 +1679,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习第六章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第六章—逻辑斯谛回归与最大熵模型</a>
+                <a href="/Java/数据库/Spring-JDBC/" class="post-title-link" itemprop="url">Spring JDBC</a>
               
             
           </h1>
@@ -2187,7 +1704,7 @@
                 
               
 
-              <time title="创建时间：2020-01-09 19:20:00" itemprop="dateCreated datePublished" datetime="2020-01-09T19:20:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-26 12:04:40" itemprop="dateCreated datePublished" datetime="2020-02-26T12:04:40+08:00">2020-02-26</time>
             
 
             
@@ -2204,7 +1721,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 12:06:46" itemprop="dateModified" datetime="2020-02-29T12:06:46+08:00">2020-02-29</time>
+                <time title="修改时间：2020-02-29 12:06:17" itemprop="dateModified" datetime="2020-02-29T12:06:17+08:00">2020-02-29</time>
               
             
           </span>
@@ -2221,14 +1738,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -2257,7 +1774,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">14k</span>
               
 
               
@@ -2284,16 +1801,25 @@
         
           
             <p>
-              1.逻辑斯谛回归模型1.1 逻辑斯谛分布逻辑斯谛分布：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：
+              概念Spring 框架对 JDBC 的简单封装，提供了一个 JDBCTemplate 对象简化 JDBC 的开发。
+步骤1.导入 jar 包。2.创建 JdbcTemplate 对象。依赖于数据源DataSourceJdbcTemplate template = new JdbcTemplate(ds);
+3.调用JdbcTemplate的方法来完成CRUD的操作。
+update()：执行DML语句。增、删、改语句。
+queryForMap()：查询结果将结果集封装为map集合，将列名作为key，将值作为value 将这条记录封装为一个map集合。
+注意：这个方法查询的结果集长度只能是1。
 
-\begin{array}{l}{F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}} \\ {f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}}\end{array}其中 $\mu$ 为位置参数，$\gamma&gt;0$ 为形状参数。
-f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(\mu,\frac{1}{2})$ 中心对称。$\gamma$ 越小 ，曲线在中心
+
+queryForList()：查询结果将结果集封装为list集合。
+注意：将每一条记录封装为一个Map集合，再将Map集合装载到List集合中。
+
+
+query()：查询结果，将结果封装为JavaB
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习第六章学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/数据库/Spring-JDBC/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2353,7 +1879,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/机器学习/统计学习方法/统计学习方法第一章学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/基础知识/注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -2373,7 +1899,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/机器学习/统计学习方法/统计学习方法第一章学习笔记/" class="post-title-link" itemprop="url">统计学习方法第一章—概论</a>
+                <a href="/Java/基础知识/注解/" class="post-title-link" itemprop="url">注解</a>
               
             
           </h1>
@@ -2398,7 +1924,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                 
               
 
-              <time title="创建时间：2020-01-09 18:16:00" itemprop="dateCreated datePublished" datetime="2020-01-09T18:16:00+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-26 10:01:19" itemprop="dateCreated datePublished" datetime="2020-02-26T10:01:19+08:00">2020-02-26</time>
             
 
             
@@ -2415,7 +1941,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-28 21:01:59" itemprop="dateModified" datetime="2020-02-28T21:01:59+08:00">2020-02-28</time>
+                <time title="修改时间：2020-02-29 12:06:32" itemprop="dateModified" datetime="2020-02-29T12:06:32+08:00">2020-02-29</time>
               
             
           </span>
@@ -2432,14 +1958,14 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/基础知识/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a></span>
 
                 
                 
@@ -2468,7 +1994,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.1k</span>
+                <span title="本文字数">15k</span>
               
 
               
@@ -2495,42 +2021,495 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
         
           
             <p>
-              1.统计学习1.1特点
-建立于计算机及网络之上
-数据驱动
-目的：对数据进行预测及分析
-以方法为中心
-综合概率论、统计学、信息论、计算理论、最优化理论及计算机科学
+              注解的基本原理意如其名，其本来的意思就是用来做标注用：可以在类、字段变量、方法、接口等位置进行一个特殊的标记，为后续做一些诸如：代码生成、数据校验、资源整合等工作做铺垫。
+注解一旦对代码标注完成，后续我们就可以结合Java强大的反射机制，在运行时动态地获取到注解的标注信息，从而可以执行很多其他逻辑，完成我们想要的自动化工作。
 
-
-统计学习就是计算机系统通过运用数据及统计方法提高系统性能的机器学习。
-
-1.2对象 统计学习对象：数据 基本假设： 同类数据具有一定的统计规律性
-1.3目的 对新数据进行预测和分析
-1.4方法常用方法：
-
-监督学习（supervised learning）
-非监督学习（unsupervised learning）
-半监督学习（semi-supervised learning）
-强化学习（reinforcement learning）
-
-三要素：
-
-模型（model）
-策略（strategy）
-算法（algorithm）
-
-主要步骤：
-
-得到一个有限训练数据集
-确定包含所有可能模型的假设空间（学习模型的集合）
-确定模型选择的准则
+造一个注解Spring自身提供了非常多好用的注解可以用来方便地帮我们做数据校验的工作。
+比如，在没有注解加持时，我们想要校验 Student类：
+public class Student &#123;        private Long id;        // 学号        private String name;    // 姓名        private String mobile;  // 手机号码(11位)&#125;
+我们只能通过手写 i
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/机器学习/统计学习方法/统计学习方法第一章学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/基础知识/注解/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/数据库/数据库连接池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/数据库/数据库连接池/" class="post-title-link" itemprop="url">数据库连接池</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 16:53:03" itemprop="dateCreated datePublished" datetime="2020-02-25T16:53:03+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-29 21:27:28" itemprop="dateModified" datetime="2020-02-29T21:27:28+08:00">2020-02-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">27k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              1.概述1.1概念一个容器(集合)，存放数据库连接的容器。        当系统初始化好后，容器被创建，容器中会申请一些连接对象，当用户来访问数据库时，从容器中获取连接对象，用户访问完之后，会将连接对象归还给容器。
+1.2好处
+节约资源
+用户访问高效
+
+1.3实现
+1.标准接口：DataSource   javax.sql包下。
+获取连接：getConnection()
+归还连接：Connection.close()。如果连接对象Connection是从连接池中获取的，那么调用Connection.close()方法，则不会再关闭连接了。而是归还连接
+
+
+2.数据库厂商实现
+C3P0：数据库连接池技术。
+Druid：数据库连接池实现技术，由阿里巴巴提供。
+
+
+
+1.4 C3P0：数据库连接池技术步骤
+1.导入jar包 (两个) c3p0-0.9.5.2.jar  mchange-commo
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/数据库/数据库连接池/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/HTTP/HTTP学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/JavaWeb/HTTP/HTTP学习笔记/" class="post-title-link" itemprop="url">HTTP学习笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 11:12:48" itemprop="dateCreated datePublished" datetime="2020-02-25T11:12:48+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-27 11:14:35" itemprop="dateModified" datetime="2020-02-27T11:14:35+08:00">2020-02-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">27k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              1.概述概念：Hyper Text Transfer Protocol 超文本传输协议。
+传输协议：定义了客户端和服务器端通信时，发送数据的格式。
+特点：
+
+基于 TCP/IP 的高级协议。
+默认端口号：80。
+基于请求/响应模型：一次请求对应一次响应。
+无状态：每次请求之间相互独立，不能交互数据。
+
+历史版本：
+
+1.0：每一次请求响应都会建立新的连接。
+1.1：复用连接。
+
+2.请求消息数据格式2.1 请求行
+格式：请求方式 请求url 请求协议/版本
+请求方式：7中，常用2种：
+GET：
+请求参数在请求行中，在url后。
+请求的url长度有限制。
+不太安全。
+
+
+POST：
+请求参数在请求体中。
+请求的url长度没有限制。
+相对安全。
+
+
+
+
+
+2.2 请求头
+格式：请求头名称：请求头值
+常见请求头：
+User-Agent：告诉服务器访问所使用的浏览器版本信息，解决浏览器兼容性问题。
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/JavaWeb/HTTP/HTTP学习笔记/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2579,7 +2558,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2623,7 +2602,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2680,7 +2659,21 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2761,7 +2754,35 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2865,7 +2886,7 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">210k</span>
+    <span title="站点总字数">242k</span>
   
 
   
@@ -3358,11 +3379,11 @@ f(x) 与 F(x) 图形如下图所示，为 S 形曲线(sigmoid curve)，以点 $(
       
     
       
-    
-      
-    
-      
         
+      
+    
+      
+    
       
     
       

@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/前端/Bootstrap学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据库/数据库基础1-约束/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/前端/Bootstrap学习笔记/" class="post-title-link" itemprop="url">Bootstrap学习笔记</a>
+                <a href="/数据库/数据库基础1-约束/" class="post-title-link" itemprop="url">数据库基础1:约束</a>
               
             
           </h1>
@@ -426,24 +426,12 @@
                 
               
 
-              <time title="创建时间：2020-02-27 15:54:53" itemprop="dateCreated datePublished" datetime="2020-02-27T15:54:53+08:00">2020-02-27</time>
+              <time title="创建时间：2020-03-04 16:09:56 / 修改时间：16:31:20" itemprop="dateCreated datePublished" datetime="2020-03-04T16:09:56+08:00">2020-03-04</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-28 08:37:38" itemprop="dateModified" datetime="2020-02-28T08:37:38+08:00">2020-02-28</time>
               
             
           </span>
@@ -460,7 +448,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -489,7 +477,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.7k</span>
+                <span title="本文字数">10k</span>
               
 
               
@@ -516,20 +504,36 @@
         
           
             <p>
-              官网
-1.概念一个前端开发的框架，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 基于 HTML、CSS、JavaScript ，简洁灵活，使得 Web 开发更加快捷。
-响应式布局：同一套页面可以兼容不同分辨率的设备。
-2.快速入门
-1.下载 Bootstrap。
-2.在项目中将三个文件夹复制。
+              概念对表中的数据进行限定，保证数据的正确性、有效性和完整性。
+分类
+主键约束：primary key
+非空约束：not null
+唯一约束：unique
+外键约束：foreign key
 
-bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.css.map│   ├── bootstrap.min.css│   ├── bootstrap.min.css.map│   ├── bootstrap-theme.css│   ├── bootstrap-theme.css.map│   ├── bootstrap-theme.min.css│   └── bootstrap-theme.min.css.m
+非空约束not null，值不能为 null
+
+创建表时添加约束。
+CREATE TABLE stu(	id INT,	NAME VARCHAR(20) NOT NULL -- name为非空);
+
+创建表完后，添加非空约束。
+ALTER TABLE stu MODIFY NAME VARCHAR(20) NOT NULL;
+
+删除 name 的非空约束。
+ALTER TABLE stu MODIFY NAME VARCHAR(20);
+
+
+唯一约束unique，值不能重复
+
+创建表时，添加唯一约束。
+
+注意 mysql 中，唯一约束限定的列的值可以有多个nullCREATE TABLE stu(   
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/前端/Bootstrap学习笔记/#more" rel="contents">
+              <a class="btn" href="/数据库/数据库基础1-约束/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -589,7 +593,7 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/JSP/JSP学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/7-Spring学习笔记-事务管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -609,7 +613,7 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/Java/JavaWeb/JSP/JSP学习笔记/" class="post-title-link" itemprop="url">JSP学习笔记</a>
+                <a href="/Java/Spring/Spring/7-Spring学习笔记-事务管理/" class="post-title-link" itemprop="url">7.Spring学习笔记:事务管理</a>
               
             
           </h1>
@@ -634,12 +638,24 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
                 
               
 
-              <time title="创建时间：2020-02-27 14:18:34 / 修改时间：15:08:56" itemprop="dateCreated datePublished" datetime="2020-02-27T14:18:34+08:00">2020-02-27</time>
+              <time title="创建时间：2020-03-04 10:02:24" itemprop="dateCreated datePublished" datetime="2020-03-04T10:02:24+08:00">2020-03-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-21 11:37:28" itemprop="dateModified" datetime="2020-05-21T11:37:28+08:00">2020-05-21</time>
               
             
           </span>
@@ -663,14 +679,14 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -699,7 +715,7 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">638</span>
+                <span title="本文字数">40k</span>
               
 
               
@@ -726,25 +742,30 @@ bootstrap/├── css/│   ├── bootstrap.css│   ├── bootstrap.c
         
           
             <p>
-              概念Java Server Pages： Java 服务器端页面。
+              声明式事务管理Spring中基于 xml 的声明式事务控制配置步骤( 1 ) 配置事务管理器
+( 2 ) 配置事务的通知
 
-可理解为：一个特殊的页面，其中既可定义html标签，又可定义 Java 代码。
-用于简化书写。
-
-原理JSP 本质上就是一个 Servlet。
-JSP 脚本JSP 定义 Java 代码的方式：
-
-1.&lt;%  代码 %&gt;：定义的java代码，在service方法中。service方法中可以定义什么，该脚本中就可以定义什么。
-2.&lt;%! 代码 %&gt;：定义的java代码，在jsp转换后的java类的成员位置。
-3.&lt;%= 代码 %&gt;：定义的java代码，会输出到页面上。输出语句中可以定义什么，该脚本中就可以定义什么。
+1 ) 导入事务的约束
+2 ) 使用 tx:advice 标签配置事务通知
+属性：
+id：给事务通知起一个唯一标识
+transaction-manager：给事务通知提供一个事务管理器引用
 
 
-              
+
+
+3 ) 配置 AOP 中的通用切入点表达式
+4 ) 建立事务通知和切入点表达式的对应关系
+5 ) 配置事务的属性（在事务的通知 tx : advice标签的内部）
+isolation：用于指定书屋的隔离级别，默认值为 DEFAULT，表示数据库的默认隔离级别
+propagation：用于指定事务的传播行为。默认值是 REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择 SUPPORTS。
+read-only：用于指定事务是否只读。只有查询方法才能设置为 tru
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/JSP/JSP学习笔记/#more" rel="contents">
+              <a class="btn" href="/Java/Spring/Spring/7-Spring学习笔记-事务管理/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -804,7 +825,7 @@ JSP 脚本JSP 定义 Java 代码的方式：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/HTTP/会话技术Cookie-Session/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/6-Spring学习笔记-面向切面编程-AOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -824,7 +845,7 @@ JSP 脚本JSP 定义 Java 代码的方式：
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/Java/JavaWeb/HTTP/会话技术Cookie-Session/" class="post-title-link" itemprop="url">会话技术Cookie&Session</a>
+                <a href="/Java/Spring/Spring/6-Spring学习笔记-面向切面编程-AOP/" class="post-title-link" itemprop="url">6.Spring学习笔记:面向切面编程(AOP)</a>
               
             
           </h1>
@@ -849,7 +870,7 @@ JSP 脚本JSP 定义 Java 代码的方式：
                 
               
 
-              <time title="创建时间：2020-02-27 12:23:35" itemprop="dateCreated datePublished" datetime="2020-02-27T12:23:35+08:00">2020-02-27</time>
+              <time title="创建时间：2020-03-04 09:44:23" itemprop="dateCreated datePublished" datetime="2020-03-04T09:44:23+08:00">2020-03-04</time>
             
 
             
@@ -866,7 +887,7 @@ JSP 脚本JSP 定义 Java 代码的方式：
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-01 21:18:43" itemprop="dateModified" datetime="2020-03-01T21:18:43+08:00">2020-03-01</time>
+                <time title="修改时间：2020-05-21 11:37:23" itemprop="dateModified" datetime="2020-05-21T11:37:23+08:00">2020-05-21</time>
               
             
           </span>
@@ -890,14 +911,14 @@ JSP 脚本JSP 定义 Java 代码的方式：
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -926,7 +947,7 @@ JSP 脚本JSP 定义 Java 代码的方式：
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.8k</span>
+                <span title="本文字数">38k</span>
               
 
               
@@ -953,37 +974,20 @@ JSP 脚本JSP 定义 Java 代码的方式：
         
           
             <p>
-              1.会话技术会话：一次会话中包含多次请求和响应。
+              1.AOP ( 面向切面编程 ) 的概念1.1 什么是AOP?在单体架构下的软件开发中，一个大型项目通常是依照功能拆分成各个模块。但是如日志、安全和事务管理此类重要且繁琐的开发却没有必要参与到各个模块中，将这些功能与业务逻辑相关的模块分离就是面向切面编程所要解决的问题
+AOP采取的是横向抽取机制，取代了传统纵向继承体系重复性代码。
+1.2 何为软件的横向和纵向？从纵向结构来看就是我们软件的各个模块，它所负责的是软件的核心业务（如购商品购买、添加购物车等）；从横向来看的话，软件的各个模块之间又有所关联，其中会包含一些公共模块（例如日志、权限等）；这些公共模块可以存在于各个核心业务中，而AOP的处理将两者分离，使开发人员可以专注于核心业务的开发，提高了开发效率。
+1.3 AOP 的作用及优势作用： 在程序运行期间，不修改源码对已有方法进行增强。优势：
 
-一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止。
-
-功能：在一次会话的范围内的多次请求间，共享数据。
-方式：
-
-客户端会话技术：Cookie
-服务器端会话技术：Session
-
-2.Cookie2.1 概念客户端会话技术，将数据保存到客户端。
-2.2 使用步骤
-创建Cookie对象，绑定数据。
-new Cookie(String name, String value)
-
-发送Cookie对象。
-response.addCookie(Cookie cookie)
-
-获取Cookie，拿到数据。
-Cookie[]  request.getCookies()
-
-
-2.3 实现原理基于响应头 set-cookie 和请求头 cookie 实现
-2.4 cookie 的细节1.一次发送多个 cookie
-可以创建多个 Co
+减少重复代码 
+提高开发效率 
+维护方便
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/HTTP/会话技术Cookie-Session/#more" rel="contents">
+              <a class="btn" href="/Java/Spring/Spring/6-Spring学习笔记-面向切面编程-AOP/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1043,7 +1047,7 @@ Cookie[]  request.getCookies()
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/数据库/Spring-JDBC/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/5-Spring学习笔记-Spring整合Junit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1063,7 +1067,7 @@ Cookie[]  request.getCookies()
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/Java/数据库/Spring-JDBC/" class="post-title-link" itemprop="url">Spring JDBC</a>
+                <a href="/Java/Spring/Spring/5-Spring学习笔记-Spring整合Junit/" class="post-title-link" itemprop="url">5.Spring学习笔记:Spring整合Junit</a>
               
             
           </h1>
@@ -1088,7 +1092,7 @@ Cookie[]  request.getCookies()
                 
               
 
-              <time title="创建时间：2020-02-26 12:04:40" itemprop="dateCreated datePublished" datetime="2020-02-26T12:04:40+08:00">2020-02-26</time>
+              <time title="创建时间：2020-03-04 09:35:14" itemprop="dateCreated datePublished" datetime="2020-03-04T09:35:14+08:00">2020-03-04</time>
             
 
             
@@ -1105,7 +1109,7 @@ Cookie[]  request.getCookies()
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 12:06:17" itemprop="dateModified" datetime="2020-02-29T12:06:17+08:00">2020-02-29</time>
+                <time title="修改时间：2020-05-21 11:37:19" itemprop="dateModified" datetime="2020-05-21T11:37:19+08:00">2020-05-21</time>
               
             
           </span>
@@ -1129,7 +1133,14 @@ Cookie[]  request.getCookies()
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -1158,7 +1169,7 @@ Cookie[]  request.getCookies()
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">14k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -1185,25 +1196,21 @@ Cookie[]  request.getCookies()
         
           
             <p>
-              概念Spring 框架对 JDBC 的简单封装，提供了一个 JDBCTemplate 对象简化 JDBC 的开发。
-步骤1.导入 jar 包。2.创建 JdbcTemplate 对象。依赖于数据源DataSourceJdbcTemplate template = new JdbcTemplate(ds);
-3.调用JdbcTemplate的方法来完成CRUD的操作。
-update()：执行DML语句。增、删、改语句。
-queryForMap()：查询结果将结果集封装为map集合，将列名作为key，将值作为value 将这条记录封装为一个map集合。
-注意：这个方法查询的结果集长度只能是1。
+              1.导入 Spring 整合 Junit 的 jar ( 坐标 )&lt;dependency&gt;    &lt;groupId&gt;org.springframework&lt;/groupId&gt;    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;    &lt;version&gt;5.0.2.RELEASE&lt;/version&gt;&lt;/dependency&gt;
+2.使用 Junit 提供的一个注解把原有的 main 方法替换了，替换成 Spring 提供的。
 
+@Runwith
 
-queryForList()：查询结果将结果集封装为list集合。
-注意：将每一条记录封装为一个Map集合，再将Map集合装载到List集合中。
+3.告知 Spring 的运行器， Spring 和 ioc 创建是基于 xml 还是注解的，并且说明位置，用到的注解如下
 
-
-query()：查询结果，将结果封装为JavaB
+@ContextConfiguration
+Locations : 指定 xml 文件的位置，加上 c
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/Java/数据库/Spring-JDBC/#more" rel="contents">
+              <a class="btn" href="/Java/Spring/Spring/5-Spring学习笔记-Spring整合Junit/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1263,7 +1270,7 @@ query()：查询结果，将结果封装为JavaB
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/基础知识/注解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/4-Spring学习笔记-基于注解的IOC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1283,7 +1290,7 @@ query()：查询结果，将结果封装为JavaB
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/Java/基础知识/注解/" class="post-title-link" itemprop="url">注解</a>
+                <a href="/Java/Spring/Spring/4-Spring学习笔记-基于注解的IOC/" class="post-title-link" itemprop="url">4.Spring学习笔记:基于注解的IOC</a>
               
             
           </h1>
@@ -1308,7 +1315,7 @@ query()：查询结果，将结果封装为JavaB
                 
               
 
-              <time title="创建时间：2020-02-26 10:01:19" itemprop="dateCreated datePublished" datetime="2020-02-26T10:01:19+08:00">2020-02-26</time>
+              <time title="创建时间：2020-03-04 09:31:19" itemprop="dateCreated datePublished" datetime="2020-03-04T09:31:19+08:00">2020-03-04</time>
             
 
             
@@ -1325,7 +1332,911 @@ query()：查询结果，将结果封装为JavaB
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 12:06:32" itemprop="dateModified" datetime="2020-02-29T12:06:32+08:00">2020-02-29</time>
+                <time title="修改时间：2020-05-21 11:37:14" itemprop="dateModified" datetime="2020-05-21T11:37:14+08:00">2020-05-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.1k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              Spring 中的新注解
+@Configuration
+
+作用：指定当前类是一个配置类。
+细节：当配置类作为 AnnotationConfigurationApplicationContext 对象创建的参数时，该注解可以不写。
+
+
+@ComponentScan
+
+作用：用于通过注解指定 Spring 在创建容器时要扫描的包。
+属性：value : 它和 basepackages 的作用是一样的，都是用于指定创建容器时要扫描的包。使用此注解就等同于在 xml 中配置了：&lt;context:component-scan base-package="com.greyson"&gt;&lt;/context:component-scan&gt;
+
+
+
+@Bean
+
+作用：用于把当前方法的返回值作为 bean 对象放入 Spring 的IOC容器中。
+属性：name : 用于指定 bean 的
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/Spring/Spring/4-Spring学习笔记-基于注解的IOC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/3-Spring学习笔记-依赖注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/Spring/Spring/3-Spring学习笔记-依赖注入/" class="post-title-link" itemprop="url">3.Spring学习笔记:依赖注入</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-03 21:42:54" itemprop="dateCreated datePublished" datetime="2020-03-03T21:42:54+08:00">2020-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-21 11:37:10" itemprop="dateModified" datetime="2020-05-21T11:37:10+08:00">2020-05-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">23k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              1.概述能注入的数据
+基本类型和 String
+其他 bean 类型（在配置文件中或者注解中配置过的 bean）
+复杂类型/集合类型
+
+IOC 的作用减低程序间的耦合（即依赖关系）
+在当前类需要用到其他类的对象，由 Spring 为我们提供，而我们在配置文件中说明依赖关系的维护，这种方式就称为依赖注入。
+2.注入方式注入的方式：
+
+第一种：使用构造函数提供
+第二种：使用 set方法提供
+第三种：使用注解提供
+
+2.1 操作实例：
+接口如下：
+   public interface IAccountDao &#123;    void saveAccount();&#125;public interface IAccountService &#123;    /**     * 模拟保存账户     */    void saveAccount();&#125;
+
+
+
+实现类：
+   @Se
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/Spring/Spring/3-Spring学习笔记-依赖注入/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/2-Spring学习笔记-Bean的装配与管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/Spring/Spring/2-Spring学习笔记-Bean的装配与管理/" class="post-title-link" itemprop="url">2.Spring学习笔记:Bean的装配与管理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-03 21:36:19" itemprop="dateCreated datePublished" datetime="2020-03-03T21:36:19+08:00">2020-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-21 11:37:05" itemprop="dateModified" datetime="2020-05-21T11:37:05+08:00">2020-05-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.8k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              1.Spring 中 Bean 的细节三种创建 bean 对象的方式
+使用默认构造函数创建
+在 spring 的配置文件中，使用 id 和 class 属性之后，且没有其他属性和标签时，采用的就是默认构造函数创建 bean 对象，此时如果类中没有默认构造函数，则对象无法创建。
+&lt;bean id = "accountService" class = "com.itheima.service.impl.AccountServiceImpl"&gt;&lt;/bean&gt;
+
+使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入  Spring 容器），如下
+/** *模拟一个工厂类，该类可能存在于jar包中，无法通过修改源码的方式来提供默认构造函数 *  */public class InstanceFactory &#123;    public IAccountServ
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/Spring/Spring/2-Spring学习笔记-Bean的装配与管理/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/Spring/Spring/1-Spring学习笔记-入门案例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/Spring/Spring/1-Spring学习笔记-入门案例/" class="post-title-link" itemprop="url">1.Spring学习笔记:入门案例</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-03 21:28:00" itemprop="dateCreated datePublished" datetime="2020-03-03T21:28:00+08:00">2020-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-21 11:37:02" itemprop="dateModified" datetime="2020-05-21T11:37:02+08:00">2020-05-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Spring/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.8k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              1.实例
+通过 Idea 创建 maven 项目
+配置 Spring 配置文件 ApplicationContext.xml
+编写接口及实现类
+
+
+IaccountDao
+/** * 账户的持久层接口 */public interface IAccountDao &#123;    /**     * 模拟保存账户     */    void saveAccount();&#125;
+
+IaccountService
+/** * 账户业务层的接口 */public interface IAccountService &#123;    /**     * 模拟保存账户     */    void saveAccount();&#125;
+
+AccountDaoImpl
+/** * 账户的持久层实现类 */public class AccountDaoImpl implements IA
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Java/Spring/Spring/1-Spring学习笔记-入门案例/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/基础知识/缓冲流、转换流、序列化流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuYe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Java/基础知识/缓冲流、转换流、序列化流/" class="post-title-link" itemprop="url">缓冲流、转换流、序列化流</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-01 15:57:32 / 修改时间：16:05:21" itemprop="dateCreated datePublished" datetime="2020-03-01T15:57:32+08:00">2020-03-01</time>
+            
+
+            
+              
+
               
             
           </span>
@@ -1378,7 +2289,7 @@ query()：查询结果，将结果封装为JavaB
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">15k</span>
+                <span title="本文字数">62k</span>
               
 
               
@@ -1405,19 +2316,22 @@ query()：查询结果，将结果封装为JavaB
         
           
             <p>
-              注解的基本原理意如其名，其本来的意思就是用来做标注用：可以在类、字段变量、方法、接口等位置进行一个特殊的标记，为后续做一些诸如：代码生成、数据校验、资源整合等工作做铺垫。
-注解一旦对代码标注完成，后续我们就可以结合Java强大的反射机制，在运行时动态地获取到注解的标注信息，从而可以执行很多其他逻辑，完成我们想要的自动化工作。
+              1.缓冲流能够高效读写的缓冲流，能够转换编码的转换流，能够持久化存储对象的序列化流。这些功能更为强大的流，都是在基本的流对象基础之上创建而来的，是对基本流对象的一种增强。
+1.1 概述缓冲流，也叫高效流，是对4个基本的 FileXxx 流的增强，所以也是 4 个流，按照数据类型分类：
 
-造一个注解Spring自身提供了非常多好用的注解可以用来方便地帮我们做数据校验的工作。
-比如，在没有注解加持时，我们想要校验 Student类：
-public class Student &#123;        private Long id;        // 学号        private String name;    // 姓名        private String mobile;  // 手机号码(11位)&#125;
-我们只能通过手写 i
+字节缓冲流：BufferedInputStream，BufferedOutputStream 
+字符缓冲流：BufferedReader，BufferedWriter
+
+缓冲流的基本原理，是在创建流对象时，会创建一个内置的默认大小的缓冲区数组，通过缓冲区读写，减少系统 IO 次数，从而提高读写的效率。
+1.2 字节缓冲流构造方法
+public BufferedInputStream(InputStream in) ：创建一个 新的缓冲输入流。 
+public BufferedOutputStream(Out
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/Java/基础知识/注解/#more" rel="contents">
+              <a class="btn" href="/Java/基础知识/缓冲流、转换流、序列化流/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1477,7 +2391,7 @@ public class Student &#123;        private Long id;        // 学号        priv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/数据库/数据库连接池/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/基础知识/I-O-字节流、字符流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuYe">
@@ -1497,7 +2411,7 @@ public class Student &#123;        private Long id;        // 学号        priv
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/Java/数据库/数据库连接池/" class="post-title-link" itemprop="url">数据库连接池</a>
+                <a href="/Java/基础知识/I-O-字节流、字符流/" class="post-title-link" itemprop="url">I/O 字节流、字符流</a>
               
             
           </h1>
@@ -1522,24 +2436,12 @@ public class Student &#123;        private Long id;        // 学号        priv
                 
               
 
-              <time title="创建时间：2020-02-25 16:53:03" itemprop="dateCreated datePublished" datetime="2020-02-25T16:53:03+08:00">2020-02-25</time>
+              <time title="创建时间：2020-03-01 14:36:49 / 修改时间：21:28:12" itemprop="dateCreated datePublished" datetime="2020-03-01T14:36:49+08:00">2020-03-01</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-29 21:27:28" itemprop="dateModified" datetime="2020-02-29T21:27:28+08:00">2020-02-29</time>
               
             
           </span>
@@ -1563,7 +2465,7 @@ public class Student &#123;        private Long id;        // 学号        priv
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/基础知识/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a></span>
 
                 
                 
@@ -1592,7 +2494,7 @@ public class Student &#123;        private Long id;        // 学号        priv
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">27k</span>
+                <span title="本文字数">80k</span>
               
 
               
@@ -1619,958 +2521,43 @@ public class Student &#123;        private Long id;        // 学号        priv
         
           
             <p>
-              1.概述1.1概念一个容器(集合)，存放数据库连接的容器。        当系统初始化好后，容器被创建，容器中会申请一些连接对象，当用户来访问数据库时，从容器中获取连接对象，用户访问完之后，会将连接对象归还给容器。
-1.2好处
-节约资源
-用户访问高效
+              1.IO概述1.1 什么是IO数据的传输，可以看做是一种数据的流动，按照流动的方向，以内存为基准，分为 输入input  和 输出output  ，即流向内存是输入流，流出内存的输出流。
+Java 中 I/O 操作主要是指使用 java.io 包下的内容，进行输入、输出操作。输入也叫做读取数据，输出也叫做作写出数据。
+1.2 IO的分类根据数据的流向分为：输入流和输出流。
 
-1.3实现
-1.标准接口：DataSource   javax.sql包下。
-获取连接：getConnection()
-归还连接：Connection.close()。如果连接对象Connection是从连接池中获取的，那么调用Connection.close()方法，则不会再关闭连接了。而是归还连接
+输入流 ：把数据从 其他设备 上读取到 内存 中的流。 
+输出流 ：把数据从 内存  中写出到 其他设备 上的流。
+
+根据数据的类型分为：字节流和字符流。
+
+字节流 ：以字节为单位，读写数据的流。
+字符流 ：以字符为单位，读写数据的流。
+
+1.3 IO的流向说明图解
+1.4 顶级父类
 
 
-2.数据库厂商实现
-C3P0：数据库连接池技术。
-Druid：数据库连接池实现技术，由阿里巴巴提供。
+
+
+输入流
+输出流
 
 
 
-1.4 C3P0：数据库连接池技术步骤
-1.导入jar包 (两个) c3p0-0.9.5.2.jar  mchange-commo
+
+字节流
+字节输入流InputStream
+字节输出流OutputStream
+
+
+字符流
+字符输入流Re
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/Java/数据库/数据库连接池/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/HTTP/HTTP学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Java/JavaWeb/HTTP/HTTP学习笔记/" class="post-title-link" itemprop="url">HTTP学习笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-25 11:12:48" itemprop="dateCreated datePublished" datetime="2020-02-25T11:12:48+08:00">2020-02-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-27 11:14:35" itemprop="dateModified" datetime="2020-02-27T11:14:35+08:00">2020-02-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">27k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.概述概念：Hyper Text Transfer Protocol 超文本传输协议。
-传输协议：定义了客户端和服务器端通信时，发送数据的格式。
-特点：
-
-基于 TCP/IP 的高级协议。
-默认端口号：80。
-基于请求/响应模型：一次请求对应一次响应。
-无状态：每次请求之间相互独立，不能交互数据。
-
-历史版本：
-
-1.0：每一次请求响应都会建立新的连接。
-1.1：复用连接。
-
-2.请求消息数据格式2.1 请求行
-格式：请求方式 请求url 请求协议/版本
-请求方式：7中，常用2种：
-GET：
-请求参数在请求行中，在url后。
-请求的url长度有限制。
-不太安全。
-
-
-POST：
-请求参数在请求体中。
-请求的url长度没有限制。
-相对安全。
-
-
-
-
-
-2.2 请求头
-格式：请求头名称：请求头值
-常见请求头：
-User-Agent：告诉服务器访问所使用的浏览器版本信息，解决浏览器兼容性问题。
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/HTTP/HTTP学习笔记/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/Servlet/Servlet学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Java/JavaWeb/Servlet/Servlet学习笔记/" class="post-title-link" itemprop="url">Servlet学习笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-25 08:51:04" itemprop="dateCreated datePublished" datetime="2020-02-25T08:51:04+08:00">2020-02-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-26 13:43:47" itemprop="dateModified" datetime="2020-02-26T13:43:47+08:00">2020-02-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/Servlet/" itemprop="url" rel="index"><span itemprop="name">Servlet</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.3k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.Servlet 概述
-概念：运行在服务器端的小程序。
-
-Servlet 就是一个接口，定义了 Java 类被浏览器访问（Tomcat识别）的规则。
-
-
-快速入门：
-
-1.创建 JavaEE 项目。
-2.定义一个类，实现 Servlet 接口。
-
-public class ServerletDemo1 implements Servlet
-
-3.实现接口中的抽象方法。
-4.配置 Servlet：web\WEB-INF\web.xml。
-
-&lt;servlet&gt;    &lt;servlet-name&gt;demo1&lt;/servlet-name&gt;    &lt;servlet-class&gt;com.coderhuye.web.servlet.ServerletDemo1&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servle
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/Servlet/Servlet学习笔记/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux/在Linux服务器端手动部署Tomcat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Linux/在Linux服务器端手动部署Tomcat/" class="post-title-link" itemprop="url">在Linux服务器端手动部署Tomcat</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-24 21:05:18" itemprop="dateCreated datePublished" datetime="2020-02-24T21:05:18+08:00">2020-02-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-25 09:41:21" itemprop="dateModified" datetime="2020-02-25T09:41:21+08:00">2020-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.7k</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.安装 jdk 并配置路径将 jdk 解压放到 /usr/local/ 目录下。
-修改 /etc/profile 文档，在末尾添加如下语句：
-export JAVA_HOME=/usr/local/jdk1.8.0_191export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-刷新配置文件：
-source /etc/profile
-2.安装 Tomcat解压Tomcat压缩包。
-修改 /conf/server.xml文件，将端口8080改为80。
-
-3.在阿里云服务器上添加安全组规则添加80端口的监听。
-
-4.启动 Tomcat 服务器执行 /bin/startup.sh脚本，启动服务器，访问服务器地址就能看到部署成功！
-
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/Linux/在Linux服务器端手动部署Tomcat/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JavaWeb/Tomcat/Tomcat部署项目的三种方式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuYe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HuYe的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Java/JavaWeb/Tomcat/Tomcat部署项目的三种方式/" class="post-title-link" itemprop="url">Tomcat部署项目的三种方式</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-24 19:55:04" itemprop="dateCreated datePublished" datetime="2020-02-24T19:55:04+08:00">2020-02-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-25 16:45:49" itemprop="dateModified" datetime="2020-02-25T16:45:49+08:00">2020-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/JavaWeb/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">835</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              1.直接将项目放到webapps目录下
-项目的访问路径—&gt;虚拟路径
-简化部署：将项目打包成一个war包，再将war包放置到webapps目录下
-war包会自动解压缩（热部署）
-
-
-
-2.配置conf/server.xml文件在标签体中配置
-
-
-
-docBase：项目存放的路径
-path：虚拟路径
-
-3.在conf\Catalina\localhost创建任意名称的xml文件在xml文件中编写
-
-虚拟目录：xml文件的名称
-
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/Java/JavaWeb/Tomcat/Tomcat部署项目的三种方式/#more" rel="contents">
+              <a class="btn" href="/Java/基础知识/I-O-字节流、字符流/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2619,7 +2606,7 @@ path：虚拟路径
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2663,7 +2650,7 @@ path：虚拟路径
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2720,7 +2707,21 @@ path：虚拟路径
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2801,7 +2802,35 @@ path：虚拟路径
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2905,7 +2934,7 @@ path：虚拟路径
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">210k</span>
+    <span title="站点总字数">242k</span>
   
 
   
