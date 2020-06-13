@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="HuYe的博客">
 <meta property="og:description" content="新装(CenOS7)1234567891011121314151617181920# 确定 CentOS 版本cat /etc/redhat-release# 安装 gcc 相关yum -y install gccyum -y install gcc-c++# 卸载旧版本yum -y remove docker docker-common docker-selinux docker-engine#">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-01T05:20:19.420Z">
+<meta property="og:updated_time" content="2020-05-23T03:06:53.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker安装">
 <meta name="twitter:description" content="新装(CenOS7)1234567891011121314151617181920# 确定 CentOS 版本cat /etc/redhat-release# 安装 gcc 相关yum -y install gccyum -y install gcc-c++# 卸载旧版本yum -y remove docker docker-common docker-selinux docker-engine#">
@@ -136,6 +136,17 @@
 
 
 
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-167615030-1');
+    }
+  </script>
 
 
 
@@ -445,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-01 13:20:19" itemprop="dateModified" datetime="2020-05-01T13:20:19+08:00">2020-05-01</time>
+                <time title="修改时间：2020-05-23 11:06:53" itemprop="dateModified" datetime="2020-05-23T11:06:53+08:00">2020-05-23</time>
               
             
           </span>
@@ -522,7 +533,7 @@
       
 
       
-        <h2 id="新装-CenOS7"><a href="#新装-CenOS7" class="headerlink" title="新装(CenOS7)"></a>新装(CenOS7)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确定 CentOS 版本</span></span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"><span class="comment"># 安装 gcc 相关</span></span><br><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br><span class="line"><span class="comment"># 卸载旧版本</span></span><br><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line"><span class="comment"># 安装需要的软件包</span></span><br><span class="line">yum install-y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="comment"># 设置 stable 镜像仓库</span></span><br><span class="line">yum-config-manager--add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 更新 yum 软件包索引</span></span><br><span class="line">yum makecache fast</span><br><span class="line"><span class="comment"># 安装 docker-ce</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="comment"># 启动 Docker</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">docekr version</span><br></pre></td></tr></table></figure>
+        <h2 id="新装-CenOS7"><a href="#新装-CenOS7" class="headerlink" title="新装(CenOS7)"></a>新装(CenOS7)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确定 CentOS 版本</span></span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"><span class="comment"># 安装 gcc 相关</span></span><br><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br><span class="line"><span class="comment"># 卸载旧版本</span></span><br><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line"><span class="comment"># 安装需要的软件包</span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="comment"># 设置 stable 镜像仓库</span></span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 更新 yum 软件包索引</span></span><br><span class="line">yum makecache fast</span><br><span class="line"><span class="comment"># 安装 docker-ce</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="comment"># 启动 Docker</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>配置镜像加速</strong></li>
 </ul>
@@ -688,7 +699,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -759,7 +770,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">29</span>
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -868,7 +881,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">48</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -918,11 +945,11 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="http://www.fontawesome.com.cn/faicons/" title="http://www.fontawesome.com.cn/faicons/" rel="noopener" target="_blank">FontAwesome</a>
+                    <a href="https://github.coderhuye.com/" title="https://github.coderhuye.com/" rel="noopener" target="_blank">Github项目精选</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" title="https://www.lfd.uci.edu/~gohlke/pythonlibs/" rel="noopener" target="_blank">Pythonlibs</a>
+                    <a href="http://www.fontawesome.com.cn/faicons/" title="http://www.fontawesome.com.cn/faicons/" rel="noopener" target="_blank">FontAwesome</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
@@ -989,7 +1016,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">242k</span>
+    <span title="站点总字数">232k</span>
   
 
   

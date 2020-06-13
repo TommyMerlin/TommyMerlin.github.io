@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Abaqus学习笔记</title>
+    <url>/Abaqus/Abaqus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><strong>学习资料</strong>：《ABAQUS分析之美》江丙云,2020,人民邮电出版社</p>
+<h2 id="1-网格划分"><a href="#1-网格划分" class="headerlink" title="1.网格划分"></a>1.网格划分</h2><h3 id="1-1指派网格控制属性"><a href="#1-1指派网格控制属性" class="headerlink" title="1.1指派网格控制属性"></a>1.1指派网格控制属性</h3><ul>
+<li><strong>中性轴算法</strong>—将目标区域划分为一些简单区域<ul>
+<li>形状规则</li>
+<li>网格节点与种子的位置吻合差</li>
+</ul>
+</li>
+<li><strong>进阶算法</strong>—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展<ul>
+<li>易获得大小均匀的网格</li>
+<li>网格节点与种子位置吻合较好</li>
+<li>易出现网格形状歪斜、扭曲的问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-分割部件"><a href="#1-2-分割部件" class="headerlink" title="1.2 分割部件"></a>1.2 分割部件</h3><p>设定工具栏颜色编码模式为 <code>Mesh defaults</code></p>
+<ul>
+<li><strong>橙色</strong>：无法划分，需进一步对几何体进行分割</li>
+<li><strong>黄色</strong>：扫掠网格</li>
+<li><strong>粉红色</strong>：自由网格</li>
+<li><strong>绿色</strong>：结构化网格</li>
+</ul>
+<p><strong>注意</strong>：结构化网格和扫掠网格采用四边形（二维）和六面体（三维），其分析精度较高，应优先选择。</p>
+<hr>
+<h2 id="2-胶接特性模拟-P94"><a href="#2-胶接特性模拟-P94" class="headerlink" title="2.胶接特性模拟(P94)"></a>2.胶接特性模拟(P94)</h2><ul>
+<li>使用 <strong>Cohesive 单元</strong>模拟胶接<ul>
+<li>定义材料属性/截面，给 Cohesive 单元赋 Cohesive 截面属性，以此模拟胶层</li>
+</ul>
+</li>
+<li>使用<strong>接触（Contact）</strong>模拟胶接<ul>
+<li>在需要胶接的面之间创建接触，接触特性选用 Cohesive Behavior</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-复合材料层合板有限元分析-P103"><a href="#3-复合材料层合板有限元分析-P103" class="headerlink" title="3.复合材料层合板有限元分析(P103)"></a>3.复合材料层合板有限元分析(P103)</h2><p>根据有限元模型采用单元的不同，可分为一下<strong>4个方案</strong>：</p>
+<ul>
+<li>壳模型、壳单元</li>
+<li>实体模型、连续壳单元、厚度方向划分一层单元</li>
+<li>实体模型、体单元、厚度方向划分一层单元</li>
+<li>实体模型、体单元、厚度方向划分多层单元</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Abaqus</category>
+      </categories>
+      <tags>
+        <tag>Abaqus</tag>
+        <tag>有限元</tag>
+        <tag>复合材料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Swagger生成API文档</title>
+    <url>/Java/Spring/Spring-Boot/Swagger%E7%94%9F%E6%88%90API%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-Swagger配置"><a href="#2-Swagger配置" class="headerlink" title="2.Swagger配置"></a>2.Swagger配置</h3><p><code>config/SwaggerConfig.java</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION = <span class="string">"1.0"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SWAGGER_SCAN_PACKAGE = <span class="string">"com.coderhuye.mybatis.controller"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Contact CONTACT = <span class="keyword">new</span> Contact(<span class="string">"HuYe"</span>, <span class="string">"https://www.coderhuye.com"</span>, <span class="string">"coderhuye@coderhuye.com"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_PACKAGE))</span><br><span class="line">                <span class="comment">// 可以根据url路径设置哪些请求加入文档，忽略哪些请求</span></span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                <span class="comment">//设置文档的标题</span></span><br><span class="line">                .title(<span class="string">"个人网站后台服务"</span>)</span><br><span class="line">                <span class="comment">// 设置文档的描述</span></span><br><span class="line">                .description(<span class="string">"个人网站后台服务 API 接口文档"</span>)</span><br><span class="line">                <span class="comment">// 设置文档的版本信息</span></span><br><span class="line">                .version(VERSION)</span><br><span class="line">                <span class="comment">// 设置联系方式</span></span><br><span class="line">                .contact(CONTACT)</span><br><span class="line">                <span class="comment">// 设置文档的License信息</span></span><br><span class="line">                <span class="comment">//.termsOfServiceUrl("https://www.coderhuye.com")</span></span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用注解"><a href="#3-使用注解" class="headerlink" title="3.使用注解"></a>3.使用注解</h3><p><code>controller/UserController.java</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Api</span>(<span class="string">"用户操作 API 接口"</span>)</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserServiceImpl userService;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(UserController.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserController</span><span class="params">(UserServiceImpl userService, EmailService emailService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(<span class="string">"获取用户列表"</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(&#123;<span class="string">"/users"</span>, <span class="string">"/"</span>&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getAllUsers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; users = userService.findAllUsers();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AjaxResult(users);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(<span class="string">"根据username获取用户信息"</span>)</span><br><span class="line">    <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"username"</span>, value = <span class="string">"用户名"</span>, required = <span class="keyword">true</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/&#123;username&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getUserByUsername</span><span class="params">(@PathVariable(required = <span class="keyword">true</span>)</span> String username) </span>&#123;</span><br><span class="line">        User user = userService.findUserByUsername(username);</span><br><span class="line">        List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        userList.add(user);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AjaxResult(userList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-打开-Swagger-API-文档"><a href="#4-打开-Swagger-API-文档" class="headerlink" title="4.打开 Swagger API 文档"></a>4.打开 Swagger API 文档</h3><p><a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+        <category>Spring Boot</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>API</tag>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置</title>
+    <url>/Linux/Linux%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="1-修改欢迎语"><a href="#1-修改欢迎语" class="headerlink" title="1.修改欢迎语"></a>1.修改欢迎语</h2><p>修改 <code>/etc/motd</code> 文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">     ___           ___           ___       ___       ___                    ___           ___           ___           ___     </span><br><span class="line">    /\__\         /\  \         /\__\     /\__\     /\  \                  /\__\         /\__\         |\__\         /\  \    </span><br><span class="line">   /:/  /        /::\  \       /:/  /    /:/  /    /::\  \                /:/  /        /:/  /         |:|  |       /::\  \   </span><br><span class="line">  /:/__/        /:/\:\  \     /:/  /    /:/  /    /:/\:\  \              /:/__/        /:/  /          |:|  |      /:/\:\  \  </span><br><span class="line"> /::\  \ ___   /::\~\:\  \   /:/  /    /:/  /    /:/  \:\  \            /::\  \ ___   /:/  /  ___      |:|__|__   /::\~\:\  \ </span><br><span class="line">/:/\:\  /\__\ /:/\:\ \:\__\ /:/__/    /:/__/    /:/__/ \:\__\          /:/\:\  /\__\ /:/__/  /\__\     /::::\__\ /:/\:\ \:\__\</span><br><span class="line">\/__\:\/:/  / \:\~\:\ \/__/ \:\  \    \:\  \    \:\  \ /:/  /          \/__\:\/:/  / \:\  \ /:/  /    /:/~~/~    \:\~\:\ \/__/</span><br><span class="line">     \::/  /   \:\ \:\__\    \:\  \    \:\  \    \:\  /:/  /                \::/  /   \:\  /:/  /    /:/  /       \:\ \:\__\  </span><br><span class="line">     /:/  /     \:\ \/__/     \:\  \    \:\  \    \:\/:/  /                 /:/  /     \:\/:/  /     \/__/         \:\ \/__/  </span><br><span class="line">    /:/  /       \:\__\        \:\__\    \:\__\    \::/  /                 /:/  /       \::/  /                     \:\__\    </span><br><span class="line">    \/__/         \/__/         \/__/     \/__/     \/__/                  \/__/         \/__/                       \/__/</span><br></pre></td></tr></table></figure>
+<p>字符转图形生成工具: <a href="http://patorjk.com/software/taag/#p=display&amp;f=Graffiti&amp;t=Type%20Something%20" target="_blank" rel="noopener">http://patorjk.com/software/taag/#p=display&amp;f=Graffiti&amp;t=Type%20Something%20</a></p>
+<h2 id="2-修改Linux终端命令行字体颜色"><a href="#2-修改Linux终端命令行字体颜色" class="headerlink" title="2.修改Linux终端命令行字体颜色"></a>2.修改Linux终端命令行字体颜色</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PS1=<span class="string">"\[\e[37;40m\][\[\e[36;40m\]\u\[\e[37;40m\]@\h \[\e[33;40m\]\w\[\e[0m\]]\\$ "</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zabbix监控告警</title>
+    <url>/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/Zabbix%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/</url>
+    <content><![CDATA[<p><a href="https://www.zabbix.com/cn" target="_blank" rel="noopener">官网链接</a></p>
+<h2 id="Zabbix安装"><a href="#Zabbix安装" class="headerlink" title="Zabbix安装"></a>Zabbix安装</h2><p><a href="https://www.zabbix.com/download?zabbix=5.0&amp;os_distribution=centos&amp;os_version=7&amp;db=mysql&amp;ws=apache" target="_blank" rel="noopener">下载安装链接</a></p>
+<p><strong>centos 7 添加阿里云镜像</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/zabbix/zabbix-docker" target="_blank" rel="noopener">Docker安装</a></p>
+<h2 id="Zabbix-Agent安装"><a href="#Zabbix-Agent安装" class="headerlink" title="Zabbix Agent安装"></a>Zabbix Agent安装</h2><ul>
+<li>下载安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm</span><br><span class="line">yum clean all</span><br><span class="line">yum install zabbix-agent</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/zabbix/zabbix_agentd.conf</span><br></pre></td></tr></table></figure>
+<p>修改以下配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># zabbix server端IP</span><br><span class="line">Server=192.168.10.24</span><br><span class="line"></span><br><span class="line"># zabbix server端IP</span><br><span class="line">ServerActive=192.168.10.24</span><br><span class="line"></span><br><span class="line"># zabbix客户端主机名</span><br><span class="line">Hostname=agent_1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动Zabbix Agent服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start zabbix-agent.service</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>微服务</category>
+        <category>监控告警</category>
+      </categories>
+      <tags>
+        <tag>微服务</tag>
+        <tag>Zabbix</tag>
+        <tag>监控告警</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Quartz学习笔记</title>
     <url>/Java/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><a href="http://www.quartz-scheduler.org/" target="_blank" rel="noopener">官网</a></p>
@@ -472,7 +595,7 @@
 <h3 id="5-3-处理日志（Logstash）"><a href="#5-3-处理日志（Logstash）" class="headerlink" title="5.3 处理日志（Logstash）"></a>5.3 处理日志（Logstash）</h3><p><code>coderhuye-pipeline.conf</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  beats &#123;</span><br><span class="line">    port =&gt; 5044</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter &#123;</span><br><span class="line">  mutate &#123;</span><br><span class="line">    split =&gt; &#123; &quot;message&quot; =&gt; &quot;|&quot; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  mutate &#123;</span><br><span class="line">    add_field =&gt; &#123;</span><br><span class="line">      &quot;userId&quot; =&gt; &quot;%&#123;[message][1]&#125;&quot;</span><br><span class="line">      &quot;visit&quot; =&gt; &quot;%&#123;[message][2]&#125;&quot;</span><br><span class="line">      &quot;date&quot; =&gt; &quot;%&#123;[message][3]&#125;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  mutate &#123;</span><br><span class="line">    convert =&gt; &#123;</span><br><span class="line">      &quot;userId&quot; =&gt; &quot;integer&quot;</span><br><span class="line">      &quot;visit&quot; =&gt; &quot;string&quot;</span><br><span class="line">      &quot;date&quot; =&gt; &quot;string&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#output &#123;</span><br><span class="line">#  stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;172.17.189.12:9200&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/logstash -f codehuye-pipeline.conf</span><br></pre></td></tr></table></figure>
-<h3 id="5-4-可视化日志（Kibana）"><a href="#5-4-可视化日志（Kibana）" class="headerlink" title="5.4 可视化日志（Kibana）"></a>5.4 可视化日志（Kibana）</h3><p>[教程视频](<a href="https://www.bilibili.com/video/BV1iJ411c7Az?p=64" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1iJ411c7Az?p=64</a></p>
+<h3 id="5-4-可视化日志（Kibana）"><a href="#5-4-可视化日志（Kibana）" class="headerlink" title="5.4 可视化日志（Kibana）"></a>5.4 可视化日志（Kibana）</h3><p><a href="https://www.bilibili.com/video/BV1iJ411c7Az?p=64" target="_blank" rel="noopener">教程视频</a></p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -483,6 +606,7 @@
         <tag>Beats</tag>
         <tag>Kibana</tag>
         <tag>Logstash</tag>
+        <tag>ELK</tag>
       </tags>
   </entry>
   <entry>
@@ -595,12 +719,14 @@
   <entry>
     <title>Docker部署MySQL</title>
     <url>/Docker/Docker%E9%83%A8%E7%BD%B2MySQL/</url>
-    <content><![CDATA[<p>拉取镜像</p>
+    <content><![CDATA[<h2 id="1-部署-MySql"><a href="#1-部署-MySql" class="headerlink" title="1.部署 MySql"></a>1.部署 MySql</h2><p>拉取镜像</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
 <p>准备 <code>docker-compose.yml</code></p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  mysql:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      MYSQL_ROOT_PASSWORD:</span> <span class="string">***</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">3306</span><span class="string">:3306</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./data:/var/lib/mysql</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./conf:/etc/mysql/conf.d</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./logs:/var/log/mysql</span></span><br></pre></td></tr></table></figure>
 <p>开启容器</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h2 id="2-错误解决"><a href="#2-错误解决" class="headerlink" title="2.错误解决"></a>2.错误解决</h2><p>SQL客户端连接出现 <code>2059-authentication plugin&#39; caching sha2 password&#39; cannot be loaded</code> 错误</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;container_id&gt; bash</span><br><span class="line">mysql --user=root --password</span><br><span class="line">alter user <span class="string">'root'</span> identified with mysql_native_password by <span class="string">'123456'</span>;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Docker</category>
@@ -614,7 +740,7 @@
   <entry>
     <title>Docker安装</title>
     <url>/Docker/Docker%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h2 id="新装-CenOS7"><a href="#新装-CenOS7" class="headerlink" title="新装(CenOS7)"></a>新装(CenOS7)</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 确定 CentOS 版本</span></span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"><span class="comment"># 安装 gcc 相关</span></span><br><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br><span class="line"><span class="comment"># 卸载旧版本</span></span><br><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line"><span class="comment"># 安装需要的软件包</span></span><br><span class="line">yum install-y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="comment"># 设置 stable 镜像仓库</span></span><br><span class="line">yum-config-manager--add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 更新 yum 软件包索引</span></span><br><span class="line">yum makecache fast</span><br><span class="line"><span class="comment"># 安装 docker-ce</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="comment"># 启动 Docker</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">docekr version</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="新装-CenOS7"><a href="#新装-CenOS7" class="headerlink" title="新装(CenOS7)"></a>新装(CenOS7)</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 确定 CentOS 版本</span></span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"><span class="comment"># 安装 gcc 相关</span></span><br><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br><span class="line"><span class="comment"># 卸载旧版本</span></span><br><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line"><span class="comment"># 安装需要的软件包</span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="comment"># 设置 stable 镜像仓库</span></span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 更新 yum 软件包索引</span></span><br><span class="line">yum makecache fast</span><br><span class="line"><span class="comment"># 安装 docker-ce</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line"><span class="comment"># 启动 Docker</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>配置镜像加速</strong></li>
 </ul>
@@ -1207,7 +1333,7 @@
   </entry>
   <entry>
     <title>Spring Boot学习笔记3:日志</title>
-    <url>/Java/Spring/Spring-Boot/Spring-Boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-%E6%97%A5%E5%BF%97%20-%20%E5%89%AF%E6%9C%AC/</url>
+    <url>/Java/Spring/Spring-Boot/Spring-Boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03-%E6%97%A5%E5%BF%97/</url>
     <content><![CDATA[<h2 id="1-日志框架"><a href="#1-日志框架" class="headerlink" title="1.日志框架"></a>1.日志框架</h2><p><strong>市面上的日志框架；</strong><br>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
 <div class="table-container">
 <table>
@@ -1232,9 +1358,9 @@
 </ul>
 <p>SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL。<br><strong>SpringBoot 选用 SLF4j 和 logback</strong></p>
 <h2 id="2-SLF4j使用"><a href="#2-SLF4j使用" class="headerlink" title="2.SLF4j使用"></a>2.SLF4j使用</h2><h3 id="2-1-如何在系统中使用SLF4j-https-www-slf4j-org"><a href="#2-1-如何在系统中使用SLF4j-https-www-slf4j-org" class="headerlink" title="2.1 如何在系统中使用SLF4j   https://www.slf4j.org"></a>2.1 如何在系统中使用SLF4j   <a href="https://www.slf4j.org" target="_blank" rel="noopener">https://www.slf4j.org</a></h3><p>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法；<br>给系统里面导入 slf4j 的 jar 和 logback 的实现 jar。<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(HelloWorld.class);</span><br><span class="line">    logger.info(<span class="string">"Hello World"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>图示<br><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志 - 副本/slf4j.png" alt="slf4j"></p>
+<p>图示<br><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/slf4j.png" alt="slf4j"></p>
 <p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件。</strong></p>
-<h3 id="2-2-遗留问题"><a href="#2-2-遗留问题" class="headerlink" title="2.2 遗留问题"></a>2.2 遗留问题</h3><p>（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx<br>统一日志记录，即使是别的框架如何让一起统一使用 slf4j 进行输出？<br><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志 - 副本/legacy.png" alt="legacy"></p>
+<h3 id="2-2-遗留问题"><a href="#2-2-遗留问题" class="headerlink" title="2.2 遗留问题"></a>2.2 遗留问题</h3><p>（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx<br>统一日志记录，即使是别的框架如何让一起统一使用 slf4j 进行输出？<br><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/legacy.png" alt="legacy"></p>
 <p><strong>如何让系统中所有的日志都统一到 slf4j</strong></p>
 <ul>
 <li>1.将系统中其他日志框架先排除出去；</li>
@@ -1245,7 +1371,7 @@
 <p>SpringBoot 使用它来做日志功能；</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>底层依赖关系</strong></p>
-<p><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志 - 副本/底层实现.png" alt="底层实现" style="zoom:80%;"></p>
+<p><img src="/Java/Spring/Spring-Boot/Spring-Boot学习笔记3-日志/底层实现.png" alt="底层实现" style="zoom:80%;"></p>
 <p><strong>总结</strong></p>
 <ul>
 <li>SpringBoot 底层也是使用 slf4j+logback 的方式进行日志记录。</li>
@@ -5278,6 +5404,37 @@ Epoch 5/5
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第二章—感知机</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
+<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
+<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
+<div align="center">    
+<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
+<p>感知机模型</p>
+</div>
+
+<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
+<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
+<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
+<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
+<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
+<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
+<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
+<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第七章—支持向量机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><img src="/机器学习/统计学习方法/统计学习方法第七章学习笔记/支持向量机.png" alt="支持向量机" style="zoom:40%;"></p>
@@ -5362,37 +5519,6 @@ b^{*}&=y_{j}-\sum_{i=1}^{N} y_{i} \alpha_{i}^{*}(x_{i}\cdot x_{j})
       </tags>
   </entry>
   <entry>
-    <title>统计学习方法第二章—感知机</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>感知机——二类分类的线性分类模型</p>
-<h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1.感知机模型"></a>1.感知机模型</h2><p>输入空间（特征空间）为 $\mathcal{X}\subseteq R^n$，输出空间为 $\mathcal{Y}\subseteq \{+1,-1\}$，输入 $x\in\mathcal{X}$ 表示实例的特征向量，输出 $y\in\mathcal{Y}$ 表示实例的类别，输入到输出空间的函数：<br>$f(x)=\operatorname{sign}(w \cdot x+b)$ 称为感知机，其中w:权值，b:偏置</p>
-<p>感知机几何解释：线性方程 $w\cdot x+b=0$ 对应于特征空间$R^n$中的一个超平面S，w为超平面的法向量，b为超平面的截距，S将特征空间分为两个部分，位于两部分的点分别被分为正、负两类。</p>
-<div align="center">    
-<img src="/机器学习/统计学习方法/统计学习方法第二章学习笔记/感知机模型.png" width="300" height="250" alt="图片名称" align="center">
-<p>感知机模型</p>
-</div>
-
-<h2 id="2-感知机学习策略"><a href="#2-感知机学习策略" class="headerlink" title="2.感知机学习策略"></a>2.感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>存在某个超平面S可将数据集的正实例点和负实例点完全正确地划分到S两侧即为线性可分。</p>
-<h3 id="2-2-学习策略"><a href="#2-2-学习策略" class="headerlink" title="2.2 学习策略"></a>2.2 学习策略</h3><p>输入空间 $R^n$ 中任一点 $x_0$ 到超平面S的距离：$\frac{1}{|w|}\left|w \cdot x_{0}+b\right|$</p>
-<p>误分类点 $x_i$到超平面S的距离：$-\frac{1}{|w|} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>所有误分类点到超平面S的总距离：$-\frac{1}{|w|} \sum_{x_{i}\in M} y_{i}\left(w \cdot x_{i}+b\right)$</p>
-<p>不考虑$\frac{1}{|w|}$即得到了感知机学习的损失函数（经验风险）：</p>
-<p>$L(w, b)=-\sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right) \quad$  (M：误分类点集合)</p>
-<h2 id="3-感知机学习算法"><a href="#3-感知机学习算法" class="headerlink" title="3.感知机学习算法"></a>3.感知机学习算法</h2><h3 id="3-1学习算法原始形式"><a href="#3-1学习算法原始形式" class="headerlink" title="3.1学习算法原始形式"></a>3.1学习算法原始形式</h3><p>随机梯度下降法：<br>任选一个初始超平面$w_0、b_0$，每次选择一个误分类点 $y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0$ 使其梯度下降。<br>$w \leftarrow w+\eta y_{i} x_{i}$<br>$b \leftarrow b+\eta y_{i}$</p>
-<h3 id="3-2学习算法对偶形式"><a href="#3-2学习算法对偶形式" class="headerlink" title="3.2学习算法对偶形式"></a>3.2学习算法对偶形式</h3><p>通过$w \leftarrow w+\eta y_{i} x_{i}$，$b \leftarrow b+\eta y_{i}$逐步修改w,b，设修改n次，则w,b关于$(x_i,y_i)$的增量为$\alpha_iy_ix_i$和$\alpha_iy_i$，其中$\alpha_i=n_i\eta$，最终学到的w,b可表示为<br>$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$<br>$b=\sum_{i=1}^{N} \alpha_{i} y_{i}$</p>
-<p>取初值$\alpha \leftarrow 0, \quad b \leftarrow 0$，训练集中选取数据$\left(x_{i}, y_{i}\right)$，如果$y_{i}\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j} \cdot x_{i}+b\right) \leqslant 0$<br>则 $\alpha_{i} \leftarrow \alpha_{i}+\eta$，$b \leftarrow b+\eta y_{i}$</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统计学习方法第五章—决策树</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-决策树模型与学习"><a href="#1-决策树模型与学习" class="headerlink" title="1.决策树模型与学习"></a>1.决策树模型与学习</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>内部节点代表一个特征或属性，叶结点代表一个类。</p>
@@ -5455,6 +5581,36 @@ g_{R}(D, A)=\frac{g(D, A)}{H(D)}</script><h2 id="3-决策树的生成"><a href="
       </tags>
   </entry>
   <entry>
+    <title>统计学习方法第四章—朴素贝叶斯法</title>
+    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
+<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
+<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
+<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
+<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
+<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
+<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
+<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
+&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
+&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
+<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
+<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
+<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
+<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>统计学习方法</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+        <tag>监督学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>统计学习方法第六章—逻辑斯谛回归与最大熵模型</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="1-逻辑斯谛回归模型"><a href="#1-逻辑斯谛回归模型" class="headerlink" title="1.逻辑斯谛回归模型"></a>1.逻辑斯谛回归模型</h2><h3 id="1-1-逻辑斯谛分布"><a href="#1-1-逻辑斯谛分布" class="headerlink" title="1.1 逻辑斯谛分布"></a>1.1 逻辑斯谛分布</h3><p><strong>逻辑斯谛分布</strong>：X是连续随机变量，X服从逻辑斯谛分布指其具有下列分布函数和密度函数：</p>
@@ -5483,36 +5639,6 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
 </ul>
 <h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2.最大熵模型"></a>2.最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p><strong>最大熵原理</strong>：熵最大的模型是最好的模型，当 X 服从均匀分布时，熵最大。</p>
 <h3 id="2-2-最大熵模型定义"><a href="#2-2-最大熵模型定义" class="headerlink" title="2.2 最大熵模型定义"></a>2.2 最大熵模型定义</h3>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>统计学习方法</tag>
-        <tag>监督学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>统计学习方法第四章—朴素贝叶斯法</title>
-    <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1.朴素贝叶斯法的学习与分类"></a>1.朴素贝叶斯法的学习与分类</h2><h3 id="1-1-基本方法"><a href="#1-1-基本方法" class="headerlink" title="1.1 基本方法"></a>1.1 基本方法</h3><p>输入空间$\mathcal{X} \subseteq \mathbf{R}^{n}$，输出空间$\mathcal{Y}=\left\{c_{1},c_{2}, \cdots, c_{K}\right\}$，朴素贝叶斯法通过训练集学习联合概率分布$P(X, Y)$，具体地学习先验概率分布$P\left(Y=c_{k}\right)$和条件概率分布$P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)$，进而得到联合概率分布$P(X, Y)$。<br>条件概率分布有指数量级的参数，难以估计，现做出<strong>条件独立性假设</strong>：<br>$\begin{aligned} P\left(X=x | Y=c_{k}\right) &amp;=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right) \\ &amp;=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right) \end{aligned}$</p>
-<p>即用于分类的特征在类确定的条件下都是条件独立的。</p>
-<p><strong>基本公式（后验概率）</strong>：$P\left(Y=c_{k} | X=x\right)=\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\sum_{k} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}$</p>
-<p>分母对所有$c_k$都相同，所以可得朴素贝叶斯分类器：</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="1-2-后验概率最大化的含义"><a href="#1-2-后验概率最大化的含义" class="headerlink" title="1.2 后验概率最大化的含义"></a>1.2 后验概率最大化的含义</h3><p>朴素贝叶斯法将实例分到后验概率最大的类中，这等价于期望风险最小化。</p>
-<h2 id="2-参数估计"><a href="#2-参数估计" class="headerlink" title="2.参数估计"></a>2.参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>先验概率$P(Y=c_k)$的极大似然估计为</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K</script><p>第j个特征$x^{(j)}$可能取值的范围$\left\{a_{j 1}, a_{j 2}, \cdots, a_{j s_j}\right\}$，条件概率$P\left(X^{(j)}=a_{jl} | Y=c_{k}\right)$的极大似然估计是</p>
-<p>$P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}$<br>$j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K$<br>式中，$x_i^{(j)}$是第i个样本的第j个特征；$a_{jl}$是第j个特征可能取的第l个值；I为指示函数。</p>
-<h3 id="2-2-学习与分类算法"><a href="#2-2-学习与分类算法" class="headerlink" title="2.2 学习与分类算法"></a>2.2 学习与分类算法</h3><p>（1）计算先验概率及条件概率</p>
-<script type="math/tex; mode=display">\begin{aligned} &P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, k=1,2, \cdots, K \\ 
-&P\left(X^{(j)} =a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)} \\ 
-&j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K \end{aligned}</script><p>（2）对于实例$x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}$，计算</p>
-<script type="math/tex; mode=display">P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K</script><p>（3）确定实例x的类</p>
-<script type="math/tex; mode=display">y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)</script><h3 id="2-3-贝叶斯估计"><a href="#2-3-贝叶斯估计" class="headerlink" title="2.3 贝叶斯估计"></a>2.3 贝叶斯估计</h3><p>条件概率的贝叶斯估计$P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}$</p>
-<p>$\lambda\geq0$，等价于在随机变量各个取值的频数上赋予一个正数$\lambda\gt0$，当$\lambda=0$即为极大似然估计，常取$\lambda=1$（拉普拉斯平滑）。</p>
-<p>先验概率的贝叶斯估计：$P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}$</p>
-]]></content>
       <categories>
         <category>机器学习</category>
         <category>统计学习方法</category>
@@ -5681,698 +5807,6 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
       </tags>
   </entry>
   <entry>
-    <title>GitHub 项目精选</title>
-    <url>/%E6%B1%87%E6%80%BB/GitHub%E9%A1%B9%E7%9B%AE%E7%B2%BE%E9%80%89/</url>
-    <content><![CDATA[<p><img src="https://gitee.com/TommyMerlin/image-host-gitee/raw/master/pilot.jpg" alt><br><em>A collection of useful repositories.</em></p>
-<hr>
-<h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><p><a href="https://github.com/apachecn/AiLearning" target="_blank" rel="noopener">apachecn / AiLearning</a></p>
-<blockquote>
-<p>AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP。<br>网站: <a href="http://ailearning.apachecn.org" target="_blank" rel="noopener">http://ailearning.apachecn.org</a></p>
-</blockquote>
-<p><a href="https://github.com/datawhalechina/pumpkin-book" target="_blank" rel="noopener">datawhalechina / pumpkin-book</a></p>
-<blockquote>
-<p>《机器学习》（西瓜书）公式推导解析，在线阅读地址：<a href="https://datawhalechina.github.io/pumpkin-book" target="_blank" rel="noopener">https://datawhalechina.github.io/pumpkin-book</a></p>
-</blockquote>
-<p><a href="https://github.com/scutan90/DeepLearning-500-questions" target="_blank" rel="noopener">scutan90 / DeepLearning-500-questions</a></p>
-<blockquote>
-<p>深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述。</p>
-</blockquote>
-<p><a href="https://github.com/zergtant/pytorch-handbook" target="_blank" rel="noopener">zergtant / pytorch-handbook</a></p>
-<blockquote>
-<p>pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门，其中包含的Pytorch教程全部通过测试保证可以成功运行。</p>
-</blockquote>
-<p><a href="https://github.com/fengdu78/lihang-code" target="_blank" rel="noopener">fengdu78 / lihang-code</a></p>
-<blockquote>
-<p>《统计学习方法》的代码实现。</p>
-</blockquote>
-<p><a href="https://github.com/MLEveryday/100-Days-Of-ML-Code" target="_blank" rel="noopener">MLEveryday / 100-Days-Of-ML-Code</a></p>
-<blockquote>
-<p>100-Days-Of-ML-Code中文版。</p>
-</blockquote>
-<p><a href="https://github.com/GokuMohandas/practicalAI" target="_blank" rel="noopener">GokuMohandas / practicalAI</a></p>
-<blockquote>
-<p>A practical approach to machine learning.</p>
-</blockquote>
-<p><a href="https://github.com/roboticcam/machine-learning-notes" target="_blank" rel="noopener">roboticcam/machine-learning-notes</a></p>
-<blockquote>
-<p>不间断更新机器学习，概率模型和深度学习的讲义(1000+页)和视频链接。</p>
-</blockquote>
-<p><a href="https://github.com/afshinea/stanford-cs-229-machine-learning" target="_blank" rel="noopener">afshinea / stanford-cs-229-machine-learning</a></p>
-<blockquote>
-<p>VIP cheatsheets for Stanford’s CS 229 Machine Learning.<br>网站: <a href="https://stanford.edu/~shervine/teaching/cs-229" target="_blank" rel="noopener">https://stanford.edu/~shervine/teaching/cs-229</a></p>
-</blockquote>
-<p><a href="https://github.com/fengdu78/deeplearning_ai_books" target="_blank" rel="noopener">fengdu78 / deeplearning_ai_books</a></p>
-<blockquote>
-<p>deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）。</p>
-</blockquote>
-<p><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank" rel="noopener">fengdu78 / Coursera-ML-AndrewNg-Notes</a></p>
-<blockquote>
-<p>吴恩达老师的机器学习课程个人笔记。</p>
-</blockquote>
-<p><a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">tensorflow / tensorflow</a></p>
-<blockquote>
-<p>An Open Source Machine Learning Framework for Everyone.</p>
-</blockquote>
-<p><a href="https://github.com/d2l-ai/d2l-zh" target="_blank" rel="noopener">d2l-ai / d2l-zh</a></p>
-<blockquote>
-<p>《动手学深度学习》：面向中文读者、能运行、可讨论。英文版即伯克利“深度学习导论（STAT 157）”教材。<br>视频：<a href="https://space.bilibili.com/209599371/channel/detail?cid=23541" target="_blank" rel="noopener">https://space.bilibili.com/209599371/channel/detail?cid=23541</a><br>PDF: <a href="https://github.com/TommyMerlin/Repository-Collection/tree/master/files" target="_blank" rel="noopener">https://github.com/TommyMerlin/Repository-Collection/tree/master/files</a></p>
-</blockquote>
-<p><a href="https://github.com/afshinea/stanford-cs-229-machine-learning" target="_blank" rel="noopener">afshinea / stanford-cs-229-machine-learning</a></p>
-<blockquote>
-<p>Cheatsheets for Stanford’s CS 229 Machine Learning.</p>
-</blockquote>
-<p><a href="https://github.com/microsoft/ai-edu" target="_blank" rel="noopener">microsoft / ai-edu</a></p>
-<blockquote>
-<p>AI education materials for Chinese students, teachers and IT professionals.</p>
-</blockquote>
-<hr>
-<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p><a href="https://github.com/jackfrued/Python-100-Days" target="_blank" rel="noopener">jackfrued / Python-100-Days</a></p>
-<blockquote>
-<p>Python - 100天从新手到大师。</p>
-</blockquote>
-<p><a href="https://github.com/TheAlgorithms/Python" target="_blank" rel="noopener">TheAlgorithms / Python</a></p>
-<blockquote>
-<p>算法的Python实现。All Algorithms implemented in Python.</p>
-</blockquote>
-<p><a href="https://github.com/vinta/awesome-python" target="_blank" rel="noopener">vinta / awesome-python</a></p>
-<blockquote>
-<p>A curated list of awesome Python frameworks, libraries, software and resources.<br>网站: <a href="https://awesome-python.com/" target="_blank" rel="noopener">https://awesome-python.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">fxsjy / jieba</a></p>
-<blockquote>
-<p>结巴中文分词。</p>
-</blockquote>
-<p><a href="https://github.com/lancopku/pkuseg-python" target="_blank" rel="noopener">lancopku / pkuseg-python</a></p>
-<blockquote>
-<p>pkuseg多领域中文分词工具。</p>
-</blockquote>
-<p><a href="https://github.com/fighting41love/funNLP" target="_blank" rel="noopener">fighting41love / funNLP</a></p>
-<blockquote>
-<p>中英文敏感词、语言检测、中外手机/电话归属地/运营商查询、名字推断性别、手机号抽取、身份证抽取、邮箱抽取、中日文人名库、中文缩写库、拆字词典、词汇情感值、停用词、反动词表、暴恐词表、繁简体转换、英文模拟中文发音、汪峰歌词生成器、职业名称词库、同义词库、反义词库、否定词库、汽车品牌词库、汽车零件词库、连续英文切割、各种中文词向量、公司名字大全、古诗词库、IT词库、财经词库、成语词库、地名词库、历史名人词库、诗词词库、医学词库、饮食词库、法律词库、汽车词库、动物词库、中文聊天语料、中文谣言数据、百度中文问答数据集、句子相似度匹配算法集合、bert资源、文本生成&amp;摘要相关工具、cocoNLP信息抽取工具、国内电话号码正则匹配</p>
-</blockquote>
-<p><a href="https://github.com/amueller/word_cloud" target="_blank" rel="noopener">amueller / word_cloud</a></p>
-<blockquote>
-<p>词云生成。A little word cloud generator in Python.<br>网站: <a href="https://amueller.github.io/word_cloud" target="_blank" rel="noopener">https://amueller.github.io/word_cloud</a></p>
-</blockquote>
-<p><a href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank" rel="noopener">jakevdp / PythonDataScienceHandbook</a></p>
-<blockquote>
-<p>Python数据处理。Python Data Science Handbook: full text in Jupyter Notebooks.</p>
-</blockquote>
-<p><a href="https://github.com/xchaoinfo/fuck-login" target="_blank" rel="noopener">xchaoinfo / fuck-login</a></p>
-<blockquote>
-<p>模拟登录一些知名的网站，为了方便爬取需要登录的网站。</p>
-</blockquote>
-<p><a href="https://github.com/fluentpython/example-code" target="_blank" rel="noopener">fluentpython / example-code</a></p>
-<blockquote>
-<p>《流畅的Python》书中代码。Example code for the book Fluent Python.</p>
-</blockquote>
-<p><a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">leisurelicht / wtfpython-cn</a></p>
-<blockquote>
-<p>wtfpython的中文翻译。</p>
-</blockquote>
-<p><a href="https://github.com/qxf2/wtfiswronghere" target="_blank" rel="noopener">qxf2 / wtfiswronghere</a></p>
-<blockquote>
-<p>新手常犯的Python错误。<br>A collection of simple errors that beginners are likely to hit when they start writing Python.</p>
-</blockquote>
-<p><a href="https://github.com/rougier/matplotlib-cheatsheet" target="_blank" rel="noopener">rougier / matplotlib-cheatsheet</a></p>
-<blockquote>
-<p>Matplotlib 3.1 cheat sheet. From an upcoming book on matplotlib.</p>
-</blockquote>
-<p><a href="https://github.com/abhat222/Data-Science--Cheat-Sheet" target="_blank" rel="noopener">abhat222 / Data-Science—Cheat-Sheet</a></p>
-<blockquote>
-<p>Data-Science—Cheat-Sheet.<br>网站: <link></p>
-</blockquote>
-<hr>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Snailclimb / JavaGuide</a></p>
-<blockquote>
-<p>【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。<br>网站: <a href="https://gitee.com/SnailClimb/JavaGuide" target="_blank" rel="noopener">https://gitee.com/SnailClimb/JavaGuide</a></p>
-</blockquote>
-<p><a href="https://github.com/doocs/advanced-java" target="_blank" rel="noopener">doocs / advanced-java</a></p>
-<blockquote>
-<p>😮 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识，后端同学必看，前端同学也可学习。<br>网站: <a href="https://doocs.github.io/advanced-java" target="_blank" rel="noopener">https://doocs.github.io/advanced-java</a></p>
-</blockquote>
-<p><a href="https://github.com/xingshaocheng/architect-awesome" target="_blank" rel="noopener">xingshaocheng / architect-awesome</a></p>
-<blockquote>
-<p>后端架构师技术图谱。<br>网站: <a href="https://docs.justauth.whnb.wang/" target="_blank" rel="noopener">https://docs.justauth.whnb.wang/</a></p>
-</blockquote>
-<p><a href="https://github.com/crossoverJie/JCSprout" target="_blank" rel="noopener">crossoverJie / JCSprout</a></p>
-<blockquote>
-<p>👨‍🎓 Java Core Sprout : basic, concurrent, algorithm.<br>网站: <a href="https://crossoverjie.top/JCSprout" target="_blank" rel="noopener">https://crossoverjie.top/JCSprout</a></p>
-</blockquote>
-<p><a href="https://github.com/wuyouzhuguli/SpringAll" target="_blank" rel="noopener">wuyouzhuguli / SpringAll</a></p>
-<blockquote>
-<p>循序渐进，学习Spring Boot、Spring Boot &amp; Shiro、Spring Cloud、Spring Security &amp; Spring Security OAuth2，博客Spring系列源码。  </p>
-</blockquote>
-<p><a href="https://github.com/hollischuang/toBeTopJavaer" target="_blank" rel="noopener">hollischuang / toBeTopJavaer</a></p>
-<blockquote>
-<p>To Be Top Javaer - Java工程师成神之路。  </p>
-</blockquote>
-<p><a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="noopener">iluwatar / java-design-patterns</a></p>
-<blockquote>
-<p>Design patterns implemented in Java.<br>网站: <a href="https://java-design-patterns.com/" target="_blank" rel="noopener">https://java-design-patterns.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/aalansehaiyang/technology-talk" target="_blank" rel="noopener">aalansehaiyang / technology-talk</a></p>
-<blockquote>
-<p>汇总java生态圈常用技术框架、开源中间件，系统架构、数据库、大公司架构案例、常用三方类库、项目管理、线上问题排查、个人成长、思考等知识。  </p>
-</blockquote>
-<p><a href="https://github.com/AobingJava/JavaFamily" target="_blank" rel="noopener">AobingJava / JavaFamily</a></p>
-<blockquote>
-<p>【互联网一线大厂面试+学习指南】进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务等领域知识。  </p>
-</blockquote>
-<p><a href="https://github.com/ZhongFuCheng3y/3y" target="_blank" rel="noopener">ZhongFuCheng3y / 3y</a></p>
-<blockquote>
-<p>📓从Java基础、JavaWeb基础到常用的框架再到面试题都有完整的教程，几乎涵盖了Java后端必备的知识点。</p>
-</blockquote>
-<p><a href="https://github.com/xkcoding/spring-boot-demo" target="_blank" rel="noopener">xkcoding / spring-boot-demo</a></p>
-<blockquote>
-<p>spring boot demo 是一个用来深度学习并实战 spring boot 的项目，目前总共包含 65 个集成demo，已经完成 53 个。 该项目已成功集成 actuator(监控)、admin(可视化监控)、logback(日志)、aopLog(通过AOP记录web请求日志)、统一异常处理(json级别和页面级别)、freemarker(模板引擎)、thymeleaf(模板引擎)、Beetl(模板引擎)、Enjoy(模板引擎)、JdbcTemplate(通用JDBC操作数据库)、JPA(强大的ORM框架)、mybatis(强大的ORM框架)、通用Mapper(快速操作Mybatis)、PageHelper(通用的Mybatis分页插件)……  </p>
-</blockquote>
-<p><a href="https://github.com/qiurunze123/miaosha" target="_blank" rel="noopener">qiurunze123 / miaosha</a></p>
-<blockquote>
-<p>⭐⭐⭐⭐秒杀系统设计与实现.互联网工程师进阶与分析🙋🐓  </p>
-</blockquote>
-<p><a href="https://github.com/macrozheng/mall" target="_blank" rel="noopener">macrozheng / mall</a></p>
-<blockquote>
-<p>mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。<br>网站: <a href="http://www.macrozheng.com/admin/" target="_blank" rel="noopener">http://www.macrozheng.com/admin/</a></p>
-</blockquote>
-<p><a href="https://github.com/lenve/vhr" target="_blank" rel="noopener">lenve / vhr</a></p>
-<blockquote>
-<p>微人事是一个前后端分离的人力资源管理系统，项目采用SpringBoot+Vue开发。  </p>
-</blockquote>
-<p><a href="https://github.com/lenve/VBlog" target="_blank" rel="noopener">lenve / VBlog</a></p>
-<blockquote>
-<p>V部落，Vue+SpringBoot实现的多用户博客管理平台!  </p>
-</blockquote>
-<p><a href="https://github.com/alibaba/druid" target="_blank" rel="noopener">alibaba / druid</a></p>
-<blockquote>
-<p>阿里巴巴数据库事业部出品，为监控而生的数据库连接池。  </p>
-</blockquote>
-<p><a href="https://github.com/justauth/JustAuth" target="_blank" rel="noopener">justauth / JustAuth</a></p>
-<blockquote>
-<p>💯 史上最全的整合第三方登录的开源库。目前已支持Github、Gitee、微博、钉钉、百度、Coding、腾讯云开发者平台、OSChina、支付宝、QQ、微信、淘宝、Google、Facebook、抖音、领英、小米、微软、今日头条、Teambition、StackOverflow、Pinterest、人人、华为、企业微信、酷家乐、Gitlab、美团、饿了么和推特等第三方平台的授权登录。 Login, so easy!<br>网站: <a href="https://docs.justauth.whnb.wang/" target="_blank" rel="noopener">https://docs.justauth.whnb.wang/</a>  </p>
-</blockquote>
-<p><a href="https://github.com/alibaba/p3c" target="_blank" rel="noopener">alibaba / p3c</a></p>
-<blockquote>
-<p>Alibaba Java Coding Guidelines pmd implements and IDE plugin.</p>
-</blockquote>
-<p><a href="link">huangz1990 / redis</a></p>
-<blockquote>
-<p>《Redis Command Reference》全文的中文翻译版。<br>网站: <a href="http://RedisDoc.com" target="_blank" rel="noopener">http://RedisDoc.com</a></p>
-</blockquote>
-<p><a href="https://github.com/lihengming/spring-boot-api-project-seed" target="_blank" rel="noopener">lihengming / spring-boot-api-project-seed</a></p>
-<blockquote>
-<p>🌱🚀一个基于Spring Boot &amp; MyBatis的种子项目，用于快速构建中小型API、RESTful API项目~  </p>
-</blockquote>
-<p><a href="https://github.com/looly/hutool" target="_blank" rel="noopener">looly / hutool</a></p>
-<blockquote>
-<p>A set of tools that keep Java sweet.<br>网站: <a href="http://www.hutool.cn/" target="_blank" rel="noopener">http://www.hutool.cn/</a></p>
-</blockquote>
-<p><a href="https://github.com/ityouknow/spring-boot-examples" target="_blank" rel="noopener">ityouknow / spring-boot-examples</a></p>
-<blockquote>
-<p>Spring Boot 教程、技术栈示例代码，快速简单上手教程。<br>网站: <a href="http://www.ityouknow.com/spring-boot.html" target="_blank" rel="noopener">http://www.ityouknow.com/spring-boot.html</a></p>
-</blockquote>
-<p><a href="https://github.com/hansonwang99/Spring-Boot-In-Action" target="_blank" rel="noopener">hansonwang99 / Spring-Boot-In-Action</a></p>
-<blockquote>
-<p>Spring Boot 系列实战合集。<br>网站: <a href="https://www.codesheep.cn/" target="_blank" rel="noopener">https://www.codesheep.cn/</a></p>
-</blockquote>
-<p><a href="https://github.com/keets2012/microservice-integration" target="_blank" rel="noopener">keets2012 / microservice-integration</a></p>
-<blockquote>
-<p>整合的项目包括网关、auth 权限服务和 backend 服务。提供了一套微服务架构下，网关服务路由、鉴权和授权认证的项目案例。</p>
-</blockquote>
-<p><a href="https://github.com/sqshq/piggymetrics" target="_blank" rel="noopener">sqshq / piggymetrics</a></p>
-<blockquote>
-<p>Microservice Architecture with Spring Boot, Spring Cloud and Docker.  </p>
-</blockquote>
-<p><a href="https://github.com/alibaba/easyexcel" target="_blank" rel="noopener">alibaba / easyexcel</a></p>
-<blockquote>
-<p>快速、简单避免OOM的java处理Excel工具。<br>网站: <a href="https://www.yuque.com/easyexcel/doc/easyexcel" target="_blank" rel="noopener">https://www.yuque.com/easyexcel/doc/easyexcel</a></p>
-</blockquote>
-<p><a href="https://github.com/TheAlgorithms/Java" target="_blank" rel="noopener">TheAlgorithms / Java</a></p>
-<blockquote>
-<p>All Algorithms implemented in Java.  </p>
-</blockquote>
-<hr>
-<h2 id="中国大学课程资源"><a href="#中国大学课程资源" class="headerlink" title="中国大学课程资源"></a>中国大学课程资源</h2><p><a href="https://github.com/USTC-Resource/USTC-Course" target="_blank" rel="noopener">USTC-Resource / USTC-Course</a></p>
-<blockquote>
-<p>中国科学技术大学课程资源。<br>网站: <a href="https://ustc-resource.github.io/USTC-Course" target="_blank" rel="noopener">https://ustc-resource.github.io/USTC-Course</a></p>
-</blockquote>
-<p><a href="https://github.com/PKUanonym/REKCARC-TSC-UHT" target="_blank" rel="noopener">PKUanonym / REKCARC-TSC-UHT</a></p>
-<blockquote>
-<p>清华大学计算机系课程攻略。</p>
-</blockquote>
-<p><a href="https://github.com/lib-pku/libpku" target="_blank" rel="noopener">lib-pku / libpku</a></p>
-<blockquote>
-<p>北京大学课程资料。<br>网站: <a href="https://lib-pku.github.io/" target="_blank" rel="noopener">https://lib-pku.github.io/</a> </p>
-</blockquote>
-<p><a href="https://github.com/QSCTech/zju-icicles" target="_blank" rel="noopener">QSCTech / zju-icicles</a></p>
-<blockquote>
-<p>浙江大学课程攻略共享计划。<br>网站: <a href="https://qsctech.github.io/zju-icicles/" target="_blank" rel="noopener">https://qsctech.github.io/zju-icicles/</a></p>
-</blockquote>
-<p><a href="https://github.com/TheNetAdmin/zjuthesis" target="_blank" rel="noopener">TheNetAdmin / zjuthesis</a></p>
-<blockquote>
-<p>浙江大学毕业论文 Latex 模板。</p>
-</blockquote>
-<hr>
-<h2 id="C-DOTNET"><a href="#C-DOTNET" class="headerlink" title="C# DOTNET"></a>C# DOTNET</h2><p><a href="https://github.com/TheAlgorithms/C-Sharp" target="_blank" rel="noopener">TheAlgorithms / C-Sharp</a></p>
-<blockquote>
-<p>算法的C#实现。All algorithms implemented in C#.</p>
-</blockquote>
-<p><a href="https://github.com/Live-Charts/Live-Charts" target="_blank" rel="noopener">Live-Charts / Live-Charts</a></p>
-<blockquote>
-<p>.NET下简单、灵活、可交互的图表。<br>Simple, flexible, interactive &amp; powerful charts, maps and gauges for .Net.</p>
-</blockquote>
-<p><a href="https://github.com/0xd4d/dnSpy" target="_blank" rel="noopener">0xd4d / dnSpy</a></p>
-<blockquote>
-<p>.NET调试和编译器。.NET debugger and assembly editor.</p>
-</blockquote>
-<p><a href="https://github.com/shimat/opencvsharp" target="_blank" rel="noopener">shimat / opencvsharp</a></p>
-<blockquote>
-<p>.NET框架下的OpenCV。.NET Framework wrapper for OpenCV.</p>
-</blockquote>
-<p><a href="https://github.com/dathlin/HslCommunication" target="_blank" rel="noopener">dathlin / HslCommunication</a></p>
-<blockquote>
-<p>工业物联网基础架构框架，专注于基础技术通信和跨平台、跨语言通信功能，实现多种主流PLC数据读写。<br>网站: <a href="http://www.hslcommunication.cn" target="_blank" rel="noopener">http://www.hslcommunication.cn</a></p>
-</blockquote>
-<p><a href="https://github.com/quozd/awesome-dotnet" target="_blank" rel="noopener">quozd / awesome-dotnet</a></p>
-<blockquote>
-<p>A collection of awesome .NET libraries, tools, frameworks and software.</p>
-</blockquote>
-<p><a href="https://github.com/microsoft/dotnet" target="_blank" rel="noopener">microsoft / dotnet</a></p>
-<blockquote>
-<p>This repo is the official home of .NET on GitHub. It’s a great starting point to find many .NET OSS projects from Microsoft and the community, including many that are part of the .NET Foundation.</p>
-</blockquote>
-<p><a href="https://github.com/yuzhengyang/Fork" target="_blank" rel="noopener">yuzhengyang / Fork</a></p>
-<blockquote>
-<p>C#工具包，C#工具类，常用方法，系统API，文件处理、加密解密、Winform美化（C# Tools）。</p>
-</blockquote>
-<p><a href="https://github.com/Jimmey-Jiang/Common.Utility" target="_blank" rel="noopener">Jimmey-Jiang / Common.Utility</a></p>
-<blockquote>
-<p>比较全面的c#帮助类，各种功能性代码。</p>
-</blockquote>
-<hr>
-<h2 id="WPF"><a href="#WPF" class="headerlink" title="WPF"></a>WPF</h2><p><a href="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit" target="_blank" rel="noopener">MaterialDesignInXAML / MaterialDesignInXamlToolkit</a></p>
-<blockquote>
-<p>Google’s Material Design in XAML &amp; WPF, for C# &amp; VB.Net.<br>网站: <a href="http://materialdesigninxaml.net/" target="_blank" rel="noopener">http://materialdesigninxaml.net/</a></p>
-</blockquote>
-<p><a href="https://github.com/MahApps/MahApps.Metro" target="_blank" rel="noopener">MahApps / MahApps.Metro</a></p>
-<blockquote>
-<p>A framework that allows developers to cobble together a Metro or Modern UI for their own WPF applications with minimal effort.<br>网站: <a href="https://mahapps.com" target="_blank" rel="noopener">https://mahapps.com</a></p>
-</blockquote>
-<p><a href="https://github.com/firstfloorsoftware/mui" target="_blank" rel="noopener">firstfloorsoftware / mui</a></p>
-<blockquote>
-<p>Modern UI for WPF.</p>
-</blockquote>
-<p><a href="https://github.com/xceedsoftware/wpftoolkit" target="_blank" rel="noopener">xceedsoftware / wpftoolkit</a></p>
-<blockquote>
-<p>All the controls missing in WPF. Over 1 million downloads.</p>
-</blockquote>
-<p><a href="https://github.com/microsoft/WPF-Samples" target="_blank" rel="noopener">microsoft / WPF-Samples</a></p>
-<blockquote>
-<p>Repository for WPF related samples.</p>
-</blockquote>
-<p><a href="https://github.com/Panuon/PanuonUI" target="_blank" rel="noopener">Panuon / PanuonUI</a></p>
-<blockquote>
-<p>一个好看精致、开源无限制使用的WPF控件库。</p>
-</blockquote>
-<p><a href="https://github.com/Panuon/PanuonUI.Silver" target="_blank" rel="noopener">Panuon / PanuonUI.Silver</a></p>
-<blockquote>
-<p>Panuon.UI optimized version. A beautiful wpf ui library using templates &amp; attached properties.</p>
-</blockquote>
-<p><a href="https://github.com/kwonganding/wpf.controls" target="_blank" rel="noopener">kwonganding / wpf.controls</a></p>
-<blockquote>
-<p>在学习中和使用WPF中，学习、借鉴了很多网友的文章和开源的项目的知识。发现提供实际项目开发需要的基础控件、样式的文章大都比较散，不成系列。因此基于现在项目中使用开发了一个wpf基础UI库。</p>
-</blockquote>
-<hr>
-<h2 id="前端-博客"><a href="#前端-博客" class="headerlink" title="前端/博客"></a>前端/博客</h2><p><a href="https://github.com/qianguyihao/Web" target="_blank" rel="noopener">qianguyihao / Web</a></p>
-<blockquote>
-<p>前端入门和进阶学习笔记，超详细的Web前端学习图文教程。</p>
-</blockquote>
-<p><a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">theme-next / hexo-theme-next</a></p>
-<blockquote>
-<p>Hexo主题。Elegant and powerful theme for Hexo.</p>
-</blockquote>
-<p><a href="https://github.com/helloqingfeng/Awsome-Front-End-learning-resource" target="_blank" rel="noopener">helloqingfeng / Awsome-Front-End-learning-resource</a></p>
-<blockquote>
-<p>GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等）。</p>
-</blockquote>
-<p><a href="https://github.com/kamranahmedse/developer-roadmap" target="_blank" rel="noopener">kamranahmedse / developer-roadmap</a></p>
-<blockquote>
-<p>Roadmap to becoming a web developer in 2019.<br>网站: <a href="https://roadmap.sh/" target="_blank" rel="noopener">https://roadmap.sh/</a></p>
-</blockquote>
-<p><a href="https://github.com/pandao/editor.md" target="_blank" rel="noopener">pandao / editor.md</a></p>
-<blockquote>
-<p>开源可嵌入的在线Markdown编辑器（模块）。The open source embeddable online markdown editor (component).<br>网站: <a href="http://editor.md.ipandao.com/" target="_blank" rel="noopener">http://editor.md.ipandao.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/lydiahallie/javascript-questions" target="_blank" rel="noopener">lydiahallie / javascript-questions</a></p>
-<blockquote>
-<p>A long list of (advanced) JavaScript questions, and their explanations ✨  </p>
-</blockquote>
-<p><a href="https://github.com/necolas/normalize.css" target="_blank" rel="noopener">necolas / normalize.css</a></p>
-<blockquote>
-<p>A modern alternative to CSS resets.<br>网站: <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="noopener">http://necolas.github.io/normalize.css/</a></p>
-</blockquote>
-<p><a href="https://github.com/tobiasahlin/SpinKit" target="_blank" rel="noopener">tobiasahlin / SpinKit</a></p>
-<blockquote>
-<p>A collection of loading indicators animated with CSS<br>网站: <a href="http://tobiasahlin.com/spinkit/" target="_blank" rel="noopener">http://tobiasahlin.com/spinkit/</a></p>
-</blockquote>
-<p><a href="https://github.com/Binaryify/NeteaseCloudMusicApi" target="_blank" rel="noopener">Binaryify / NeteaseCloudMusicApi</a></p>
-<blockquote>
-<p>网易云音乐 Node.js API service<br>网站: <a href="https://binaryify.github.io/NeteaseCloudMusicApi" target="_blank" rel="noopener">https://binaryify.github.io/NeteaseCloudMusicApi</a></p>
-</blockquote>
-<p><a href="https://github.com/docsifyjs/docsify" target="_blank" rel="noopener">docsifyjs / docsify</a></p>
-<blockquote>
-<p>🃏 A magical documentation site generator.<br>网站: <a href="https://docsify.js.org/" target="_blank" rel="noopener">https://docsify.js.org/</a></p>
-</blockquote>
-<p><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener">vuejs / vuepress</a></p>
-<blockquote>
-<p>📝 Minimalistic Vue-powered static site generator.<br>网站: <a href="https://vuepress.vuejs.org/" target="_blank" rel="noopener">https://vuepress.vuejs.org/</a></p>
-</blockquote>
-<p><a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">PanJiaChen / vue-element-admin</a></p>
-<blockquote>
-<p>🎉 A magical vue admin.<br>网站: <a href="https://panjiachen.github.io/vue-element-admin" target="_blank" rel="noopener">https://panjiachen.github.io/vue-element-admin</a></p>
-</blockquote>
-<p><a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">PanJiaChen / vue-admin-template</a></p>
-<blockquote>
-<p>A vue2.0 minimal admin template.<br>网站: <a href="https://git.io/fAnuM" target="_blank" rel="noopener">https://git.io/fAnuM</a></p>
-</blockquote>
-<p><a href="https://github.com/renrenio/renren-fast-vue" target="_blank" rel="noopener">renrenio / renren-fast-vue</a></p>
-<blockquote>
-<p>renren-fast-vue基于vue、element-ui构建开发，实现renren-fast后台管理前端功能，提供一套更优的前端解决方案。<br>网站: <a href="http://fast.demo.renren.io/" target="_blank" rel="noopener">http://fast.demo.renren.io/</a></p>
-</blockquote>
-<p><a href="https://github.com/iview/iview-admin" target="_blank" rel="noopener">iview / iview-admin</a></p>
-<blockquote>
-<p>Vue 2.0 admin management system template based on iView.<br>网站: <a href="https://admin.iviewui.com/" target="_blank" rel="noopener">https://admin.iviewui.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/electron/electron" target="_blank" rel="noopener">electron / electron</a></p>
-<blockquote>
-<p>:electron: Build cross-platform desktop apps with JavaScript, HTML, and CSS.<br>网站: <a href="https://electronjs.org/" target="_blank" rel="noopener">https://electronjs.org/</a></p>
-</blockquote>
-<p><a href="https://github.com/opendigg/awesome-github-vue" target="_blank" rel="noopener">opendigg / awesome-github-vue</a></p>
-<blockquote>
-<p>Vue相关开源项目库汇总。<br>网站: <a href="http://www.opendigg.com/tags/front-vue" target="_blank" rel="noopener">http://www.opendigg.com/tags/front-vue</a></p>
-</blockquote>
-<p><a href="https://github.com/tabler/tabler-icons" target="_blank" rel="noopener">tabler / tabler-icons</a></p>
-<blockquote>
-<p>A set of over 450 free MIT-licensed high-quality SVG icons for you to use in your web projects.  </p>
-</blockquote>
-<p><a href="https://github.com/sentsin/layui" target="_blank" rel="noopener">sentsin / layui</a></p>
-<blockquote>
-<p>采用自身模块规范编写的前端 UI 框架，遵循原生 HTML/CSS/JS 的书写形式，极低门槛，拿来即用。<br>网站: <a href="https://www.layui.com/" target="_blank" rel="noopener">https://www.layui.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/airbnb/javascript" target="_blank" rel="noopener">airbnb / javascript</a></p>
-<blockquote>
-<p>JavaScript Style Guide </p>
-</blockquote>
-<p><a href="https://github.com/elsewhencode/project-guidelines" target="_blank" rel="noopener">elsewhencode / project-guidelines</a></p>
-<blockquote>
-<p>A set of best practices for JavaScript projects.<br>网站: <link></p>
-</blockquote>
-<hr>
-<h2 id="资源汇总"><a href="#资源汇总" class="headerlink" title="资源汇总"></a>资源汇总</h2><p><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener">sindresorhus / awesome</a></p>
-<blockquote>
-<p>Awesome lists about all kinds of interesting topics.</p>
-</blockquote>
-<p><a href="https://github.com/dipakkr/A-to-Z-Resources-for-Students" target="_blank" rel="noopener">dipakkr / A-to-Z-Resources-for-Students</a></p>
-<blockquote>
-<p>Curated list of resources for college students.</p>
-</blockquote>
-<p><a href="https://github.com/LisaDziuba/Awesome-Design-Tools" target="_blank" rel="noopener">LisaDziuba / Awesome-Design-Tools</a></p>
-<blockquote>
-<p>The best design tools for everything.</p>
-</blockquote>
-<p><a href="https://github.com/Solido/awesome-flutter" target="_blank" rel="noopener">Solido / awesome-flutter</a></p>
-<blockquote>
-<p>An awesome list that curates the best Flutter libraries, tools, tutorials, articles and more.</p>
-</blockquote>
-<p><a href="https://github.com/TonnyL/Awesome_APIs" target="_blank" rel="noopener">TonnyL / Awesome_APIs</a></p>
-<blockquote>
-<p>:octocat: A collection of APIs.</p>
-</blockquote>
-<p><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis / public-apis</a></p>
-<blockquote>
-<p>A collective list of free APIs for use in software and web development.</p>
-</blockquote>
-<p><a href="https://github.com/matiassingers/awesome-readme" target="_blank" rel="noopener">matiassingers / awesome-readme</a></p>
-<blockquote>
-<p>A curated list of awesome READMEs.</p>
-</blockquote>
-<p><a href="https://github.com/ryanoasis/nerd-fonts" target="_blank" rel="noopener">ryanoasis / nerd-fonts</a></p>
-<blockquote>
-<p>图标、字体集合。🔡 Iconic font aggregator, collection, and patcher. 40+ patched fonts, over 3,600 glyph/icons, includes popular collections such as Font Awesome &amp; fonts such as Hack.</p>
-</blockquote>
-<p><a href="https://github.com/justjavac/awesome-wechat-weapp" target="_blank" rel="noopener">justjavac / awesome-wechat-weapp</a></p>
-<blockquote>
-<p>微信小程序开发资源汇总 💯</p>
-</blockquote>
-<p><a href="https://github.com/521xueweihan/HelloGitHub" target="_blank" rel="noopener">521xueweihan / HelloGitHub</a></p>
-<blockquote>
-<p>Find pearls on open-source seashore 分享 GitHub 上有趣、入门级的开源项目。<br>网站: <a href="https://hellogithub.com/" target="_blank" rel="noopener">https://hellogithub.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts" target="_blank" rel="noopener">kon9chunkit / GitHub-Chinese-Top-Charts</a></p>
-<blockquote>
-<p>🇨🇳 GitHub中文排行榜，帮助你发现高分优秀中文项目、更高效地吸收国人的优秀经验成果；榜单每周更新一次，敬请关注！ </p>
-</blockquote>
-<p><a href="https://github.com/ruanyf/weekly" target="_blank" rel="noopener">ruanyf / weekly</a></p>
-<blockquote>
-<p>科技爱好者周刊，每周五发布。  </p>
-</blockquote>
-<p><a href="https://github.com/niezhiyang/open_source_team" target="_blank" rel="noopener">niezhiyang / open_source_team</a></p>
-<blockquote>
-<p>国内顶尖团队的开源地址。  </p>
-</blockquote>
-<hr>
-<h2 id="CS相关"><a href="#CS相关" class="headerlink" title="CS相关"></a>CS相关</h2><p><a href="https://github.com/CyC2018/CS-Notes" target="_blank" rel="noopener">CyC2018 / CS-Notes</a></p>
-<blockquote>
-<p>📚 技术面试必备基础知识、Leetcode 题解、Java、C++、Python、后端面试、操作系统、计算机网络、系统设计。</p>
-</blockquote>
-<p><a href="https://github.com/prakhar1989/awesome-courses" target="_blank" rel="noopener">prakhar1989 / awesome-courses</a></p>
-<blockquote>
-<p>📚 大学CS课程。List of awesome university courses for learning Computer Science!</p>
-</blockquote>
-<p><a href="https://github.com/EbookFoundation/free-programming-books" target="_blank" rel="noopener">EbookFoundation / free-programming-books</a></p>
-<blockquote>
-<p>📚 编程相关书籍。Freely available programming books.</p>
-</blockquote>
-<p><a href="https://github.com/justjavac/free-programming-books-zh_CN" target="_blank" rel="noopener">justjavac / free-programming-books-zh_CN</a></p>
-<blockquote>
-<p>📚 免费的计算机编程类中文书籍</p>
-</blockquote>
-<p><a href="https://github.com/ruanyf/free-books" target="_blank" rel="noopener">ruanyf / free-books</a></p>
-<blockquote>
-<p>互联网上的免费书籍。</p>
-</blockquote>
-<p><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Snailclimb / JavaGuide</a></p>
-<blockquote>
-<p>【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。</p>
-</blockquote>
-<p><a href="https://github.com/protocolbuffers/protobuf" target="_blank" rel="noopener">protocolbuffers / protobuf</a></p>
-<blockquote>
-<p>Protocol Buffers - Google’s data interchange format.</p>
-</blockquote>
-<p><a href="https://github.com/geeeeeeeeek/git-recipes" target="_blank" rel="noopener">geeeeeeeeek / git-recipes</a></p>
-<blockquote>
-<p>🥡 高质量的Git中文教程。Git recipes in Chinese by Zhongyi Tong.</p>
-</blockquote>
-<p><a href="https://github.com/github/gitignore" target="_blank" rel="noopener">github / gitignore</a></p>
-<blockquote>
-<p>A collection of useful .gitignore templates.</p>
-</blockquote>
-<p><a href="https://github.com/ziishaned/learn-regex" target="_blank" rel="noopener">ziishaned / learn-regex</a></p>
-<blockquote>
-<p>学习正则表达式。Learn regex the easy way.</p>
-</blockquote>
-<p><a href="https://github.com/Lellansin/Cipher-examples" target="_blank" rel="noopener">Lellansin / Cipher-examples</a></p>
-<blockquote>
-<p>常见加密算法。</p>
-</blockquote>
-<p><a href="https://github.com/badges/shields" target="_blank" rel="noopener">badges / shields</a></p>
-<blockquote>
-<p>Concise, consistent, and legible badges in SVG and raster format.<br>网站: <a href="https://shields.io/" target="_blank" rel="noopener">https://shields.io/</a></p>
-</blockquote>
-<p><a href="https://github.com/tuteng/Best-websites-a-programmer-should-visit-zh" target="_blank" rel="noopener">tuteng / Best-websites-a-programmer-should-visit-zh</a></p>
-<blockquote>
-<p>程序员应该访问的最佳网站中文版。  </p>
-</blockquote>
-<hr>
-<h2 id="AGV"><a href="#AGV" class="headerlink" title="AGV"></a>AGV</h2><p><a href="https://github.com/AtsushiSakai/PythonRobotics" target="_blank" rel="noopener">AtsushiSakai / PythonRobotics</a></p>
-<blockquote>
-<p>Python sample codes for robotics algorithms.</p>
-</blockquote>
-<p><a href="https://github.com/anvaka/ngraph.path" target="_blank" rel="noopener">anvaka / ngraph.path</a></p>
-<blockquote>
-<p>Path finding in a graph.</p>
-</blockquote>
-<hr>
-<h2 id="有趣项目"><a href="#有趣项目" class="headerlink" title="有趣项目"></a>有趣项目</h2><p><a href="https://github.com/chrislgarry/Apollo-11" target="_blank" rel="noopener">chrislgarry / Apollo-11</a></p>
-<blockquote>
-<p>阿波罗11号。Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules.</p>
-</blockquote>
-<p><a href="https://github.com/VincentSit/ChinaMobilePhoneNumberRegex" target="_blank" rel="noopener">VincentSit / ChinaMobilePhoneNumberRegex</a></p>
-<blockquote>
-<p> 一组匹配中国大陆手机号码的正则表达式。<br>Regular expressions that match the mobile phone number in mainland China.</p>
-</blockquote>
-<p><a href="https://github.com/Jannchie/Historical-ranking-data-visualization-based-on-d3.js" target="_blank" rel="noopener">Jannchie / Historical-ranking-data-visualization-based-on-d3.js</a></p>
-<blockquote>
-<p>这是一个数据可视化项目，能够将历史数据排名转化为动态柱状图图表。</p>
-</blockquote>
-<p><a href="https://github.com/pomber/git-history" target="_blank" rel="noopener">pomber / git-history</a></p>
-<blockquote>
-<p>可视化浏览commit历史。Quickly browse the history of a file from any git repository.<br>网站: <a href="https://githistory.xyz/" target="_blank" rel="noopener">https://githistory.xyz/</a></p>
-</blockquote>
-<p><a href="https://github.com/leon-ai/leon" target="_blank" rel="noopener">leon-ai / leon</a></p>
-<blockquote>
-<p>Leon is your open-source personal assistant.</p>
-</blockquote>
-<p><a href="https://github.com/lennylxx/ipv6-hosts" target="_blank" rel="noopener">lennylxx / ipv6-hosts</a></p>
-<blockquote>
-<p>Fork of <a href="https://code.google.com/archive/p/ipv6-hosts/" target="_blank" rel="noopener">https://code.google.com/archive/p/ipv6-hosts/</a>, focusing on automation.</p>
-</blockquote>
-<p><a href="https://github.com/chinese-poetry/chinese-poetry" target="_blank" rel="noopener">chinese-poetry / chinese-poetry</a></p>
-<blockquote>
-<p>最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。</p>
-</blockquote>
-<p><a href="https://github.com/JustArchiNET/ArchiSteamFarm" target="_blank" rel="noopener">JustArchiNET / ArchiSteamFarm</a></p>
-<blockquote>
-<p>Steam挂卡。C# application with primary purpose of idling Steam cards from multiple accounts simultaneously.</p>
-</blockquote>
-<p><a href="https://github.com/houshanren/hangzhou_house_knowledge" target="_blank" rel="noopener">houshanren / hangzhou_house_knowledge</a></p>
-<blockquote>
-<p>2017年买房经历总结出来的买房购房知识分享给大家，希望对大家有所帮助。买房不易，且买且珍惜。</p>
-</blockquote>
-<p><a href="https://github.com/komeiji-satori/Dress" target="_blank" rel="noopener">komeiji-satori / Dress</a></p>
-<blockquote>
-<p>好耶 是女装。</p>
-</blockquote>
-<p><a href="https://github.com/XX-net/XX-Net" target="_blank" rel="noopener">XX-net / XX-Net</a></p>
-<blockquote>
-<p>A web proxy tool.</p>
-</blockquote>
-<p><a href="https://github.com/Aniket965/Hello-world" target="_blank" rel="noopener">Aniket965 / Hello-world</a></p>
-<blockquote>
-<p>Add any Program in any language you like or add a hello world Program ❣️ if you like give us ⭐️.</p>
-</blockquote>
-<p><a href="https://github.com/rwv/chinese-dos-games" target="_blank" rel="noopener">rwv / chinese-dos-games</a></p>
-<blockquote>
-<p>🎮 Chinese DOS games in browser.</p>
-</blockquote>
-<p><a href="https://github.com/gelstudios/gitfiti" target="_blank" rel="noopener">gelstudios / gitfiti</a></p>
-<blockquote>
-<p>随意更改commit历史。Abusing github commit history for the lulz.</p>
-</blockquote>
-<p><a href="https://github.com/ornicar/lila" target="_blank" rel="noopener">ornicar / lila</a></p>
-<blockquote>
-<p>国际象棋。♞ lichess.org: the forever free, adless and open source chess server. ♞</p>
-</blockquote>
-<p><a href="https://github.com/cmiscm/leonsans" target="_blank" rel="noopener">cmiscm / leonsans</a></p>
-<blockquote>
-<p>代码生成的字体。Leon Sans is a geometric sans-serif typeface made with code in 2019 by Jongmin Kim.<br>网站: <a href="https://leon-kim.com/" target="_blank" rel="noopener">https://leon-kim.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/menzi11/BullshitGenerator" target="_blank" rel="noopener">menzi11 / BullshitGenerator</a></p>
-<blockquote>
-<p>狗屁不通文章生成器。Needs to generate some texts to test if my GUI rendering codes good or not. so I made this.<br>网站: <a href="https://suulnnka.github.io/BullshitGenerator/index.html" target="_blank" rel="noopener">https://suulnnka.github.io/BullshitGenerator/index.html</a></p>
-</blockquote>
-<p><a href="https://github.com/3b1b/manim" target="_blank" rel="noopener">3b1b / manim</a></p>
-<blockquote>
-<p>数学动画引擎。Animation engine for explanatory math videos.</p>
-</blockquote>
-<p><a href="https://github.com/carloscuesta/gitmoji" target="_blank" rel="noopener">carloscuesta / gitmoji</a></p>
-<blockquote>
-<p>在commit信息中添加emoji。An emoji guide for your commit messages. 😜<br>网站: <a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">https://gitmoji.carloscuesta.me/</a></p>
-</blockquote>
-<p><a href="https://github.com/shimohq/chinese-programmer-wrong-pronunciation" target="_blank" rel="noopener">shimohq / chinese-programmer-wrong-pronunciation</a></p>
-<blockquote>
-<p>中国程序员容易发音错误的单词。  </p>
-</blockquote>
-<p><a href="https://github.com/SkalskiP/make-sense" target="_blank" rel="noopener">SkalskiP / make-sense</a></p>
-<blockquote>
-<p>Free to use online tool for labelling photos.<br>网站: <a href="https://makesense.ai" target="_blank" rel="noopener">https://makesense.ai</a></p>
-</blockquote>
-<p><a href="https://github.com/A3M4/YouTube-Report" target="_blank" rel="noopener">A3M4 / YouTube-Report</a></p>
-<blockquote>
-<p>📊 Generate a personal YouTube report from your Google Takeout data  </p>
-</blockquote>
-<p><a href="https://github.com/CopyTranslator/CopyTranslator" target="_blank" rel="noopener">CopyTranslator / CopyTranslator</a></p>
-<blockquote>
-<p>Foreign language reading and translation assistant based on copy and translate.  </p>
-</blockquote>
-<p><a href="https://github.com/nondanee/UnblockNeteaseMusic" target="_blank" rel="noopener">nondanee / UnblockNeteaseMusic</a></p>
-<blockquote>
-<p>Revive unavailable songs for Netease Cloud Music.  </p>
-</blockquote>
-<p><a href="https://github.com/kelseyhightower/nocode" target="_blank" rel="noopener">kelseyhightower / nocode</a></p>
-<blockquote>
-<p>The best way to write secure and reliable applications. Write nothing; deploy nowhere.  </p>
-</blockquote>
-<p><a href="https://github.com/monicahq/monica" target="_blank" rel="noopener">monicahq / monica</a></p>
-<blockquote>
-<p>Personal CRM. Remember everything about your friends, family and business relationships.<br>网站: <a href="https://www.monicahq.com/" target="_blank" rel="noopener">https://www.monicahq.com/</a></p>
-</blockquote>
-<p><a href="https://github.com/danistefanovic/build-your-own-x" target="_blank" rel="noopener">danistefanovic / build-your-own-x</a></p>
-<blockquote>
-<p>🤓 Build your own (insert technology here)  </p>
-</blockquote>
-<hr>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><a href="https://github.com/plotly/falcon" target="_blank" rel="noopener">plotly / falcon</a></p>
-<blockquote>
-<p>Free, open-source SQL client for Windows and Mac 🦅<br>网站: <a href="https://plot.ly/free-sql-client-download/" target="_blank" rel="noopener">https://plot.ly/free-sql-client-download/</a></p>
-</blockquote>
-<p><a href="https://www.endpoints.dev/" target="_blank" rel="noopener">endpoints.dev</a></p>
-<blockquote>
-<p>该网站向每个用户提供一个独特的 API 终点（endpoint），用于接受 HTTP 请求。用户发来的所有请求，都可以在该网站实时显示，用于调试和记录。</p>
-</blockquote>
-<p><a href="https://ip-geolocation.whoisxmlapi.com/api" target="_blank" rel="noopener">WhoisXML API</a></p>
-<blockquote>
-<p>该网站提供各种网络信息查询，比如 IP 地理地址、Whois、DNS 等。  </p>
-</blockquote>
-<p><a href="https://raileo.com/" target="_blank" rel="noopener">Raileo</a></p>
-<blockquote>
-<p>该网站提供网站状态监控服务。免费账户可以监控三个网址，监控内容包括：运行时间监控、性能监控、SSL 监控和页面大小监控。  </p>
-</blockquote>
-<p><a href="https://github.com/leeoniya/uPlot" target="_blank" rel="noopener">leeoniya / uPlot</a></p>
-<blockquote>
-<p>📈 A small, fast chart for time series, lines, areas, ohlc &amp; bars.<br>一个 JS 的网页小型图表库，用于快速渲染超大型数据集，系统资源占用少。</p>
-</blockquote>
-<p><a href="https://github.com/soimort/you-get" target="_blank" rel="noopener">soimort / you-get</a></p>
-<blockquote>
-<p>Dumb downloader that scrapes the web.</p>
-</blockquote>
-<p><a href="https://github.com/hakimel/reveal.js" target="_blank" rel="noopener">hakimel / reveal.js</a></p>
-<blockquote>
-<p>The HTML Presentation Framework.</p>
-</blockquote>
-<p><a href="https://github.com/pearmini/gossip" target="_blank" rel="noopener">pearmini / gossip</a></p>
-<blockquote>
-<p>一个高效创建和演示炫酷幻灯片的用户界面！<br>网站: <a href="https://pearmini.gitee.io/gossip/" target="_blank" rel="noopener">https://pearmini.gitee.io/gossip/</a></p>
-</blockquote>
-<p><a href="https://repl.it/languages" target="_blank" rel="noopener">repl.it</a></p>
-<blockquote>
-<p>在线编程语言环境平台，可以在浏览器里面自动加载并运行各种 GitHub 仓库。这里有一个 C++ 写的<a href="https://repl.it/repls/StarkDefensiveCheckpoint" target="_blank" rel="noopener">命令行扫雷游戏</a>，直接在浏览器运行。  </p>
-</blockquote>
-<p><a href="https://www.gitpod.io/" target="_blank" rel="noopener">Gitpod</a></p>
-<blockquote>
-<p>浏览器里面的 IDE 编辑环境，一键加载 GitHub 仓库，内部使用的是 VSCode Web 版。 </p>
-</blockquote>
-<p><a href="https://www.happyhues.co/palettes/17" target="_blank" rel="noopener">Happy Hues</a></p>
-<blockquote>
-<p>该网站提供一系列配色方案，可以实时切换、定制，查看效果。  </p>
-</blockquote>
-<p><a href="https://github.com/zhaoolee/ChromeAppHeroes" target="_blank" rel="noopener">zhaoolee / ChromeAppHeroes</a></p>
-<blockquote>
-<p>🌈谷粒-Chrome插件英雄榜, 为优秀的Chrome插件写一本中文说明书, 让Chrome插件英雄们造福人类~   </p>
-</blockquote>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><a href="link">owner</a></p>
-<blockquote>
-<p>content<br>网站: <link></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>汇总</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo + GitHub 搭建个人博客</title>
     <url>/%E6%95%99%E7%A8%8B/Hexo-GitHub-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<div align="center">
@@ -6449,9 +5883,9 @@ L(w) =\sum_{i=1}^{N}[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \
         <category>教程</category>
       </categories>
       <tags>
-        <tag>github</tag>
         <tag>windows</tag>
         <tag>git</tag>
+        <tag>github</tag>
         <tag>hexo</tag>
         <tag>node.js</tag>
         <tag>网站</tag>
