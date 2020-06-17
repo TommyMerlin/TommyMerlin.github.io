@@ -103,18 +103,24 @@
 
 
 
-  <meta name="description" content="学习资料：《ABAQUS分析之美》江丙云,2020,人民邮电出版社 1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置吻合较好 易出现网格形状歪斜、扭曲的问题    1.2 分割部件设定工具栏颜色编码模式为 Mesh def">
+  <meta name="description" content="学习资料  1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社 2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社 3.Abaqus复合材料建模  1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置">
 <meta name="keywords" content="Abaqus,有限元,复合材料">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Abaqus学习笔记">
 <meta property="og:url" content="http://yoursite.com/Abaqus/Abaqus学习笔记/index.html">
 <meta property="og:site_name" content="HuYe的博客">
-<meta property="og:description" content="学习资料：《ABAQUS分析之美》江丙云,2020,人民邮电出版社 1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置吻合较好 易出现网格形状歪斜、扭曲的问题    1.2 分割部件设定工具栏颜色编码模式为 Mesh def">
+<meta property="og:description" content="学习资料  1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社 2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社 3.Abaqus复合材料建模  1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-13T01:41:36.885Z">
+<meta property="og:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/横观各向同性.png">
+<meta property="og:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/层压板建模单元模型.png">
+<meta property="og:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/普通壳和连续壳.png">
+<meta property="og:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/field%20output.png">
+<meta property="og:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/section%20points.png">
+<meta property="og:updated_time" content="2020-06-17T08:16:11.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Abaqus学习笔记">
-<meta name="twitter:description" content="学习资料：《ABAQUS分析之美》江丙云,2020,人民邮电出版社 1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置吻合较好 易出现网格形状歪斜、扭曲的问题    1.2 分割部件设定工具栏颜色编码模式为 Mesh def">
+<meta name="twitter:description" content="学习资料  1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社 2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社 3.Abaqus复合材料建模  1.网格划分1.1指派网格控制属性 中性轴算法—将目标区域划分为一些简单区域 形状规则 网格节点与种子的位置吻合差   进阶算法—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展 易获得大小均匀的网格 网格节点与种子位置">
+<meta name="twitter:image" content="http://yoursite.com/Abaqus/Abaqus学习笔记/横观各向同性.png">
 
 
 
@@ -456,7 +462,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-13 09:41:36" itemprop="dateModified" datetime="2020-06-13T09:41:36+08:00">2020-06-13</time>
+                <time title="修改时间：2020-06-17 16:16:11" itemprop="dateModified" datetime="2020-06-17T16:16:11+08:00">2020-06-17</time>
               
             
           </span>
@@ -509,7 +515,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">11k</span>
               
 
               
@@ -533,7 +539,12 @@
       
 
       
-        <p><strong>学习资料</strong>：《ABAQUS分析之美》江丙云,2020,人民邮电出版社</p>
+        <p><strong>学习资料</strong></p>
+<ul>
+<li>1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社</li>
+<li>2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社</li>
+<li>3.<a href="https://space.bilibili.com/381464575/video" target="_blank" rel="noopener">Abaqus复合材料建模</a></li>
+</ul>
 <h2 id="1-网格划分"><a href="#1-网格划分" class="headerlink" title="1.网格划分"></a>1.网格划分</h2><h3 id="1-1指派网格控制属性"><a href="#1-1指派网格控制属性" class="headerlink" title="1.1指派网格控制属性"></a>1.1指派网格控制属性</h3><ul>
 <li><strong>中性轴算法</strong>—将目标区域划分为一些简单区域<ul>
 <li>形状规则</li>
@@ -556,7 +567,7 @@
 </ul>
 <p><strong>注意</strong>：结构化网格和扫掠网格采用四边形（二维）和六面体（三维），其分析精度较高，应优先选择。</p>
 <hr>
-<h2 id="2-胶接特性模拟-P94"><a href="#2-胶接特性模拟-P94" class="headerlink" title="2.胶接特性模拟(P94)"></a>2.胶接特性模拟(P94)</h2><ul>
+<h2 id="2-胶接特性模拟-1-P94"><a href="#2-胶接特性模拟-1-P94" class="headerlink" title="2.胶接特性模拟(1-P94)"></a>2.胶接特性模拟(1-P94)</h2><ul>
 <li>使用 <strong>Cohesive 单元</strong>模拟胶接<ul>
 <li>定义材料属性/截面，给 Cohesive 单元赋 Cohesive 截面属性，以此模拟胶层</li>
 </ul>
@@ -567,14 +578,247 @@
 </li>
 </ul>
 <hr>
-<h2 id="3-复合材料层合板有限元分析-P103"><a href="#3-复合材料层合板有限元分析-P103" class="headerlink" title="3.复合材料层合板有限元分析(P103)"></a>3.复合材料层合板有限元分析(P103)</h2><p>根据有限元模型采用单元的不同，可分为一下<strong>4个方案</strong>：</p>
-<ul>
+<h2 id="3-层压板有限元分析"><a href="#3-层压板有限元分析" class="headerlink" title="3.层压板有限元分析"></a>3.层压板有限元分析</h2><h3 id="3-1-复合材料本构关系"><a href="#3-1-复合材料本构关系" class="headerlink" title="3.1 复合材料本构关系"></a>3.1 复合材料本构关系</h3><h4 id="3-1-1-Isotropic-各向同性材料"><a href="#3-1-1-Isotropic-各向同性材料" class="headerlink" title="3.1.1 Isotropic(各向同性材料)"></a>3.1.1 Isotropic(各向同性材料)</h4><script type="math/tex; mode=display">
+\left\{\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}=\left[\begin{array}{cccccc}
+1 / E & -\nu / E & -\nu / E & 0 & 0 & 0 \\
+-\nu / E & 1 / E & -\nu / E & 0 & 0 & 0 \\
+-\nu / E & -\nu / E & 1 / E & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 / G & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 / G & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 / G
+\end{array}\right]\left\{\begin{array}{l}
+\sigma_{11} \\
+\sigma_{22} \\
+\sigma_{33} \\
+\sigma_{12} \\
+\sigma_{13} \\
+\sigma_{23}
+\end{array}\right\}</script><script type="math/tex; mode=display">
+G=E/2(1+\mu)</script><p><strong>2个</strong>独立的工程常数：杨氏模量、泊松比</p>
+<h4 id="3-1-2-Engineering-Constant-三维工程常数"><a href="#3-1-2-Engineering-Constant-三维工程常数" class="headerlink" title="3.1.2 Engineering Constant(三维工程常数)"></a>3.1.2 Engineering Constant(三维工程常数)</h4><script type="math/tex; mode=display">
+\left\{\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}=\left[\begin{array}{cccccc}
+1 / E_{1} & -\nu_{21} / E_{2} & -\nu_{31} / E_{3} & 0 & 0 & 0 \\
+-\nu_{12} / E_{1} & 1 / E_{2} & -\nu_{32} / E_{3} & 0 & 0 & 0 \\
+-\nu_{13} / E_{1} & -\nu_{23} / E_{2} & 1 / E_{3} & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 / G_{12} & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 / G_{13} & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 / G_{23}
+\end{array}\right]\left\{\begin{array}{c}
+\sigma_{11} \\
+\sigma_{22} \\
+\sigma_{33} \\
+\sigma_{12} \\
+\sigma_{13} \\
+\sigma_{23}
+\end{array}\right)</script><p>材料稳定性条件：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+E_{1}, E_{2}, E_{3}, G_{12}, G_{13}, G_{23}>0 \\
+\left|\nu_{12}\right|<\left(E_{1} / E_{2}\right)^{1 / 2} \\
+\left|\nu_{13}\right|<\left(E_{1} / E_{3}\right)^{1 / 2} \\
+\left|\nu_{23}\right|<\left(E_{2} / E_{3}\right)^{1 / 2} \\
+1-\nu_{12} \nu_{21}-\nu_{23} \nu_{32}-\nu_{31} \nu_{13}-2 \nu_{21} \nu_{32} \nu_{13}>0
+\end{array}</script><p><strong>9个</strong>独立的工程常数。</p>
+<p>用于<strong>体单元</strong>。</p>
+<h4 id="3-1-3-Lamina-二维"><a href="#3-1-3-Lamina-二维" class="headerlink" title="3.1.3 Lamina(二维)"></a>3.1.3 Lamina(二维)</h4><p><strong>平面应力</strong>状态下的<strong>正交各向异性</strong>材料</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{c}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\gamma_{12}
+\end{array}\right\}=\left[\begin{array}{ccc}
+1 / E_{1} & -\nu_{12} / E_{1} & 0 \\
+-\nu_{12} / E_{1} & 1 / E_{2} & 0 \\
+0 & 0 & 1 / G_{12}
+\end{array}\right]\left\{\begin{array}{c}
+\sigma_{11} \\
+\sigma_{22} \\
+\tau_{12}
+\end{array}\right\}</script><p>Abaqus 还需输入 $G_{23},G_{13}$ 用于计算壳的横向剪切变形。</p>
+<p>用于<strong>壳单元</strong>。</p>
+<h4 id="3-1-4-Orthotropic-正交各向异性"><a href="#3-1-4-Orthotropic-正交各向异性" class="headerlink" title="3.1.4 Orthotropic(正交各向异性)"></a>3.1.4 Orthotropic(正交各向异性)</h4><script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+\sigma_{11} \\
+\sigma_{22} \\
+\sigma_{33} \\
+\sigma_{12} \\
+\sigma_{13} \\
+\sigma_{23}
+\end{array}\right)=\left[\begin{array}{cccccc}
+D_{1111} & D_{1122} & D_{1133} & 0 & 0 & 0 \\
+& D_{2222} & D_{2233} & 0 & 0 & 0 \\
+& & D_{3333} & 0 & 0 & 0 \\
+& & & D_{1212} & 0 & 0 \\
+& s y m & & & D_{1313} & 0 \\
+& & & & &D_{2323}
+\end{array}\right]\left\{\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}=\left[D^{e l}\right]\left\{\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}</script><p>三维正交各向异性材料：三个对称面，直接指定弹性矩阵，共 9 个独立弹性系数。</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+D_{1111}=E_{1}\left(1-\nu_{23} \nu_{32}\right) \Upsilon \\
+D_{2222}=E_{2}\left(1-\nu_{13} \nu_{31}\right) \Upsilon \\
+D_{3333}=E_{3}\left(1-\nu_{12} \nu_{21}\right) \Upsilon \\
+D_{1122}=E_{1}\left(\nu_{21}+\nu_{31} \nu_{23}\right) \Upsilon=E_{2}\left(\nu_{12}+\nu_{32} \nu_{13}\right) \Upsilon \\
+D_{1133}=E_{1}\left(\nu_{31}+\nu_{21} \nu_{32}\right) \Upsilon=E_{3}\left(\nu_{13}+\nu_{12} \nu_{23}\right) \Upsilon \\
+D_{2233}=E_{2}\left(\nu_{32}+\nu_{12} \nu_{31}\right) \Upsilon=E_{3}\left(\nu_{23}+\nu_{21} \nu_{13}\right) \Upsilon \\
+D_{1212}=G_{12} \\
+D_{1313}=G_{13} \\
+D_{2323}=G_{23}
+\end{array}</script><script type="math/tex; mode=display">
+\Upsilon=\frac{1}{1-\nu_{12} \nu_{21}-\nu_{23} \nu_{32}-\nu_{31} \nu_{13}-2 \nu_{21} \nu_{32} \nu_{13}}</script><p><strong>注意</strong>：<strong>单层板</strong>使用 Engineering Constant 或 Orthotropic 结果相同，Engineering Constant 可以做<strong>多层板</strong>的分析，可将等效的工程常数代入进行计算。</p>
+<h4 id="3-1-5-Anisotropic-完全各向异性"><a href="#3-1-5-Anisotropic-完全各向异性" class="headerlink" title="3.1.5 Anisotropic(完全各向异性)"></a>3.1.5 Anisotropic(完全各向异性)</h4><script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+\sigma_{11} \\
+\sigma_{22} \\
+\sigma_{33} \\
+\sigma_{12} \\
+\sigma_{13} \\
+\sigma_{23}
+\end{array}\right\}=\left[\begin{array}{llllll}
+D_{1111} & D_{1122} & D_{1133} & D_{1112} & D_{1113} & D_{1123} \\
+& D_{2222} & D_{2233} & D_{2212} & D_{2213} & D_{2223} \\
+&&D_{3333} & D_{3312} & D_{3313} & D_{3323} \\
+&&&D_{1212} & D_{1213} & D_{1223} \\
+&sym&&&D_{1313} & D_{1323} \\
+&&&&&D_{2323}
+\end{array}\right]\left\{\begin{array}{l}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}=\left[D^{e l}\right]\left\{\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\gamma_{12} \\
+\gamma_{13} \\
+\gamma_{23}
+\end{array}\right\}</script><p>三维完全各向异性材料：直接指定弹性矩阵，无对称面，共 21 个独立弹性系数。</p>
+<h4 id="3-1-6-Transversely-Isotropic-横观各向同性"><a href="#3-1-6-Transversely-Isotropic-横观各向同性" class="headerlink" title="3.1.6 Transversely Isotropic(横观各向同性)"></a>3.1.6 Transversely Isotropic(横观各向同性)</h4><script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+\sigma_{11} \\
+\sigma_{22} \\
+\sigma_{33} \\
+\sigma_{23} \\
+\sigma_{31} \\
+\sigma_{12}
+\end{array}\right\}=\left[\begin{array}{cccccc}
+C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\
+C_{21} & C_{22} & C_{23} & 0 & 0 & 0 \\
+C_{21} & C_{23} & C_{22} & 0 & 0 & 0 \\
+0 & 0 & 0 & \frac{1}{2}\left(C_{22}-C_{23}\right) & 0 & 0 \\
+0 & 0 & 0 & 0 & C_{66} & 0 \\
+0 & 0 & 0 & 0 & 0 & C_{66}
+\end{array}\right]\left[\begin{array}{c}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\varepsilon_{23} \\
+\varepsilon_{31} \\
+\varepsilon_{12}
+\end{array}\right]</script><p><img src="/Abaqus/Abaqus学习笔记/横观各向同性.png" alt="横观各向同性" style="zoom:50%;"></p>
+<p>可指定为 Engineering Constant。</p>
+<h3 id="3-2-层压板建模方法-1-P103"><a href="#3-2-层压板建模方法-1-P103" class="headerlink" title="3.2 层压板建模方法(1-P103)"></a>3.2 层压板建模方法(1-P103)</h3><h4 id="3-2-1-由采用单元的不同，分为4个方案"><a href="#3-2-1-由采用单元的不同，分为4个方案" class="headerlink" title="3.2.1 由采用单元的不同，分为4个方案"></a>3.2.1 由采用单元的不同，分为4个方案</h4><ul>
 <li>壳模型、壳单元</li>
 <li>实体模型、连续壳单元、厚度方向划分一层单元</li>
 <li>实体模型、体单元、厚度方向划分一层单元</li>
 <li>实体模型、体单元、厚度方向划分多层单元</li>
 </ul>
-
+<p><img src="/Abaqus/Abaqus学习笔记/层压板建模单元模型.png" alt="横观各向同性" style="zoom:50%;"></p>
+<h4 id="3-2-2-普通壳单元与连续壳单元比较"><a href="#3-2-2-普通壳单元与连续壳单元比较" class="headerlink" title="3.2.2 普通壳单元与连续壳单元比较"></a>3.2.2 普通壳单元与连续壳单元比较</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>普通壳单元</th>
+<th>连续壳单元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依附几何</td>
+<td>面</td>
+<td>实体</td>
+</tr>
+<tr>
+<td>厚度确定方式</td>
+<td>截面属性</td>
+<td>通过单元节点确定</td>
+</tr>
+<tr>
+<td>节点自由度</td>
+<td>平动及转动自由度</td>
+<td>仅平动自由度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="/Abaqus/Abaqus学习笔记/普通壳和连续壳.png" alt="横观各向同性" style="zoom:50%;"></p>
+<ul>
+<li>对于薄板，普通壳单元精度会更高一些。</li>
+<li>对于接触问题，连续壳单元可以在接触中考虑双面接触及厚度的变化，精度更高。</li>
+</ul>
+<h3 id="3-3-普通壳单元建模方法"><a href="#3-3-普通壳单元建模方法" class="headerlink" title="3.3 普通壳单元建模方法"></a>3.3 普通壳单元建模方法</h3><p><strong>流程</strong></p>
+<blockquote>
+<p>Part①➡Material②➡Section③➡Assign section➡Assign material orientation④➡Create mesh➡Assign mesh type➡Assembly➡Step⑤➡output➡Interaction➡Load➡Job➡Visualization</p>
+</blockquote>
+<p><strong>①Part</strong>：3D-Deformable-Shell-Planar</p>
+<p><strong>②Property / Material</strong>：Elasticity-Elastic-Lamina</p>
+<p><strong>③Property / Section</strong>：Shell-Composite</p>
+<ul>
+<li>During analysis<ul>
+<li>在积分过程中，每个增量步重新计算截面属性，计算量较大，准确性较高，当材料有明显非线性（塑性、损伤后刚度退化等）时，建议使用。</li>
+</ul>
+</li>
+<li>Before analysis<ul>
+<li>在计算前对截面属性进行预积分，分析过程中截面属性不再变化，计算量小。</li>
+</ul>
+</li>
+</ul>
+<p><strong>④Assign material orientation</strong></p>
+<ul>
+<li>Create Datum Coordinate：Rectangular 建立材料坐标系</li>
+<li>Assign material orientation：指派材料方向</li>
+</ul>
+<p><strong>⑤Step</strong>：Field Output</p>
+<ul>
+<li>输出每一层节点的数据</li>
+</ul>
+<p><img src="/Abaqus/Abaqus学习笔记/field output.png" alt="横观各向同性" style="zoom:70%;"></p>
+<ul>
+<li>确定节点编号</li>
+</ul>
+<p><img src="/Abaqus/Abaqus学习笔记/section points.png" alt="横观各向同性" style="zoom:70%;"></p>
+<h3 id="3-4-连续壳单元建模方法"><a href="#3-4-连续壳单元建模方法" class="headerlink" title="3.4 连续壳单元建模方法"></a>3.4 连续壳单元建模方法</h3>
       
     </div>
 
@@ -1006,7 +1250,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-网格划分"><span class="nav-text">1.网格划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1指派网格控制属性"><span class="nav-text">1.1指派网格控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-分割部件"><span class="nav-text">1.2 分割部件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-胶接特性模拟-P94"><span class="nav-text">2.胶接特性模拟(P94)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-复合材料层合板有限元分析-P103"><span class="nav-text">3.复合材料层合板有限元分析(P103)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-网格划分"><span class="nav-text">1.网格划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1指派网格控制属性"><span class="nav-text">1.1指派网格控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-分割部件"><span class="nav-text">1.2 分割部件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-胶接特性模拟-1-P94"><span class="nav-text">2.胶接特性模拟(1-P94)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-层压板有限元分析"><span class="nav-text">3.层压板有限元分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-复合材料本构关系"><span class="nav-text">3.1 复合材料本构关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Isotropic-各向同性材料"><span class="nav-text">3.1.1 Isotropic(各向同性材料)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-Engineering-Constant-三维工程常数"><span class="nav-text">3.1.2 Engineering Constant(三维工程常数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-Lamina-二维"><span class="nav-text">3.1.3 Lamina(二维)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-Orthotropic-正交各向异性"><span class="nav-text">3.1.4 Orthotropic(正交各向异性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-Anisotropic-完全各向异性"><span class="nav-text">3.1.5 Anisotropic(完全各向异性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-Transversely-Isotropic-横观各向同性"><span class="nav-text">3.1.6 Transversely Isotropic(横观各向同性)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-层压板建模方法-1-P103"><span class="nav-text">3.2 层压板建模方法(1-P103)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-由采用单元的不同，分为4个方案"><span class="nav-text">3.2.1 由采用单元的不同，分为4个方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-普通壳单元与连续壳单元比较"><span class="nav-text">3.2.2 普通壳单元与连续壳单元比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-普通壳单元建模方法"><span class="nav-text">3.3 普通壳单元建模方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-连续壳单元建模方法"><span class="nav-text">3.4 连续壳单元建模方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1039,7 +1283,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">232k</span>
+    <span title="站点总字数">233k</span>
   
 
   
@@ -1535,6 +1779,53 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
   
 
 

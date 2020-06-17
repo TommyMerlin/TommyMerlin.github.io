@@ -454,7 +454,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-13 09:41:36" itemprop="dateModified" datetime="2020-06-13T09:41:36+08:00">2020-06-13</time>
+                <time title="修改时间：2020-06-17 16:16:11" itemprop="dateModified" datetime="2020-06-17T16:16:11+08:00">2020-06-17</time>
               
             
           </span>
@@ -500,7 +500,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">11k</span>
               
 
               
@@ -527,7 +527,12 @@
         
           
             <p>
-              学习资料：《ABAQUS分析之美》江丙云,2020,人民邮电出版社
+              学习资料
+
+1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社
+2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社
+3.Abaqus复合材料建模
+
 1.网格划分1.1指派网格控制属性
 中性轴算法—将目标区域划分为一些简单区域
 形状规则
@@ -550,12 +555,9 @@
 
 注意：结构化网格和扫掠网格采用四边形（二维）和六面体（三维），其分析精度较高，应优先选择。
 
-2.胶接特性模拟(P94)
+2.胶接特性模拟(1-P94)
 使用 Cohesive 单元模拟胶接
-定义材料属性/截面，给 Cohesive 单元赋 Cohesive 截面属性，以此模拟胶层
-
-
-使用接触（Contact）模拟胶接
+定义材料属性/截面，
               ...
             </p>
           <!--noindex-->
@@ -2906,7 +2908,7 @@ version: '3.1'services:  es01:    image: docker.elastic.co/elasticsearch/elastic
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">232k</span>
+    <span title="站点总字数">233k</span>
   
 
   
@@ -3397,6 +3399,8 @@ version: '3.1'services:  es01:    image: docker.elastic.co/elasticsearch/elastic
   
     
       
+        
+      
     
       
     
@@ -3418,6 +3422,53 @@ version: '3.1'services:  es01:    image: docker.elastic.co/elasticsearch/elastic
     
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
   
 
 
