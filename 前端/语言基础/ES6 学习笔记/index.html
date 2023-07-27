@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1.新增关键字var 关键字缺陷：  var 可以重复声明。 var 无法限制修改。 var 没有块级作用域。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 学习笔记">
+<meta property="og:url" content="https://coderhuye.top/%E5%89%8D%E7%AB%AF/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/ES6%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.新增关键字var 关键字缺陷：  var 可以重复声明。 var 无法限制修改。 var 没有块级作用域。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-19T06:21:53.000Z">
+<meta property="article:modified_time" content="2021-06-23T06:25:39.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E5%89%8D%E7%AB%AF/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/ES6%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E5%89%8D%E7%AB%AF/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/ES6%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"前端/语言基础/ES6 学习笔记/","title":"ES6 学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ES6 学习笔记 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%96%B0%E5%A2%9E%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.</span> <span class="nav-text">1.新增关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2.箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B0%E5%A2%9E%E9%AB%98%E7%BA%A7%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3.数组的新增高级方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E5%92%8C%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">4.解构赋值和扩展运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E7%94%A8%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">5.对象的新用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-ES-6-%E7%9A%84-Class%EF%BC%88%E7%B1%BB%EF%BC%89%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 ES 6 的 Class（类）的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-JSON-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%BA%94%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 JSON 对象的新应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Module-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">6.Module 模块化编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Promise-%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">7.Promise 的原理及应用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E5%89%8D%E7%AB%AF/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/ES6%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ES6 学习笔记 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES6 学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-19 14:21:53" itemprop="dateCreated datePublished" datetime="2021-05-19T14:21:53+08:00">2021-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 14:25:39" itemprop="dateModified" datetime="2021-06-23T14:25:39+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">语言基础</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="1-新增关键字"><a href="#1-新增关键字" class="headerlink" title="1.新增关键字"></a>1.新增关键字</h2><p><strong>var</strong> 关键字<strong>缺陷</strong>：</p>
+<ul>
+<li>var 可以重复声明。</li>
+<li>var 无法限制修改。</li>
+<li>var 没有块级作用域。</li>
+</ul>
+<span id="more"></span>
+
+<p>ES6 新增 let 和 const 关键字来声明变量，用法类似于 var。</p>
+<p><strong>let</strong> 关键字：</p>
+<ul>
+<li><p>let 声明的变量，只在 let 命令所在的代码块内有效。</p>
+</li>
+<li><p>let 命令不存在变量提升。</p>
+</li>
+<li><p>let 命令不允许在相同作用域内，重复声明同一个变量。</p>
+</li>
+</ul>
+<p><strong>const</strong> 关键字：</p>
+<ul>
+<li>const 命令声明一个只读的常量。一旦声明，常量的值就不能改变。</li>
+<li>const 命令声明的常量不得改变值。即一旦声明，就必须立即初始化。</li>
+<li>const 命令声明的常量，只在声明所在的块级作用域内有效。</li>
+<li>const 命令声明的常量不提升，只能在声明的位置后使用。</li>
+<li>const 命令声明的常量，与 let 一样不可重复声明。</li>
+<li>const 命令声明的复合类型的数据（对象、数组等），变量指向内存地址（对象里的内容可以更改，但是引用的对象不能更改）。</li>
+</ul>
+<h2 id="2-箭头函数"><a href="#2-箭头函数" class="headerlink" title="2.箭头函数"></a>2.箭头函数</h2><p>ES6 允许使用箭头 &#x3D;&gt; 定义函数。</p>
+<ul>
+<li>不需要参数或需要多个参数，需用圆括号。</li>
+<li>代码块部分多于一条语句，就用大括号包裹，并使用 return 返回。</li>
+<li>箭头函数返回<strong>对象</strong>时，须在对象外面加上括号。</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">a1</span> = (<span class="params"></span>) =&gt; &#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello 1&quot;</span>);&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">a2</span> = (<span class="params">x, y</span>) =&gt; <span class="variable language_">console</span>.<span class="title function_">log</span>(x + y);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fun1 = <span class="keyword">function</span> <span class="title function_">a1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello 2&quot;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">let</span> narr = arr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fun</span> = x =&gt; (&#123; <span class="attr">x</span>: x, <span class="attr">name</span>: <span class="string">&#x27;ZhangSan&#x27;</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>关于箭头函数中的 **<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Pz4y1S7Uv?p=31">this 的指向</a>**：</p>
+<ul>
+<li><p><strong>普通函数</strong>的 this：指向它的调用者，如果没有调用者则默认指向 window。</p>
+</li>
+<li><p><strong>箭头函数</strong>的 this：指向箭头函数定义时所处的对象，而不是箭头函数使用时所在的对象，默认使用父级的 this。</p>
+</li>
+</ul>
+<p>综上：箭头函数没有自己的 this，它的 this 是继承而来，默认指向在定义它时所处的对象（宿主对象）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">fun1</span>: <span class="keyword">function</span> <span class="title function_">fun1</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">fun1</span>: <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;fun1: f&#125;</span></span><br><span class="line"><span class="comment">// 有调用者，指向调用者</span></span><br><span class="line">obj1.<span class="title function_">fun1</span>();</span><br><span class="line"><span class="comment">// Window &#123;window: Window, self: Window, document: document, name: &quot;&quot;, location: Location, …&#125;</span></span><br><span class="line"><span class="comment">// 没有调用者，默认指向 window</span></span><br><span class="line"><span class="title function_">add</span>();</span><br><span class="line"><span class="comment">// Window &#123;window: Window, self: Window, document: document, name: &quot;&quot;, location: Location, …&#125;</span></span><br><span class="line">obj2.<span class="title function_">fun1</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-数组的新增高级方法"><a href="#3-数组的新增高级方法" class="headerlink" title="3.数组的新增高级方法"></a>3.数组的新增高级方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> numsBefore = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">20</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">7</span>, <span class="number">20</span>];</span><br><span class="line"><span class="keyword">let</span> numsAfter = numsBefore</span><br><span class="line">                .<span class="title function_">filter</span>(<span class="function"><span class="params">x</span> =&gt;</span> x &gt; <span class="number">10</span>)		<span class="comment">// 过滤</span></span><br><span class="line">                .<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)		<span class="comment">// 排序</span></span><br><span class="line">                .<span class="title function_">map</span>(<span class="function"><span class="params">x</span> =&gt;</span> x * <span class="number">0.5</span>)			<span class="comment">// 映射</span></span><br><span class="line">                .<span class="title function_">reduce</span>(<span class="function">(<span class="params">s, n</span>) =&gt;</span> s + n, <span class="number">0</span>)	<span class="comment">// 汇总</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(numsAfter)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-解构赋值和扩展运算符"><a href="#4-解构赋值和扩展运算符" class="headerlink" title="4.解构赋值和扩展运算符"></a>4.解构赋值和扩展运算符</h2><p>解构赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;ZhangSan&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;name, age&#125; = user     <span class="comment">// 对象的解构赋值名称属性必须对应</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展运算符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 展开数组</span></span><br><span class="line"><span class="keyword">let</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> arr2 = [...arr1, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="comment">// arr2 = [1, 2, 3, 4, 5, 6]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可变参数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">show</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">    args.<span class="title function_">forEach</span>(<span class="function"><span class="params">x</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(x));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-对象的新用法"><a href="#5-对象的新用法" class="headerlink" title="5.对象的新用法"></a>5.对象的新用法</h2><h3 id="5-1-ES-6-的-Class（类）的概念"><a href="#5-1-ES-6-的-Class（类）的概念" class="headerlink" title="5.1 ES 6 的 Class（类）的概念"></a>5.1 ES 6 的 Class（类）的概念</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">setName</span>(<span class="params">name</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;ZhangSan&quot;</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<p>子类继承父类</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Person</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name, age, school</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(name, age);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">school</span> = school;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> s = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;ZhangSan&quot;</span>, <span class="number">20</span>, <span class="string">&quot;ZJU&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-JSON-对象的新应用"><a href="#5-2-JSON-对象的新应用" class="headerlink" title="5.2 JSON 对象的新应用"></a>5.2 JSON 对象的新应用</h3><ul>
+<li>JSON.stringify()  串行化</li>
+<li>JSON.parse()       反串行化</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;ZhangSan&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> age1 = <span class="number">12</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    name,        <span class="comment">// 键和值名称相同时可简写</span></span><br><span class="line">    <span class="attr">age</span>: age1,</span><br><span class="line">    <span class="title function_">say</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Module-模块化编程"><a href="#6-Module-模块化编程" class="headerlink" title="6.Module 模块化编程"></a>6.Module 模块化编程</h2><p>模块化优点：</p>
+<ul>
+<li>减少命名冲突。</li>
+<li>避免引入时的层层依赖。</li>
+<li>提升执行效率。</li>
+</ul>
+<p><strong>export 命令</strong>：用于规定模块的对外接口</p>
+<ul>
+<li>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果希望外部能够读取模块内部的某个变量，就必须使用 export 关键字输出该变量。</li>
+</ul>
+<p><strong>import 命令</strong>：用于输入其他模块提供的功能</p>
+<ul>
+<li>import 命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号内的变量名必须与被导入模块对外接口的名称相同。</li>
+</ul>
+<h2 id="7-Promise-的原理及应用"><a href="#7-Promise-的原理及应用" class="headerlink" title="7.Promise 的原理及应用"></a>7.Promise 的原理及应用</h2><p>主要用于<strong>异步计算</strong>：</p>
+<ul>
+<li><p>可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果。</p>
+</li>
+<li><p>可以在对象之间传递和操作 promise，帮助我们处理队列。</p>
+</li>
+</ul>
+<p><strong>异步回调</strong>的问题：</p>
+<p>之前处理异步是通过纯粹的回调函数的形式进行处理很容易进入到回调地狱中，剥夺了函数 return 的能力。问题可以解决，但是难以读懂，维护困难。稍有不慎就会踏入回调地狱，嵌套层次深，不好维护。</p>
+<p><strong>primise</strong></p>
+<p>promise 是个对象，对象和函数的区別就是对象可以保存状态，函数不可以（闭包除外）并未剥夺函数 return 的能力，因此无需层层传递 callback，进行回调获取数据。代码风格容易理解，便于维护多个异步等待合并便于解决。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Level 1&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> flag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;Level 2&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&quot;error&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="webpack 学习笔记">
+                  <i class="fa fa-angle-left"></i> webpack 学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/axios%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="axios 学习笔记">
+                  axios 学习笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="学习资料  1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社 2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社 3.Abaqus复合材料建模 4.Abaqus中如何创建变厚度复合材料层板有限元模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Abaqus复合材料层压板建模">
+<meta property="og:url" content="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="学习资料  1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社 2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社 3.Abaqus复合材料建模 4.Abaqus中如何创建变厚度复合材料层板有限元模型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E6%A8%AA%E8%A7%82%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7-789aac.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1%E5%8D%95%E5%85%83%E6%A8%A1%E5%9E%8B-b358b8.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E6%99%AE%E9%80%9A%E5%A3%B3%E5%92%8C%E8%BF%9E%E7%BB%AD%E5%A3%B3-73ab1e.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-field%20output-7c72df.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-section%20points-4121f2.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-0193c3.png">
+<meta property="article:published_time" content="2020-06-10T03:25:35.000Z">
+<meta property="article:modified_time" content="2021-06-23T06:30:47.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="Abaqus">
+<meta property="article:tag" content="有限元">
+<meta property="article:tag" content="复合材料">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E6%A8%AA%E8%A7%82%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7-789aac.png">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1/","path":"复合材料/Abaqus复合材料层压板建模/","title":"Abaqus复合材料层压板建模"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Abaqus复合材料层压板建模 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">1.网格划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E6%8C%87%E6%B4%BE%E7%BD%91%E6%A0%BC%E6%8E%A7%E5%88%B6%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">1.1指派网格控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%88%86%E5%89%B2%E9%83%A8%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 分割部件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%83%B6%E6%8E%A5%E7%89%B9%E6%80%A7%E6%A8%A1%E6%8B%9F-1-P94"><span class="nav-number">2.</span> <span class="nav-text">2.胶接特性模拟(1-P94)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B1%82%E5%8E%8B%E6%9D%BF%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">3.层压板有限元分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E6%9C%AC%E6%9E%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 复合材料本构关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Isotropic-%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7%E6%9D%90%E6%96%99"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 Isotropic(各向同性材料)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-Engineering-Constant-%E4%B8%89%E7%BB%B4%E5%B7%A5%E7%A8%8B%E5%B8%B8%E6%95%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 Engineering Constant(三维工程常数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-Lamina-%E4%BA%8C%E7%BB%B4"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 Lamina(二维)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-Orthotropic-%E6%AD%A3%E4%BA%A4%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 Orthotropic(正交各向异性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-Anisotropic-%E5%AE%8C%E5%85%A8%E5%90%84%E5%90%91%E5%BC%82%E6%80%A7"><span class="nav-number">3.1.5.</span> <span class="nav-text">3.1.5 Anisotropic(完全各向异性)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-Transversely-Isotropic-%E6%A8%AA%E8%A7%82%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7"><span class="nav-number">3.1.6.</span> <span class="nav-text">3.1.6 Transversely Isotropic(横观各向同性)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95-1-P103"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 层压板建模方法(1-P103)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-%E7%94%B1%E5%8D%95%E5%85%83%E4%B8%8D%E5%90%8C%EF%BC%8C%E5%88%86%E4%B8%BA4%E4%B8%AA%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 由单元不同，分为4个方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-%E6%99%AE%E9%80%9A%E5%A3%B3%E5%8D%95%E5%85%83%E4%B8%8E%E8%BF%9E%E7%BB%AD%E5%A3%B3%E5%8D%95%E5%85%83%E6%AF%94%E8%BE%83"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 普通壳单元与连续壳单元比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%99%AE%E9%80%9A%E5%A3%B3%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 普通壳单元建模方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E8%BF%9E%E7%BB%AD%E5%A3%B3%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 连续壳单元建模方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%A4%9A%E5%B1%82%E5%AE%9E%E4%BD%93%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 多层实体单元建模方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 小结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Abaqus复合材料层压板建模 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Abaqus复合材料层压板建模
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-10 11:25:35" itemprop="dateCreated datePublished" datetime="2020-06-10T11:25:35+08:00">2020-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 14:30:47" itemprop="dateModified" datetime="2021-06-23T14:30:47+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">复合材料</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>学习资料</strong></p>
+<ul>
+<li>1.《ABAQUS分析之美》江丙云,2020,人民邮电出版社</li>
+<li>2.《复合材料力学与结构设计》王耀先,2012,华东理工大学出版社</li>
+<li>3.<a target="_blank" rel="noopener" href="https://space.bilibili.com/381464575/video">Abaqus复合材料建模</a></li>
+<li>4.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649180241&idx=1&sn=e78447652fe81f9dc9ee8771d63bbd79&chksm=f2d62104c5a1a81274638d4a7c78906f0f4cc7bb1c1324c5c229ac441957b452afc2c87f2507&scene=21#wechat_redirect">Abaqus中如何创建变厚度复合材料层板有限元模型</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-网格划分"><a href="#1-网格划分" class="headerlink" title="1.网格划分"></a>1.网格划分</h2><h3 id="1-1指派网格控制属性"><a href="#1-1指派网格控制属性" class="headerlink" title="1.1指派网格控制属性"></a>1.1指派网格控制属性</h3><ul>
+<li><strong>中性轴算法</strong>—将目标区域划分为一些简单区域<ul>
+<li>形状规则</li>
+<li>网格节点与种子的位置吻合差</li>
+</ul>
+</li>
+<li><strong>进阶算法</strong>—现在目标区域边界生成四边形网格，然后逐步向区域内部扩展<ul>
+<li>易获得大小均匀的网格</li>
+<li>网格节点与种子位置吻合较好</li>
+<li>易出现网格形状歪斜、扭曲的问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-分割部件"><a href="#1-2-分割部件" class="headerlink" title="1.2 分割部件"></a>1.2 分割部件</h3><p>设定工具栏颜色编码模式为 <code>Mesh defaults</code></p>
+<ul>
+<li><strong>橙色</strong>：无法划分，需进一步对几何体进行分割</li>
+<li><strong>黄色</strong>：扫掠网格</li>
+<li><strong>粉红色</strong>：自由网格</li>
+<li><strong>绿色</strong>：结构化网格</li>
+</ul>
+<p><strong>注意</strong>：结构化网格和扫掠网格采用四边形（二维）和六面体（三维），其分析精度较高，应优先选择。</p>
+<hr>
+<h2 id="2-胶接特性模拟-1-P94"><a href="#2-胶接特性模拟-1-P94" class="headerlink" title="2.胶接特性模拟(1-P94)"></a>2.胶接特性模拟(1-P94)</h2><ul>
+<li>使用 <strong>Cohesive 单元</strong>模拟胶接<ul>
+<li>定义材料属性&#x2F;截面，给 Cohesive 单元赋 Cohesive 截面属性，以此模拟胶层</li>
+</ul>
+</li>
+<li>使用<strong>接触（Contact）</strong>模拟胶接<ul>
+<li>在需要胶接的面之间创建接触，接触特性选用 Cohesive Behavior</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-层压板有限元分析"><a href="#3-层压板有限元分析" class="headerlink" title="3.层压板有限元分析"></a>3.层压板有限元分析</h2><h3 id="3-1-复合材料本构关系"><a href="#3-1-复合材料本构关系" class="headerlink" title="3.1 复合材料本构关系"></a>3.1 复合材料本构关系</h3><h4 id="3-1-1-Isotropic-各向同性材料"><a href="#3-1-1-Isotropic-各向同性材料" class="headerlink" title="3.1.1 Isotropic(各向同性材料)"></a>3.1.1 Isotropic(各向同性材料)</h4><p>$$<br>\left{\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}&#x3D;\left[\begin{array}{cccccc}<br>1 &#x2F; E &amp; -\nu &#x2F; E &amp; -\nu &#x2F; E &amp; 0 &amp; 0 &amp; 0 \<br>-\nu &#x2F; E &amp; 1 &#x2F; E &amp; -\nu &#x2F; E &amp; 0 &amp; 0 &amp; 0 \<br>-\nu &#x2F; E &amp; -\nu &#x2F; E &amp; 1 &#x2F; E &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G<br>\end{array}\right]\left{\begin{array}{l}<br>\sigma_{11} \<br>\sigma_{22} \<br>\sigma_{33} \<br>\sigma_{12} \<br>\sigma_{13} \<br>\sigma_{23}<br>\end{array}\right}<br>$$</p>
+<p>$$<br>G&#x3D;E&#x2F;2(1+\mu)<br>$$</p>
+<p><strong>2个</strong>独立的工程常数：杨氏模量、泊松比</p>
+<h4 id="3-1-2-Engineering-Constant-三维工程常数"><a href="#3-1-2-Engineering-Constant-三维工程常数" class="headerlink" title="3.1.2 Engineering Constant(三维工程常数)"></a>3.1.2 Engineering Constant(三维工程常数)</h4><p>$$<br>\left{\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}&#x3D;\left[\begin{array}{cccccc}<br>1 &#x2F; E_{1} &amp; -\nu_{21} &#x2F; E_{2} &amp; -\nu_{31} &#x2F; E_{3} &amp; 0 &amp; 0 &amp; 0 \<br>-\nu_{12} &#x2F; E_{1} &amp; 1 &#x2F; E_{2} &amp; -\nu_{32} &#x2F; E_{3} &amp; 0 &amp; 0 &amp; 0 \<br>-\nu_{13} &#x2F; E_{1} &amp; -\nu_{23} &#x2F; E_{2} &amp; 1 &#x2F; E_{3} &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G_{12} &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G_{13} &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &#x2F; G_{23}<br>\end{array}\right]\left{\begin{array}{c}<br>\sigma_{11} \<br>\sigma_{22} \<br>\sigma_{33} \<br>\sigma_{12} \<br>\sigma_{13} \<br>\sigma_{23}<br>\end{array}\right)<br>$$</p>
+<p>材料稳定性条件：<br>$$<br>\begin{array}{l}<br>E_{1}, E_{2}, E_{3}, G_{12}, G_{13}, G_{23}&gt;0 \<br>\left|\nu_{12}\right|&lt;\left(E_{1} &#x2F; E_{2}\right)^{1 &#x2F; 2} \<br>\left|\nu_{13}\right|&lt;\left(E_{1} &#x2F; E_{3}\right)^{1 &#x2F; 2} \<br>\left|\nu_{23}\right|&lt;\left(E_{2} &#x2F; E_{3}\right)^{1 &#x2F; 2} \<br>1-\nu_{12} \nu_{21}-\nu_{23} \nu_{32}-\nu_{31} \nu_{13}-2 \nu_{21} \nu_{32} \nu_{13}&gt;0<br>\end{array}<br>$$<br><strong>9个</strong>独立的工程常数。</p>
+<p>用于<strong>体单元</strong>。</p>
+<h4 id="3-1-3-Lamina-二维"><a href="#3-1-3-Lamina-二维" class="headerlink" title="3.1.3 Lamina(二维)"></a>3.1.3 Lamina(二维)</h4><p><strong>平面应力</strong>状态下的<strong>正交各向异性</strong>材料<br>$$<br>\left{\begin{array}{c}<br>\varepsilon_{1} \<br>\varepsilon_{2} \<br>\gamma_{12}<br>\end{array}\right}&#x3D;\left[\begin{array}{ccc}<br>1 &#x2F; E_{1} &amp; -\nu_{12} &#x2F; E_{1} &amp; 0 \<br>-\nu_{12} &#x2F; E_{1} &amp; 1 &#x2F; E_{2} &amp; 0 \<br>0 &amp; 0 &amp; 1 &#x2F; G_{12}<br>\end{array}\right]\left{\begin{array}{c}<br>\sigma_{11} \<br>\sigma_{22} \<br>\tau_{12}<br>\end{array}\right}<br>$$<br>Abaqus 还需输入 $G_{23},G_{13}$ 用于计算壳的横向剪切变形。</p>
+<p>用于<strong>壳单元</strong>。</p>
+<h4 id="3-1-4-Orthotropic-正交各向异性"><a href="#3-1-4-Orthotropic-正交各向异性" class="headerlink" title="3.1.4 Orthotropic(正交各向异性)"></a>3.1.4 Orthotropic(正交各向异性)</h4><p>$$<br>\left{\begin{array}{l}<br>\sigma_{11} \<br>\sigma_{22} \<br>\sigma_{33} \<br>\sigma_{12} \<br>\sigma_{13} \<br>\sigma_{23}<br>\end{array}\right)&#x3D;\left[\begin{array}{cccccc}<br>D_{1111} &amp; D_{1122} &amp; D_{1133} &amp; 0 &amp; 0 &amp; 0 \<br>&amp; D_{2222} &amp; D_{2233} &amp; 0 &amp; 0 &amp; 0 \<br>&amp; &amp; D_{3333} &amp; 0 &amp; 0 &amp; 0 \<br>&amp; &amp; &amp; D_{1212} &amp; 0 &amp; 0 \<br>&amp; s y m &amp; &amp; &amp; D_{1313} &amp; 0 \<br>&amp; &amp; &amp; &amp; &amp;D_{2323}<br>\end{array}\right]\left{\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}&#x3D;\left[D^{e l}\right]\left{\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}<br>$$</p>
+<p>三维正交各向异性材料：三个对称面，直接指定弹性矩阵，共 9 个独立弹性系数。<br>$$<br>\begin{array}{l}<br>D_{1111}&#x3D;E_{1}\left(1-\nu_{23} \nu_{32}\right) \Upsilon \<br>D_{2222}&#x3D;E_{2}\left(1-\nu_{13} \nu_{31}\right) \Upsilon \<br>D_{3333}&#x3D;E_{3}\left(1-\nu_{12} \nu_{21}\right) \Upsilon \<br>D_{1122}&#x3D;E_{1}\left(\nu_{21}+\nu_{31} \nu_{23}\right) \Upsilon&#x3D;E_{2}\left(\nu_{12}+\nu_{32} \nu_{13}\right) \Upsilon \<br>D_{1133}&#x3D;E_{1}\left(\nu_{31}+\nu_{21} \nu_{32}\right) \Upsilon&#x3D;E_{3}\left(\nu_{13}+\nu_{12} \nu_{23}\right) \Upsilon \<br>D_{2233}&#x3D;E_{2}\left(\nu_{32}+\nu_{12} \nu_{31}\right) \Upsilon&#x3D;E_{3}\left(\nu_{23}+\nu_{21} \nu_{13}\right) \Upsilon \<br>D_{1212}&#x3D;G_{12} \<br>D_{1313}&#x3D;G_{13} \<br>D_{2323}&#x3D;G_{23}<br>\end{array}<br>$$</p>
+<p>$$<br>\Upsilon&#x3D;\frac{1}{1-\nu_{12} \nu_{21}-\nu_{23} \nu_{32}-\nu_{31} \nu_{13}-2 \nu_{21} \nu_{32} \nu_{13}}<br>$$</p>
+<p><strong>注意</strong>：<strong>单层板</strong>使用 Engineering Constant 或 Orthotropic 结果相同，Engineering Constant 可以做<strong>多层板</strong>的分析，可将等效的工程常数代入进行计算。</p>
+<h4 id="3-1-5-Anisotropic-完全各向异性"><a href="#3-1-5-Anisotropic-完全各向异性" class="headerlink" title="3.1.5 Anisotropic(完全各向异性)"></a>3.1.5 Anisotropic(完全各向异性)</h4><p>$$<br>\left{\begin{array}{l}<br>\sigma_{11} \<br>\sigma_{22} \<br>\sigma_{33} \<br>\sigma_{12} \<br>\sigma_{13} \<br>\sigma_{23}<br>\end{array}\right}&#x3D;\left[\begin{array}{llllll}<br>D_{1111} &amp; D_{1122} &amp; D_{1133} &amp; D_{1112} &amp; D_{1113} &amp; D_{1123} \<br>&amp; D_{2222} &amp; D_{2233} &amp; D_{2212} &amp; D_{2213} &amp; D_{2223} \<br>&amp;&amp;D_{3333} &amp; D_{3312} &amp; D_{3313} &amp; D_{3323} \<br>&amp;&amp;&amp;D_{1212} &amp; D_{1213} &amp; D_{1223} \<br>&amp;sym&amp;&amp;&amp;D_{1313} &amp; D_{1323} \<br>&amp;&amp;&amp;&amp;&amp;D_{2323}<br>\end{array}\right]\left{\begin{array}{l}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}&#x3D;\left[D^{e l}\right]\left{\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\gamma_{12} \<br>\gamma_{13} \<br>\gamma_{23}<br>\end{array}\right}<br>$$</p>
+<p>三维完全各向异性材料：直接指定弹性矩阵，无对称面，共 21 个独立弹性系数。</p>
+<h4 id="3-1-6-Transversely-Isotropic-横观各向同性"><a href="#3-1-6-Transversely-Isotropic-横观各向同性" class="headerlink" title="3.1.6 Transversely Isotropic(横观各向同性)"></a>3.1.6 Transversely Isotropic(横观各向同性)</h4><p>$$<br>\left{\begin{array}{l}<br>\sigma_{11} \<br>\sigma_{22} \<br>\sigma_{33} \<br>\sigma_{23} \<br>\sigma_{31} \<br>\sigma_{12}<br>\end{array}\right}&#x3D;\left[\begin{array}{cccccc}<br>C_{11} &amp; C_{12} &amp; C_{12} &amp; 0 &amp; 0 &amp; 0 \<br>C_{21} &amp; C_{22} &amp; C_{23} &amp; 0 &amp; 0 &amp; 0 \<br>C_{21} &amp; C_{23} &amp; C_{22} &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; \frac{1}{2}\left(C_{22}-C_{23}\right) &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; C_{66} &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; C_{66}<br>\end{array}\right]\left[\begin{array}{c}<br>\varepsilon_{11} \<br>\varepsilon_{22} \<br>\varepsilon_{33} \<br>\varepsilon_{23} \<br>\varepsilon_{31} \<br>\varepsilon_{12}<br>\end{array}\right]<br>$$</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E6%A8%AA%E8%A7%82%E5%90%84%E5%90%91%E5%90%8C%E6%80%A7-789aac.png" alt="横观各向同性" width="30%" />
+
+<p>可指定为 Engineering Constant。</p>
+<h3 id="3-2-层压板建模方法-1-P103"><a href="#3-2-层压板建模方法-1-P103" class="headerlink" title="3.2 层压板建模方法(1-P103)"></a>3.2 层压板建模方法(1-P103)</h3><h4 id="3-2-1-由单元不同，分为4个方案"><a href="#3-2-1-由单元不同，分为4个方案" class="headerlink" title="3.2.1 由单元不同，分为4个方案"></a>3.2.1 由单元不同，分为4个方案</h4><ul>
+<li>壳模型、壳单元</li>
+<li>实体模型、连续壳单元、厚度方向划分一层单元</li>
+<li>实体模型、体单元、厚度方向划分一层单元</li>
+<li>实体模型、体单元、厚度方向划分多层单元</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E5%B1%82%E5%8E%8B%E6%9D%BF%E5%BB%BA%E6%A8%A1%E5%8D%95%E5%85%83%E6%A8%A1%E5%9E%8B-b358b8.png" alt="横观各向同性" width="40%" />
+
+<h4 id="3-2-2-普通壳单元与连续壳单元比较"><a href="#3-2-2-普通壳单元与连续壳单元比较" class="headerlink" title="3.2.2 普通壳单元与连续壳单元比较"></a>3.2.2 普通壳单元与连续壳单元比较</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>普通壳单元</th>
+<th>连续壳单元</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>依附几何</td>
+<td>面</td>
+<td>实体</td>
+</tr>
+<tr>
+<td>厚度确定方式</td>
+<td>截面属性</td>
+<td>通过单元节点确定</td>
+</tr>
+<tr>
+<td>节点自由度</td>
+<td>平动及转动自由度</td>
+<td>仅平动自由度</td>
+</tr>
+</tbody></table>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-%E6%99%AE%E9%80%9A%E5%A3%B3%E5%92%8C%E8%BF%9E%E7%BB%AD%E5%A3%B3-73ab1e.png" alt="横观各向同性" width="30%" />
+
+<ul>
+<li>对于薄板，普通壳单元精度会更高一些。</li>
+<li>对于接触问题，连续壳单元可以在接触中考虑双面接触及厚度的变化，精度更高。</li>
+</ul>
+<h3 id="3-3-普通壳单元建模方法"><a href="#3-3-普通壳单元建模方法" class="headerlink" title="3.3 普通壳单元建模方法"></a>3.3 普通壳单元建模方法</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wf4y1m7jg">教程视频</a></p>
+<p><strong>流程</strong></p>
+<blockquote>
+<p>Part①➡Material②➡Section③➡Assign section➡Assign material orientation④➡Create mesh➡Assign element type➡Assembly➡Step⑤➡output➡Interaction➡Load➡Job➡Visualization</p>
+</blockquote>
+<p><strong>①Part</strong>：3D—Deformable—Shell—Planar</p>
+<p><strong>②Property &#x2F; Material</strong>：Elasticity—Elastic—Lamina</p>
+<p><strong>③Property &#x2F; Section</strong>：Shell—Composite</p>
+<ul>
+<li>During analysis<ul>
+<li>在积分过程中，每个增量步重新计算截面属性，计算量较大，准确性较高，当材料有明显非线性（塑性、损伤后刚度退化等）时，建议使用。</li>
+</ul>
+</li>
+<li>Before analysis<ul>
+<li>在计算前对截面属性进行预积分，分析过程中截面属性不再变化，计算量小。</li>
+</ul>
+</li>
+</ul>
+<p><strong>④Assign material orientation</strong></p>
+<ul>
+<li>Create Datum Coordinate：Rectangular 建立材料坐标系</li>
+<li>Assign material orientation：指派材料方向</li>
+</ul>
+<p><strong>⑤Step</strong>：Field Output</p>
+<ul>
+<li>输出每一层节点的数据</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-field%20output-7c72df.png" alt="横观各向同性" width="40%" />
+
+<ul>
+<li>确定节点编号</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-section%20points-4121f2.png" alt="横观各向同性" width="30%" />
+
+<h3 id="3-4-连续壳单元建模方法"><a href="#3-4-连续壳单元建模方法" class="headerlink" title="3.4 连续壳单元建模方法"></a>3.4 连续壳单元建模方法</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ia4y1v7S8">教程视频</a></p>
+<p><strong>流程</strong></p>
+<blockquote>
+<p>Part①➡Material②➡Section③➡Assign section➡Assign material orientation➡Create mesh④➡Assign element type⑤➡Assembly➡Step⑥➡output➡Interaction➡Load➡Job➡Visualization</p>
+</blockquote>
+<p><strong>①Part</strong>：3D—Deformable—Solid</p>
+<p><strong>②Property &#x2F; Material</strong>：Elasticity—Elastic—Lamina</p>
+<p><strong>③Property &#x2F; Section</strong>：Shell—Composite</p>
+<p><strong>④Assign Mesh Controls</strong>：Element Shape—Hex，Technique—Sweep</p>
+<p><strong>⑤Assign Element Type</strong>：Family 中改为 Continuum Shell：SC8R</p>
+<h3 id="3-5-多层实体单元建模方法"><a href="#3-5-多层实体单元建模方法" class="headerlink" title="3.5 多层实体单元建模方法"></a>3.5 多层实体单元建模方法</h3><p><strong>①Part</strong>：3D—Deformable—Solid</p>
+<p><strong>②Property &#x2F; Material</strong>：Elasticity—Elastic—Engineering Constants</p>
+<p><strong>③Property &#x2F; Section</strong>：Solid—Composite</p>
+<p><strong>④Assign Mesh Controls</strong>：Element Shape—Hex，Technique—Sweep</p>
+<p><strong>⑤Assign Element Type</strong>：C3D8R</p>
+<p><strong>⑥Step</strong>：Field Output</p>
+<ul>
+<li>输出每一层节点的数据</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-0193c3.png" alt="横观各向同性" width="40%" />
+
+<ul>
+<li>只需输入 1,2,3,4 即可，因为每个铺层的积分点为 1</li>
+</ul>
+<h3 id="3-6-小结"><a href="#3-6-小结" class="headerlink" title="3.6 小结"></a>3.6 小结</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>普通壳</th>
+<th>连续壳</th>
+<th>多层实体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Part</td>
+<td>Shell—Planar</td>
+<td>Solid</td>
+<td>Solid</td>
+</tr>
+<tr>
+<td>Material</td>
+<td>Lamina</td>
+<td>Lamina</td>
+<td>Engineering Constants</td>
+</tr>
+<tr>
+<td>Section</td>
+<td>Shell—Composite</td>
+<td>Shell—Composite</td>
+<td>Solid—Composite</td>
+</tr>
+<tr>
+<td>Mesh Controls</td>
+<td>Quad，Free</td>
+<td>Hex，Sweep</td>
+<td>Hex，Sweep</td>
+</tr>
+<tr>
+<td>Element Type</td>
+<td>S4R</td>
+<td>SC8R</td>
+<td>C3D8R</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Abaqus/" rel="tag"><i class="fa fa-tag"></i> Abaqus</a>
+              <a href="/tags/%E6%9C%89%E9%99%90%E5%85%83/" rel="tag"><i class="fa fa-tag"></i> 有限元</a>
+              <a href="/tags/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" rel="tag"><i class="fa fa-tag"></i> 复合材料</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Java/Spring/Spring-Boot/Swagger%E7%94%9F%E6%88%90API%E6%96%87%E6%A1%A3/" rel="prev" title="Swagger生成API文档">
+                  <i class="fa fa-angle-left"></i> Swagger生成API文档
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99%E5%A4%B1%E6%95%88%E5%87%86%E5%88%99/" rel="next" title="复合材料失效准则">
+                  复合材料失效准则 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

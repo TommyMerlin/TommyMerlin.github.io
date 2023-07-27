@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1.许可证问题1.1 解决方法1MATLAB 在启动时，一直停留在“正在初始化”的状态，有可能是因为 MATLAB 一直在找着本机的许可证。 有可能是设置了 LM_LICENSE_FILE 的环境变量。这个变量告诉 MATLAB 或者其他应用程序去哪里查找许可证文件。如果您有一个网络许可证，但是当前又没有联网，那么 MATLAB 就会一直停留在这个状态。 注意：还有一个环境变量 MLM_LICEN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法">
+<meta property="og:url" content="https://coderhuye.top/%E6%95%99%E7%A8%8B/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="1.许可证问题1.1 解决方法1MATLAB 在启动时，一直停留在“正在初始化”的状态，有可能是因为 MATLAB 一直在找着本机的许可证。 有可能是设置了 LM_LICENSE_FILE 的环境变量。这个变量告诉 MATLAB 或者其他应用程序去哪里查找许可证文件。如果您有一个网络许可证，但是当前又没有联网，那么 MATLAB 就会一直停留在这个状态。 注意：还有一个环境变量 MLM_LICEN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-10T04:14:27.000Z">
+<meta property="article:modified_time" content="2021-06-23T08:52:27.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="MATLAB">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E6%95%99%E7%A8%8B/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E6%95%99%E7%A8%8B/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/","path":"教程/Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法/","title":"Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%B8%E5%8F%AF%E8%AF%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">1.许可证问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%951"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 解决方法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%952"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 解决方法2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%9D%9E%E8%AE%B8%E5%8F%AF%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2.非许可问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%951"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 解决方法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%952"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 解决方法2</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E6%95%99%E7%A8%8B/Matlab%E6%89%93%E5%BC%80%E5%90%8E%E9%95%BF%E6%97%B6%E9%97%B4%E5%A4%84%E4%BA%8E%E2%80%9C%E6%AD%A3%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E2%80%9D%E6%88%96%E2%80%9C%E6%AD%A3%E5%BF%99%E2%80%9D%E7%8A%B6%E6%80%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Matlab打开后长时间处于“正在初始化”或“正忙”状态解决办法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-10 12:14:27" itemprop="dateCreated datePublished" datetime="2020-01-10T12:14:27+08:00">2020-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 16:52:27" itemprop="dateModified" datetime="2021-06-23T16:52:27+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="1-许可证问题"><a href="#1-许可证问题" class="headerlink" title="1.许可证问题"></a>1.许可证问题</h2><h3 id="1-1-解决方法1"><a href="#1-1-解决方法1" class="headerlink" title="1.1 解决方法1"></a>1.1 解决方法1</h3><p>MATLAB 在启动时，一直停留在“正在初始化”的状态，有可能是因为 MATLAB 一直在找着本机的许可证。</p>
+<p>有可能是设置了 <code>LM_LICENSE_FILE</code> 的环境变量。这个变量告诉 MATLAB 或者其他应用程序去哪里查找许可证文件。如果您有一个网络许可证，但是当前又没有联网，那么 MATLAB 就会一直停留在这个状态。</p>
+<p><strong>注意</strong>：还有一个环境变量 <code>MLM_LICENSE_FILE</code> 也会导致这一问题。这个环境变量只用于 MATLAB。</p>
+<span id="more"></span>
+
+<p>要解决这个问题，您可以执行以下操作：</p>
+<ul>
+<li>1.右击“<strong>我的电脑</strong>”，然后选择“<strong>属性</strong>”。（有可能需要在控制面板中双击“系统”）。</li>
+<li>2.选择“<strong>高级</strong>”标签，点击“<strong>环境变量</strong>”。</li>
+<li>3.在窗口下方的系统变量中，查找变量 <code>LM_LICENSE_FILE</code>。</li>
+<li>4.如果有 <code>LM_LICENSE_FILE</code> 变量存在，请看第5步。如果没有，请创建一个 <code>LM_LICENSE_FILE</code> 变量：点击“新建”，然后在变量名框中输入 <code>LM_LICENSE_FILE</code>。</li>
+<li>5.把 <code>LM_LICENSE_FILE</code> 的值设为 MATLAB <strong>许可证文件的绝对路径</strong>。如果有多个许可证文件，在第一个路径后加上分号（；），然后在写第二个路径。点击“确认”保存。</li>
+<li>6.<strong>重新启动</strong> MATLAB。</li>
+</ul>
+<h3 id="1-2-解决方法2"><a href="#1-2-解决方法2" class="headerlink" title="1.2 解决方法2"></a>1.2 解决方法2</h3><p>如果您仅使用一个许可证来访问 MATLAB 和工具箱，可以在 MATLAB <strong>快捷方式</strong>中指定许可证文件或在启动 MATLAB 时从命令行中指定许可证文件。要实现以上目的，请执行下列步骤：</p>
+<ul>
+<li>1）右击 MATLAB 的快捷方式并选择“<strong>属性</strong>”。</li>
+<li>2）在“<strong>目标</strong>”字段中，输入以下内容：</li>
+</ul>
+<blockquote>
+<p>“$MATLAB\bin\win32\MATLAB.exe” -c “&lt;包括文件名的 MATLAB 许可证文件的完整路径&gt;“</p>
+</blockquote>
+<p>其中 $MATLAB 是 MATLAB <strong>根目录</strong>，&lt;MATLAB 许可证文件的路径&gt; 是许可证文件的<strong>绝对路径</strong>。</p>
+<ul>
+<li>3）点击“确定”。</li>
+<li>4）从快捷方式启动 MATLAB。</li>
+</ul>
+<h2 id="2-非许可问题"><a href="#2-非许可问题" class="headerlink" title="2.非许可问题"></a>2.非许可问题</h2><h3 id="2-1-解决方法1"><a href="#2-1-解决方法1" class="headerlink" title="2.1 解决方法1"></a>2.1 解决方法1</h3><p><strong>首先确保您已允许查看隐藏文件和文件夹。</strong></p>
+<ul>
+<li>1.<strong>退出 MATLAB</strong>。确保 MATLAB 不再运行。</li>
+<li>2.浏览到文件夹 <code>c:\Documents and Settings\ &lt;your username&gt;\Application Data\MathWorks\MATLAB\ </code>或 <code>c:\users\&lt;username&gt;\AppData\Roaming </code></li>
+<li>3.<strong>重命名</strong>您使用的 MATLAB 版本目录，以 <code>_old</code> 结尾。如果有名称中包含<code>_licenses</code>的文件夹，不要重命名该文件夹。</li>
+<li>4.在<strong>删除</strong>了此目录之后，<strong>重新启动</strong> MATLAB。下次您启动 MATLAB 时会重新创建此目录。</li>
+</ul>
+<p>如果这没有解决问题，则可以考虑 Windows 上的 MATLAB 7.0 (R14) 和某些显卡提供的图形库之间存在的一个已知问题，这些显卡没有高效使用内存，因而使 MATLAB 7.0 (R14) 比预期更频繁地使用虚拟内存。在这种情况下，禁用显卡卡的硬件图形加速功能可以提高 MATLAB 7.0 (R14) 的性能。为此，请执行下列步骤。</p>
+<ul>
+<li>1.<strong>关闭</strong> MATLAB。</li>
+<li>2.右击 Windows 桌面并选择“<strong>属性</strong>”。</li>
+<li>3.在打开的“<strong>显示属性</strong>”窗口中，选择“<strong>设置</strong>”选项卡，然后点击“<strong>高级</strong>”按钮。</li>
+<li>4.在打开的窗口中，选择“<strong>疑难解答</strong>”选项卡。</li>
+<li>5.将“<strong>硬件加速</strong>”滑动条一直向左设置为“<strong>无</strong>”。</li>
+<li>6.点击此窗口中的“确定”，然后再次点击“<strong>显示属性</strong>”窗口中的“确定”。</li>
+<li>7.<strong>重新启动</strong> MATLAB。</li>
+</ul>
+<h3 id="2-2-解决方法2"><a href="#2-2-解决方法2" class="headerlink" title="2.2 解决方法2"></a>2.2 解决方法2</h3><p>在一些情况下，客户报告在后台运行的防病毒程序会降低 MATLAB 的速度。对于这些客户，<strong>禁止防病毒软件扫描 MATLAB 目录</strong>可以大大提高性能。</p>
+<p><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/matlabcentral/answers/116115-matlab">参考链接</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MATLAB/" rel="tag"><i class="fa fa-tag"></i> MATLAB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%90%84%E6%96%B9%E6%B3%95%E6%AF%94%E8%BE%83/" rel="prev" title="监督学习各方法比较">
+                  <i class="fa fa-angle-left"></i> 监督学习各方法比较
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AE%9E%E8%B7%B5%E7%AC%AC1%E7%AB%A0-%E5%8D%95%E5%9D%97%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%85%B6%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98/" rel="next" title="微服务架构与实践 第1章-单块架构及其面临的挑战">
+                  微服务架构与实践 第1章-单块架构及其面临的挑战 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

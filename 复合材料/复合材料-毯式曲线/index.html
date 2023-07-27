@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="学习资料  1.何为毯式曲线？  毯式曲线是采用二维图表征两个或多个独立变量与一个或多个非独立变量之间相互作用关系的图。毯式曲线具有良好的可读性，另外还可以用于准确地进行数据点插值。传统的毯式曲线可以表征多达三个独立变量和三个非独立变量的相互作用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="毯式曲线">
+<meta property="og:url" content="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E6%AF%AF%E5%BC%8F%E6%9B%B2%E7%BA%BF/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="学习资料  1.何为毯式曲线？  毯式曲线是采用二维图表征两个或多个独立变量与一个或多个非独立变量之间相互作用关系的图。毯式曲线具有良好的可读性，另外还可以用于准确地进行数据点插值。传统的毯式曲线可以表征多达三个独立变量和三个非独立变量的相互作用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-1fbfb7.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-40b76c.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-2fa776.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-30471d.png">
+<meta property="article:published_time" content="2020-08-26T08:34:35.000Z">
+<meta property="article:modified_time" content="2021-06-23T06:27:14.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="复合材料">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-1fbfb7.png">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E6%AF%AF%E5%BC%8F%E6%9B%B2%E7%BA%BF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E6%AF%AF%E5%BC%8F%E6%9B%B2%E7%BA%BF/","path":"复合材料/复合材料-毯式曲线/","title":"毯式曲线"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>毯式曲线 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E6%AF%AF%E5%BC%8F%E6%9B%B2%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="毯式曲线 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          毯式曲线
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-26 16:34:35" itemprop="dateCreated datePublished" datetime="2020-08-26T16:34:35+08:00">2020-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 14:27:14" itemprop="dateModified" datetime="2021-06-23T14:27:14+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">复合材料</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>学习资料</strong></p>
+<ul>
+<li>1.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649177310&idx=1&sn=64a0e81c069e7fc2080a9c7857b8d278&chksm=f2d6558bc5a1dc9db2f4a69a45877228be497a0d53cfc614934f016c12eac197407b9c651d85&scene=21#wechat_redirect">何为毯式曲线？</a></li>
+</ul>
+<p>毯式曲线是采用二维图<strong>表征两个或多个独立变量与一个或多个非独立变量之间相互作用关系</strong>的图。毯式曲线具有良好的可读性，另外还可以用于准确地进行数据点插值。传统的毯式曲线可以表征多达三个独立变量和三个非独立变量的相互作用。</p>
+<span id="more"></span>
+
+<p>毯式曲线在材料科学等领域具有广泛的应用，例如在复合材料层压板结构设计中，可通过毯式曲线表征不同铺层组合下的层压板等效弹性常数。</p>
+<p>一种常见的毯式曲线是两个独立变量与一个非独立变量模式，以下图为例，A 和 B 为两个独立的变量，且 A 和 B 均有各自的取值范围，X 轴为虚坐标轴，无物理意义，Y 轴为因变量，且有 Y&#x3D;f(A,B) 。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-1fbfb7.png" alt="1" style="width:350px;" />
+
+<p>该类二维曲线图可以由三维曲面图来替代。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-40b76c.png" alt="2" style="width:400px;" />
+
+<p>另一种常见的毯式曲线是两个独立变量与两个非独立变量模式，如下图所示。A 和 B 为两个独立的变量，且 A 和 B 均有各自的取值范围，X 和 Y 均为 A 和 B 的函数，且<br>$$<br>X&#x3D;f_1(A,B) \<br>Y&#x3D;f_2(A,B)<br>$$<br>该类毯式曲线图无法用三维曲面图来替代。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-2fa776.png" alt="3" style="width:400px;" />
+
+<p>在复合材料层压结构设计中，毯式曲线采用的是四变量毯式曲线，它可以清晰直观地表征不同铺层比例下层压板的刚度或强度属性。</p>
+<p>以最常见的 π&#x2F;4 铺层组合为例，0° 层、90° 层以及 ±45° 层的总百分比是 100%，一般假设 45° 层与 -45° 层比例相等，故 ±45° 层比例可以看作是一个独立变量 A，另外，可以将 0° 层（或者 90° 层）比例看作是另一个独立变量 B，则剩下的 90° 层（或者 0° 层）铺层比例即为第一个非独立变量 X，且 X&#x3D;1-A-B。Y 轴可以是整个层压板的等效弹性常数，比如等效杨氏模量 Ex、Ey、Gxy 等，也可以是层压板的强度。</p>
+<p>下图所示为层压板等效弹性模量 Ex 随 0°、90° 及 ±45° 铺层比例变化的毯式曲线，使用毯式曲线时，可以先根据横轴找到一个铺层角度的比例（该图中横轴代表的是 ±45° 层铺层比例之和），然后再从几条并列的曲线中找到另一个铺层角度的比例（该图中为 0° 铺层的比例，变化范围为 0~1，间隔 10%，一条曲线代表一个铺层比例），两个铺层比例确定以后，交叉点处剩余铺层的比例也可唯一确定，Y 轴对应的等效杨氏模量也可以唯一确定。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-30471d.png" alt="4" />
+
+<p>根据铺层比例确定等效弹性模量的方法可以参考经典层合板理论。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" rel="tag"><i class="fa fa-tag"></i> 复合材料</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E8%9C%82%E7%AA%9D%E5%A4%B9%E5%B1%82%E7%BB%93%E6%9E%84/" rel="prev" title="蜂窝夹层结构">
+                  <i class="fa fa-angle-left"></i> 蜂窝夹层结构
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Python/pip%E5%AE%89%E8%A3%85/" rel="next" title="pip安装">
+                  pip安装 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

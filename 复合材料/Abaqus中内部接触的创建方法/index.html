@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="学习资料  1.Abaqus中内部接触的创建方法（一） 2.Abaqus中内部接触的创建方法（二） 3.复合材料渐进损伤分析中内部接触的三种创建方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Abaqus中内部接触的创建方法">
+<meta property="og:url" content="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E4%B8%AD%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="学习资料  1.Abaqus中内部接触的创建方法（一） 2.Abaqus中内部接触的创建方法（二） 3.复合材料渐进损伤分析中内部接触的三种创建方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-bdf93c.gif">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-ddb986.gif">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-af35f6.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-1ea673.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-5-f864e0.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-6-e791bf.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-7-0bf3ba.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-8-19b0dd.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-9-873a52.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-10-1fa663.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-11-1690a6.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-12-616fe8.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-13-ec5b92.png">
+<meta property="article:published_time" content="2020-08-19T06:45:35.000Z">
+<meta property="article:modified_time" content="2021-06-23T06:30:57.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="Abaqus">
+<meta property="article:tag" content="有限元">
+<meta property="article:tag" content="复合材料">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-bdf93c.gif">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E4%B8%AD%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E4%B8%AD%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95/","path":"复合材料/Abaqus中内部接触的创建方法/","title":"Abaqus中内部接触的创建方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Abaqus中内部接触的创建方法 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">1.必要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.内部接触创建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%96%B9%E6%B3%95%E4%B8%89"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 方法三</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E4%B8%AD%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Abaqus中内部接触的创建方法 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Abaqus中内部接触的创建方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-19 14:45:35" itemprop="dateCreated datePublished" datetime="2020-08-19T14:45:35+08:00">2020-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 14:30:57" itemprop="dateModified" datetime="2021-06-23T14:30:57+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">复合材料</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>学习资料</strong></p>
+<ul>
+<li>1.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649176107&idx=1&sn=eb19f5400d7e8d564450f889b0a5e59f&chksm=f2d6517ec5a1d8683ec3c4a951150e5d8451ca528c7317871d028be44c5543232533325c0326&scene=21#wechat_redirect">Abaqus中内部接触的创建方法（一）</a></li>
+<li>2.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649176122&idx=1&sn=b2405deac5548cc84e447f993f04504e&chksm=f2d6516fc5a1d87988fee55f67870a2aefdbfbb823c139da573c4c45229dff609459d7b64081&scene=21#wechat_redirect">Abaqus中内部接触的创建方法（二）</a></li>
+<li>3.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649176160&idx=1&sn=2408f6b19b575aaaed0d0a9efd3acab8&chksm=f2d65135c5a1d823ad276a7d26695ed11208708cb629f91060e714eafc0b99e2d50f25f0207d&scene=21#wechat_redirect">复合材料渐进损伤分析中内部接触的三种创建方法</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-必要性"><a href="#1-必要性" class="headerlink" title="1.必要性"></a>1.必要性</h2><p>在做复合材料冲击、压溃、切削、钻削等问题仿真分析时，随着分层或者面内损伤的扩展，部分单元会逐渐被删除，<strong>局部单元删除后，与被删除单元相邻的单元上共用的内部单元面便会裸露出来，而这些内部单元面默认是不会被考虑在接触范围之内的</strong>。</p>
+<p>以下图所示的冲击损伤为例，当脆性材料开裂以后，如果不考虑内部接触，开裂产生的新的内部单元面与底板之间无接触关系，则破碎单元将会穿透底板，达不到预期的效果。</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-bdf93c.gif"></p>
+<p>同样的，下面的复合材料层压板压溃分析中，也有类似的问题，当分层产生以后，层间 cohesive 单元被删除，cohesive 单元两侧的层板单元面裸露出来，如果不考虑内部接触，两侧单元会互相穿透。另外，当层板单元被删除后，如果不考虑内部接触，加载板&#x2F;支撑板与层压板之间也将失去接触关系，使得载荷施加不上去，加载板&#x2F;支撑板直接穿过层板网格。</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-ddb986.gif"></p>
+<h2 id="2-内部接触创建方法"><a href="#2-内部接触创建方法" class="headerlink" title="2.内部接触创建方法"></a>2.内部接触创建方法</h2><h3 id="2-1-方法一"><a href="#2-1-方法一" class="headerlink" title="2.1 方法一"></a>2.1 方法一</h3><p>该方法为<strong>官方</strong>正式方法，<strong>基于单元集合创建内部面，然后将内部面包含在通用接触中</strong>。具体实施步骤如下：</p>
+<ul>
+<li><p>1.基于 Part 创建单元集合，该单元集合须包含所有可能进入内部接触区域的单元，并对单元集合命名，例如命名为 “ALL_ELEMS”。</p>
+</li>
+<li><p>2.同样在 Part 层面创建一个 Surface，类别为基于单元类型，在视图中选择对象时可以选择某一个单元的某一个面作为一个假面（并非真正参与内部接触的面），并进行命名，例如命名为 “inner_surf”。</p>
+</li>
+<li><p>3.在 interaction 模块创建通用接触，通用接触中将上一步创建的内面 “inner_surf” 包含进去，注意，此时的内面为假面。</p>
+</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-af35f6.png"></p>
+<ul>
+<li><p>4.进入 Job 模块，写出 inp 文件，并用文本编辑器将 inp 文件打开，通过关键字搜索找到定义名为 “inner_surf” 的位置，一般为以下形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*Surface, <span class="built_in">type</span>=ELEMENT, name=inner_surf</span><br><span class="line">_inner_surf_S3, S3</span><br></pre></td></tr></table></figure>
+
+<p>将上述关键字按照以下形式进行修改并保存：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*Surface, <span class="built_in">type</span>=ELEMENT, name=inner_surf</span><br><span class="line">ALL_ELEMS, interior</span><br></pre></td></tr></table></figure>
+
+<p>其中，ALL_ELEMS 即为第一步创建的单元集合，interior 关键字代表内部面。至此内部单元面及内部接触就创建完成了。</p>
+<p>保存 inp 以后，再次提交任务时，可以用 Abaqus Command 来提交，也可以在 CAE Job 模块提交任务，后者提交任务时，切记不要在原模型任务中直接提交，否则将覆盖掉刚刚修改过的 inp，正确的方式为创建一个新的 Job，Job 类型选择 Input file 而不是默认的Model：</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-1ea673.png"></p>
+</li>
+</ul>
+<h3 id="2-2-方法二"><a href="#2-2-方法二" class="headerlink" title="2.2 方法二"></a>2.2 方法二</h3><p>该方法基于<strong>单元节点集合创建内部面，然后将内部面包含在面面接触中，而不是通用接触中</strong>。具体实施步骤如下：</p>
+<ul>
+<li><p>1.基于 Part 创建节点集合，该集合须包含所有可能进入内部接触区域的节点，并对节点集合命名，例如命名为 “ALL_NODES”。</p>
+</li>
+<li><p>2.在 interaction 模块创建面面接触，注意不是通用接触，然后选择个主面，再选择一个从面，从面类型为 “node region”，并指向所创建的节点集合 “ALL_NODES”。由此可见，基于 node 的内部面仅能用于面面接触中的从面。</p>
+</li>
+</ul>
+<p>当基于节点的内面生成以后，inp 文件中会多出一行，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*SURFACE, NAME=name, TYPE=NODE</span><br><span class="line">node number <span class="keyword">or</span> node <span class="built_in">set</span>, area</span><br></pre></td></tr></table></figure>
+
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*Surface, <span class="built_in">type</span>=NODE, name=surf_node</span><br><span class="line">plate-mesh-<span class="number">1.</span>all_node, <span class="number">1.</span></span><br></pre></td></tr></table></figure>
+
+<p>第二行的第一个参数即为<strong>所定义的单元集合</strong>，也可以直接写单元节点号；</p>
+<p>第二行的第二个参数为<strong>节点对应的接触面积</strong>，Abaqus&#x2F;Explicit 中默认1.0，也可以自己指定。还需要注意的是，默认接触面积是 1.0 时，所输出的接触压力实际上就是节点上的接触力。</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-5-f864e0.png"></p>
+<p>这种方法操作简单，不需要修改关键字，<strong>但是也存在一些问题</strong>：</p>
+<ul>
+<li>1.基于节点的内部面只能做从面。</li>
+<li>2.当对接触应力的精度要求较高时，慎用此方法。</li>
+<li>3.复合材料渐进损伤分析中，无法考虑层间损伤以后，层与层之间的接触。</li>
+</ul>
+<h3 id="2-3-方法三"><a href="#2-3-方法三" class="headerlink" title="2.3 方法三"></a>2.3 方法三</h3><p>该方法与第一种方法类似，<strong>基于单元面创建内部接触面，然后将内部面包含在通用接触中，而不是面面接触中</strong>。具体实施步骤如下：</p>
+<ul>
+<li>1.切换到 mesh 模块下，对象也切换到 part 层面，选择需要创建内面的 part。</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-6-e791bf.png" alt="6" width="60%" />
+
+<ul>
+<li>2.点击菜单 Tools→Surface→Create，创建曲面，入股你的模型中有 cohesive 单元，请先将 cohesive 单元隐藏掉在创建曲面。</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-7-0bf3ba.png"></p>
+<ul>
+<li>3.选择 Surfaace 的类型为 Mesh，如果你的模型中没有几何，只有孤立网格，此步跳过。</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-8-19b0dd.png"></p>
+<ul>
+<li>4.<strong>关键的一步</strong>：长按下图红框标注的对象选择按钮，保持三秒。</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-9-873a52.png"></p>
+<p>这时候会弹出三个按钮，如下图所示，第一个表示内部外部对象都选，第二个只选择内部对象，第三个只选择外部对象，默认的就是第三个，只选择外部对象。而我们现在要将其切换到第一个或者第二个，只要能选中内部单元面即可。</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-10-1fa663.png"></p>
+<ul>
+<li>5.到视图中去框选有可能会出现单元删除的区域的单元面，如下图所示。</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-11-1690a6.png"></p>
+<p>然后点击鼠标中键或者 Done 确认，此时，视图下方会出现以下提示。</p>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-12-616fe8.png"></p>
+<p>选择 Both sides 即可完成内面的创建。</p>
+<p>这个时候在你的 inp 文件中可以看到所创建的面包含了所有被选单元的所有面。</p>
+<ul>
+<li>6.创建通用接触。其方法和第一种内部接触创建方法一样。</li>
+</ul>
+<p><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-13-ec5b92.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Abaqus/" rel="tag"><i class="fa fa-tag"></i> Abaqus</a>
+              <a href="/tags/%E6%9C%89%E9%99%90%E5%85%83/" rel="tag"><i class="fa fa-tag"></i> 有限元</a>
+              <a href="/tags/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" rel="tag"><i class="fa fa-tag"></i> 复合材料</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E8%BD%AF%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7/" rel="prev" title="Abaqus软件代码工具">
+                  <i class="fa fa-angle-left"></i> Abaqus软件代码工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E3%80%81%E5%BA%94%E5%8F%98%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="next" title="位移、变形、应变基本概念">
+                  位移、变形、应变基本概念 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

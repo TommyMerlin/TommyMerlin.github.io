@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"coderhuye.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="学习资料  1.【原创】位移、变形、应变基本概念 2.【原创】关于变形梯度  1.力学基本概念 位移：物体位置的变化（分为刚体位移和变形两部分） 变形：物体受外力作用而产生体积或形状的改变 应变：外力作用下物体局部的相对变形 应力：单位面积上的内力 强度：材料在外力作用下抵抗永久变形和断裂的能力，表征的是承载能力 刚度：材料在载荷作用下抵抗弹性变形的能力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位移、变形、应变基本概念">
+<meta property="og:url" content="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E3%80%81%E5%BA%94%E5%8F%98%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="HuYe的博客">
+<meta property="og:description" content="学习资料  1.【原创】位移、变形、应变基本概念 2.【原创】关于变形梯度  1.力学基本概念 位移：物体位置的变化（分为刚体位移和变形两部分） 变形：物体受外力作用而产生体积或形状的改变 应变：外力作用下物体局部的相对变形 应力：单位面积上的内力 强度：材料在外力作用下抵抗永久变形和断裂的能力，表征的是承载能力 刚度：材料在载荷作用下抵抗弹性变形的能力">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-10f16a.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-778726.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-0247d9.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-fe0265.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-5-3b4915.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-6-69e8e0.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-7-dfe871.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-8-557a03.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-9-009d01.png">
+<meta property="og:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-10-00128f.png">
+<meta property="article:published_time" content="2020-08-21T07:51:35.000Z">
+<meta property="article:modified_time" content="2021-06-23T06:28:13.000Z">
+<meta property="article:author" content="HuYe">
+<meta property="article:tag" content="复合材料">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-10f16a.png">
+
+
+<link rel="canonical" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E3%80%81%E5%BA%94%E5%8F%98%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E3%80%81%E5%BA%94%E5%8F%98%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/","path":"复合材料/复合材料-位移、变形、应变基本概念/","title":"位移、变形、应变基本概念"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>位移、变形、应变基本概念 | HuYe的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HuYe的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">72</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">40</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">94</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8A%9B%E5%AD%A6%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1.力学基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B0%8F%E5%8F%98%E5%BD%A2%E5%81%87%E8%AE%BE"><span class="nav-number">2.</span> <span class="nav-text">2.小变形假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E5%8F%8A%E5%BA%94%E5%8F%98"><span class="nav-number">3.</span> <span class="nav-text">3.位移、变形及应变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B0%8F%E5%8F%98%E5%BD%A2%E5%81%87%E8%AE%BE%E4%B8%8B%E5%BA%94%E5%8F%98%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">4.</span> <span class="nav-text">4.小变形假设下应变的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8F%98%E5%BD%A2%E6%A2%AF%E5%BA%A6"><span class="nav-number">5.</span> <span class="nav-text">5.变形梯度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%9E%84%E5%9E%8B%E6%8F%8F%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 构型描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%8F%98%E5%BD%A2%E6%A2%AF%E5%BA%A6"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 变形梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E5%8F%98%E5%BD%A2%E6%A2%AF%E5%BA%A6%E6%9E%81%E5%88%86%E8%A7%A3"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 变形梯度极分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E5%B0%8F%E5%8F%98%E5%BD%A2%E4%B8%8B%E5%BA%94%E5%8F%98%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">5.5.</span> <span class="nav-text">5.5 小变形下应变的定义</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HuYe"
+      src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+  <p class="site-author-name" itemprop="name">HuYe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://coderhuye.top/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99-%E4%BD%8D%E7%A7%BB%E3%80%81%E5%8F%98%E5%BD%A2%E3%80%81%E5%BA%94%E5%8F%98%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/%E5%A4%B4%E5%83%8F%E6%AD%A3%E6%96%B9%E5%BD%A2.jpg">
+      <meta itemprop="name" content="HuYe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="位移、变形、应变基本概念 | HuYe的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          位移、变形、应变基本概念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-21 15:51:35" itemprop="dateCreated datePublished" datetime="2020-08-21T15:51:35+08:00">2020-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-23 14:28:13" itemprop="dateModified" datetime="2021-06-23T14:28:13+08:00">2021-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">复合材料</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>学习资料</strong></p>
+<ul>
+<li>1.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649176644&idx=2&sn=c6839f03b2760c5ef8d6ec66c1cdb5c5&chksm=f2d65311c5a1da071d941e34690e8d39f79e203aa2c737de739a14041d0f7375420990510b66&scene=21#wechat_redirect">【原创】位移、变形、应变基本概念</a></li>
+<li>2.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTE3OTgzNA==&mid=2649176644&idx=1&sn=b55f92ba4f91232c95d588e61aa853b8&chksm=f2d65311c5a1da0712b6533e614d85a0499c4b739c09c42ed7409cc0b4078024dce35941f607&scene=21#wechat_redirect">【原创】关于变形梯度</a></li>
+</ul>
+<h2 id="1-力学基本概念"><a href="#1-力学基本概念" class="headerlink" title="1.力学基本概念"></a>1.力学基本概念</h2><ul>
+<li>位移：物体位置的变化（分为刚体位移和变形两部分）</li>
+<li>变形：物体受外力作用而产生体积或形状的改变</li>
+<li>应变：外力作用下物体局部的相对变形</li>
+<li>应力：单位面积上的内力</li>
+<li>强度：材料在外力作用下抵抗永久变形和断裂的能力，表征的是承载能力</li>
+<li>刚度：材料在载荷作用下抵抗弹性变形的能力</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="2-小变形假设"><a href="#2-小变形假设" class="headerlink" title="2.小变形假设"></a>2.小变形假设</h2><p>小变形假设，是指构件因外力作用而产生的变形量远远小于其原始尺寸，这样在研究平衡问题时，就<strong>可忽略构件的变形</strong>，按其原始尺寸进行分析，使计算得以简化。在弹性力学中，小变形假设指物体在外力作用下产生的变形与其本身几何尺寸相比很小，可以不考虑因变形而引起的尺寸变化。这样，就可以用变形以前的几何尺寸来建立各种方程。此外，<strong>应变的二阶微量可以忽略不计</strong>，从而使得几何方程线性化。</p>
+<ul>
+<li>小变形假设是弹性力学几何方程成立的前提条件</li>
+<li>小变形假设也是线弹性有限元分析的前提条件</li>
+</ul>
+<h2 id="3-位移、变形及应变"><a href="#3-位移、变形及应变" class="headerlink" title="3.位移、变形及应变"></a>3.位移、变形及应变</h2><p>以下面所示一维杆为例，原始构型为 AB，变形后构型为 A’B’。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-1-10f16a.png" alt="1" style="width:400px;" />
+
+<ul>
+<li><p>位移：矢量AA’代表的是A点的位移，矢量BB’代表B点的位移，杆AB上任意一点的位移可以有A点和B点的位移插值得到。</p>
+</li>
+<li><p>变形：杆的伸长量，定义为 $\Delta L&#x3D;L^{‘}-L$。</p>
+</li>
+<li><p>应变：局部的相对变形，材料力学或者弹性力学中的定义为：$\varepsilon&#x3D;\frac{\Delta L}{L}&#x3D;\frac{L^{‘}-L}{L}$。</p>
+<p>二维问题中，定义为：$\varepsilon_{x}&#x3D;\frac{\partial u}{\partial x}, \quad \varepsilon_{y}&#x3D;\frac{\partial v}{\partial y}, \quad \gamma_{x y}&#x3D;\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}$</p>
+</li>
+</ul>
+<h2 id="4-小变形假设下应变的推导"><a href="#4-小变形假设下应变的推导" class="headerlink" title="4.小变形假设下应变的推导"></a>4.小变形假设下应变的推导</h2><ul>
+<li><p>在 O-X-Y坐标系下，PABC 组成一个结构构型，为原始构型。</p>
+</li>
+<li><p>在受到外界作用（外力或者温度场）时，PABC 四点分别移动到了 P’A’B’C’ 位置，形成种新的构型，为当前构型。</p>
+</li>
+</ul>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-2-778726.png" alt="2" style="width:400px;" />
+
+<p>设 $PA&#x3D;dx$，$PB&#x3D;dy$，P 点的坐标为 $P[x,y]$。</p>
+<p>$AB$ 两点的坐标为：$A[x+dx,y]$，$B[x,y+dy]$。</p>
+<p>设 P’ 相对于 P 点的位移函数为 $(u(x,y),v(x,y))$。u，v 为作用对象的坐标点的函数。</p>
+<p>$$\mathbf{P P}^{\prime}&#x3D;(u(x, y), v(x, y))$$</p>
+<p>变形后 P’A’B’ 三点的坐标为：</p>
+<p>$$<br>\begin{array}{l}<br>P^{\prime}[x+u, y+v] \<br>A^{\prime}[x+d x+u(x+d x, y), y+v(x+d x, y)] \<br>B^{\prime}[x+u(x, y+d y), y+d y+v(x, y+d y)]<br>\end{array}<br>$$</p>
+<p>对 $P[x,y]$ 点进行<strong>泰勒级数展开，忽略高阶项</strong>：</p>
+<p>$$<br>\begin{aligned}<br>&amp;u(x+d x, y)&#x3D;u(x, y)+\left.\frac{\partial u}{\partial x}\right|<em>{P} d x+\left.\frac{1}{2} \frac{\partial^{2} u}{\partial x^{2}}\right|</em>{P}(d x)^{2}+\cdots \approx u(x, y)+\left.\frac{\partial u}{\partial x}\right|<em>{P} d x\<br>&amp;v(x+d x, y)&#x3D;v(x, y)+\left.\frac{\partial v}{\partial x}\right|</em>{P} d x+\left.\frac{1}{2} \frac{\partial^{2} v}{\partial x^{2}}\right|<em>{P}(d x)^{2}+\cdots \approx v(x, y)+\left.\frac{\partial v}{\partial x}\right|</em>{P} d x\<br>&amp;u(x, y+d y)&#x3D;u(x, y)+\left.\frac{\partial u}{\partial y}\right|<em>{P} d y+\left.\frac{1}{2} \frac{\partial^{2} u}{\partial y^{2}}\right|</em>{P}(d y)^{2}+\cdots \approx u(x, y)+\left.\frac{\partial u}{\partial y}\right|<em>{P} d y\<br>&amp;v(x, y+d y)&#x3D;v(x, y)+\left.\frac{\partial v}{\partial y}\right|</em>{P} d y+\left.\frac{1}{2} \frac{\partial^{2} v}{\partial y^{2}}\right|<em>{P}(d y)^{2}+\cdots \approx v(x, y)+\left.\frac{\partial v}{\partial y}\right|</em>{P} d y<br>\end{aligned}<br>$$</p>
+<p>可得<strong>点坐标</strong>：</p>
+<p>$$<br>\begin{aligned}<br>&amp;P[x, y] \quad P^{\prime}[x+u, y+v]\<br>&amp;A[x+d x, y] \quad A^{\prime}\left[x+d x+u(x, y)+\left.\frac{\partial u}{\partial x}\right|<em>{P} d x, y+v(x, y)+\left.\frac{\partial v}{\partial x}\right|</em>{P} d x\right]\<br>&amp;B[x, y+d y] \quad B^{\prime}\left[x+u(x, y)+\left.\frac{\partial u}{\partial y}\right|<em>{p} d y, y+d y+v(x, y)+\left.\frac{\partial v}{\partial y}\right|</em>{p} d y\right]<br>\end{aligned}<br>$$</p>
+<p><strong>矢量</strong>：</p>
+<p>$$<br>\begin{array}{l}<br>P A&#x3D;(d x, 0) \quad P B&#x3D;(0, d y) \<br>P^{‘}A^{‘}&#x3D;\left(d x+\left.\frac{\partial u}{\partial x}\right|<em>{P} d x,\left.\frac{\partial v}{\partial x}\right|</em>{P} d x\right) \<br>P^{‘}B^{‘}&#x3D;\left(\left.\frac{\partial u}{\partial y}\right|<em>{P} d y, d y+\left.\frac{\partial v}{\partial y}\right|</em>{P} d y\right)<br>\end{array}<br>$$</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-3-0247d9.png" alt="3" style="width:350px;" />
+
+<p>线段 <strong>PA 的伸长量</strong>：$P^{\prime} A^{\prime}-P A&#x3D;\left(\left.\frac{\partial u}{\partial x}\right|<em>{P} d x,\left.\frac{\partial v}{\partial x}\right|</em>{P} d x\right)$</p>
+<p><strong>PA 的线应变</strong>：$\begin{aligned}<br>\varepsilon_{x} &amp;&#x3D;\frac{P^{\prime} A^{\prime}-P A}{P A} \approx \frac{\left(P^{\prime} A^{\prime}\right)_{x}-P A}{P A}&#x3D;\frac{\left(u+\frac{\partial u}{\partial x} \mathrm{d} x\right)-u}{\mathrm{d} x}&#x3D;\frac{\partial u}{\partial x}<br>\end{aligned}$</p>
+<p>同理，<strong>PB 的线应变</strong>：$\varepsilon_{y}&#x3D;\frac{\partial v}{\partial y}$</p>
+<p><strong>PA 的转角</strong>：$\alpha \approx \sin \alpha&#x3D;\frac{\left(v+\frac{\partial v}{\partial x} \mathrm{d} x\right)-v}{\mathrm{d} x}&#x3D;\frac{\partial v}{\partial x}$</p>
+<p>同理，<strong>PB 的转角</strong>：$\beta&#x3D;\frac{\partial u}{\partial y}$</p>
+<p><strong>PA 与 PB 之间的转角</strong>：$\gamma_{x y}&#x3D;\alpha+\beta&#x3D;\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}$</p>
+<p><strong>完整的几何方程</strong>：</p>
+<p>$$<br>\varepsilon_{x}&#x3D;\frac{\partial u}{\partial x}, \quad \varepsilon_{y}&#x3D;\frac{\partial v}{\partial y}, \quad \gamma_{x y}&#x3D;\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}<br>$$</p>
+<h2 id="5-变形梯度"><a href="#5-变形梯度" class="headerlink" title="5.变形梯度"></a>5.变形梯度</h2><h3 id="5-1-构型描述"><a href="#5-1-构型描述" class="headerlink" title="5.1 构型描述"></a>5.1 构型描述</h3><p>在有限变形理论中经常会遇到<strong>变形梯度</strong>这个概念，Abaqus 子程序开发编写程序的过程中也会遇到对变形梯度的操作。</p>
+<p>假设材料点初始坐标为 $\mathbf{X}$，材料点当前坐标为 $\boldsymbol{x}$。</p>
+<p><strong>当前坐标可以看做初始坐标与时间的常数</strong>，即<br>$$<br>\boldsymbol{x}&#x3D;\boldsymbol{x}(\mathbf{X},t) \quad x_k&#x3D;x_k(X_K,t),k&#x3D;1,2,3;K&#x3D;I,II,III<br>$$<br><strong>位移</strong>：$\boldsymbol{u}&#x3D;\boldsymbol{x}-\boldsymbol{X}$</p>
+<p><strong>速度</strong>：$\boldsymbol{v}&#x3D;\dot{\boldsymbol{u}}&#x3D;\frac{\partial{\boldsymbol{x}(X_K,t)}}{\partial t}$</p>
+<p><strong>加速度</strong>：$\boldsymbol{a}&#x3D;\dot{v}&#x3D;\ddot{u}&#x3D;\frac{\partial^2{\boldsymbol{x}(X_K,t)}}{\partial t^2}$</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-4-fe0265.png" alt="4" style="width:400px;" />
+
+<p><strong>变形前</strong>：$\overline{PQ}&#x3D;d\mathbf{X}&#x3D;dX_K\cdot \mathbf{E}_K$				$\mathbf{E}_K$ 沿着 PQ 方向的单位向量</p>
+<p><strong>变形后</strong>：$\overline{pq}&#x3D;d\boldsymbol{x}&#x3D;dx_k\cdot \boldsymbol{e}_k$						 $\boldsymbol{e}_k$ 沿着 PQ 方向的单位向量</p>
+<p>$d\mathbf{X}\to d\boldsymbol{x}$ 既有长度的变化，又有方向的变化。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-5-3b4915.png" alt="5" style="width:350px;" />
+
+<h3 id="5-2-变形梯度"><a href="#5-2-变形梯度" class="headerlink" title="5.2 变形梯度"></a>5.2 变形梯度</h3><p>P 点的坐标：$\mathbf{X}$</p>
+<p>Q 点的坐标：$\mathbf{X}+d\mathbf{X}$</p>
+<p>p 点的坐标：$\boldsymbol{x}&#x3D;\boldsymbol{x}(\mathbf{X},t) \quad\quad x_k&#x3D;x_k(X_K,t)$</p>
+<p>q 点的坐标：$\boldsymbol{x}+d\boldsymbol{x}$</p>
+<p>从 Q 点出发，q 点的坐标还可以写为：$\boldsymbol{x}(\mathbf{X}+d\mathbf{X},t)$，即 $\boldsymbol{x}+d\boldsymbol{x}&#x3D;\boldsymbol{x}(\mathbf{X}+d\mathbf{X},t)$，分量形式：$x_k+dx_k&#x3D;x_k(X_K+dX_K,t)$</p>
+<p>p、q 两点联立：$d \boldsymbol{x}&#x3D;\boldsymbol{x}(\mathbf{X}+d \mathbf{X}, t)-\boldsymbol{x}(\mathbf{X}, t)&#x3D;\frac{\boldsymbol{x}(\mathbf{X}+d \mathbf{X}, t)-\boldsymbol{x}(\mathbf{X}, t)}{d \mathbf{X}} d \mathbf{X}&#x3D;\frac{\partial \boldsymbol{x}}{\partial \mathbf{X}} d \mathbf{X}$，$dx_k&#x3D;\frac{\partial x_k}{\partial  X_K}dX_K$</p>
+<p>定义<strong>变形梯度</strong>：$\boldsymbol{F}&#x3D;\frac{\partial \boldsymbol{x}}{\partial \mathbf{X}}&#x3D;Grad \boldsymbol x \quad\quad F_{kK}&#x3D;\frac{\partial x_k}{\partial X_K}\overset{简写}&#x3D;x_{k,K}$</p>
+<p><strong>展开形式</strong>：$F&#x3D;\left[\begin{array}{lll}\frac{\partial x_{1}}{\partial X_{1}} &amp; \frac{\partial x_{1}}{\partial X_{2}} &amp; \frac{\partial x_{1}}{\partial X_{3}} \ \frac{\partial x_{2}}{\partial X_{1}} &amp; \frac{\partial x_{2}}{\partial X_{2}} &amp; \frac{\partial x_{2}}{\partial X_{3}} \ \frac{\partial x_{3}}{\partial X_{1}} &amp; \frac{\partial x_{3}}{\partial X_{2}} &amp; \frac{\partial x_{3}}{\partial X_{3}}\end{array}\right]$</p>
+<p>可以认为，变形梯度是原始构型向当前构型<strong>映射的媒介</strong>。</p>
+<p>变形梯度表示的是 $d\boldsymbol{x}$ 和 $d\mathbf{X}$ 之间的关系，把初始构型中的微向量 $d\mathbf{X}$ 映射到当前构型中的微向量 $d\boldsymbol{x}$。</p>
+<p>又因 $\boldsymbol{u}&#x3D;\boldsymbol{x}-\boldsymbol{X}$，所以 $\boldsymbol{F}&#x3D;\frac{\partial \boldsymbol{x}}{\partial \mathbf{X}}&#x3D;\frac{\partial \boldsymbol{u+X}}{\partial \mathbf{X}}&#x3D;\mathop{\underline{\frac{\partial \boldsymbol{u}}{\partial \mathbf{X}}}}\limits_{位移梯度}+I$</p>
+<h3 id="5-3-实例"><a href="#5-3-实例" class="headerlink" title="5.3 实例"></a>5.3 实例</h3><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-6-69e8e0.png" alt="6" style="width:600px;" />
+
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-7-dfe871.png" alt="7" style="width:600px;" />
+
+<h3 id="5-4-变形梯度极分解"><a href="#5-4-变形梯度极分解" class="headerlink" title="5.4 变形梯度极分解"></a>5.4 变形梯度极分解</h3><p>$\boldsymbol{F}$ 是一个<strong>可逆张量</strong>，可分解为一个<strong>正交张量</strong> $\boldsymbol{R}$ 和<strong>对称正定张量</strong> $\boldsymbol{U}$ 或 $\boldsymbol{V}$。</p>
+<p>右极分解：$\boldsymbol{F}&#x3D;\boldsymbol{R}\cdot\boldsymbol{U}$      Abaqus 中采用的是右极分解。</p>
+<p>左极分解：$\boldsymbol{F}&#x3D;\boldsymbol{R}\cdot\boldsymbol{V}$<br>$$<br>\left{\begin{matrix}<br>\begin{align}<br>&amp;\boldsymbol{R}\boldsymbol{R}^T&#x3D;I\<br> &amp;\boldsymbol{F}\boldsymbol{F}^T&#x3D;(\boldsymbol{R}\cdot\boldsymbol{U})^T(\boldsymbol{R}\cdot\boldsymbol{U})&#x3D;\boldsymbol{U}^T\boldsymbol{R}^T\boldsymbol{R}\cdot\boldsymbol{U}\<br>&amp;\boldsymbol{U}&#x3D;(\boldsymbol{F}^T\boldsymbol{F})^{1&#x2F;2}\<br>&amp;\boldsymbol{V}&#x3D;(\boldsymbol{F}\boldsymbol{F}^T)^{1&#x2F;2}\<br>&amp;\boldsymbol{C}&#x3D;\boldsymbol{F}^T\boldsymbol{F}&#x3D;\boldsymbol{U}^T\boldsymbol{U} \qquad Green变形张量<br>\end{align}<br>\end{matrix}\right.<br>$$<br>连续介质力学中，极分解得到的 $\boldsymbol{R}$ 代表的是<strong>转动张量</strong>，$\boldsymbol{U}$ <strong>拉伸张量</strong>，代表的是纯变形。</p>
+<p>以二维问题为例：<br>$$<br>\boldsymbol{F}&#x3D;\boldsymbol{R}\cdot\boldsymbol{U}&#x3D;<br>\begin{bmatrix}<br>\cos \theta  &amp; \sin \theta &amp; 0\<br>-\sin \theta &amp; \cos \theta &amp; 0\<br> 0           &amp;  0          &amp; 1<br>\end{bmatrix}<br>\boldsymbol{U}<br>$$<br>$\theta$ 为旋转角度。</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-8-557a03.png" alt="8" style="width:400px;" />
+
+<h3 id="5-5-小变形下应变的定义"><a href="#5-5-小变形下应变的定义" class="headerlink" title="5.5 小变形下应变的定义"></a>5.5 小变形下应变的定义</h3><p>小变形理论中，应变的基本定义如下，<strong>柯西应变张量</strong>：<br>$$<br>\boldsymbol{E}&#x3D;\frac{1}{2}\left(\boldsymbol{F}+\boldsymbol{F}^{T}\right)-\boldsymbol{I}&#x3D;\frac{1}{2}\left(\boldsymbol{R} \boldsymbol{U}+\boldsymbol{U}^{T} \boldsymbol{R}^{T}\right)-\boldsymbol{I}<br>$$<br>且    $\boldsymbol{F}&#x3D;\frac{\partial \boldsymbol{x}}{\partial \mathbf{X}}&#x3D;\frac{\partial \boldsymbol{u+X}}{\partial \mathbf{X}}&#x3D;\frac{\partial \boldsymbol{u}}{\partial \mathbf{X}}+I$</p>
+<p>柯西应变的位移表达形式：<br>$$<br>\boldsymbol{E}&#x3D;\frac{1}{2}\left(\boldsymbol{F}+\boldsymbol{F}^{T}\right)-\boldsymbol{I}&#x3D;\frac{1}{2}\left(\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{X}}+\left(\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{X}}\right)^{T}+2 \boldsymbol{I}\right)-\boldsymbol{I}&#x3D;\frac{1}{2}\left(\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{X}}+\left(\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{X}}\right)^{T}\right)<br>$$<br>变量形式： $\varepsilon_{ij}&#x3D;\frac{1}{2}(u_{i,j}+u_{j,i})&#x3D;\frac{1}{2}(F_{ij}+F_{ji})-\delta_{ij}$</p>
+<p>等价于： $\varepsilon_{x}&#x3D;\frac{\partial u}{\partial x}, \quad \varepsilon_{y}&#x3D;\frac{\partial v}{\partial y}, \quad \gamma_{x y}&#x3D;\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}$</p>
+<img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-9-009d01.png" alt="9" style="width:600px;" />
+
+<p>小变形理论中柯西应变的基本定义不仅包含了变形还包含了转动，因此对于含有转动的问题，这种应变定义方式存在问题。当仅有旋转运动，没有变形时，$\boldsymbol{U}&#x3D;\boldsymbol{I}$ 应变应为 0，但按照小変形理论应变的定义，应变值不为 0。</p>
+<p>例如：纯旋转 90 度，$\boldsymbol{R}&#x3D;\left[\begin{array}{ll}0 &amp; 1 \ 1 &amp; 0\end{array}\right]$<br>$$<br>\boldsymbol{E}&#x3D;\frac{1}{2}\left(\boldsymbol{F}+\boldsymbol{F}^{T}\right)-\boldsymbol{I}&#x3D;\frac{1}{2}\left(\boldsymbol{R}+\boldsymbol{R}^{T}\right)-\boldsymbol{I}&#x3D;\left[\begin{array}{ll}-1 &amp; 1 \ 1 &amp; -1\end{array}\right] _{\Huge{\times}}<br>$$<br><img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/blog/2021-06-19-10-00128f.png" alt="10" style="width:350px;" /></p>
+<p>所以，在大变形条件下，我们熟悉的小变形假设下的应变定义是不准确的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/" rel="tag"><i class="fa fa-tag"></i> 复合材料</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%A4%8D%E5%90%88%E6%9D%90%E6%96%99/Abaqus%E4%B8%AD%E5%86%85%E9%83%A8%E6%8E%A5%E8%A7%A6%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95/" rel="prev" title="Abaqus中内部接触的创建方法">
+                  <i class="fa fa-angle-left"></i> Abaqus中内部接触的创建方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Latex/Latex%E4%B8%8D%E5%B8%B8%E8%A7%81%E7%AC%A6%E5%8F%B7/" rel="next" title="Latex不常见符号">
+                  Latex不常见符号 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">浙ICP备2023021004号-1 </a>
+      <img src="https://aliyun-oss-coderhuye.oss-cn-hangzhou.aliyuncs.com/image-host2023/2023-07-26-21-备案图标-164445.png" alt="">
+  </div>
+  <div class="copyright">
+    &copy; 2019 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">HuYe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/TommyMerlin" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
